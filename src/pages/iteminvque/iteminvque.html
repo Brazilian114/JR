@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Item Inventory Query</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col col-3>
+          <button ion-button block>Client</button>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-label>Barcode</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oBarcode" #focusInputBarcode (keyup.enter)="doGetBarcode(oClient, oBarcode)"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <ion-label>Item</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oItem" #focusInputItem style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-label>Description</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input style="height: 100px; background-color: #FFFF99" [(ngModel)]="oDes" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto>
+        <ion-label>Qty</ion-label>
+      </ion-col>
+      <ion-col col-3>
+        <ion-input [(ngModel)]="oQty" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label stacked style="margin: 0px 0px 0px 0;">UOM</ion-label>
+          <ion-select [(ngModel)]="oUOM">
+            <ion-option *ngFor = "let uom of data_uom" value="{{uom.uom}}">{{uom.uom}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+        <ion-label stacked style="margin: 0px 0px 0px 0;">Grade</ion-label>
+        <ion-select [(ngModel)]="oGrade">
+          <ion-option *ngFor = "let grade of data_grade" value="{{grade.grade}}">{{grade.grade}}</ion-option>
+        </ion-select>
+      </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-scroll scrollX="true" scrollY="true">
+      <ion-grid>
+        <ion-row style="width: 600px;" *ngFor="let item of data_item; let i = index">
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Warehouse
+            </ion-row>
+            <ion-row>
+              {{item.warehouse}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Location
+            </ion-row>
+            <ion-row>
+              {{item.location}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Qty
+            </ion-row>
+            <ion-row>
+              {{item.qty}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Grade
+            </ion-row>
+            <ion-row>
+              {{item.grade}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              UOM
+            </ion-row>
+            <ion-row>
+              {{item.uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Pallet
+            </ion-row>
+            <ion-row>
+              {{item.pallet}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Status
+            </ion-row>
+            <ion-row>
+              {{item.status}}
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-scroll>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <button ion-button block (click)="doClear()">Clear</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="GetDetail(oClient,oItem, oGrade, oUOM)">Get Detail</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block disabled>Image</button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

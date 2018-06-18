@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Item Work Order</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let item of items">
+  <ion-card (click)="doSelectItem(item.item_no, item.description, item.qty, item.uom, item.location_from, item.order_no, item.pallet_from
+  , item.delivery_date, item.customer, item.task_no, item.activity, item.location_to, item.warehouse_from, item.warehouse_to, item.zone_dest, item.zone_from)">
+      <ion-card-content >
+        <ion-card-title>Item No: {{item.item_no}} (Task: {{item.task_no}})</ion-card-title>
+        <p>Description: {{item.description}}</p>
+        <p>Qty: {{item.qty}}</p>
+        <p>UOM: {{item.uom}}</p>
+        <p>Location From: {{item.location_from}}</p>
+        <p>Order No: {{item.order_no}}</p>
+        <p>Pallet From: {{item.pallet_from}}</p>
+        <p>Delivery Date: {{item.delivery_date}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

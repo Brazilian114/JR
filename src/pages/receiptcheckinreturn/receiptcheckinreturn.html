@@ -1,0 +1,300 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Receipt Check In Return</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div [ngSwitch]="Check">
+
+    <ion-list *ngSwitchCase="'Header'">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>
+              <button ion-button block >Client</button>
+            </ion-col>
+            <ion-col col-2>
+              <ion-input [(ngModel)]="oClient" readonly></ion-input>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button block (click)="doGetReceipt(oClient, listType ,oReceipt, listBook, listWhses)">R#</button>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="R#" [(ngModel)]="oReceipt"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked style="margin: 0px 0px 0px 0;">Book</ion-label>
+                <ion-select [(ngModel)]="listBook" interface="popover">
+                  <ion-option *ngFor = "let book of data_book" value="{{book.QCBOOK}}">{{book.FMDESC}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-label stacked style="margin: 0px 0px 0px 0;">Date</ion-label>
+              <ion-datetime [(ngModel)]="oDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"></ion-datetime>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked style="margin: 0px 0px 0px 0;">Warehouse</ion-label>
+                <ion-select [(ngModel)]="listWhses" interface="popover" (ionChange)="doGetStation(listWhses)">
+                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Description}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked style="margin: 0px 0px 0px 0;">Station</ion-label>
+                <ion-select [(ngModel)]="listStation" interface="popover">
+                  <ion-option *ngFor = "let station of data_station" value="{{station.station}}">{{station.station}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col >
+              <ion-item>
+                <ion-label stacked style="margin: 0px 0px 0px 0;">Zone</ion-label>
+                <ion-select [(ngModel)]="listZone" interface="popover">
+                  <ion-option *ngFor = "let zone of data_zone" value="{{zone.Zone}}">{{zone.Description}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked style="margin: 0px 0px 0px 0;">Type</ion-label>
+                <ion-select [(ngModel)]="listType" interface="popover" disabled ="{{isEnabled}}">
+                  <ion-option value="RETURN" [selected]="true">RETURN</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>
+              <button ion-button block (click)="doGetDocref(oClient, oCustomer_Header)">Doc Ref</button>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="Doc Ref" [(ngModel)]="oDocref" (click)="doClick()"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-2>
+              <ion-label>Customer</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oCustomer_Header" #focusInputSup style="background-color: #FFFF99" readonly></ion-input>
+            </ion-col>
+            <ion-col col-auto>
+              <ion-label>Status</ion-label>
+            </ion-col>
+            <ion-col col-4>
+              <ion-input placeholder="Status" [(ngModel)]="oStatus" style="background-color: #FFFF99" readonly></ion-input>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-2>
+              <ion-label>Remark</ion-label>
+            </ion-col>
+            <ion-col >
+              <ion-input placeholder="Remark" [(ngModel)]="oRemark" #focusInputRemark (keyup.enter)="enterRemark()" (click)="doClick()"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+          <ion-grid>
+            <ion-row>
+                <ion-col>
+                  <button ion-button block (click)="doClearHeader()">Clear</button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button block>Close</button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button block (click)="doSaveHeader(oClient, listBook, oReceipt, oDate, oInc, listStation, listWhses, listZone, listType, oContainer, oCustomer_Header, oRemarks, oDocref, oStatus, oInvoice, oInvoice_Date)">Save</button>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Details'">
+      <ion-grid>
+        <ion-row>
+            <ion-col col-3>
+              <button ion-button disabled block>Client</button>
+            </ion-col>
+            <ion-col col-2>
+              <ion-input placeholder="Client" [(ngModel)]="oClient" readonly></ion-input>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button block disabled>R#</button>
+            </ion-col>
+            <ion-col>
+              <ion-input placeholder="R#" [(ngModel)]="oReceipt" readonly></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+              <button ion-button block >LOC</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oLoc" #focusInputLoc (keyup.enter)="doGetLoc()"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+              <button ion-button block (click)="doGetPallet(oClient,oReceipt)">Pallet</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oPallet" #focusInputPallet (keyup.enter)="doGetPalletListDetali(oClient,oReceipt,oPallet)"></ion-input>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button block (click)="doGetNewPallet(oClient)">N</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+              <button ion-button block>Barcode</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oBarcode" #focusInputBarcode (keyup.enter)="doGetBarcodeDetail(oClient, oReceipt, oDate, oLoc, oPallet, oBarcode, listUOM, oQty, listGrade, listQty, oReason)"></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+              <button ion-button block>Name</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oName" style="background-color: #FFFF99" readonly></ion-input>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>UOM</ion-label>
+              <ion-select [(ngModel)]="listUOM" interface="popover" disabled>
+                <ion-option *ngFor = "let uom of data_uom" value="{{uom.item_packing}}">{{uom.item_packing}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked>เหตุผล</ion-label>
+              <ion-select [(ngModel)]="oReason" interface="action-sheet">
+                <ion-option *ngFor = "let reason of data_reason" value="{{reason.reason_code}}">{{reason.reason_name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item style="display: none;">
+              <ion-label stacked>Qty</ion-label>
+              <ion-select [(ngModel)]="listQty" dir="ltr" interface="popover" (ionChange)="doListqty(listQty)" disabled>
+                <ion-option value="0" [selected]="true">Key Qty</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-input type="number" style="background-color: #000000; color: green; font-size: 20px; margin-top: 10px;" [(ngModel)]="oQty" #focusInputQty disabled="{{enabled}}"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Grade</ion-label>
+                <ion-select [(ngModel)]="listGrade" interface="popover">
+                  <ion-option *ngFor = "let grade of data_grade" value="{{grade.param_code}}">{{grade.param_code}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode, listUOM, oQty, listGrade, oLoc, listQty, oReason)">Add</button>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button block style="margin-top: 20px" (click)="doDelete(oClient, oReceipt, oPallet)">Delete</button>
+            </ion-col>
+            <ion-col col-auto>
+              <button ion-button block style="margin-top: 20px" (click)="doClearDetail()">Clear</button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    <ion-grid>
+        <ion-scroll scrollX="true" scrollY="true">
+          <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty,details.uom,details.item_barcode,details.grade,details.remark01)">
+            <ion-col class="border-col" col-auto>
+              <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+                #
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{details.line_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-2>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                รหัสสินค้า
+              </ion-row>
+              <ion-row>
+                {{details.item_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-5>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                  ชื่อสินค้า
+              </ion-row>
+              <ion-row style="width:180px;">
+                {{details.description}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                จำนวน
+              </ion-row>
+              <ion-row>
+                {{details.qty}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                หน่วย
+              </ion-row>
+              <ion-row>
+                {{details.uom}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-scroll>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block (click)="doCheckIn(oClient, oReceipt, oDate, oPallet, oUOM, oQTY, oGrade, oLocation, oBarcode, listType, listBook)">Confirm</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doCheckReturn(oClient, oCustomer_Header, oDocref)">Details</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+      <ion-segment [(ngModel)]="Check">
+        <ion-segment-button value="Header" (click)="doClickHeader(Check, listQty)">
+          Header
+        </ion-segment-button>
+        <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doClickHeader(Check, listQty)">
+          Details
+        </ion-segment-button>
+      </ion-segment>
+</ion-footer>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Setting</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto>
+        <ion-label>URL</ion-label>
+      </ion-col>
+      <ion-col >
+        <ion-input placeholder="192.168.1.1" [(ngModel)]="oURL"></ion-input>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button block (click)="doURL(oURL)">Save</button>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button block (click)="doClearURL()">C</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

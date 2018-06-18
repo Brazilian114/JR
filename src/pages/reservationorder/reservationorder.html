@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Reservation Order</ion-title>
+    <ion-buttons end>
+       <button style="background-color: #000080;width:30px; height:30px;" (click)="doGetReservationOrderDetail(oClient, oBranch, oDate)">
+         <ion-icon style="color: #FFFFFF;" name="ios-refresh-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <button ion-button block>Client</button>
+        </ion-col>
+        <ion-col col-2>
+          <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+        <ion-col col-auto>
+          <ion-label>วันที่เอกสาร</ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oDate" readonly></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+          <ion-col col-2>
+            <ion-label>สาขา</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oBranchName" readonly></ion-input>
+          </ion-col>
+          <!-- <ion-item>
+              <select-searchable
+                  title="สาขา"
+                  [(ngModel)]="oBranch"
+                  [items]="data_branch"
+                  itemValueField="cust_id"
+                  itemTextField="customer_name"
+                  [canSearch]="true"
+                  (onChange)="branchChange($event)">
+              </select-searchable>
+          </ion-item> -->
+          <!-- <ion-item>
+            <ion-label stacked>สาขา</ion-label>
+            <ion-select [(ngModel)]="oBranch" interface="popover" (ionChange)="doGetReservationOrderDetail(oClient, oBranch, oDate)">
+              <ion-option *ngFor = "let branch of data_branch" value="{{branch.cust_id}}">{{branch.customer_name}}</ion-option>
+            </ion-select>
+          </ion-item> -->
+      </ion-row>
+    </ion-grid>
+    <br>
+
+    <ion-list-header style="border-top: 1px solid #cecece; border-bottom: 1px solid #cecece; margin-bottom: 0px">
+        <h2>รายละเอียดเอกสารส่งคืนสินค้า</h2>
+    </ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+              <ion-label>ลำดับ</ion-label>
+          </ion-col>
+          <ion-col col-2>
+              <ion-input type="text" [(ngModel)]="oLine_no" readonly></ion-input>
+          </ion-col>
+          <ion-col col-auto>
+              <ion-label>รหัสสินค้า</ion-label>
+          </ion-col>
+          <ion-col>
+              <ion-input type="text" [(ngModel)]="oItem_Barcode" #focusInputBarcode (keyup.enter)="doGetUOM(oClient, oItem_Barcode)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+              <ion-label>จำนวน</ion-label>
+          </ion-col>
+          <ion-col>
+              <ion-input [(ngModel)]="oQty" #focusInputQty></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label stacked style="margin: 0px 0px 0px 0;">หน่วย</ion-label>
+              <ion-select [(ngModel)]="oUom" interface="action-sheet">
+                <ion-option *ngFor = "let uom of data_uom" value="{{uom.uom_stock}}">{{uom.uom_stock}}</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br>
+      <ion-scroll scrollX="true" scrollY="true">
+          <ion-grid>
+            <ion-row style="width: 700px;" *ngFor = "let items of data_item; let i = index" (click)="doReturnOrderDetail(items.line_no,items.item_barcode,items.item_description,items.uom,items.qty,items.item_no)">
+              <ion-col class="border-col" col-auto>
+                <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
+                  #
+                </ion-row>
+                <ion-row style="width:20px;">
+                  {{items.line_no}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  รหัสสินค้า
+                </ion-row>
+                <ion-row>
+                  {{items.item_barcode}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" style="width:350px;" *ngIf = "i == 0">
+                    ชื่อสินค้า
+                </ion-row>
+                <ion-row style="width:350px;">
+                  {{items.item_description}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  หน่วย
+                </ion-row>
+                <ion-row>
+                  {{items.uom}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  จำนวน
+                </ion-row>
+                <ion-row>
+                  {{items.qty}}
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-scroll>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block (click)="doClear()">ล้างค่า</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doDeleteReservation(oClient,oBranch, oLine_no, oItem_Barcode, oUom, oQty)">ลบ</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doUpdateReservation(oClient,oBranch, oLine_no, oItem_Barcode, oUom, oQty)">บันทึก</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

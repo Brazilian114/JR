@@ -1,0 +1,221 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Despatch Packing</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col  class="col" col-8>
+        <ion-row>
+        <ion-col  class="col" col-auto>
+          <button ion-button (click)="doGetClient()">Client</button>
+        </ion-col>
+        <ion-col >
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+      </ion-row>
+
+        <ion-row>
+        <ion-col class="col" col-auto>
+          <button ion-button (click)="doGetClient()">Packing</button>
+        </ion-col>
+        <ion-col >
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+      </ion-row>
+
+          </ion-col>
+
+          <ion-col>
+            <ion-input [(ngModel)]="oo" style="height:100px;width:100px" readonly></ion-input>
+          </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col style="text-align:center" class="col" col-auto>
+          <button ion-button (click)="doGetClient()">Packing</button>
+        </ion-col>
+        <ion-col>
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col style="text-align:center" class="col" col-auto>
+          <button ion-button (click)="doGetClient()">Carton</button>
+        </ion-col>
+        <ion-col>
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+        <ion-col style="text-align:center" class="col" col-auto>
+          <button ion-button (click)="doGetClient()">Pack</button>
+        </ion-col>
+        <ion-col style="text-align:center" class="col" col-auto>
+          <button ion-button (click)="doGetClient()">Gen</button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-scroll scrollX="true" scrollY="true">
+      <ion-grid>
+        <ion-row style="width: 700px;" *ngFor = "let items of data_detail; let i = index" (click)="doReturnItemDetail(items.item_no,items.description,items.qty,items.location_to,items.rec_num,items.warehouse_to,items.pallet_no)">
+          <ion-col class="border-col" col-auto>
+            <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
+              #
+            </ion-row>
+            <ion-row style="width:20px;">
+              {{items.line_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              รหัสสินค้า
+            </ion-row>
+            <ion-row>
+              {{items.item_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-6>
+            <ion-row class="border-row" *ngIf = "i == 0">
+                ชื่อสินค้า
+            </ion-row>
+            <ion-row style="width:180px;">
+              {{items.description}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+                โลเคชั่น
+            </ion-row>
+            <ion-row style="width:180px;">
+              {{items.location_to}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-1>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวน
+            </ion-row>
+            <ion-row>
+              {{items.qty}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วย
+            </ion-row>
+            <ion-row>
+              {{items.uom}}
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-scroll>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col style="text-align:center" class="col" col-auto>
+        <button ion-button (click)="doGetClient()">Del</button>
+      </ion-col>
+      <ion-col col-5>
+          <ion-input [(ngModel)]="oClient" readonly></ion-input>
+      </ion-col>
+      <ion-col>
+          <ion-input [(ngModel)]="oClient" readonly></ion-input>
+      </ion-col>
+      <ion-col style="text-align:center" class="col" col-auto>
+        <button ion-button (click)="doGetClient()">Add</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align:center" class="col" col-auto>
+          <button ion-button (click)="doGetClient()">SI</button>
+        </ion-col>
+        <ion-col>
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+        <ion-col>
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-scroll scrollX="true" scrollY="true">
+        <ion-grid>
+          <ion-row style="width: 700px;" *ngFor = "let items of data_detail; let i = index" (click)="doReturnItemDetail(items.item_no,items.description,items.qty,items.location_to,items.rec_num,items.warehouse_to,items.pallet_no)">
+            <ion-col class="border-col" col-auto>
+              <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
+                #
+              </ion-row>
+              <ion-row style="width:20px;">
+                {{items.line_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-2>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                รหัสสินค้า
+              </ion-row>
+              <ion-row>
+                {{items.item_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-6>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                  ชื่อสินค้า
+              </ion-row>
+              <ion-row style="width:180px;">
+                {{items.description}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-2>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                  โลเคชั่น
+              </ion-row>
+              <ion-row style="width:180px;">
+                {{items.location_to}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-1>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                จำนวน
+              </ion-row>
+              <ion-row>
+                {{items.qty}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                หน่วย
+              </ion-row>
+              <ion-row>
+                {{items.uom}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </ion-scroll>
+
+    <ion-grid>
+      <ion-row>
+          <ion-col >
+            <button ion-button block>Clear</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block>Confirm</button>
+          </ion-col>
+          <ion-col >
+            <button ion-button block>Main</button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

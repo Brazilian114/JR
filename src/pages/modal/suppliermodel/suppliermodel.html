@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Line</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="data_supplier">
+    <div *ngFor = "let supplier of items">
+      <ion-card (click)="doSelectSupplier(supplier.supplier, supplier.supplier_name)">
+        <ion-card-content >
+          <ion-card-title>{{supplier.supplier_name}}</ion-card-title>
+          <p>{{supplier.supplier}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="data_line">
+    <div *ngFor = "let line of items">
+      <ion-card (click)="doSelectLine(line.line_no, line.item_no, line.description, line.qty_remain, line.grade, line.whse_source, line.zone, line.uom, line.qty_picked)">
+        <ion-card-content >
+          <ion-card-title>{{line.item_no}}({{line.line_no}})</ion-card-title>
+          <p>{{line.description}}</p>
+          <p>Grade :{{line.grade}}</p>
+          <p>Warehouse :{{line.whse_source}}</p>
+          <p>Zone :{{line.zone}}</p>
+          <p>Qty :{{line.qty_remain}}</p>
+          <p>UOM :{{line.uom}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pick By Transfer Task</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<ion-grid>
+  <ion-row>
+      <ion-col class="col" col-auto>
+        <button ion-button >Client</button>
+      </ion-col>
+      <ion-col class="col" col-2>
+
+          <ion-input [(ngModel)]="oClient" readonly></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <button ion-button (click)="doGetWo(oClient, oWo)">WO#</button>
+      </ion-col>
+      <ion-col class="col">
+          <ion-input [(ngModel)]="oWo" #focusInputScanWo (keyup.enter)="onKeyup()" (click)="clickInput()"></ion-input>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+      <ion-row>
+        <ion-col class="col" col-auto>
+          <ion-label>Item</ion-label>
+        </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oItem" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+        <ion-col class="col" col-2>
+          <ion-input [(ngModel)]="oTaskNo" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+        <ion-col class="col" col-2>
+          <ion-input [(ngModel)]="oActivity" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+        <ion-col col-auto class="col">
+          <button ion-button (click)="doGetitemWObyTask(oWo)">#</button>
+        </ion-col>
+      </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col class="col" col-2>
+      <ion-label>Order</ion-label>
+    </ion-col>
+    <ion-col class="col">
+      <ion-input [(ngModel)]="oOrderNo" style="background-color: #FFFF99" readonly></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col class="col" col-2>
+      <ion-label>Description</ion-label>
+    </ion-col>
+    <ion-col class="col">
+      <ion-input [(ngModel)]="oDesItem" style="background-color: #FFFF99" readonly></ion-input>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col class="col" col-2>
+          <ion-label>Qty</ion-label>
+        </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oQty" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+        <ion-col class="col" col-auto>
+          <ion-label>UOM</ion-label>
+        </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oUOM" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>Loc Fr.</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oLocFr" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <ion-label>Loc To.</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oLocTo" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>Pallet</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oPallet" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <ion-label>Date</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oDate" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>Pallet</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oPalletCon" #focusInputPallet_Confirm (keyup.enter)="doPalletChange()" (click)="doClick()"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>Location</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oLocation_confirm" #focusInputScanCodeItem (keyup.enter)="enterItem()" (click)="doClick()"></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <ion-label>Qty</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oQtyPick" #focusInputQty disabled></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>Status</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oStatus" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col class="col">
+        <button ion-button block (click)="doPickItem(oLocFr, oLocTo, oWo, oTaskNo, oActivity, oQtyPick, oPallet, oPalletCon, oItem, oItemNo, oLocation_confirm, oUOM)">Pick Item</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col">
+        <button ion-button block (click)="doClear()">Clear</button>
+      </ion-col>
+      <ion-col class="col">
+        <button ion-button block disabled>S/N</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

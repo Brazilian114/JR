@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Putaway Detail</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list-header>
+      <h2>
+        Detail Pallet
+      </h2>
+    </ion-list-header>
+    <ion-scroll scrollX="true" scrollY="true">
+          <ion-row style="width: 2000px;" *ngFor="let detail of data_detail; let i = index">
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Client
+              </ion-row>
+              <ion-row>
+                {{detail.client}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Receipt
+              </ion-row>
+              <ion-row>
+                {{detail.receipt_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Item
+              </ion-row>
+              <ion-row>
+                {{detail.item_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-2>
+              <ion-row class="border-row" *ngIf="i == 0">
+                Description
+              </ion-row>
+              <ion-row>
+                {{detail.description}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Line
+              </ion-row>
+              <ion-row>
+                {{detail.line_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                WH#
+              </ion-row>
+              <ion-row>
+                {{detail.warehouse_to}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Location TO
+              </ion-row>
+              <ion-row>
+                {{detail.location_to}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                UOM
+              </ion-row>
+              <ion-row>
+                {{detail.uom}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Qty
+              </ion-row>
+              <ion-row>
+                {{detail.qty}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Grade
+              </ion-row>
+              <ion-row>
+                {{detail.grade}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Branch
+              </ion-row>
+              <ion-row>
+                {{detail.branch}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Rec Num
+              </ion-row>
+              <ion-row>
+                {{detail.rec_num}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf="i == 0">
+                Receipt Date
+              </ion-row>
+              <ion-row>
+                {{detail.receipt_date}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+    </ion-scroll>
+</ion-content>

@@ -1,0 +1,252 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Item Relocation</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col col-auto>
+          <button ion-button >Client</button>
+        </ion-col>
+        <ion-col col-2>
+          <ion-input [(ngModel)]="oClient"></ion-input>
+        </ion-col>
+        <ion-col col-auto>
+          <button ion-button >Pallet</button>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oPallet" #focusInputPallet (keyup.enter)="doGetListItemInPallet_ByPallet(oClient, oPallet)"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-scroll scrollX="true" scrollY="true">
+      <ion-grid>
+        <ion-row style="width: 1200px;" *ngFor="let item of data_item; let i = index"
+        (click)="doReturnItemDetail(item.description,item.grade,item.item_code,item.item_no,item.location,item.qty_avail
+        ,item.rec_num,item.uom,item.warehouse, item.pallet)">
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Item No
+            </ion-row>
+            <ion-row>
+              {{item.item_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" style="width: 250px;" *ngIf = "i == 0">
+              Description
+            </ion-row>
+            <ion-row style="width: 250px;">
+              {{item.description}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Qty
+            </ion-row>
+            <ion-row>
+              {{item.qty_avail}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              UOM
+            </ion-row>
+            <ion-row>
+              {{item.uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Grade
+            </ion-row>
+            <ion-row>
+              {{item.grade}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Warehouse
+            </ion-row>
+            <ion-row>
+              {{item.warehouse}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Location
+            </ion-row>
+            <ion-row >
+              {{item.location}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Pallet
+            </ion-row>
+            <ion-row>
+              {{item.pallet}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Lot No
+            </ion-row>
+            <ion-row>
+              {{item.lot_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Batch No
+            </ion-row>
+            <ion-row>
+              {{item.batch_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Prod.Date
+            </ion-row>
+            <ion-row>
+              {{item.prod_date}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Exp.Date
+            </ion-row>
+            <ion-row>
+              {{item.expiry_date}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Rec
+            </ion-row>
+            <ion-row>
+              {{item.rec_num}}
+            </ion-row>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+  </ion-scroll>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <button ion-button (click)="doGetItemNo(oClient, oItem)">Item</button>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oItem"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+        <ion-label>Description</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oDes" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-2>
+        <ion-label>Location</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oLocation" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <ion-label>Rec No</ion-label>
+      </ion-col>
+      <ion-col >
+        <ion-input [(ngModel)]="oRec" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <ion-label>WH</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oWH" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <ion-label>Pallet</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oSrcPallet" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <ion-label>UOM</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oUOM" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <ion-label>Qty</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oQty" (click)="doClick()"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-label>Dest Location</ion-label>
+      </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oDestLoc" #focusInputDestLoc (click)="doClick()"></ion-input>
+        </ion-col>
+        <ion-col col-auto>
+          <button ion-button (click)="doGetLocation(oClient, oItem, oWH, oDestLoc, oLocation)">?</button>
+        </ion-col>
+        <ion-col col-auto>
+          <ion-item>
+            <ion-label stacked style="margin: 0px 0px 0px 0;">Grade</ion-label>
+            <ion-select [(ngModel)]="oGrade" disabled>
+              <ion-option *ngFor="let grade of listGrade" value="{{grade.param_code}}" [selected]="false">{{grade.param_code}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-label>Dest Pallet</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oDestPit" #focusInputDestPit (click)="doClick()"></ion-input>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button (click)="doGetNewPallet(oClient)">N</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="doClearAll()">Clear All</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="doClear()">Clear</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block (click)="doMove(oSrcPallet,oWH,oDestLoc,oDestPit,oClient,oItem,oRec,oQty,oUOM)">Move</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

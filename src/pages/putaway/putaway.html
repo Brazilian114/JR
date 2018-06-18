@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Putaway</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+            <ion-label>Pallet No</ion-label>
+        </ion-col>
+        <ion-col>
+            <ion-input [(ngModel)]="oPallet" #focusInputScanCode (keyup.enter)="onKeyup(oPallet)" no-lines></ion-input>
+        </ion-col>
+        <ion-col col-auto>
+            <button ion-button block (click)="doGetPalletforPutaway(oPallet)">?</button>
+        </ion-col>
+      </ion-row>
+
+      <ion-scroll scrollX="true" scrollY="true">
+          <ion-grid>
+            <ion-row style="width: 700px;" *ngFor = "let items of data_detail; let i = index">
+              <ion-col class="border-col" col-auto>
+                <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
+                  #
+                </ion-row>
+                <ion-row style="width:20px;">
+                  {{items.line_no}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col" col-2>
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  รหัสสินค้า
+                </ion-row>
+                <ion-row>
+                  {{items.item_no}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col" col-5>
+                <ion-row class="border-row" *ngIf = "i == 0">
+                    ชื่อสินค้า
+                </ion-row>
+                <ion-row style="width:180px;">
+                  {{items.description}}
+                </ion-row>
+              </ion-col>
+              <!-- <ion-col class="border-col" col-2>
+                <ion-row class="border-row" *ngIf = "i == 0">
+                    โลเคชั่น
+                </ion-row>
+                <ion-row style="width:180px;">
+                  {{items.location_to}}
+                </ion-row>
+              </ion-col> -->
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  จำนวน
+                </ion-row>
+                <ion-row>
+                  {{items.qty}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  หน่วย
+                </ion-row>
+                <ion-row>
+                  {{items.uom}}
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+      </ion-scroll>
+
+      <!-- <ion-row>
+        <ion-col col-2>
+            <ion-label>จำนวน</ion-label>
+        </ion-col>
+        <ion-col>
+            <ion-input type="number" #focusInputQty [(ngModel)]="oQty"></ion-input>
+        </ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col col-4>
+            <ion-label>Location From</ion-label>
+        </ion-col>
+        <ion-col>
+            <ion-input type="text" [(ngModel)]="oLocation" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+            <ion-label>Location Confirm</ion-label>
+        </ion-col>
+        <ion-col>
+            <ion-input type="text" [(ngModel)]="oLocation_confirm" #focusInputLocation_Confirm ></ion-input>
+        </ion-col>
+      </ion-row>
+ิ<br>
+<br>
+      <ion-row>
+          <ion-col>
+            <button ion-button block (click)="doClear()">Clear</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doConfirm(oLocation, oLocation_confirm, oPallet)">Putaway</button>
+
+          </ion-col>
+          <!-- <ion-col>
+            <button ion-button block>Main</button>
+          </ion-col> -->
+      </ion-row>
+    </ion-grid>
+</ion-content>

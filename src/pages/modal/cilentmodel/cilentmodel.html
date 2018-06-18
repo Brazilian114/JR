@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Client</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let client of data_client">
+  <ion-card (click)="doSelectClient(client.client)">
+      <ion-card-content >
+        <!-- <img src="http://192.168.1.98/ECommerce/Image/item_master/{{data_item.store_belong}}/{{data_item.image}}"
+         onerror="this.src = './assets/img/noimages.png'"/> -->
+        <ion-card-title>{{client.client_name}}</ion-card-title>
+        <p>{{client.client}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

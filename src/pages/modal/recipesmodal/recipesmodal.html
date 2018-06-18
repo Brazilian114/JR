@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Receipt</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor = "let item of items">
+  <ion-card (click)="doSelectReceipt(item.receipt_no, item.receipt_ref_no, item.supplier, item.status, item.receipt_date, item.warehouse, item.zone, item.receipt_station, item.incoming_no, item.container, item.customer, item.remark01, item.invoice_no, item.invoice_date, item.asn_flag, item.client_po_no)">
+      <ion-card-content >
+        <ion-card-title>{{item.receipt_no}}</ion-card-title>
+        <p>Doc.Ref : {{item.receipt_ref_no}} ({{item.status}})</p>
+        <!--<p>Incoming : {{item.incoming_no}}</p> -->
+        <p>PO_Ref : {{item.client_po_no}}</p>
+        <p>Station : {{item.receipt_station}}</p>
+        <p>Type : {{item.receipt_type}}</p>
+        <p>Warehouse : {{item.warehouse}}</p>
+        <p>Zone : {{item.zone}}</p>
+        <p>Receipt Date : {{item.receipt_date}}</p>
+        <p>Invoice : {{item.invoice_no}}</p>
+        <p>Invoice Date : {{item.invoice_date}}</p>
+        <p>ASN : {{item.asn_flag}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

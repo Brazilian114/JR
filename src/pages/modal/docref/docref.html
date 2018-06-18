@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Doc Ref</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let data of items">
+  <ion-card (click)="doSelectDocref(data.doc_no, data.branch)">
+      <ion-card-content >
+        <ion-card-title>{{data.doc_no}}</ion-card-title>
+        <p>Branch: {{data.branch}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

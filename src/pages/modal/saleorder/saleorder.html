@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Sale Order</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let data of items">
+  <ion-card (click)="doSelectSO(data.sales_order, data.customer, data.customer_name)">
+      <ion-card-content >
+        <ion-card-title>{{data.sales_order}}</ion-card-title>
+        <p>{{data.customer_name}}({{data.customer}})</p>
+        <p>Status: {{data.status}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

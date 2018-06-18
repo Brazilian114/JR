@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>WO</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="data_wo">
+    <div *ngFor = "let wo of items">
+      <ion-card (click)="doSelectWO(wo.wo_no, wo.deliver_to, wo.so_no, wo.wo_status, wo.delivery_date, wo.customer_name, wo.customer)">
+        <ion-card-content >
+          <ion-card-title>{{wo.wo_no}}</ion-card-title>
+          <p>{{wo.customer_name}}({{wo.customer}})</p>
+          <p>เลขที่ SO {{wo.so_no}}</p>
+          <p>วันที่ : {{wo.delivery_date}}({{wo.wo_status}})</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="data_wo_by_order">
+    <div *ngFor = "let wo of items">
+    <ion-card (click)="doSelectWOByOrder(wo.works_order, wo.dlvr_to, wo.dlvr_code, wo.status, wo.delivery_date, wo.customer_name, wo.customer, wo.order_no, wo.reference_no, wo.create_date)">
+        <ion-card-content >
+          <ion-card-title>{{wo.works_order}}</ion-card-title>
+          <p>{{wo.customer_name}}({{wo.customer}})</p>
+          <p>เลขที่ Order No : {{wo.order_no}}</p>
+          <p>วันที่ : {{wo.delivery_date}}({{wo.status}})</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

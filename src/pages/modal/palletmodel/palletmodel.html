@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Pallet List</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="data_pallet">
+    <div *ngFor = "let pallet of items">
+    <ion-card (click)="doSelectPallet(pallet.client_po_no, pallet.item_barcode, pallet.pallet_no, pallet.qty, pallet.uom)">
+        <ion-card-content >
+          <ion-card-title>{{pallet.pallet_no}}</ion-card-title>
+          <p>{{pallet.item_barcode}}</p>
+          <p>{{pallet.description}}</p>
+          <p>จำนวน {{pallet.qty}} : {{pallet.uom}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="data_pallet_for_rep">
+    <div *ngFor = "let pallet of items">
+    <ion-card>
+        <ion-card-content >
+          <ion-card-title>{{pallet.item_no}}</ion-card-title>
+          <p>{{pallet.description}}</p>
+          <p>Location: {{pallet.location}}</p>
+          <p>จำนวน {{pallet.qty_avail}} : {{pallet.item_packing}}</p>
+          <p>Receipt Date: {{pallet.receipt_date}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="data_pallet_for_workorder">
+    <div *ngFor = "let pallet of items">
+    <ion-card (click)="doSelectPalletForWork(pallet.pallet_to, pallet.item_code, pallet.description, pallet.qty, pallet.uom)">
+        <ion-card-content >
+          <ion-card-title>{{pallet.pallet_to}}</ion-card-title>
+          <p>Item No: {{pallet.item_code}}</p>
+          <p>{{pallet.description}}</p>
+          <p>Qty: {{pallet.qty}}</p>
+          <p>UOM: {{pallet.uom}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

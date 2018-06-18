@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Check Barcode</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-scroll scrollX="true" scrollY="true">
+      <ion-grid>
+        <ion-row style="width: 800px;" *ngFor = "let barcode of data_barcode; let i = index"
+        (click)="doReturnItemDetail(barcode.item_barcode,barcode.description,barcode.item_qty)">
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Barcode
+            </ion-row>
+            <ion-row>
+              {{barcode.item_barcode}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              รหัสสินค้า
+            </ion-row>
+            <ion-row>
+              {{barcode.item_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-3>
+            <ion-row class="border-row" *ngIf = "i == 0">
+                ชื่อสินค้า
+            </ion-row>
+            <ion-row>
+              {{barcode.description}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวน
+            </ion-row>
+            <ion-row>
+              {{barcode.item_qty}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วย
+            </ion-row>
+            <ion-row>
+              {{barcode.item_uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+                Maker
+            </ion-row>
+            <ion-row>
+              {{barcode.maker}}
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-scroll>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-label stacked>Barcode</ion-label>
+          <ion-input [(ngModel)]="oBarcode" #focusInputScanCode (keyup.enter)="doAddCheckBarcode()" (click)="doClick()"></ion-input>
+      </ion-col>
+      <ion-col>
+          <ion-label stacked>UOM</ion-label>
+          <ion-input [(ngModel)]="oUOM" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-9>
+          <ion-label stacked>Description</ion-label>
+          <ion-input [(ngModel)]="oDescription" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col>
+          <button ion-button style="margin-top: 20px" block (click)="doDeleteBarcode(oBarcode)">Delete</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

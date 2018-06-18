@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Location Relocation</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col col-auto>
+          <button ion-button (click)="doGetWH()">W/H</button>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oWH" #focusInputWH></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col col-auto>
+          <button ion-button (click)="doGetLocationAll(oWH, oLoc)">Location</button>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oLoc" #focusInputLoc (keyup.enter)="doGetListPalletInLocation(oWH, oLoc)"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-scroll scrollX="true" scrollY="true">
+      <ion-grid>
+        <ion-row style="width: 1200px;" *ngFor="let listPallet of data_listPallet; let i = index">
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Item Code
+            </ion-row>
+            <ion-row>
+              {{listPallet.item_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-3>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Description
+            </ion-row>
+            <ion-row >
+              {{listPallet.description}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Pallet No
+            </ion-row>
+            <ion-row>
+              {{listPallet.pallet}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Qty
+            </ion-row>
+            <ion-row>
+              {{listPallet.qty_avail}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              UOM
+            </ion-row>
+            <ion-row>
+              {{listPallet.uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Batch No
+            </ion-row>
+            <ion-row>
+              {{listPallet.batch_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Lot No
+            </ion-row>
+            <ion-row>
+              {{listPallet.lot_no}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Grade
+            </ion-row>
+            <ion-row>
+              {{listPallet.grade}}
+            </ion-row>
+          </ion-col>
+          <ion-col  class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              Rec
+            </ion-row>
+            <ion-row>
+              {{listPallet.rec_num}}
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-scroll>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <ion-label>Location Destination</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oLocDes" #focusInputDestLoc (click)="doClick()"></ion-input>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button (click)="doGetLocationAll_NotGetDetail(oWH, oLocDes)">?</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <button ion-button block (click)="doClear()">Clear</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="doClickMove(oWH, oLoc, oLocDes)">Move</button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

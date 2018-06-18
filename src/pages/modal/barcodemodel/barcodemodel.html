@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Barcode Detail</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let barcode of items">
+  <ion-card>
+      <ion-card-content >
+        <ion-card-title>{{barcode.item_no}}</ion-card-title>
+        <p>{{barcode.description}}</p>
+        <p>Location: {{barcode.location}}</p>
+        <p>Qty: {{barcode.qty_avail}}</p>
+        <p>UOM: {{barcode.item_packing}}</p>
+        <p>Grade: {{barcode.grade}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

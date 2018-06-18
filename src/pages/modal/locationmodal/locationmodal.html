@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Location</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf ="data_location">
+    <div *ngFor = "let location of items">
+    <ion-card (click)="doSelectItem(location.location, location.warehouse, location.zone)">
+        <ion-card-content >
+          <ion-card-title>{{location.location}}</ion-card-title>
+          <p *ngIf = "location.warehouse">{{location.warehouse}}</p>
+          <p *ngIf = "location.zone">{{location.zone}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="data_stock">
+    <div *ngFor = "let stock of items">
+    <ion-card>
+        <ion-card-content >
+          <ion-card-title>{{stock.location}}</ion-card-title>
+          <p>Pallet :{{stock.pallet}}</p>
+          <p>Qty :{{stock.qty}}</p>
+          <p>UOM :{{stock.uom}}</p>
+          <p>Zone :{{stock.zone}}</p>
+          <p>Grade :{{stock.grade}}</p>
+          <p>Receipt Date :{{stock.receipt_date}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

@@ -1,0 +1,28 @@
+page-operation {
+  // ion-content {
+  //   background-image: url('../assets/imgs/login-BG.png');
+  //   background-repeat: no-repeat;
+  //   background-size:cover;
+  // }
+  .col{
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  ion-icon{
+    font-size: 30px;
+  }
+  .paddingLeft{
+    padding-left: 30px;
+  }
+  ion-img{
+    background-color: #FFFFFF;
+  }
+  .card-title-md{
+    font-size: 18px;
+  }
+  .card-content-md {
+    padding: 2px 3px;
+    font-size: 1.4rem;
+    line-height: 0;
+  }
+}

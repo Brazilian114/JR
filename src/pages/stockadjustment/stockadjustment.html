@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Stock Adjustment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+        <ion-col col-3>
+          <button ion-button style="width: 95%" (click)="doGetClient()">Client</button>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oClient" [value]="oClient"></ion-input>
+        </ion-col>
+        <ion-col col-auto>
+          <button ion-button style="width: 95%" (click)="doGetItemNo(oClient)">Item</button>
+        </ion-col>
+        <ion-col>
+          <ion-input placeholder="Item"  style="background-color: #FFFF99" [(ngModel)]="oItem" [value]="oItem"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <ion-label stacked>Des</ion-label>
+          <ion-input placeholder="Des" style="background-color: #FFFF99" [(ngModel)]="oDes" [value]="oDes"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-scroll scrollX="true" scrollY="true">
+      <ion-grid style="margin-top: 10px;">
+        <ion-row style="width: 1000px;">
+          <ion-col class="border-col">
+            Location
+          </ion-col>
+          <ion-col class="border-col">
+            Qty
+          </ion-col>
+          <ion-col class="border-col">
+            UOM
+          </ion-col>
+          <ion-col class="border-col">
+            Grade
+          </ion-col>
+          <ion-col class="border-col">
+            Item
+          </ion-col>
+          <ion-col class="border-col">
+            Warehouse
+          </ion-col>
+          <ion-col class="border-col">
+            Lot No
+          </ion-col>
+          <ion-col class="border-col">
+            Batch No
+          </ion-col>
+          <ion-col class="border-col">
+            Rec
+          </ion-col>
+          <ion-col class="border-col">
+            Class
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-scroll>
+  <ion-grid>
+    <ion-row>
+        <ion-col >
+          <ion-label stacked>Pallet No</ion-label>
+          <ion-input placeholder="Pallet No"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <ion-label stacked>WH</ion-label>
+          <ion-input placeholder="Pallet No" style="background-color: #FFFF99"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label stacked>Loc</ion-label>
+          <ion-input placeholder="Loc" style="background-color: #FFFF99"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <ion-label stacked>Grade</ion-label>
+          <ion-input style="background-color: #FFFF99" value="01"></ion-input>
+        </ion-col>
+        <ion-col >
+          <ion-label stacked>UOM</ion-label>
+          <ion-input placeholder="UOM" style="background-color: #FFFF99"></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col >
+          <ion-label stacked>Qty</ion-label>
+          <ion-input placeholder="Qty" style="background-color: #FFFF99"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label stacked>New Qty</ion-label>
+          <ion-input placeholder=""></ion-input>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+        <ion-col>
+          <button ion-button block>Cancle</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block>Ok</button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

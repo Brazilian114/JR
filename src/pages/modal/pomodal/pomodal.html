@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>PO</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let po of items">
+  <ion-card (click)="doSelectPo(po.order_no, po.supplier)">
+      <ion-card-content >
+        <ion-card-title>{{po.order_no}}</ion-card-title>
+        <p>{{po.supplier}}</p>
+        <p>{{po.supplier_name}}</p>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

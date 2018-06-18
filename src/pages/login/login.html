@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="md-settings"></ion-icon>
+    </button> -->
+    <ion-title>WMS-Handheld</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<!-- <img src="./assets/imgs/walllogin.jpg"/> -->
+<div style="margin-top: 80%" >
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input type="text" text-center text-uppercase placeholder="Username" [(ngModel)]="oUsername" (click)="doClick()"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input type="password" text-center text-uppercase placeholder="Password" [(ngModel)]="oPassword" (click)="doClick()"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+  <br/>
+  <ion-row>
+    <ion-col style="text-align:center">
+      <ion-col col-auto text-center>
+          <button ion-button (click)="doLogin(oUsername, oPassword)">เข้าสู่ระบบ</button>
+      </ion-col>
+      <ion-col col-auto text-left>
+          <button ion-button>
+            <ion-icon name="md-settings" (click)="doSetting()"></ion-icon>
+          </button>
+      </ion-col>
+    </ion-col>
+  </ion-row>
+  <br/>
+  <!-- <ion-label style="text-align:center">ลืมรหัสผ่าน</ion-label> -->
+</ion-content>
+<ion-footer>
+    <ion-label style="text-align: right; color: #CCCCCC">Version 1.0.0</ion-label>
+</ion-footer>

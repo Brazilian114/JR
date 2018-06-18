@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle (click)="menuOpened()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="margin-top: 90%">
+    <ion-label style="text-align: center;">This user is currently logged in.</ion-label>
+    <ion-label style="text-align: center;">Username : {{data_logins}}</ion-label>
+    <ion-label style="text-align: center;">Group : {{oGroup}}</ion-label>
+    <ion-label *ngIf="oCus_name != undefined" style="text-align: center;">Name : {{oCus_name}}</ion-label>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Putaway</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let pallet of items">
+  <ion-card (click)="doSelectItem(pallet.pallet_no, pallet.location_to)">
+      <ion-card-content >
+        <ion-card-title>{{pallet.pallet_no}}</ion-card-title>
+        <ion-label stacked style="margin: 0px 0px 0px 0;">Location</ion-label>
+        <p>{{pallet.location_to}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

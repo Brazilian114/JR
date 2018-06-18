@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Checkin Order</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button block >Client</button>
+      </ion-col>
+      <ion-col col-2>
+        <ion-input [(ngModel)]="oClient" readonly></ion-input>
+      </ion-col>
+      <ion-col col-auto>
+        <button ion-button block>T#</button>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oLoadingSummaryNo" #focusInputLoadingSummaryNo (keyup.enter)="doLoadingNo()"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button block >Pack No</button>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oPackNo" #focusInputPackNo (keyup.enter)="doGetBranch_Receipt(oClient, oLoadingSummaryNo, oPackNo, oBranch)"></ion-input>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-label>Status</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oStatus" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button block >Barcode</button>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oBarcode" #focusInputBarcode (keyup.enter)="doInsBranchReceiptCheckinDetail(oClient, oLoadingSummaryNo, oPackNo, oBarcode, oStatus, oBranch)"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button block >Branch</button>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oBranch" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-auto>
+        <ion-label>UOM</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="listUOM" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-label>QTY</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="oQTY" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-scroll scrollX="true" scrollY="true">
+        <ion-row style="width: 700px;" *ngFor = "let details of data_checkin; let i = index" (click)="doReturnItemDetail(details.item_barcode,details.description,details.qty,details.uom)">
+          <ion-col class="border-col" col-auto>
+            <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+              #
+            </ion-row>
+            <ion-row style="width:30px;">
+              {{i+1}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-2>
+            <ion-row class="border-row" *ngIf = "i == 0">
+              รหัสสินค้า
+            </ion-row>
+            <ion-row>
+              {{details.item_barcode}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col" col-5>
+            <ion-row class="border-row" *ngIf = "i == 0">
+                ชื่อสินค้า
+            </ion-row>
+            <ion-row style="width:180px;">
+              {{details.description}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวน
+            </ion-row>
+            <ion-row>
+              {{details.qty}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วย
+            </ion-row>
+            <ion-row>
+              {{details.uom}}
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-scroll>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button block (click)="doClear()">Clear</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="doDelBranchReceiptCheckinDetail(oClient, oLoadingSummaryNo, oPackNo, oQTY, oBarcode, oStatus, oBranch)">Delete</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="doSummaryBranch_ReceiptCheckinDetail(oClient, oLoadingSummaryNo, oPackNo, oBranch)">Summary</button>
+        </ion-col>
+        <ion-col>
+          <button ion-button block (click)="doConfirmBranchReceiptCheckinDetail(oClient, oLoadingSummaryNo, oPackNo, oBranch)">Confirm</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

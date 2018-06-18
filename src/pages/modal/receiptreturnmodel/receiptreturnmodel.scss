@@ -1,0 +1,48 @@
+page-receiptreturnmodel {
+  ion-input{
+    background-color: #FFFFFF;
+    border: 1px solid #cecece;
+    // border-radius: 25px 25px 25px 25px;
+  }
+  ion-icon {
+     font-size: 25px; //Preferred size here
+  }
+  ion-grid{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  ion-scroll {
+    white-space: nowrap;
+    height: 530px;
+    // width: 100px;
+  }
+  .border-col{
+    border: 1px solid #cecece;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .border-row{
+    border-bottom: 1px solid #cecece;
+    background-color: #FAFAD2;
+  }
+  .col{
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .grid{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  // .label-md {
+  //   margin: 0px 0px 0px 0;
+  // }
+  .button-md {
+      padding: 0 0.7em;
+  }
+}

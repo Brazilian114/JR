@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>STK</ion-title>
+    <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      clearInput>
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let stk of items">
+  <ion-card (click)="doSelectStk(stk.count_type, stk.status, stk.stocktake_ref, stk.warehouse)">
+      <ion-card-content >
+        <ion-card-title>{{stk.stocktake_ref}}</ion-card-title>
+        <p>Count Type: {{stk.count_type}}</p>
+        <p>Status: {{stk.status}}</p>
+        <p>Warehouse: {{stk.warehouse}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

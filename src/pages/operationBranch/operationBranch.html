@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Branch Operation</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card (click)="doOrdering()">
+    <ion-card-content style="border-left: 2px solid #66FF33;">
+      <ion-row>
+        <ion-col col-1 style="margin: auto;">
+          <ion-img width="30" height="30" src="assets/imgs/Reservation.png"></ion-img>
+        </ion-col>
+        <ion-col class="paddingLeft">
+          <ion-card-title>
+            Reservation Order
+          </ion-card-title>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="doCheckinOrder()">
+    <ion-card-content style="border-left: 2px solid #FFFF33;">
+      <ion-row>
+        <ion-col col-1 style="margin: auto;">
+          <ion-img width="30" height="30" src="assets/imgs/import.png"></ion-img>
+        </ion-col>
+        <ion-col class="paddingLeft">
+          <ion-card-title>
+            Check In Order
+          </ion-card-title>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="doReservationOrder()">
+    <ion-card-content style="border-left: 2px solid #6A5ACD;">
+      <ion-row>
+        <ion-col col-1 style="margin: auto;">
+          <ion-img width="30" height="30" src="assets/imgs/Return.png"></ion-img>
+        </ion-col>
+        <ion-col class="paddingLeft">
+          <ion-card-title>
+            Sale Return
+          </ion-card-title>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

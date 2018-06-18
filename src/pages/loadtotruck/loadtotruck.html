@@ -1,0 +1,287 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Load To Truck</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="Check">
+
+    <ion-list *ngSwitchCase="'Header'">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+            <button ion-button block (click)="doGetLoading()">T#</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oLoadingSummaryNo" #focusInputT (click)="doGetLoading_Enter()"></ion-input>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-col col-2>
+            <ion-label>Status</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oStatus" style="background-color: #FFFF99" readonly></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-label stacked style="margin: 0px 0px 0px 0;">Date</ion-label>
+            <ion-datetime [(ngModel)]="oDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"></ion-datetime>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block (click)="doGetLoadingTruckLicensePlate()">License</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oLicense" #focusInputLic></ion-input>
+          </ion-col>
+          <ion-col col-auto>
+            <button ion-button block>V.Type</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oViType" #focusInputVType></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block (click)="doGetLoadingDriver()">Driver</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oDriver" #focusInputDriver></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block>Name</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oName" style="background-color: #FFFF99" readonly></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block (click)="doClearHeader()">Clear</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doSaveLoadingSummaryHeader(oLoadingSummaryNo, oStatus, oDate, oLicense, oViType, oDriver)">Save</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doConfirmLoadingSummaryDetail(oLoadingSummaryNo)">Confirm</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Details'">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block>Client</button>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input [(ngModel)]="oClient"></ion-input>
+          </ion-col>
+          <ion-col col-auto>
+            <button ion-button block (click)="GetLoadingSalesOrderCustomerInfo(oLoadingSummaryNo, oClient)">SO</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oSalesOrder" #focusInputSo></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block>Customer</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oCustomer" style="background-color: #FFFF99" readonly></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block>Pack No</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oPackingNo" #focusInputPackNo (keyup.enter)="doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo)"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-scroll scrollX="true" scrollY="true" style="height: 340px">
+          <ion-row style="width: 800px;" *ngFor = "let details of data_details; let i = index" (click)="doReturn(details.packing_no,details.customer,details.customer_name,details.sales_order)">
+            <ion-col class="border-col" col-auto>
+              <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+                #
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{i+1}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Packing No
+              </ion-row>
+              <ion-row>
+                {{details.packing_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Customer
+              </ion-row>
+              <ion-row>
+                {{details.customer}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Customer Name
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{details.customer_name}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Sales Order
+              </ion-row>
+              <ion-row>
+                {{details.sales_order}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                  Status
+              </ion-row>
+              <ion-row >
+                {{details.loading_status}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-scroll>
+      </ion-grid>
+      <ion-grid>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button ion-button block (click)="doClearDetails()">Clear</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block (click)="doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo)">Delete</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Item'">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <button ion-button block disabled>Client</button>
+          </ion-col>
+          <ion-col col-2>
+            <ion-input [(ngModel)]="oClient" readonly></ion-input>
+          </ion-col>
+          <ion-col col-auto>
+            <button ion-button block disabled>WO#</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oWO" readonly></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-scroll scrollX="true" scrollY="true" style="height: 300px">
+          <ion-row style="width: 1200px;" *ngFor = "let details of data_itemList; let i = index" >
+            <ion-col class="border-col" col-auto>
+              <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+                #
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{i+1}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-auto>
+              <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+                Task
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{details.task_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-auto>
+              <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+                Act
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{details.activity}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Pallet
+              </ion-row>
+              <ion-row style="width:30px;">
+                {{details.pallet_to}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-2>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                รหัสสินค้า
+              </ion-row>
+              <ion-row>
+                {{details.item_code}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col" col-5>
+              <ion-row class="border-row" *ngIf = "i == 0">
+                  ชื่อสินค้า
+              </ion-row>
+              <ion-row style="width:180px;">
+                {{details.description}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                จำนวน
+              </ion-row>
+              <ion-row>
+                {{details.qty}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                หน่วย
+              </ion-row>
+              <ion-row>
+                {{details.uom}}
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-scroll>
+      </ion-grid>
+    </ion-list>
+
+  </div>
+  </ion-content>
+  <ion-footer>
+      <ion-segment [(ngModel)]="Check">
+        <ion-segment-button value="Header">
+          Header
+        </ion-segment-button>
+        <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient)">
+          Details
+        </ion-segment-button>
+        <ion-segment-button value="Item" [disabled]="!isenabled" (click)="doGetItemList(oLoadingSummaryNo)">
+          Item List
+        </ion-segment-button>
+      </ion-segment>
+  </ion-footer>
