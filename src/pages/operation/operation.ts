@@ -4,6 +4,7 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { CheckinPage } from '../checkin/checkin';
 import { PutawayPage } from '../putaway/putaway';
 import { PickbytaskPage } from '../pickbytask/pickbytask';
+import { PicksummaryPage } from '../picksummary/picksummary';
 import { ItemrelocationPage } from '../itemrelocation/itemrelocation';
 import { StockadjustmentPage } from '../stockadjustment/stockadjustment';
 import { PalletrelocationPage } from '../palletrelocation/palletrelocation';
@@ -50,6 +51,15 @@ export class OperationPage {
   doPickbytask(){
     if(this.network.type !== 'none'){
       this.navCtrl.push(PickbytaskPage);
+    }else if(this.network.type === 'none'){
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }else{
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }
+  }
+  doPicksummary(){
+    if(this.network.type !== 'none'){
+      this.navCtrl.push(PicksummaryPage);
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{

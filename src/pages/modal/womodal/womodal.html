@@ -35,6 +35,16 @@
       </ion-card>
     </div>
   </div>
+  <div *ngIf="data_pick_sum">
+    <div *ngFor = "let wo of items">
+      <ion-card (click)="doSelectPickSum(wo.wave_pick_no)">
+        <ion-card-content >
+          <ion-card-title>{{wo.wave_pick_no}}</ion-card-title>
+            <p>เลขที่ Order No : {{wo.wave_pick_no}}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>

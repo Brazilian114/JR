@@ -1,0 +1,141 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pick Summary</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+<ion-grid>
+  <ion-row>
+      <ion-col style="text-align:center" class="col" col-auto>
+        <button ion-button>Client</button>
+      </ion-col>
+      <ion-col style="text-align:center" class="col" col-2>
+          <ion-input [(ngModel)]="oClient" readonly></ion-input>
+      </ion-col>
+      <ion-col style="text-align:center" class="col" col-auto>
+        <button ion-button (click)="doGetWoSum(oClient)">WO#</button>
+      </ion-col>
+      <ion-col style="text-align:center" class="col">
+          <ion-input [(ngModel)]="oWo" #focusInputScanWo (keyup.enter)="onKeyup(oClient)" (click)="clickInput()"></ion-input>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid>
+
+      <ion-row>
+        <ion-col class="col" col-2>
+            <ion-label >รหัส</ion-label>
+        </ion-col>
+        <ion-col class="col">
+            <ion-input [(ngModel)]="oItem" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+
+
+        <ion-col col-auto class="col">
+          <button ion-button (click)="doGetitemWObyTask(oWo,oClient)">#</button>
+        </ion-col>
+      </ion-row>
+  <ion-row>
+    <ion-col class="col" col-2>
+      <ion-label>ชื่อ</ion-label>
+    </ion-col>
+      <ion-col class="col">
+        <ion-input class="sizeXL-input" [(ngModel)]="oDesItem" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+  </ion-row>
+</ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>จำนวน</ion-label>
+      </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oQty" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+        <ion-col class="col" col-auto>
+          <ion-label>หน่วย</ion-label>
+        </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oUOM" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="col" col-3>
+        <ion-label>Pallet From</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oPalletFrom" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <ion-label hidden>วันที่</ion-label>
+      </ion-col>
+      <ion-col class="col" hidden>
+        <ion-input [(ngModel)]="oDate" style="background-color: #FFFF99" ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="col" col-3>
+        <ion-label>Location</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oLocation" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <ion-label>สถานะ</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oStatus" style="background-color: #FFFF99" readonly></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="col" col-3>
+        <ion-label>Pallet Confirm</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oPalletFromConfirm" #focusInputPalletConfirm (keyup.enter)="doCheckPallet(oPalletFrom, oPalletFromConfirm)" (click)="doClick()"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="col" col-3>
+        <ion-label>Location To</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oLocation_confirm" #focusInputLocation_Confirm (keyup.enter)="doLocation(oLocation, oLocation_confirm, oQty)" (click)="doClick()"></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto>
+        <ion-label>จำนวน</ion-label>
+      </ion-col>
+      <ion-col class="col">
+        <ion-input [(ngModel)]="oQtyNew" disabled (click)="doClick()"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row hidden>
+      <ion-col class="col" col-3>
+        <ion-label>Pallet To</ion-label>
+      </ion-col>
+      <ion-col class="col"  >
+        <ion-input [(ngModel)]="oPalletTo" #focusInputPalletTo (click)="doClick()"></ion-input>
+      </ion-col>
+      <ion-col class="col" col-auto  >
+        <button ion-button block (click)="doGetNewPallet(oClient)">N</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col">
+        <button ion-button block (click)="doClear()">Clear</button>
+      </ion-col>
+      <ion-col class="col">
+        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oUOM, oQtyNew)">Pick</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -29,6 +29,7 @@ import { CheckinOrderPage } from '../pages/checkinorder/checkinorder';
 import { ReservationOrderPage } from '../pages/reservationorder/reservationorder';
 import { PackingPage } from '../pages/packing/packing';
 import { PickbyorderPage } from '../pages/pickbyorder/pickbyorder';
+import { PicksummaryPage } from '../pages/picksummary/picksummary';
 import { ReplenishmentPage } from '../pages/replenishment/replenishment';
 import { StockListPage } from '../pages/stocklist/stocklist';
 import { ListPage } from '../pages/list/list';
@@ -69,6 +70,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
 import { Network } from '@ionic-native/network';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { DocumentViewer } from '@ionic-native/document-viewer';
+import { itemPickSumPage } from '../pages/modal/itemPickSum/itemPickSum';
 
 @NgModule({
   declarations: [
@@ -123,7 +125,9 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
     LicensePage,
     DriverPage,
     SaleorderPage,
-    SettingPage
+    SettingPage,
+    PicksummaryPage,
+    itemPickSumPage
   ],
   imports: [
     BrowserModule,
@@ -201,7 +205,9 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
     LicensePage,
     DriverPage,
     SaleorderPage,
-    SettingPage
+    SettingPage,
+    PicksummaryPage,
+    itemPickSumPage
   ],
   providers: [
     StatusBar,

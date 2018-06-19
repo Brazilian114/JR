@@ -474,6 +474,27 @@ get_wo(oClient, oWO, oMaker) {
        }
     );
 }
+get_wo_sum(oClient, oWO, oMaker) {
+  let parameters='oClient='+oClient+'&oWO='+oWO+'&oMaker='+oMaker;
+  return this.http.get(this.hostWebService +"/GetWoSum?"+parameters)
+    .toPromise()
+    .then(response =>
+       {
+          let a;
+          xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+          a = result;
+       });
+          try {
+              // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+              return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+              // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+          }
+          catch (e) {
+            return [];
+          }
+       }
+    );
+}
 get_TranferStockMovements(oClient, oWO, oMaker) {
   let parameters='oClient='+oClient+'&oWO='+oWO+'&oMaker='+oMaker;
   return this.http.get(this.hostWebService +"/GetTranferStockMovements?"+parameters)
@@ -943,6 +964,28 @@ get_detail_workorder_by_select(oWO, oTask, oAct, oUser) {
        }
     );
 }
+
+get_detail_pick_sum(oWO, oClient,   oUser) {
+  let parameters='oWO='+oWO+'&oClient='+oClient+ '&oUser='+oUser;
+  return this.http.get(this.hostWebService +"/Get_Detail_WorkOrderPickSum?"+parameters)
+    .toPromise()
+    .then(response =>
+       {
+          let a;
+          xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+          a = result;
+       });
+          try {
+              // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+              return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+              // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+          }
+          catch (e) {
+            return [];
+          }
+       }
+    );
+}
 get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
   let parameters='oWO='+oWO+'&oTask='+oTask+'&oAct='+oAct;
   return this.http.get(this.hostWebService +"/Get_Detail_Tranfer_WorkOrderBySelect?"+parameters)
@@ -1243,6 +1286,30 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
+
+  close_pickSum(oWO, oMaker,oQtyPick, oUOM, oPalletTo) {
+    let parameters='oWO='+oWO +'&oQtyPick='+oQtyPick+ '&oMaker='+oMaker
+    +'&oUOM='+oUOM+'&oPalletTo='+oPalletTo;
+    return this.http.get(this.hostWebService +"/ClosePickTaskEkapab?"+parameters)
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
+
   get_ClientWarehouse(oClient) {
     let parameters='oClient='+oClient;
     return this.http.get(this.hostWebService +"/GetClientWarehouse?"+parameters)
@@ -2589,7 +2656,7 @@ update_receipt_header_new(oClient, oBook, oReceiptNo, oReceiptDate, oIncoming, o
     let parameters="oClient="+oClient+'&oBook='+oBook+'&oReceiptNo='+oReceiptNo+'&oReceiptDate='+oReceiptDate
     +'&oIncoming='+oIncoming+'&oStation='+oStation+'&oWarehouse='+oWarehouse+'&oZone='+oZone+'&oType='+oType
     +'&oContainer='+oContainer+'&oSupplier='+oSupplier+'&oClientSoNo='+oClientSoNo+'&oRemarks='+oRemarks+'&oRefNo='+oRefNo
-    +'&oStatus='+oStatus+'&oMaker='+oMaker+'&oInvoice='+oInvoice+'&oInvoice_Date='+oInvoice_Date+'&oAsn_flag='+oAsn_flag;
+    +'&oStatus='+oStatus+'&oMaker='+oMaker+'&oInvoice='+oInvoice+'&oInvoice_Date='+oInvoice_Date;
   return this.http.get(this.hostWebService +"/Update_Receipt_Header_NEW?"+parameters)
     .toPromise()
     .then(response =>
@@ -2838,4 +2905,5 @@ delete_sale_return_detail(oClient, oDoc_no, oBranch, oLine_no, oItem_no, oUom, o
        }
     );
 }
+
 }

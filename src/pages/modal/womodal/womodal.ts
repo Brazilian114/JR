@@ -9,9 +9,12 @@ import { Service } from '../../../services/service';
 })
 export class WomodalPage {
   data_wo:any;
+  data_pick_sum:any;
   data_wo_by_order:any;
   oClient:any;
   oWo:any;
+
+  wave_pick_no:any;
   oUsername:any;
   frag:any;
   items: any;
@@ -23,24 +26,39 @@ export class WomodalPage {
     this.oUsername = navParams.get('oUsername');
     this.frag = navParams.get('frag');
     console.log(this.frag);
-    if(this.frag != 1 && this.frag != 2){
+    console.log(this.oClient);
+    if(this.frag != 1 && this.frag != 2 && this.frag != 3){
         this.doGetWo(this.oClient);
     }else if(this.frag == 1){
       if(this.oWo == undefined){
         this.oWo = "";
         this.doGetWoTranferStockMovements(this.oClient, this.oWo, this.oUsername);
+
       }else{
         this.oWo = "";
         this.doGetWoTranferStockMovements(this.oClient, this.oWo, this.oUsername);
       }
-    }else{
+    }else if(this.frag == 3){
+      if(this.oWo == undefined){
+        this.oWo = "";
+        this.doGetWoSum(this.oClient);
+
+      }else{
+        this.oWo = "";
+        this.doGetWo(this.oClient);
+      }
+    }
+    else{
       this.doGetWOPickbyOrder(this.oClient, this.oUsername);
     }
   }
   initializeItems() {
     if(this.data_wo != undefined){
       this.items = this.data_wo;
-    }else{
+    }else if (this.data_pick_sum){
+      this.items = this.data_pick_sum;
+    }
+   else{
       this.items = this.data_wo_by_order;
     }
 
@@ -55,7 +73,18 @@ export class WomodalPage {
                 return (item.wo_no["0"].toLowerCase().indexOf(val.toLowerCase()) > -1);
               })
             }
-          }else{
+          }
+            else if(this.data_pick_sum != undefined)
+            {
+                let val = ev.target.value;
+                if(val && val.trim() != ''){
+                  this.items = this.items.filter((item)=>{
+                    return (item.wave_pick_no["0"].toLowerCase().indexOf(val.toLowerCase()) > -1);
+                  })
+                }
+
+            }
+          else{
             let val = ev.target.value;
             if(val && val.trim() != ''){
               this.items = this.items.filter((item)=>{
@@ -70,13 +99,18 @@ export class WomodalPage {
     , 'delivery_date': delivery_date, 'customer_name': customer_name, 'customer': customer };
     this.viewCtrl.dismiss(data);
   }
+  doSelectPickSum(wave_pick_no){
+    let data = { 'wave_pick_no': wave_pick_no };
+    this.viewCtrl.dismiss(data);
+  }
   doSelectWOByOrder(works_order, dlvr_to, dlvr_code, status, delivery_date, customer_name, customer, order_no, reference_no, create_date){
     let data = { 'works_order': works_order, 'dlvr_to': dlvr_to, 'dlvr_code': dlvr_code, 'status': status
     , 'delivery_date': delivery_date, 'customer_name': customer_name, 'customer': customer , 'order_no': order_no, 'reference_no': reference_no, 'create_date': create_date};
     this.viewCtrl.dismiss(data);
   }
-  doGetWo(oClient){
-    this.presentLoading();
+ doGetWo(oClient){
+
+   this.presentLoading();
     this.service.get_wo(oClient, "", "").then((res)=>{
       this.data_wo = res;
       console.log(this.data_wo);
@@ -84,6 +118,18 @@ export class WomodalPage {
       this.initializeItems();
     })
   }
+
+  doGetWoSum(oClient){
+    this.presentLoading();
+    this.service.get_wo_sum(oClient, "", "").then((res)=>{
+      this.data_pick_sum = res;
+      console.log(this.data_pick_sum);
+      this.finishLoding();
+      this.initializeItems();
+    })
+  }
+
+
   doGetWOPickbyOrder(oClient, oUsername){
     this.presentLoading();
     this.service.get_WO_Pick_by_Order(oClient, oUsername).then((res)=>{
