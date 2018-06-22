@@ -17,7 +17,8 @@
             <button ion-button block (click)="doGetLoading()">T#</button>
           </ion-col>
           <ion-col>
-            <ion-input [(ngModel)]="oLoadingSummaryNo" #focusInputT (click)="doGetLoading_Enter()"></ion-input>
+              <!-- <ion-input [(ngModel)]="oLoadingSummaryNo" #focusInputT (click)="doGetLoading_Enter()"></ion-input> -->
+            <ion-input [(ngModel)]="oLoadingSummaryNo" ></ion-input>
           </ion-col>
 
         </ion-row>
@@ -64,7 +65,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       <ion-grid>
         <ion-row>
           <ion-col>
@@ -79,7 +80,7 @@
         </ion-row>
       </ion-grid>
     </ion-list>
-
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------>
     <ion-list *ngSwitchCase="'Details'">
       <ion-grid>
         <ion-row>
@@ -106,6 +107,14 @@
         </ion-row>
         <ion-row>
           <ion-col col-3>
+            <button ion-button block>DO</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oDeliveryNo" style="background-color: #FFFF99" readonly></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-3>
             <button ion-button block>Pack No</button>
           </ion-col>
           <ion-col>
@@ -114,8 +123,8 @@
         </ion-row>
       </ion-grid>
       <ion-grid>
-        <ion-scroll scrollX="true" scrollY="true" style="height: 340px">
-          <ion-row style="width: 800px;" *ngFor = "let details of data_details; let i = index" (click)="doReturn(details.packing_no,details.customer,details.customer_name,details.sales_order)">
+        <ion-scroll scrollX="true" scrollY="true" style="height: 300px">
+          <ion-row style="width: 800px;" *ngFor = "let details of data_details; let i = index" (click)="doReturn(details.packing_no,details.customer,details.customer_name,details.sales_order,details.delivery)">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #
@@ -130,6 +139,14 @@
               </ion-row>
               <ion-row>
                 {{details.packing_no}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Delivery No
+              </ion-row>
+              <ion-row>
+                {{details.delivery}}
               </ion-row>
             </ion-col>
             <ion-col class="border-col">
@@ -209,36 +226,36 @@
                 {{i+1}}
               </ion-row>
             </ion-col>
-            <ion-col class="border-col" col-auto>
+            <!-- <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 Task
               </ion-row>
               <ion-row style="width:30px;">
                 {{details.task_no}}
               </ion-row>
-            </ion-col>
-            <ion-col class="border-col" col-auto>
+            </ion-col> -->
+            <!-- <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 Act
               </ion-row>
               <ion-row style="width:30px;">
                 {{details.activity}}
               </ion-row>
-            </ion-col>
-            <ion-col class="border-col">
+            </ion-col> -->
+            <!-- <ion-col class="border-col">
               <ion-row class="border-row" *ngIf = "i == 0">
                 Pallet
               </ion-row>
               <ion-row style="width:30px;">
                 {{details.pallet_to}}
               </ion-row>
-            </ion-col>
+            </ion-col> -->
             <ion-col class="border-col" col-2>
               <ion-row class="border-row" *ngIf = "i == 0">
                 รหัสสินค้า
               </ion-row>
               <ion-row>
-                {{details.item_code}}
+                {{details.item_barcode}}
               </ion-row>
             </ion-col>
             <ion-col class="border-col" col-5>
@@ -269,7 +286,6 @@
         </ion-scroll>
       </ion-grid>
     </ion-list>
-
   </div>
   </ion-content>
   <ion-footer>

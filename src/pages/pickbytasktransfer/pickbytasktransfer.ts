@@ -143,6 +143,7 @@ export class PickbytaskTransferPage {
     if(oWo == undefined){
       this.presentToast('กรุณากรอก Work Order', false, 'bottom');
     }else{
+        console.log("oWo ก่อนส่งเข้า service",oWo);
       this.service.get_Detail_Tranfer_WorkOrder(oWo).then((res)=>{
         this.data_item = res;
         console.log(this.data_item);

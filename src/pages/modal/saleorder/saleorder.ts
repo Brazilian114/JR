@@ -33,8 +33,9 @@ export class SaleorderPage {
           })
         }
   }
-  doSelectSO(sales_order, customer, customer_name){
-    let data = { 'sales_order': sales_order, 'customer': customer, 'customer_name': customer_name };
+  doSelectSO(sales_order, customer, customer_name, delivery){
+    let data = { 'sales_order': sales_order, 'customer': customer, 'customer_name': customer_name ,'delivery':delivery};
+      console.log("doSelectSO",data);
     this.viewCtrl.dismiss(data);
   }
   doGetSO(oClient){

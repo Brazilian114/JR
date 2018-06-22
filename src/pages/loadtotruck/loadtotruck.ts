@@ -49,7 +49,7 @@ export class LoadtotruckPage {
   oCustomer:string = "";
   oCustomer_Name:string = "";
   oPackingNo:string = "";
-
+  oDeliveryNo:string = "";
   data_del_detail:any;
   data_save_detail:any;
   data_details:any;
@@ -72,7 +72,7 @@ export class LoadtotruckPage {
   ionViewDidEnter(){
     setTimeout(()=>{
         this.keyboard.close();
-        this.InputT.setFocus();
+        //this.InputT.setFocus();
 
     },0);
     setTimeout(()=>{
@@ -240,7 +240,7 @@ let profileModal = this.modalCtrl.create(SaleorderPage, { oClient: oClient });
       this.oSalesOrder = data.sales_order;
       this.oCustomer = data.customer;
       this.oCustomer_Name = data.customer_name;
-
+      this.oDeliveryNo =  data.delivery;
       this.doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient);
     }else{
 
@@ -261,7 +261,7 @@ doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, o
   }else{
     this.service.Save_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, this.oUsername).then((res)=>{
       this.data_save_detail = res;
-      console.log(this.data_save_detail);
+      console.log("this.service.Save_Loading_Summary_Detail",this.data_save_detail);
 
       this.doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient);
       this.oPackingNo = "";
@@ -275,14 +275,16 @@ doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, o
 doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient){
   this.service.Get_Loading_Summary_Detail(oLoadingSummaryNo, oClient).then((res)=>{
     this.data_details = res;
-    console.log(this.data_details);
+    console.log("this.service.Get_Loading_Summary_Detail",this.data_details);
   })
 }
-doReturn(packing_no, customer, customer_name, sales_order){
+doReturn(packing_no, customer, customer_name, sales_order, delivery){
+    console.log("doReturn",packing_no, customer, customer_name, sales_order, delivery);
   this.oPackingNo = packing_no;
   this.oCustomer = customer;
   this.oCustomer_Name = customer_name;
   this.oSalesOrder = sales_order;
+  this.oDeliveryNo = delivery;
 }
   doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo){
     if(oLoadingSummaryNo == undefined || oLoadingSummaryNo == ""){
@@ -298,7 +300,7 @@ doReturn(packing_no, customer, customer_name, sales_order){
     }else{
       this.service.Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, this.oUsername).then((res)=>{
         this.data_del_detail = res;
-        console.log(this.data_del_detail);
+        console.log("this.service.Delete_Loading_Summary_Detail",this.data_del_detail);
         this.doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient);
         this.oPackingNo = "";
 

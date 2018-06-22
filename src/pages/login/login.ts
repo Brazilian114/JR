@@ -79,6 +79,11 @@ export class LoginPage {
                        this.storage.set('_user', oUsername)
 
                      })
+                     this.storage.ready().then(() => {
+                            this.storage.set('_chk_Loc', this.data_logins.edit_loc_wh_trask)
+                              console.log(this.data_logins.edit_loc_wh_trask);
+                          })
+
                 this.finishLoding();
                 this.navCtrl.setRoot(HomePage);
               }

@@ -248,6 +248,7 @@ export class ItemrelocationPage {
     }
   }
   doItemRelocation(oSrcPallet,  oDestWhse,  oDestLoc,  oDestPallet,  oClient,  oItem,  oSrcRec,  oQty,  oUOM){
+    console.log("ตัวแปรที่ส่งไป",oSrcPallet,  oDestWhse,  oDestLoc,  oDestPallet,  oClient,  oItem,  oSrcRec,  oQty,  oUOM);
     this.service.item_Relocation(oSrcPallet+"0",  oDestWhse,  oDestLoc,  oDestPallet+"0",  oClient,  oItem,  oSrcRec,  oQty,  oUOM, this.oUsername).then((res) =>{
       this.data_item_relocation = res;
       console.log("data_item_relocation",this.data_item_relocation);

@@ -41,10 +41,16 @@ export class PutawayPage {
   data_logins:any;
   username:string = '';
   password:string = '';
+  chk_Loc:string = '';
   constructor(public navCtrl: NavController,private loadingCtrl: LoadingController, private toastCtrl: ToastController, private modalCtrl: ModalController
     , private service: Service, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
+      })
+
+      this.storage.get('_chk_Loc').then((res)=>{
+        this.chk_Loc = res;
+        console.log(this.chk_Loc);
       })
       // this.keyboard.onKeyboardHide();
 
@@ -85,6 +91,7 @@ export class PutawayPage {
             this.service.get_pallet_for_putaway(this.oPallet+"0").then((res)=>{
               this.data_detail = res;
               console.log("แสดง Loc.",this.data_detail.location_to);
+                console.log("แสดง chk_Loc.",this.chk_Loc);
               this.oLocation = this.data_detail["0"].location_to["0"];
               console.log(this.data_detail);
 
@@ -238,49 +245,90 @@ doLoginApprove(username,password){
     {
         this.presentToast('โปรดระบุ Location', false, 'bottom');
     }
-    // else if (oLocation != oLocation_confirm)
-    // {
-    //    this.service.Get_Chk_Confirm_Location_Putaway(this.oUsername,).then((res)=>{
-    //      this.data_return_CheckUser = res;
-    //     console.log(this.data_return_CheckUser);
-    //        console.log(this.data_return_CheckUser["0"].edit_loc_wh_trask);
-    //      });
-    //
-    //      if(this.data_return_CheckUser["0"].edit_loc_wh_trask != 'Y')
-    //      {
-    // //
-    //     //this.presentPrompt() ;
-    //      this.presentToast('LOCATION ที่ ASSIGN ไม่ตรง Conf.Location จะต้อง Login ด้วย USER ของผู้ที่มีสิทธิ์', false, 'bottom');
-    // //       console.log("show",this.data_return_CheckUser);
-    //        //return;
-    //      }
-    //    }
+    else if (oLocation != oLocation_confirm)
+    {
+       // this.service.Get_Chk_Confirm_Location_Putaway(this.oUsername,).then((res)=>{
+       //   this.data_return_CheckUser = res;
+       //  console.log(this.data_return_CheckUser);
+       //     console.log(this.data_return_CheckUser["0"].edit_loc_wh_trask);
+       //   });
+
+         if(this.chk_Loc != 'Y')
+
+         {
+          console.log(this.chk_Loc);
+        //this.presentPrompt() ;
+         this.presentToast('Location Confirm ไม่ตรงกับ Location Assign จะต้อง Login ด้วย USER ที่มีสิทธิ์ในการเปลี่ยน Location', false, 'bottom');
+           //return;
+         }
+         else
+         {
+             console.log("loop  else");
+           //var oCPallet = this.oPallet;
+           if(oLocation_confirm != undefined){
+                   this.storage.get('_Wh').then((res)=>{
+                     this.oWh = res;
+                     var coWh = this.oWh;
+
+                     this.service.check_pallet_in_location(oCPallet+"0", coWh, oLocation_confirm).then((res)=>{
+                       this.data_return_CheckPallet = res;
+                       console.log(this.data_return_CheckPallet);
+                       if(this.data_return_CheckPallet["0"].sqlstatus == '0'){
+                         console.log("good");
+                           this.service.putaway(oCPallet+"0", coWh, oLocation_confirm, this.oUsername).then((res)=>{
+                             this.data_return_Putaway = res;
+                             console.log(this.data_return_Putaway);
+                             if(this.data_return_Putaway["0"].sqlstatus != '0'){
+                                 let alert = this.alertCtrl.create({
+                                   title: 'Error',
+                                   subTitle: this.data_return_Putaway["0"].sqlmsg,
+                                   buttons: [ {
+                                       text: 'ตกลง',
+                                       handler: data => {
+                                       }
+                                     }]
+                                 });
+                                 alert.present();
+                             }else{
+                               let alert = this.alertCtrl.create({
+                                 title: 'Success',
+                                 subTitle: this.data_return_Putaway["0"].sqlmsg,
+                                 buttons: [ {
+                                     text: 'ตกลง',
+                                     handler: data => {
+                                       this.doClear();
+                                       setTimeout(()=>{
+                                           this.keyboard.close();
+                                           this.myInputScanCode.setFocus();
+                                       },0);
+                                       setTimeout(()=>{
+                                           this.myInputScanCode.setFocus();
+                                             this.keyboard.close();
+                                       },2000);
+                                     }
+                                   }]
+                               });
+                               alert.present();
+                             }
+                           })
+                       }else{
+                         this.presentToast(this.data_return_CheckPallet["0"].sqlmsg, false, 'bottom');
+                       }
+
+                     })
+                   })
+           }else{
+               this.presentToast('โปรดระบุ Confirm Location', false, 'bottom');
+           }
+
+         }
+
+       }
 
     else
     {
       var oCPallet = this.oPallet;
-  // console.log("เช้กตัวแปร222",oLocation, oLocation_confirm, oPallet);
-      if (oLocation != oLocation_confirm)
-      {
-        console.log("เช้กตัวแปร222",oLocation, oLocation_confirm, oPallet);
-         this.service.Get_Chk_Confirm_Location_Putaway(this.oUsername,).then((res)=>{
-           this.data_return_CheckUser = res;
-          console.log(this.data_return_CheckUser);
-          console.log(this.data_return_CheckUser["0"].edit_loc_wh_trask);
-           });
-
-           if(this.data_return_CheckUser["0"].edit_loc_wh_trask != 'Y')
-           {
-      //
-          //this.presentPrompt() ;
-           this.presentToast('LOCATION ที่ ASSIGN ไม่ตรง Conf.Location จะต้อง Login ด้วย USER ของผู้ที่มีสิทธิ์', false, 'bottom');
-      //       console.log("show",this.data_return_CheckUser);
-             //return;
-           }
-
-
-
-      else if(oLocation_confirm != undefined){
+      if(oLocation_confirm != undefined){
               this.storage.get('_Wh').then((res)=>{
                 this.oWh = res;
                 var coWh = this.oWh;
@@ -335,9 +383,10 @@ doLoginApprove(username,password){
       }else{
           this.presentToast('โปรดระบุ Confirm Location', false, 'bottom');
       }
+
     }
-  }/////
   }
+
   doBack(){
       this.navCtrl.setRoot(HomePage);
   }

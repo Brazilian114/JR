@@ -196,18 +196,28 @@ export class PickbytaskPage {
     })
   }
   doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew){
-    if(oLocation != oLocation_confirm){
+    if(oLocation != oLocation_confirm)
+    {
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
-    }else if(oLocation_confirm == "" || oLocation_confirm == undefined){
+    }
+    else if(oLocation_confirm == "" || oLocation_confirm == undefined)
+    {
         this.presentToast('โปรดกรอก Location', false, 'bottom');
-    }else if(oPalletFrom != oPalletFromConfirm){
+    }
+    else if(oPalletFrom != oPalletFromConfirm)
+    {
         this.presentToast('โปรดกรอก Pallet ให้ตรงกัน', false, 'bottom');
-    }else if(oPalletTo == "" || oPalletTo == undefined){
+    }
+    else if(oPalletTo == "" || oPalletTo == undefined)
+    {
         this.presentToast('โปรดกรอก Pallet To', false, 'bottom');
-    }else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0){
+    }
+    else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0)
+    {
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
-    else{
+    else
+    {
       this.doClosePickTask(oWo, oTaskNo, oActivity, oQtyNew, "", this.oUsername, oUOM, oPalletTo);
     }
   }
@@ -220,7 +230,10 @@ export class PickbytaskPage {
       if(this.data_checkTask.length > 0){
         if(this.data_checkTask["0"].sqlstatus == "0"){
           if(oPallet != oPalletFromConfirm){
+            //this.presentToast('โปรดกรอก Pallet ให้ตรงกัน', false, 'bottom');
             this.Alert('Error', 'โปรดกรอก Pallet ให้ตรงกัน');
+            this.oPalletFromConfirm = "";
+            this.myInputPalletConfirm.setFocus();
           }else{
             setTimeout(()=>{
                 this.myInputLocation_Confirm.setFocus();
@@ -362,6 +375,8 @@ export class PickbytaskPage {
     });
     alert.present();
   }
+
+
   presentToast(key, showCloseButton, position: string) {
     const toast = this.toastCtrl.create({
       message: key,
