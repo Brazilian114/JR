@@ -42,6 +42,10 @@ export class PicksummaryPage {
     oTaskNo:any;
     oActivity:any;
     oColor:any;
+    oExp:any;
+    oProd:any;
+    oBacth:any;
+    oUomNew: any;
 
     data_new_pallet:any;
     data_checkWo:any;
@@ -130,6 +134,9 @@ export class PicksummaryPage {
         this.oLocation = data.location_from;
         this.oPalletFrom = data.pallet_from;
         this.oStatus = data.status;
+        this.oExp = data.expiry_date;
+        this.oProd = data.prod_date;
+        this.oBacth = data.batch_no;
 
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
@@ -180,6 +187,9 @@ export class PicksummaryPage {
         this.oLocation = this.data_item["0"].location_from;
         this.oPalletFrom = this.data_item["0"].pallet_from;
         this.oStatus = this.data_item["0"].status;
+        this.oExp = this.data_item["0"].expiry_date;
+        this.oProd = this.data_item["0"].prod_date;
+        this.oBacth = this.data_item["0"].batch_no;
 
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
@@ -232,20 +242,18 @@ export class PicksummaryPage {
     }
   }
 
-  doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oUOM, oQtyNew){
+  doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd){
     if(oLocation != oLocation_confirm){
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
     }else if(oLocation_confirm == "" || oLocation_confirm == undefined){
         this.presentToast('โปรดกรอก Location', false, 'bottom');
     }else if(oPalletFrom != oPalletFromConfirm){
         this.presentToast('โปรดกรอก Pallet ให้ตรงกัน', false, 'bottom');
-    }else if(oPalletTo == "" || oPalletTo == undefined){
-        this.presentToast('โปรดกรอก Pallet To', false, 'bottom');
-    }else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0){
+    } else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0){
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
     else{
-      this.service.close_pickSum(oWo, this.oUsername, oQtyNew, oUOM, oPalletTo).then((res)=>{
+      this.service.close_pickSum(oWo, this.oUsername, oQtyNew, oUOM, oPalletFromConfirm, oLocation_confirm, oItem,  oBacth, oExp, oProd).then((res)=>{
         this.data_closePick = res;
         console.log(this.data_closePick);
         if(this.data_closePick.length < 0){
@@ -323,12 +331,12 @@ doCheckPallet(oPalletFr, oPalletTo){
 
 
 
-  doLocation(oLocation, oLocation_confirm, oQty){
+  doLocation(oLocation, oLocation_confirm, oQty, oUom){
     if(oLocation != oLocation_confirm){
       this.Alert('Error', 'โปรดกรอก Location ให้ตรงกัน');
     }else{
       this.oQtyNew = oQty;
-
+      this.oUomNew = oUom;
       setTimeout(()=>{
           this.myInputPalletTo.setFocus();
       },0);
@@ -383,6 +391,9 @@ doCheckPallet(oPalletFr, oPalletTo){
     this.oPalletTo = "";
     this.oPalletFrom = "";
     this.oPalletFromConfirm = "";
+    this.oProd = "";
+    this.oExp = "";
+    this.oBacth = "";
   }
   doClearInput(){
     this.oQtyNew = "";

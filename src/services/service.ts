@@ -1287,10 +1287,10 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
       );
   }
 
-  close_pickSum(oWO, oMaker,oQtyPick, oUOM, oPalletTo) {
+  close_pickSum(oWO, oMaker,oQtyPick, oUOM, oPalletFromConfirm, oLocation_confirm,oItem, oBacth, oExp, oProd) {
     let parameters='oWO='+oWO +'&oQtyPick='+oQtyPick+ '&oMaker='+oMaker
-    +'&oUOM='+oUOM+'&oPalletTo='+oPalletTo;
-    return this.http.get(this.hostWebService +"/ClosePickTaskEkapab?"+parameters)
+    +'&oUOM='+oUOM+'&oPalletTo='+oPalletFromConfirm+'&oItem_no='+oItem+'&oLocation_confirm='+oLocation_confirm+'&oBacth='+oBacth+'&oExp='+oExp+'&oProd='+oProd  ;
+    return this.http.get(this.hostWebService +"/ClosePickSum?"+parameters)
       .toPromise()
       .then(response =>
          {
