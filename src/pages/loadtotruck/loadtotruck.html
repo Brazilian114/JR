@@ -115,10 +115,10 @@
         </ion-row>
         <ion-row>
           <ion-col col-3>
-            <button ion-button block>Pack No</button>
+            <button ion-button block>SCAN SI</button>
           </ion-col>
           <ion-col>
-            <ion-input [(ngModel)]="oPackingNo" #focusInputPackNo (keyup.enter)="doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo)"></ion-input>
+            <ion-input [(ngModel)]="oPackingNo" #focusInputPackNo (keyup.enter)="doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oDeliveryNo)"></ion-input>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -135,10 +135,10 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf = "i == 0">
-                Packing No
+                invoice No
               </ion-row>
               <ion-row>
-                {{details.packing_no}}
+                {{details.invoice_no}}
               </ion-row>
             </ion-col>
             <ion-col class="border-col">
@@ -173,14 +173,14 @@
                 {{details.sales_order}}
               </ion-row>
             </ion-col>
-            <ion-col class="border-col">
+            <!-- <ion-col class="border-col">
               <ion-row class="border-row" *ngIf = "i == 0">
                   Status
               </ion-row>
               <ion-row >
                 {{details.loading_status}}
               </ion-row>
-            </ion-col>
+            </ion-col> -->
           </ion-row>
         </ion-scroll>
       </ion-grid>
@@ -192,7 +192,7 @@
             <button ion-button block (click)="doClearDetails()">Clear</button>
           </ion-col>
           <ion-col>
-            <button ion-button block (click)="doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo)">Delete</button>
+            <button ion-button block (click)="doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo , oDeliveryNo , oDeliveryNo)">Delete</button>
           </ion-col>
         </ion-row>
       </ion-grid>

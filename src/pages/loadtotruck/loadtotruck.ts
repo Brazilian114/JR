@@ -247,7 +247,7 @@ let profileModal = this.modalCtrl.create(SaleorderPage, { oClient: oClient });
     }
   });
 }
-doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo){
+doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo ,oDeliveryNo){
   if(oLoadingSummaryNo == undefined || oLoadingSummaryNo == ""){
     this.presentToast('โปรดระบุ Loading Summary No', false, 'bottom');
   }else if(oClient == undefined || oClient == ""){
@@ -258,8 +258,10 @@ doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, o
     this.presentToast('โปรดระบุ Customer', false, 'bottom');
   }else if(oPackingNo == undefined || oPackingNo == ""){
     this.presentToast('โปรดระบุ Packing No', false, 'bottom');
+  }else if(oDeliveryNo == undefined || oDeliveryNo == ""){
+    this.presentToast('โปรดระบุ Delivery No', false, 'bottom');
   }else{
-    this.service.Save_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, this.oUsername).then((res)=>{
+    this.service.Save_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, this.oUsername, oDeliveryNo).then((res)=>{
       this.data_save_detail = res;
       console.log("this.service.Save_Loading_Summary_Detail",this.data_save_detail);
 
@@ -286,7 +288,7 @@ doReturn(packing_no, customer, customer_name, sales_order, delivery){
   this.oSalesOrder = sales_order;
   this.oDeliveryNo = delivery;
 }
-  doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo){
+  doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oDeliveryNo){
     if(oLoadingSummaryNo == undefined || oLoadingSummaryNo == ""){
       this.presentToast('โปรดระบุ Loading Summary No', false, 'bottom');
     }else if(oClient == undefined || oClient == ""){
@@ -295,10 +297,10 @@ doReturn(packing_no, customer, customer_name, sales_order, delivery){
       this.presentToast('โปรดระบุ Sales Order', false, 'bottom');
     }else if(oCustomer == undefined || oCustomer == ""){
       this.presentToast('โปรดระบุ Customer', false, 'bottom');
-    }else if(oPackingNo == undefined || oPackingNo == ""){
-      this.presentToast('โปรดระบุ Packing No', false, 'bottom');
+    }else if(oDeliveryNo == undefined || oDeliveryNo == ""){
+      this.presentToast('โปรดระบุ Delivery No', false, 'bottom');
     }else{
-      this.service.Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, this.oUsername).then((res)=>{
+      this.service.Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, this.oUsername , oDeliveryNo).then((res)=>{
         this.data_del_detail = res;
         console.log("this.service.Delete_Loading_Summary_Detail",this.data_del_detail);
         this.doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient);
@@ -315,6 +317,7 @@ doReturn(packing_no, customer, customer_name, sales_order, delivery){
     this.oCustomer = "";
     this.oCustomer_Name = "";
     this.oPackingNo = "";
+    this.oDeliveryNo = "";
 
     setTimeout(()=>{
         this.InputSo.setFocus();

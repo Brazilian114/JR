@@ -2240,9 +2240,9 @@ Save_Loading_Summary_Header(oLoadingSummaryNo, oStatus, oDeliveryDate, oVehicle,
        }
     );
 }
-Save_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oMaker) {
+Save_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oMaker ,oDeliveryNo) {
   let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer
-  +'&oPackingNo='+oPackingNo+'&oMaker='+oMaker;
+  +'&oPackingNo='+oPackingNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo;
   return this.http.get(this.hostWebService +"/Save_Loading_Summary_Detail?"+parameters)
     .toPromise()
     .then(response =>
@@ -2283,8 +2283,8 @@ Confirm_Loading_Summary_Detail(oLoadingSummaryNo, oMaker) {
        }
     );
 }
-Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oMaker) {
-  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oPackingNo='+oPackingNo+'&oMaker='+oMaker;
+Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oMaker , oDeliveryNo) {
+  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oPackingNo='+oPackingNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo;
   return this.http.get(this.hostWebService +"/Delete_Loading_Summary_Detail?"+parameters)
     .toPromise()
     .then(response =>

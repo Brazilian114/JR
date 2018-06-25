@@ -253,6 +253,7 @@ export class PicksummaryPage {
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
     else{
+      console.log("doPickItemSum",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd);
       this.service.close_pickSum(oWo, this.oUsername, oQtyNew, oUOM, oPalletFromConfirm, oLocation_confirm, oItem,  oBacth, oExp, oProd).then((res)=>{
         this.data_closePick = res;
         console.log(this.data_closePick);
