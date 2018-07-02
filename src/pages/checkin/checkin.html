@@ -217,7 +217,14 @@
             </ion-item>
           </ion-col> -->
         </ion-row>
-
+        <ion-row>
+            <ion-col col-3>
+              <button ion-button block >LOC</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oLoc" #focusInputLoc (keyup.enter)="doGetLoc()"></ion-input>
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col col-3>
               <button ion-button block (click)="doGetPallet(oClient,oReceipt)">Pallet</button>
@@ -231,7 +238,8 @@
         </ion-row>
         <ion-row>
             <ion-col col-3>
-              <button ion-button block (click)="doGetBarcode(oClient,oSupplier,oInc)">Barcode</button>
+              <!-- <button ion-button block (click)="doGetBarcode(oClient,oSupplier,oInc)">Barcode</button> -->
+              <button ion-button block >Barcode</button>
             </ion-col>
             <ion-col>
               <ion-input [(ngModel)]="oBarcode" #focusInputBarcode (keyup.enter)="doGetBarcodeDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, listUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass)"></ion-input>
@@ -277,7 +285,7 @@
               </ion-item>
             </ion-col>
             <ion-col>
-              <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, listUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass , asn_flag ,listZone )">Add</button>
+              <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, listUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass , asn_flag ,listZone, oLoc )">Add</button>
             </ion-col>
             <ion-col>
               <button ion-button block style="margin-top: 20px" (click)="doDelete(oClient, oReceipt, oPallet)">Delete</button>
@@ -290,7 +298,7 @@
     <ion-grid>
         <ion-scroll scrollX="true" scrollY="true">
           <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty
-          ,details.uom,details.item_barcode,details.grade,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class)">
+          ,details.uom,details.item_barcode,details.grade,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class,details.location)">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #
@@ -337,6 +345,14 @@
               </ion-row>
               <ion-row>
                 {{details.grade}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Location
+              </ion-row>
+              <ion-row>
+                {{details.location}}
               </ion-row>
             </ion-col>
           </ion-row>

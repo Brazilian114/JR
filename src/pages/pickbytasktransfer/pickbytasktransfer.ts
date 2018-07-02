@@ -252,6 +252,7 @@ export class PickbytaskTransferPage {
     }else if(oQtyPick == "" || oQtyPick == undefined){
       this.presentToast('โปรดระบุจำนวน', false, 'bottom');
     }else{
+      console.log("statusLocation",this.oWarehouseFr, this.oZoneFr, oLocFr, this.oWarehouseTo, this.oZoneTo, oLocTo)
       this.service.statusLocation(this.oWarehouseFr, this.oZoneFr, oLocFr, this.oWarehouseTo, this.oZoneTo, oLocTo).then((res)=>{
         this.data_StatusCheck = res;
         console.log(this.data_StatusCheck);

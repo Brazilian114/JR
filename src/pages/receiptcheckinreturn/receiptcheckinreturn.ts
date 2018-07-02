@@ -48,6 +48,7 @@ export class ReceiptCheckinReturnPage {
   data_check_receipt:any;
   data_reason:any;
   data_grade:any;
+  data_productOther:any;
 
   oClient:any = "001";
   oReceipt:any;
@@ -81,14 +82,24 @@ export class ReceiptCheckinReturnPage {
   oRefNo:any;
   oMaker:any;
   oReply:any;
-  oLot:any;
-  oLoc:any;
-  oMfg:any;
-  oExpiry:any;
-  oBatch:any;
-  oSize:any;
-  oClass:any;
-  oColor:any;
+//  oLot:any;
+//  oLoc:any;
+  oLoc:string = "";
+  //oMfg:any;
+  //oExpiry:any;
+  //oBatch:any;
+  // oSize:any;
+  // oClass:any;
+  // oColor:any;
+
+  oLot:string = "";
+  oMfg:string = "";
+  oExpiry:string = "";
+  oBatch:string = "";
+  oSize:string = "";
+  oClass:string = "";
+  oColor:string = "";
+
 
   loader:any;
   listWhses:any;
@@ -102,6 +113,15 @@ export class ReceiptCheckinReturnPage {
   isenabled:boolean = false;
   enabled:boolean = false;
   Check : string = 'Header';
+
+  isenabledLot:boolean = false;
+  isenabledBatch:boolean = false;
+  isenabledExp:boolean = false;
+  isenabledMfg:boolean = false;
+  isenabledRcpt:boolean = false;
+  isenabledSize:boolean = false;
+  isenabledColor:boolean = false;
+  isenabledClass:boolean = false;
 
   constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private storage: Storage, public platform: Platform, private alertCtrl: AlertController, private keyboard: Keyboard) {
@@ -231,8 +251,9 @@ export class ReceiptCheckinReturnPage {
         }
     });
   }
-  doGetDocref(oClient, oCustomer_Header){
-    let profileModal = this.modalCtrl.create(DocrefPage, {oClient: oClient, oCustomer_Header: oCustomer_Header });
+  doGetDocref(oClient, oCustomer_Header,oDocref){
+    console.log("oClient",oClient, "oCustomer_Header",oCustomer_Header,"oDocref",oDocref);
+    let profileModal = this.modalCtrl.create(DocrefPage, {oClient: oClient, oCustomer_Header: oCustomer_Header ,oDocref: this.oDocref});
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -279,7 +300,7 @@ export class ReceiptCheckinReturnPage {
         },200);
     })
   }
-  doGetBarcodeDetail(oClient, oReceipt, oDate, oLoc, oPallet, oBarcode, oUOM, oQty, listGrade, listQty, oReason){
+  doGetBarcodeDetail(oClient, oReceipt, oDate, oLoc, oPallet, oBarcode, oUOM, oQty, listGrade, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass){
     if(listQty == 1){
 
       this.service.get_Barcode_Detail(oClient, oBarcode).then((res)=>{
@@ -295,9 +316,11 @@ export class ReceiptCheckinReturnPage {
             this.oName = this.data_barcodeDetail["0"].description;
             this.oItem = this.data_barcodeDetail["0"].item_no;
             this.storage.set('_oItem', this.oItem);
-                  this.doGetUOM(oClient,this.oItem);
+            this.doGetUOM(oClient,this.oItem);
             this.listUOM = this.data_barcodeDetail["0"].item_packing;
-            this.doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode ,this.listUOM, this.oQty, this.listGrade, oLoc, listQty, oReason);
+            this.doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode ,this.listUOM, this.oQty, this.listGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass);
+            this.doGetProductOrther(oClient, this.oItem);
+            console.log("Testtt",oClient, this.oItem);
             console.log("doAddDetail",oClient, oReceipt, oDate, oPallet, oBarcode ,this.listUOM, this.oQty, this.listGrade, oLoc, listQty, oReason);
         }
       })
@@ -318,6 +341,8 @@ export class ReceiptCheckinReturnPage {
             this.storage.set('_oItem', this.oItem);
                   this.doGetUOM(oClient,this.oItem);
             this.listUOM = this.data_barcodeDetail["0"].item_packing;
+            this.doGetProductOrther(oClient, this.oItem);
+            console.log("Testtt",oClient, this.oItem);
               setTimeout(()=>{
                   this.InputQty.setFocus();
               },0);
@@ -388,15 +413,33 @@ export class ReceiptCheckinReturnPage {
     }
   }
   //oClient, oReciptNo, oReceiptDate, oLine, oPallet, oItem, oUOM, oQTY, oGrade, oLocation, oBatch, oLot, oMaker, oBarcode
-  doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode, oUOM, oQty, oGrade, oLoc, listQty, oReason){
-  console.log("doAddDetail",oClient, oReceipt, oDate, oPallet, oBarcode, oUOM, oQty, oGrade, oLoc, listQty, oReason);
+  doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode, oUOM, oQty, oGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass){
+  console.log("doAddDetail",oClient, oReceipt, oDate, oPallet, oBarcode, oUOM, oQty, oGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass);
 
-    this.oLot = "";
-    this.oBatch = "";
-    this.oExpiry = "";
-    this.oMfg = "";
+    // this.oLot = "";
+    // this.oBatch = "";
+    // this.oExpiry = "";
+    // this.oMfg = "";
 
     console.log(oBarcode);
+    if(this.isenabledLot == true && oLot == ""){
+        this.presentToast('Please specify Lot No.', false, 'bottom');
+    }else if(this.isenabledBatch == true && oBatch == ""){
+        this.presentToast('Please specify Batch No.', false, 'bottom');
+    }else if(this.isenabledExp == true && oExpiry == ""){
+        this.presentToast('Please specify Exp Date.', false, 'bottom');
+    }else if(this.isenabledMfg == true && oMfg == ""){
+        this.presentToast('Please specify Production Date.', false, 'bottom');
+    }else if(this.isenabledSize == true && oSize == ""){
+        this.presentToast('Please specify Size.', false, 'bottom');
+    }else if(this.isenabledColor == true && oColor == ""){
+        this.presentToast('Please specify Color.', false, 'bottom');
+    }else if(this.isenabledClass == true && oClass == ""){
+        this.presentToast('Please specify Class.', false, 'bottom');
+    }else if(oQty == undefined || oQty == ""){
+      this.presentToast('โปรดระบุจำนวน Qty ที่ต้องการ', false, 'bottom');
+    }else{
+
 
     let date = String(oDate).substr(0,10)
     this.storage.get('_oItem').then((res)=>{
@@ -415,7 +458,7 @@ export class ReceiptCheckinReturnPage {
               this.presentToast('โปรดระบุ Barcode', false, 'bottom');
             }else{
               console.log('type:' +oQty)
-              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason).then((res)=>{
+              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason,oExpiry,oMfg).then((res)=>{
                 this.data_r_detail = res;
                 console.log(this.data_r_detail);
                 if(this.data_r_detail.sqlstatus != "0"){
@@ -443,7 +486,7 @@ export class ReceiptCheckinReturnPage {
             }
           }else{
             console.log('type1:' +oQty)
-            this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason).then((res)=>{
+            this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason,oExpiry,oMfg).then((res)=>{
               this.data_r_detail = res;
               console.log(this.data_r_detail);
               if(this.data_r_detail.sqlstatus != "0"){
@@ -478,7 +521,7 @@ export class ReceiptCheckinReturnPage {
             if(oBarcode == "" || oBarcode == " " || oBarcode == undefined){
               this.presentToast('โปรดระบุ Barcode', false, 'bottom');
             }else{
-              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason).then((res)=>{
+              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason,oExpiry,oMfg).then((res)=>{
                 this.data_r_detail = res;
                 console.log(this.data_r_detail);
                 if(this.data_r_detail.sqlstatus != "0"){
@@ -508,6 +551,7 @@ export class ReceiptCheckinReturnPage {
 
 
     })
+    }
   }
   doCheckIn(oClient, oReceipt, oPallet, listType, listBook){
     if(oClient == undefined || oClient == ""){
@@ -655,8 +699,8 @@ export class ReceiptCheckinReturnPage {
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,remark01){
-    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,remark01);
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,remark01,location){
+    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,remark01,location);
     this.oBarcode = "1";
     setTimeout(()=>{
       this.oBarcode = item_barcode;
@@ -665,6 +709,7 @@ export class ReceiptCheckinReturnPage {
       this.listGrade = grade;
       this.oReason = remark01;
       this.storage.set('_oLine', this.oLine);
+      this.oLoc = location;
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
         this.data_barcodeDetail = res;
@@ -684,6 +729,8 @@ export class ReceiptCheckinReturnPage {
               this.data_uom = res;
               console.log(this.data_uom);
               this.listUOM = uom;
+
+                this.doGetProductOrther(this.oClient, this.oItem);
             })
               setTimeout(()=>{
                   this.InputQty.setFocus();
@@ -765,7 +812,7 @@ export class ReceiptCheckinReturnPage {
     })
   }
   doGetBook(){
-    this.service.get_Book().then((res)=>{
+    this.service.get_Book_CN().then((res)=>{
       this.data_book = res;
       this.listBook = this.data_book["0"].QCBOOK["0"];
       console.log(this.data_book);
@@ -819,6 +866,54 @@ export class ReceiptCheckinReturnPage {
     })
     this.storage.remove('_oLine');
   }
+
+  doGetProductOrther(oClient, oItem){
+    this.service.get_ProductOther(oClient, oItem).then((res)=>{
+      this.data_productOther = res;
+      console.log(this.data_productOther);
+      if(this.data_productOther.length <= 0){
+
+      }else{
+        if(this.data_productOther["0"].lot_no == "N"){
+          this.isenabledLot = false;
+        }else{
+          this.isenabledLot = true;
+        }
+        if(this.data_productOther["0"].batch_no == "N"){
+          this.isenabledBatch = false;
+        }else{
+          this.isenabledBatch = true;
+        }
+        if(this.data_productOther["0"].item_size == "N"){
+          this.isenabledSize = false;
+        }else{
+          this.isenabledSize = true;
+        }
+        if(this.data_productOther["0"].item_color == "N"){
+          this.isenabledColor = false;
+        }else{
+          this.isenabledColor = true;
+        }
+        if(this.data_productOther["0"].item_class == "N"){
+          this.isenabledClass = false;
+        }else{
+          this.isenabledClass = true;
+        }
+        if(this.data_productOther["0"].expiry_dt == "N"){
+          this.isenabledExp = false;
+        }else{
+          this.isenabledExp = true;
+        }
+        if(this.data_productOther["0"].production_dt == "N"){
+          this.isenabledMfg = false;
+        }else{
+          this.isenabledMfg = true;
+        }
+      }
+
+    })
+  }
+
   doClearDetail(){
     this.oPallet = "";
     this.oPo = "";
@@ -834,6 +929,14 @@ export class ReceiptCheckinReturnPage {
     this.oName = "";
     this.storage.remove('_oLine');
     this.oLoc = "";
+    this.oLot = "";
+    this.oBatch = "";
+    this.oExpiry = "";
+    this.oMfg = "";
+    this.oLine = "";
+    this.oName = "";
+
+
     setTimeout(() => {
       this.doGetGrade();
       this.doGetReasonReturnCode()

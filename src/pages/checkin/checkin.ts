@@ -83,6 +83,7 @@ export class CheckinPage {
   oMaker:string;
   oReply:string;
 
+  oLoc:string = "";
   oLot:string = "";
   oMfg:string = "";
   oExpiry:string = "";
@@ -165,6 +166,13 @@ export class CheckinPage {
       setTimeout(() => {
           this.updateScroll();
       }, 200)
+  }
+  doGetLoc(){
+    if(this.listZone == "" || this.listZone == undefined ){
+            this.presentToast('โปรดระบุ Zone.', false, 'bottom');
+        }else
+
+    this.InputPallet.setFocus();
   }
   doGetReceipt(oClient, listType ,oReceipt, listBook, listWhses){
     this.storage.set('_oReceipt', oReceipt);
@@ -321,7 +329,7 @@ export class CheckinPage {
             this.listUOM = this.data_barcodeDetail["0"].item_packing;
             console.log(oPo);
             this.doGetProductOrther(oClient, this.oItem);
-            this.doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, this.listUOM, this.oQty, this.listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass,this.oAsn_flag,this.listZone);
+            this.doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, this.listUOM, this.oQty, this.listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass,this.oAsn_flag,this.listZone,this.oLoc);
 
         }
       })
@@ -414,7 +422,8 @@ export class CheckinPage {
       }
     }
   }
-  doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone ){
+  doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc ){
+console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc );
     if(this.isenabledLot == true && oLot == ""){
         this.presentToast('Please specify Lot No.', false, 'bottom');
     }else if(this.isenabledBatch == true && oBatch == ""){
@@ -429,6 +438,10 @@ export class CheckinPage {
         this.presentToast('Please specify Color.', false, 'bottom');
     }else if(this.isenabledClass == true && oClass == ""){
         this.presentToast('Please specify Class.', false, 'bottom');
+    }else if(listZone == "" || listZone == undefined ){
+        this.presentToast('โปรดระบุ Zone.', false, 'bottom');
+    }else if(oLoc == "" || oLoc == undefined ){
+        this.presentToast('โปรดระบุ Location.', false, 'bottom');
     }else{
       let date = String(oDate).substr(0,10)
       this.storage.get('_oItem').then((res)=>{
@@ -452,8 +465,8 @@ export class CheckinPage {
                 this.presentToast('โปรดระบุ Barcode', false, 'bottom');
               }else{
                 console.log('type:' +listQty)
-                console.log(oClient, oReceipt, date, oInc, oPo, 'line: '+this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag);
-                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername ,this.oAsn_flag, listZone ).then((res)=>{
+                console.log(oClient, oReceipt, date, oInc, oPo, 'line: '+this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,this.oLoc);
+                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername ,this.oAsn_flag, listZone ,this.oLoc).then((res)=>{
                   this.data_r_detail = res;
                   console.log(this.data_r_detail);
                   if(this.data_r_detail.sqlstatus != "0"){
@@ -488,7 +501,7 @@ export class CheckinPage {
               }
             }else{
               console.log('type1:' +listQty)
-              this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone).then((res)=>{
+              this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc).then((res)=>{
                 this.data_r_detail = res;
                 console.log(this.data_r_detail);
                 if(this.data_r_detail.sqlstatus != "0"){
@@ -531,7 +544,7 @@ export class CheckinPage {
                 this.presentToast('โปรดระบุ Barcode', false, 'bottom');
               }else{
                 console.log(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, this.oLot, this.oBatch, this.oExpiry, this.oMfg, oSize, oColor, oClass, this.oUsername);
-                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone).then((res)=>{
+                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc).then((res)=>{
                   this.data_r_detail = res;
                   console.log(this.data_r_detail);
                   if(this.data_r_detail.sqlstatus != "0"){
@@ -740,8 +753,8 @@ export class CheckinPage {
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class){
-    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class);
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location){
+    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location);
     this.oBarcode = "1";
     setTimeout(()=>{
       let dateExp = String(expiry_date).substr(0,10)
@@ -758,6 +771,7 @@ export class CheckinPage {
       this.oSize = item_size;
       this.oColor = item_color;
       this.oClass = item_class;
+      this.oLoc = location;
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
         this.data_barcodeDetail = res;
@@ -952,6 +966,7 @@ export class CheckinPage {
   doClearDetail(){
     this.oPallet = "";
     //this.oPo = "";
+    this.oLoc = "";
     this.oBarcode = "";
     this.listUOM = "";
     this.data_pallet_detail = null;

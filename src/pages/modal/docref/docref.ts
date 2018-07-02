@@ -13,15 +13,20 @@ export class DocrefPage {
   oCustomer:any;
   loader:any;
   items: any;
+  oDocref: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private service: Service,
      private loadingCtrl: LoadingController) {
     this.oClient = navParams.get('oClient');
     this.oCustomer = navParams.get('oCustomer_Header');
+    this.oDocref = navParams.get('oDocref');
     if(this.oCustomer == undefined){
       this.oCustomer = "";
-      this.doGetBranchReturn_Header(this.oClient, this.oCustomer);
+    }if(this.oDocref == undefined){
+      this.oDocref = "";
+    
+      //this.rf_get_sale_for_receipt_return(this.oClient, this.oCustomer,this.oDocref);
     }else{
-      this.doGetBranchReturn_Header(this.oClient, this.oCustomer);
+      this.rf_get_sale_for_receipt_return(this.oClient, this.oCustomer,this.oDocref);
     }
 
   }
@@ -42,9 +47,10 @@ export class DocrefPage {
     let data = { 'doc_no': doc_no, 'branch': branch };
     this.viewCtrl.dismiss(data);
   }
-  doGetBranchReturn_Header(oClient, oCustomer){
+  rf_get_sale_for_receipt_return(oClient, oCustomer,oDocref){
       this.presentLoading();
-      this.service.getBranchReturn_Header(oClient, oCustomer).then((res)=>{
+        console.log("LOG",oClient, oCustomer,oDocref);
+      this.service.rf_get_sale_for_receipt_return(oClient, oCustomer,oDocref).then((res)=>{
         this.data_docref = res;
         console.log(this.data_docref);
         this.finishLoding();

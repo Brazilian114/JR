@@ -79,7 +79,8 @@
           </ion-row>
           <ion-row>
             <ion-col col-3>
-              <button ion-button block (click)="doGetDocref(oClient, oCustomer_Header)">Doc Ref</button>
+              <!-- <button ion-button block (click)="doGetDocref(oClient, oCustomer_Header,oDocref)">Doc Ref</button> -->
+              <ion-label>Doc Ref</ion-label>
             </ion-col>
             <ion-col>
               <ion-input placeholder="Doc Ref" [(ngModel)]="oDocref" (click)="doClick()"></ion-input>
@@ -219,7 +220,7 @@
               </ion-item>
             </ion-col>
             <ion-col col-auto>
-              <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode, listUOM, oQty, listGrade, oLoc, listQty, oReason)">Add</button>
+              <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode, listUOM, oQty, listGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass)">Add</button>
             </ion-col>
             <ion-col col-auto>
               <button ion-button block style="margin-top: 20px" (click)="doDelete(oClient, oReceipt, oPallet)">Delete</button>
@@ -231,7 +232,7 @@
       </ion-grid>
     <ion-grid>
         <ion-scroll scrollX="true" scrollY="true">
-          <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty,details.uom,details.item_barcode,details.grade,details.remark01)">
+          <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty,details.uom,details.item_barcode,details.grade,details.remark01,details.location)">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #
@@ -272,6 +273,14 @@
                 {{details.uom}}
               </ion-row>
             </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                Location
+              </ion-row>
+              <ion-row>
+                {{details.location}}
+              </ion-row>
+            </ion-col>
           </ion-row>
         </ion-scroll>
       </ion-grid>
@@ -280,12 +289,77 @@
           <ion-col>
             <button ion-button block (click)="doCheckIn(oClient, oReceipt, oDate, oPallet, oUOM, oQTY, oGrade, oLocation, oBarcode, listType, listBook)">Confirm</button>
           </ion-col>
-          <ion-col>
+          <!-- <ion-col>
             <button ion-button block (click)="doCheckReturn(oClient, oCustomer_Header, oDocref)">Details</button>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ion-grid>
     </ion-list>
+
+
+    <ion-list *ngSwitchCase="'Other'">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-2>
+            <ion-label>Lot No</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input *ngIf="isenabledLot == true" [(ngModel)]="oLot" [readonly]="!isenabledLot"></ion-input>
+            <ion-input *ngIf="isenabledLot == false" style="background-color: #CCCCCC" [(ngModel)]="oLot" [readonly]="!isenabledLot"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-2>
+            <ion-label>Batch No</ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input *ngIf="isenabledBatch == true" [(ngModel)]="oBatch" [readonly]="!isenabledBatch"></ion-input>
+            <ion-input *ngIf="isenabledBatch == false" style="background-color: #CCCCCC" [(ngModel)]="oBatch" [readonly]="!isenabledBatch"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Exp Date </ion-label>
+                <ion-datetime *ngIf="isenabledExp == true" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oExpiry" [disabled]="!isenabledExp" style="background-color: #DFFBFA"></ion-datetime>
+                <ion-datetime *ngIf="isenabledExp == false" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oExpiry" [disabled]="!isenabledExp"></ion-datetime>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label stacked>Production Date</ion-label>
+                <ion-datetime *ngIf="isenabledMfg == true" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oMfg" [disabled]="!isenabledMfg" style="background-color: #DFFBFA"></ion-datetime>
+                <ion-datetime *ngIf="isenabledMfg == false" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oMfg" [disabled]="!isenabledExp"></ion-datetime>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+            <ion-col>
+              <ion-label stacked>Size</ion-label>
+              <ion-input *ngIf="isenabledSize == true" [(ngModel)]="oSize" [readonly]="!isenabledSize"></ion-input>
+              <ion-input *ngIf="isenabledSize == false" style="background-color: #CCCCCC" [(ngModel)]="oSize" [readonly]="!isenabledSize"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label stacked>Color</ion-label>
+              <ion-input *ngIf="isenabledColor == true" [(ngModel)]="oColor" [readonly]="!isenabledColor"></ion-input>
+              <ion-input *ngIf="isenabledColor == false" style="background-color: #CCCCCC" [(ngModel)]="oColor" [readonly]="!isenabledColor"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label stacked>Class</ion-label>
+              <ion-input *ngIf="isenabledClass == true" [(ngModel)]="oClass" [readonly]="!isenabledClass"></ion-input>
+              <ion-input *ngIf="isenabledClass == false" style="background-color: #CCCCCC" [(ngModel)]="oClass" [readonly]="!isenabledClass"></ion-input>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+
   </div>
 </ion-content>
 <ion-footer>
@@ -295,6 +369,9 @@
         </ion-segment-button>
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doClickHeader(Check, listQty)">
           Details
+        </ion-segment-button>
+        <ion-segment-button value="Other" [disabled]="!isenabled">
+          Other
         </ion-segment-button>
       </ion-segment>
 </ion-footer>

@@ -1414,6 +1414,26 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
+  get_Book_CN() {
+    return this.http.get(this.hostWebService +"/showBookCN?")
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
   get_Station(oWarehouse) {
     let parameters='oWarehouse='+oWarehouse;
     return this.http.get(this.hostWebService +"/Get_Station_CheckIN?"+parameters)
@@ -1945,6 +1965,30 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
+  rf_get_sale_for_receipt_return(oClient, oCustomer,oDocref) {
+    let parameters='oClient='+oClient+'&oCus='+oCustomer+'&oSale='+oDocref;
+
+    return this.http.get(this.hostWebService +"/rf_get_sale_for_receipt_return?"+parameters)
+
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
+
   get_Receipt_Return_Differ_From_Branch_Return(oClient, oCustomer, oRefNo) {
     let parameters='oClient='+oClient+'&oCustomer='+oCustomer+'&oRefNo='+oRefNo;
     return this.http.get(this.hostWebService +"/Get_Receipt_Return_Differ_From_Branch_Return?"+parameters)
@@ -2486,9 +2530,9 @@ receipt_checkin_by_pallet(oClient, oReciptNo, oUser, oPallet) {
        }
     );
 }
-update_receipt_detail_udf(oClient, oReciptNo, oReceiptDate, oLine, oPallet, oItem, oUOM, oQTY, oGrade, oLocation, oBatch, oLot, oMaker, oBarcode, oRemark) {
+update_receipt_detail_udf(oClient, oReciptNo, oReceiptDate, oLine, oPallet, oItem, oUOM, oQTY, oGrade, oLocation, oBatch, oLot, oMaker, oBarcode, oRemark,oExpiry,oMfg) {
   let parameters='oClient='+oClient+'&oReciptNo='+oReciptNo+'&oReceiptDate='+oReceiptDate+'&oLine='+oLine+'&oPallet='+oPallet+'&oItem='+oItem+'&oUOM='
-  +oUOM+'&oQTY='+oQTY+'&oGrade='+oGrade+'&oLocation='+oLocation+'&oBatch='+oBatch+'&oLot='+oLot+'&oMaker='+oMaker+'&oBarcode='+oBarcode+'&oRemark='+oRemark;
+  +oUOM+'&oQTY='+oQTY+'&oGrade='+oGrade+'&oLocation='+oLocation+'&oBatch='+oBatch+'&oLot='+oLot+'&oMaker='+oMaker+'&oBarcode='+oBarcode+'&oRemark='+oRemark+'&oExpiry='+oExpiry+'&oMfg='+oMfg;
   return this.http.get(this.hostWebService +"/update_receipt_detail_udf?"+parameters)
     .toPromise()
     .then(response =>
@@ -2674,11 +2718,11 @@ update_receipt_header_new(oClient, oBook, oReceiptNo, oReceiptDate, oIncoming, o
        }
     );
 }
-update_receipt_detail_new(oClient, oReceiptNo, oReceiptDate, oIncoming, oPONO, oLine, oPallet, oItem, oBarcode, oUOM, oQTY, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oMaker,oAsn_flag,listZone) {
+update_receipt_detail_new(oClient, oReceiptNo, oReceiptDate, oIncoming, oPONO, oLine, oPallet, oItem, oBarcode, oUOM, oQTY, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oMaker,oAsn_flag,listZone,oLoc) {
     let parameters="oClient="+oClient+'&oReceiptNo='+oReceiptNo+'&oReceiptDate='+oReceiptDate+'&oIncoming='+oIncoming
     +'&oPONO='+oPONO+'&oLine='+oLine+'&oPallet='+oPallet+'&oItem='+oItem+'&oBarcode='+oBarcode
     +'&oUOM='+oUOM+'&oQTY='+oQTY+'&oGrade='+oGrade+'&oLot='+oLot+'&oBatch='+oBatch
-    +'&oExpiry='+oExpiry+'&oMfg='+oMfg+'&oSize='+oSize+'&oColor='+oColor+'&oClass='+oClass+'&oMaker='+oMaker+'&oAsn_flag='+oAsn_flag+'&listZone='+listZone;
+    +'&oExpiry='+oExpiry+'&oMfg='+oMfg+'&oSize='+oSize+'&oColor='+oColor+'&oClass='+oClass+'&oMaker='+oMaker+'&oAsn_flag='+oAsn_flag+'&listZone='+listZone+'&oLoc='+oLoc;
   return this.http.get(this.hostWebService +"/Update_Receipt_Detail_NEW?"+parameters)
     .toPromise()
     .then(response =>
