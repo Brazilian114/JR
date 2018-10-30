@@ -30,6 +30,6 @@ export class SettingPage {
     this.reload();
   }
   reload(){
-    window.location.reload();
+    this.navCtrl.pop();
   }
 }
