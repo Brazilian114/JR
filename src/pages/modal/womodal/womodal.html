@@ -41,6 +41,10 @@
         <ion-card-content >
           <ion-card-title>{{wo.wave_pick_no}}</ion-card-title>
             <p>เลขที่ Order No : {{wo.wave_pick_no}}</p>
+            <p>สถานที่ : {{wo.route_picksum}} {{wo.route_name}}</p>
+            <p>วันที่จัดส่ง : {{wo.delivery_picsum | date : 'dd/MM/yyyy'}}</p>
+            <p>หมายเหตุ : {{wo.remark_picksum}}</p>
+
         </ion-card-content>
       </ion-card>
     </div>

@@ -32,6 +32,7 @@ export class PicksummaryPage {
     oUOM:any;
     oQty:any;
     oQtyNew:any;
+    oQty_Group:any;
     oLocation:any;
     oLocation_confirm:any;
     oPalletFrom:any;
@@ -191,6 +192,7 @@ export class PicksummaryPage {
         this.oItem = this.data_item["0"].item_no;
 
         this.oDesItem = this.data_item["0"].description;
+        this.oQty_Group=this.data_item["0"].qty_uom1+" | "+this.data_item["0"].qty_uom2+" | "+this.data_item["0"].qty_uom3+" | "+this.data_item["0"].qty_uom4;
         this.oQty = this.data_item["0"].qty;
         this.oUOM = this.data_item["0"].uom;
         this.oColor = this.data_item["0"].item_color;
@@ -203,10 +205,10 @@ export class PicksummaryPage {
         this.oLot = this.data_item["0"].lot_no;
 
         setTimeout(()=>{
-            this.myInputPalletConfirm.setFocus();
+            this.myInputLocation_Confirm.setFocus();
         },0);
         setTimeout(()=>{
-            this.myInputPalletConfirm.setFocus();
+            this.myInputLocation_Confirm.setFocus();
             this.updateScroll();
         },500);
 
@@ -293,6 +295,7 @@ console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLoca
           this.presentToast(this.data_closePick["0"].sqlmsg, false, 'bottom');
         }
         else if(this.data_closePick["0"].sqlstatus == "0"){
+          this.presentToast(this.data_closePick["0"].sqlmsg, false, 'bottom');
           this.doGetDetailWorkOrder(oWo,this.oClient, this.oUsername);
 
           this.doClearInput();
@@ -355,10 +358,10 @@ doCheckPallet(oPalletFr, oPalletTo){
       return;
   }else
   setTimeout(()=>{
-      this.myInputLocation_Confirm.setFocus();
+      this.myInputBarcodeConfirm.setFocus();
   },0);
   setTimeout(()=>{
-        this.myInputLocation_Confirm.setFocus();
+        this.myInputBarcodeConfirm.setFocus();
       this.updateScroll();
   },500);
 
@@ -380,13 +383,22 @@ doCheckPallet(oPalletFr, oPalletTo){
       },500);
       return;
     }else{
-      //this.oQtyNew = oQty;
+      // //this.oQtyNew = oQty;
+      // this.oUomNew = oUom;
+      // setTimeout(()=>{
+      //     this.myInputBarcodeConfirm.setFocus();
+      // },0);
+      // setTimeout(()=>{
+      //     this.myInputBarcodeConfirm.setFocus();
+      //     this.updateScroll();
+      // },200);
+      // //this.oQtyNew = oQty;
       this.oUomNew = oUom;
       setTimeout(()=>{
-          this.myInputBarcodeConfirm.setFocus();
+          this.myInputPalletConfirm.setFocus();
       },0);
       setTimeout(()=>{
-          this.myInputBarcodeConfirm.setFocus();
+          this.myInputPalletConfirm.setFocus();
           this.updateScroll();
       },200);
     }
@@ -459,6 +471,7 @@ doCheckPallet(oPalletFr, oPalletTo){
     this.oItem = "";
     this.oDesItem = "";
     this.oQty = "";
+    this.oQty_Group="";
     this.oUOM = "";
     this.oLocation = "";
     this.oDate = "";
@@ -488,6 +501,7 @@ doCheckPallet(oPalletFr, oPalletTo){
     this.oPalletTo = "";
     this.oLocation_confirm = "";
     this.oPalletFromConfirm = "";
+    this.oBarcode_confirm="";
     this.oBarcode_confirm_scan_chk = "";
   }
   doClearDetail(){
