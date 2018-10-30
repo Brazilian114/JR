@@ -26,7 +26,7 @@ export class ReplenishmentPage {
   data_barcode_dest:any;
   data_close:any;
 
-  oClient:any = "001";
+  oClient:any = "JRFB2550";
   oDes:any = null;
   oItem:any = null;
   oRecNum:any;

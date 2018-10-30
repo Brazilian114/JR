@@ -1,17 +1,18 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Line</ion-title>
+    <ion-title>Supplier</ion-title>
     <ion-searchbar
-      [(ngModel)]="myInput"
-      [showCancelButton]="shouldShowCancel"
-      (ionInput)="onInput($event)"
-      clearInput>
+    [(ngModel)]="myInput"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    clearInput>
     </ion-searchbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="data_supplier">
+  <!-- <div *ngIf="data_supplier"> -->
+
     <div *ngFor = "let supplier of items">
       <ion-card (click)="doSelectSupplier(supplier.supplier, supplier.supplier_name)">
         <ion-card-content >
@@ -20,8 +21,8 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div>
-  <div *ngIf="data_line">
+
+  <!-- <div *ngIf="data_line">
     <div *ngFor = "let line of items">
       <ion-card (click)="doSelectLine(line.line_no, line.item_no, line.description, line.qty_remain, line.grade, line.whse_source, line.zone, line.uom, line.qty_picked)">
         <ion-card-content >
@@ -35,7 +36,7 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div>
+  </div> -->
 </ion-content>
 
 <ion-footer>

@@ -4,22 +4,24 @@ import { NavController, NavParams, ViewController, LoadingController } from 'ion
 import { Service } from '../../../services/service';
 
 @Component({
-  selector: 'page-loadingsummary',
-  templateUrl: 'loadingsummary.html'
+  selector: 'page-saleorder-pack',
+  templateUrl: 'saleorder-pack.html'
 })
-export class LoadingsummaryPage {
-  data_loading:any;
-  oClient:any;
-  items: any;
+export class SaleorderPagePack {
+  data_saleorder:any;
+  oClient:string = "";
   loader:any;
+  items: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private service: Service,
      private loadingCtrl: LoadingController) {
 
-      this.doGetLoading();
+       this.oClient = navParams.get('oClient');
+
+       this.doGetSO(this.oClient);
 
   }
   initializeItems() {
-    this.items = this.data_loading;
+    this.items = this.data_saleorder;
   }
   onInput(ev: any){
          this.initializeItems();
@@ -27,19 +29,20 @@ export class LoadingsummaryPage {
         let val = ev.target.value;
         if(val && val.trim() != ''){
           this.items = this.items.filter((item)=>{
-            return (item.load_summary["0"].toLowerCase().indexOf(val.toLowerCase()) > -1);
+            return (item.sales_order["0"].toLowerCase().indexOf(val.toLowerCase()) > -1);
           })
         }
   }
-  doSelectLoading(load_summary, status, create_date, vehicle_type, vehicle, driver, agent){
-    let data = { 'load_summary': load_summary, 'status': status, 'create_date': create_date, 'vehicle_type': vehicle_type, 'vehicle': vehicle, 'driver': driver, 'agent': agent };
+  doSelectSO(sales_order, customer, customer_name, delivery){
+    let data = { 'sales_order': sales_order, 'customer': customer, 'customer_name': customer_name ,'delivery':delivery};
+      console.log("doSelectSO",data);
     this.viewCtrl.dismiss(data);
   }
-  doGetLoading(){
+  doGetSO(oClient){
       this.presentLoading();
-      this.service.Get_Loading_Summary_List().then((res)=>{
-        this.data_loading = res;
-        console.log(this.data_loading);
+      this.service.Get_Loading_Sales_Order_Customer_Info_by_pack_carton(oClient).then((res)=>{
+        this.data_saleorder = res;
+        console.log(this.data_saleorder);
         this.finishLoding();
         this.initializeItems();
       })

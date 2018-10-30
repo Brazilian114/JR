@@ -18,10 +18,31 @@
           <ion-card-title>
             Check In
           </ion-card-title>
+          <!-- <ion-card-title>
+            รับสินค้าเข้าระบบ อ้างอิง PO,ASN
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
+  <ion-card (click)="doCheckInOther()">
+    <ion-card-content style="border-left: 2px solid #99CCCC;">
+      <ion-row>
+        <ion-col col-1 style="margin: auto;">
+          <ion-img width="30" height="30" src="assets/imgs/checkbox-pen-outline.png"></ion-img>
+        </ion-col>
+        <ion-col class="paddingLeft">
+          <ion-card-title>
+            Check In Other
+          </ion-card-title>
+          <!-- <ion-card-title>
+            รับสินค้าเข้าระบบ อ้างอิง PO,ASN
+          </ion-card-title> -->
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
   <ion-card (click)="doReceiptCheckinReturn()">
     <ion-card-content style="border-left: 2px solid #99CCCC;">
       <ion-row>
@@ -32,6 +53,9 @@
           <ion-card-title>
             Receipt Check In Return
           </ion-card-title>
+          <!-- <ion-card-title>
+            รับสินค้าเข้าระบบ จากการทำ SM
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -46,6 +70,9 @@
           <ion-card-title>
             Putaway
           </ion-card-title>
+          <!-- <ion-card-title>
+            นำสินค้าไปจัดเก็บ
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -60,6 +87,9 @@
           <ion-card-title>
             Pick By Task
           </ion-card-title>
+          <!-- <ion-card-title>
+            หยิบสินค้าตามงาน
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -74,6 +104,9 @@
           <ion-card-title>
             Pick Summary
           </ion-card-title>
+          <!-- <ion-card-title>
+            หยิบสินค้าแบบรวม
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -88,6 +121,9 @@
           <ion-card-title>
             Pick By Task Transfer
           </ion-card-title>
+          <!-- <ion-card-title>
+            หยิบสินค้าตามงาน แบบโอนย้ายโซน
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -116,10 +152,30 @@
           <ion-card-title>
             Load To Truck
           </ion-card-title>
+          <!-- <ion-card-title>
+            นำสินค้าขึ้นรถ
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
+
+  <ion-card (click)="doLoadToTruckPack()">
+    <ion-card-content style="border-left: 2px solid #FF4500;">
+      <ion-row>
+        <ion-col col-1 style="margin: auto;">
+          <ion-img width="30" height="30" src="assets/imgs/LoadtoTruck.png"></ion-img>
+        </ion-col>
+        <ion-col class="paddingLeft">
+          <ion-card-title>
+            Load To Truck Pack Carton
+          </ion-card-title>
+
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
   <ion-card (click)="doItemrelocation()">
     <ion-card-content style="border-left: 2px solid #FFA500;">
       <ion-row>
@@ -130,6 +186,9 @@
           <ion-card-title>
             Item Relocation
           </ion-card-title>
+          <!-- <ion-card-title>
+            ย้ายสินค้า
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -144,6 +203,9 @@
           <ion-card-title>
             Pallet Relocation
           </ion-card-title>
+          <!-- <ion-card-title>
+            ย้ายพาเลท
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -158,6 +220,9 @@
           <ion-card-title>
             Location Inventory Query
           </ion-card-title>
+          <!-- <ion-card-title>
+            ดูสต๊อกสินค้าตามสถานที่
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -172,6 +237,9 @@
           <ion-card-title>
             Location Relocation
           </ion-card-title>
+          <!-- <ion-card-title>
+            ย้ายทั้งสถานที่
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -186,6 +254,9 @@
           <ion-card-title>
             Stock Count
           </ion-card-title>
+          <!-- <ion-card-title>
+            นับสต๊อกสินค้า
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>
@@ -200,6 +271,9 @@
           <ion-card-title>
             Item Inventory Query
           </ion-card-title>
+          <!-- <ion-card-title>
+            ดูสต๊อกสินค้าตามรหัสสินค้า
+          </ion-card-title> -->
         </ion-col>
       </ion-row>
     </ion-card-content>

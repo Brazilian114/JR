@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>Check In</ion-title> -->
-    <ion-title>Check In</ion-title>
+    <ion-title>Check In Other</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -68,16 +68,16 @@
 
 
 <!-- ปุ่ม PO-->
-          <ion-row>
+          <!-- <ion-row>
               <ion-col col-3>
-                <button ion-button block (click)="doGetPo(oClient,oSupplier,oInc)">PO</button>
-                <!--button ion-button block (click)="doGetPo(oClient,oPo,oReceiptType)">PO</button-->
-              </ion-col>
-              <ion-col>
+                <button ion-button block (click)="doGetPo(oClient,oSupplier,oInc)">PO</button> -->
+                <!-- button ion-button block (click)="doGetPo(oClient,oPo,oReceiptType)">PO</button -->
+              <!-- </ion-col>
+              <ion-col> -->
                 <!--ion-input [(ngModel)]="oPo" #focusInputPO></ion-input-->
-                <ion-input [(ngModel)]="oPo" ></ion-input>
+                <!-- <ion-input [(ngModel)]="oPo" ></ion-input>
               </ion-col>
-          </ion-row>
+          </ion-row> -->
 
 
 
@@ -100,25 +100,28 @@
                 <!-- <ion-label stacked style="margin: 0px 0px 0px 0;">ชนิด</ion-label> -->
                 <ion-select [(ngModel)]="listType" interface="popover" disabled ="{{isEnabled}}">
                   <!-- <ion-select [(ngModel)]="listType" interface="popover" > -->
-                  <ion-option value="NORMAL" [selected]="true">NORMAL</ion-option>
+                  <ion-option value="OTHER" [selected]="true">OTHER</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col col-2>
-              <ion-label>Supplier</ion-label>
+              <!-- <ion-label>Supplier</ion-label> -->
               <!-- <ion-label>ผู้จัดจำหน่าย</ion-label> -->
+
+                <button ion-button block (click)="doGetSupplier(oClient)">SUPP.</button>
+
             </ion-col>
             <ion-col col-auto>
               <ion-input [(ngModel)]="oSupplier" #focusInputSup style="background-color: #FFFF99" readonly></ion-input>
             </ion-col>
-            <ion-col col-auto>
+            <!-- <ion-col col-auto> -->
               <!--<button ion-button block (click)="doGetINC(oClient, oSupplier, oDate)">INC</button>-->
-            </ion-col>
-            <ion-col>
+            <!-- </ion-col> -->
+            <!-- <ion-col> -->
               <!--<ion-input [(ngModel)]="oInc" #focusInputInc (click)="doClick()"></ion-input>-->
-            </ion-col>
+            <!-- </ion-col> -->
           </ion-row>
           <ion-row>
             <ion-col col-2>
@@ -128,31 +131,34 @@
             <ion-col>
               <ion-input placeholder="Doc Ref" [(ngModel)]="oDocref" (click)="doClick()"></ion-input>
             </ion-col>
-            <ion-col col-auto>
-              <ion-label>Remark</ion-label>
-              <!-- <ion-label>หมายเหตุ</ion-label> -->
-            </ion-col>
-            <ion-col >
-              <ion-input placeholder="Remark" [(ngModel)]="oRemark" #focusInputRemark (keyup.enter)="enterRemark()" (click)="doClick()"></ion-input>
-            </ion-col>
-          </ion-row>
+                </ion-row>
+
         </ion-grid>
 
         <ion-grid>
           <ion-row>
-            <ion-col col-2>
-              <ion-label>Invoice</ion-label>
+          <ion-col col-auto>
+            <ion-label>Remark</ion-label>
+            <!-- <ion-label>หมายเหตุ</ion-label> -->
+          </ion-col>
+          <ion-col >
+            <ion-input placeholder="Remark" [(ngModel)]="oRemarks" #focusInputRemark (keyup.enter)="enterRemark()" (click)="doClick()"></ion-input>
+          </ion-col>
+        </ion-row>
+          <!-- <ion-row> -->
+            <!-- <ion-col col-2>
+              <ion-label>Invoice</ion-label> -->
               <!-- <ion-label>ใบแจ้งหนี้</ion-label> -->
-            </ion-col>
+            <!-- </ion-col>
             <ion-col>
               <ion-input [(ngModel)]="oInvoice" (click)="doClick()"></ion-input>
-            </ion-col>
-            <ion-col>
-              <!-- <ion-label stacked style="margin: 0px 0px 0px 0;">Invoice Date</ion-label> -->
+            </ion-col> -->
+            <!-- <ion-col>
+              <ion-label stacked style="margin: 0px 0px 0px 0;">Invoice Date</ion-label>
               <ion-label stacked style="margin: 0px 0px 0px 0;">วันที่ ใบแจ้งหนี้</ion-label>
               <ion-datetime [(ngModel)]="oInvoice_Date" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD"></ion-datetime>
-            </ion-col>
-          </ion-row>
+            </ion-col> -->
+          <!-- </ion-row> -->
           <ion-row>
             <ion-col col-2>
               <ion-label>Status</ion-label>
@@ -161,12 +167,12 @@
               <ion-col>
                 <ion-input placeholder="Status" [(ngModel)]="oStatus" style="background-color: #FFFF99" readonly></ion-input>
               </ion-col>
-              <ion-col col-auto>
+              <!-- <ion-col col-auto>
                 <ion-label>SO#</ion-label>
               </ion-col>
               <ion-col >
                 <ion-input placeholder="SO#" [(ngModel)]="oSo" #focusInputSO (click)="doClick()"></ion-input>
-              </ion-col>
+              </ion-col> -->
           </ion-row>
         </ion-grid>
         <br/>
@@ -317,6 +323,7 @@
             <ion-col>
               <!-- <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, listUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass , asn_flag ,listZone, oLoc )">Add</button> -->
               <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, listUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass , asn_flag ,listZone, oLoc )">Add</button>
+
             </ion-col>
             <ion-col>
               <!-- <button ion-button block style="margin-top: 20px" (click)="doDelete(oClient, oReceipt, oPallet)">Delete</button> -->
@@ -331,7 +338,7 @@
     <ion-grid>
         <ion-scroll scrollX="true" scrollY="true">
           <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty
-          ,details.uom,details.item_barcode,details.grade,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class,details.location)">
+          ,details.uom,details.item_barcode,details.grade,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class,details.location,details.pallet_no)">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #
@@ -340,7 +347,7 @@
                 {{details.line_no}}
               </ion-row>
             </ion-col>
-            <ion-col class="border-col" col-2>
+            <ion-col class="border-col" >
               <ion-row class="border-row" *ngIf = "i == 0">
                 รหัสสินค้า
               </ion-row>
@@ -386,6 +393,14 @@
               </ion-row>
               <ion-row>
                 {{details.location}}
+              </ion-row>
+            </ion-col>
+            <ion-col class="border-col">
+              <ion-row class="border-row" *ngIf = "i == 0">
+                พาลท
+              </ion-row>
+              <ion-row>
+                {{details.pallet_no}}
               </ion-row>
             </ion-col>
           </ion-row>

@@ -58,6 +58,7 @@ import { VehicletypePage } from '../pages/modal/vehicletype/vehicletype';
 import { LicensePage } from '../pages/modal/license/license';
 import { DriverPage } from '../pages/modal/driver/driver';
 import { SaleorderPage } from '../pages/modal/saleorder/saleorder';
+import { SaleorderPagePack } from '../pages/modal/saleorder-pack/saleorder-pack';
 
 import { Service } from '../services/service';
 
@@ -71,7 +72,8 @@ import { Network } from '@ionic-native/network';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { DocumentViewer } from '@ionic-native/document-viewer';
 import { itemPickSumPage } from '../pages/modal/itemPickSum/itemPickSum';
-
+import { CheckinotherPage } from '../pages/checkinother/checkinother';
+import { LoadtotruckPackCartonPage } from '../pages/loadtotruckpackct/loadtotruckpackct';
 @NgModule({
   declarations: [
     WMSHandheld,
@@ -127,7 +129,10 @@ import { itemPickSumPage } from '../pages/modal/itemPickSum/itemPickSum';
     SaleorderPage,
     SettingPage,
     PicksummaryPage,
-    itemPickSumPage
+    itemPickSumPage,
+    CheckinotherPage,
+    LoadtotruckPackCartonPage,
+    SaleorderPagePack
   ],
   imports: [
     BrowserModule,
@@ -207,7 +212,10 @@ import { itemPickSumPage } from '../pages/modal/itemPickSum/itemPickSum';
     SaleorderPage,
     SettingPage,
     PicksummaryPage,
-    itemPickSumPage
+    itemPickSumPage,
+    CheckinotherPage,
+    LoadtotruckPackCartonPage,
+    SaleorderPagePack
   ],
   providers: [
     StatusBar,

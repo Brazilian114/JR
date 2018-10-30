@@ -15,7 +15,7 @@ export class CheckinOrderPage {
   @ViewChild(Content) content: Content;
 
   oUsername:string = "";
-  oClient:string = "001";
+  oClient:string = "JRFB2550";
   oStatus:string = "DATA ENTRY";
   oPackNo:string = "";
   oBarcode:string = "";
@@ -76,7 +76,7 @@ export class CheckinOrderPage {
   }
   doInsBranchReceiptCheckinDetail(oClient, oLoadingSummaryNo, oPackingNo, oBarcode, oStatus, oBranch){
     if(oBarcode == undefined || oBarcode == ""){
-  
+
     }else{
       this.service.Ins_Branch_Receipt_Checkin_Detail(oClient, oLoadingSummaryNo, oPackingNo, this.oUsername, oBarcode, oStatus, oBranch).then((res)=>{
         this.data_insBranch = res;

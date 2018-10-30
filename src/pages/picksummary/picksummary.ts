@@ -19,8 +19,11 @@ export class PicksummaryPage {
     @ViewChild('focusInputLocation_Confirm') myInputLocation_Confirm;
     @ViewChild('focusInputPalletTo') myInputPalletTo;
     @ViewChild('focusInputPalletConfirm') myInputPalletConfirm;
+    @ViewChild('focusInputBacodeConfirm') myInputBarcodeConfirm;
+    @ViewChild('focusQtyNew') myInputQtyNew;
+
     @ViewChild(Content) content: Content;
-    oClient:any = "001";
+    oClient:any = "JRFB2550";
     oWo:any;
     oStatus:any;
     oItem:any;
@@ -45,6 +48,8 @@ export class PicksummaryPage {
     oExp:any;
     oProd:any;
     oBacth:any;
+    oBatch:any;
+    oLot:any;
     oUomNew: any;
 
     data_new_pallet:any;
@@ -53,12 +58,17 @@ export class PicksummaryPage {
     data_movement:any;
     data_checkTask:any;
     data_closePick:any;
+    data_barcodeDetail:any;
     data_wo:any;
     oUsername:any;
+    oBarcode_confirm:any;
+    oBarcode_confirm_scan_chk:any;
+
   constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
           this.oUsername = res;
+          console.log(this.oUsername)
         })
   }
   doClick(){
@@ -100,6 +110,7 @@ export class PicksummaryPage {
   }
   doGetWoSum(oClient){
     let frag = 3;
+    console.log('oClient:',oClient, 'oUsername:', this.oUsername,'frag:', frag);
     let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oUsername: this.oUsername,frag: frag });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
@@ -114,11 +125,20 @@ export class PicksummaryPage {
       });
   }
 
-
-
-
-
-
+  onKeyup(oClient,oWo){
+    console.log(this.oWo)
+    console.log("onKeyup",this.oUsername)
+    let barcode=this.oWo;
+    this.service.get_wo_sum(oClient, oWo, this.oUsername).then((res)=>{
+      this.data_wo = res;
+      console.log("this.data_wo : ",this.data_wo)
+      // this.oSup = this.data_wo["0"].customer_name;
+      // this.oSupId = this.data_wo["0"].customer;
+      console.log(this.data_wo);
+      this.oWo = this.data_wo.wave_pick_no;
+    })
+     this.doGetDetailWorkOrder(this.oWo,this.oClient, this.oUsername);
+  }
 
 
   doGetitemWObyTask(oWo,oClient){
@@ -149,22 +169,12 @@ export class PicksummaryPage {
       }
       });
   }
-  onKeyup(oClient){
-    console.log(this.oWo)
-    let barcode=this.oWo;
-    this.service.get_wo(oClient, barcode, this.oUsername).then((res)=>{
-      this.data_wo = res;
-      this.oSup = this.data_wo["0"].customer_name;
-      this.oSupId = this.data_wo["0"].customer;
-      console.log(this.data_wo);
-    })
-     this.doGetDetailWorkOrder(this.oWo,this.oClient, this.oUsername);
-  }
+
 
   doGetDetailWorkOrder(oWo,oClient, oUsername){
     this.service.get_detail_pick_sum(oWo,oClient,oUsername).then((res)=>{
       this.data_item = res;
-      console.log(this.data_item);
+      console.log("this.data_item",this.data_item);
         if(this.data_item.length <= 0){
           let alert = this.alertCtrl.create({
             title: 'Success',
@@ -189,7 +199,8 @@ export class PicksummaryPage {
         this.oStatus = this.data_item["0"].status;
         this.oExp = this.data_item["0"].expiry_date;
         this.oProd = this.data_item["0"].prod_date;
-        this.oBacth = this.data_item["0"].batch_no;
+        this.oBatch = this.data_item["0"].batch_no;
+        this.oLot = this.data_item["0"].lot_no;
 
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
@@ -243,15 +254,36 @@ export class PicksummaryPage {
   }
 
   doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd){
+console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd);
     if(oLocation != oLocation_confirm){
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
+        this.myInputLocation_Confirm.setFocus();
+        this.updateScroll();
     }else if(oLocation_confirm == "" || oLocation_confirm == undefined){
         this.presentToast('โปรดกรอก Location', false, 'bottom');
+        this.myInputLocation_Confirm.setFocus();
+        this.updateScroll();
     }else if(oPalletFrom != oPalletFromConfirm){
         this.presentToast('โปรดกรอก Pallet ให้ตรงกัน', false, 'bottom');
-    } else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0){
-        this.presentToast('โปรดกรอก Qty', false, 'bottom');
+        this.myInputPalletConfirm.setFocus();
+        this.updateScroll();
     }
+    else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0){
+        this.presentToast('โปรดกรอก Qty', false, 'bottom');
+        this.myInputQtyNew.setFocus();
+        this.updateScroll();
+    }
+    else if(oQtyNew != this.oQty){
+        this.presentToast('จำนวนที่ระบุ ไม่เท่ากับที่ระบบ Assign!!', false, 'bottom');
+        this.myInputQtyNew.setFocus();
+        this.updateScroll();
+    }
+    // else if(oItem != this.oBarcode_confirm_scan_chk){
+    //   console.log('oItem',oItem,'this.oBarcode_confirm_scan_chk',this.oBarcode_confirm_scan_chk);
+    //     this.presentToast('บาร์โค้ดสินค้าทีแสกน ไม่ตรงกับที่ระบบ Assign!!', false, 'bottom');
+    //     this.myInputBarcodeConfirm.setFocus();
+    //     this.updateScroll();
+    // }
     else{
       console.log("doPickItemSum",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd);
       this.service.close_pickSum(oWo, this.oUsername, oQtyNew, oUOM, oPalletFromConfirm, oLocation_confirm, oItem,  oBacth, oExp, oProd).then((res)=>{
@@ -310,14 +342,17 @@ export class PicksummaryPage {
 doCheckPallet(oPalletFr, oPalletTo){
   if(oPalletFr != oPalletTo)
   {
-      this.Alert('Error', 'โปรดกรอก Pallet ให้ตรงกัน')
+      //this.Alert('Error', 'โปรดกรอก Pallet ให้ตรงกัน')
+      this.presentToast('โปรดกรอก Pallet ให้ตรงกัน', false, 'bottom');
       setTimeout(()=>{
           this.myInputPalletConfirm.setFocus();
       },0);
+
       setTimeout(()=>{
           this.myInputPalletConfirm.setFocus();
           this.updateScroll();
       },500);
+      return;
   }else
   setTimeout(()=>{
       this.myInputLocation_Confirm.setFocus();
@@ -334,19 +369,67 @@ doCheckPallet(oPalletFr, oPalletTo){
 
   doLocation(oLocation, oLocation_confirm, oQty, oUom){
     if(oLocation != oLocation_confirm){
-      this.Alert('Error', 'โปรดกรอก Location ให้ตรงกัน');
-    }else{
-      this.oQtyNew = oQty;
-      this.oUomNew = oUom;
+      //this.Alert('Error', 'โปรดกรอก Location ให้ตรงกัน');
+      this.presentToast('ปรดกรอก Location ให้ตรงกัน', false, 'bottom');
       setTimeout(()=>{
-          this.myInputPalletTo.setFocus();
+          this.myInputLocation_Confirm.setFocus();
       },0);
       setTimeout(()=>{
-          this.myInputPalletTo.setFocus();
+            this.myInputLocation_Confirm.setFocus();
+          this.updateScroll();
+      },500);
+      return;
+    }else{
+      //this.oQtyNew = oQty;
+      this.oUomNew = oUom;
+      setTimeout(()=>{
+          this.myInputBarcodeConfirm.setFocus();
+      },0);
+      setTimeout(()=>{
+          this.myInputBarcodeConfirm.setFocus();
           this.updateScroll();
       },200);
     }
   }
+
+  doChkBarcode(oItem, oBarcode_confirm ){
+    if(oBarcode_confirm == "" || oBarcode_confirm == undefined){
+      this.Alert('Error', 'โปรดกรอก Barcode!!');
+    }else{
+      this.service.get_Barcode_Detail(this.oClient, oBarcode_confirm).then((res)=>{
+        this.data_barcodeDetail = res;
+
+        if(this.data_barcodeDetail.length <= 0){
+            this.oBarcode_confirm = "";
+            this.presentToast("ไม่พบบาร์โค้ดสินค้าที่แสกน กรุุณาตรวจสอบ", false, 'bottom');
+            this.myInputBarcodeConfirm.setFocus();
+            this.updateScroll();
+            console.log("ไม่พบบาร์โค้ดสินค้าที่แสกน");
+            return;
+        }else{
+            //this.oBarcode_confirm = this.data_barcodeDetail["0"].item_no;
+            this.oBarcode_confirm_scan_chk = this.data_barcodeDetail["0"].item_no;
+            console.log("this.oBarcode_confirm_scan_chk",this.oBarcode_confirm_scan_chk);
+            console.log("this.data_barcodeDetail",this.data_barcodeDetail);
+
+              setTimeout(()=>{
+                  this.myInputBarcodeConfirm.setFocus();
+                  console.log("พบ 0");
+              },0);
+              setTimeout(()=>{
+                  this.myInputQtyNew.setFocus();
+                  this.updateScroll();
+                  console.log("พบ 200");
+              },200);
+              // this.doGetProductOrther(oClient, this.oItem);
+                 this.myInputQtyNew.setFocus();
+                 console.log("พบ");
+        }
+      })
+    }
+  }
+
+
   doClosePickTask(oWo, oTaskNo, oActNO, oQtyPick, oReasonCode, oMaker, oUOM, oPalletTo){
     this.service.close_picktask(oWo, oTaskNo, oActNO, oQtyPick, oReasonCode, this.oUsername, oUOM, oPalletTo).then((res)=>{
       this.data_closePick = res;
@@ -395,12 +478,17 @@ doCheckPallet(oPalletFr, oPalletTo){
     this.oProd = "";
     this.oExp = "";
     this.oBacth = "";
+    this.oBarcode_confirm = "";
+    this.oBarcode_confirm_scan_chk = "";
+    this.oBatch = "";
+    this.oLot = "";
   }
   doClearInput(){
     this.oQtyNew = "";
     this.oPalletTo = "";
     this.oLocation_confirm = "";
     this.oPalletFromConfirm = "";
+    this.oBarcode_confirm_scan_chk = "";
   }
   doClearDetail(){
     this.oItem = "";
@@ -417,6 +505,7 @@ doCheckPallet(oPalletFr, oPalletTo){
     this.oTaskNo = "";
     this.oActivity = "";
     this.oColor = "";
+
   }
   doGetNewPallet(oClient){
     if(oClient != ""){

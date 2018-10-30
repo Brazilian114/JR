@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Load To Truck</ion-title>
+    <ion-title>Load To Truck Pack Carton</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -113,14 +113,25 @@
             <ion-input [(ngModel)]="oDeliveryNo" style="background-color: #FFFF99" readonly></ion-input>
           </ion-col>
         </ion-row>
+
         <!-- <ion-row>
-          <ion-col col-3>
-            <button ion-button block>SCAN SO</button>
+          <ion-col col-2>
+            <button ion-button block>S.Pack</button>
           </ion-col>
           <ion-col>
-            <ion-input [(ngModel)]="oPackingNo" #focusInputPackNo (keyup.enter)="doSaveLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oDeliveryNo)"></ion-input>
+            <ion-input [(ngModel)]="oPackingNo" #focusInputPackNo (keyup.enter)="doChkScanPackCaton(oClient,oSalesOrder,oPackingNo,oCartonNo)"></ion-input>
+          </ion-col>
+
+          <ion-col col-2>
+            <button ion-button block>Carton</button>
+          </ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="oCartonNo" #focusInputCartonNo (keyup.enter)="doChkScanPackCaton_2(oClient,oSalesOrder,oPackingNo,oCartonNo)"></ion-input>
           </ion-col>
         </ion-row> -->
+
+
+
       </ion-grid>
       <ion-grid>
         <ion-scroll scrollX="true" scrollY="true" style="height: 300px">
@@ -235,18 +246,33 @@
               <ion-input [(ngModel)]="oItemChk" style="background-color: #FFFF99" readonly></ion-input>
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-col col-2>
+              <button ion-button block>S.Pack</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oPackingNo" #focusInputPackNo (keyup.enter)="doChkScanPackCaton(oClient,oSalesOrder,oPackingNo,oCartonNo)"></ion-input>
+            </ion-col>
+
+            <ion-col col-2>
+              <button ion-button block>Carton</button>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="oCartonNo" #focusInputCartonNo (keyup.enter)="doChkScanPackCaton_2(oClient,oSalesOrder,oPackingNo,oCartonNo)"></ion-input>
+            </ion-col>
+          </ion-row>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-scroll scrollX="true" scrollY="true" style="height: 400px">
-          <ion-row style="width: 1200px;" *ngFor = "let details of data_itemList; let i = index" (click)="doReturn_Detail_select(details.item_barcode,details.row_hh)" [ngClass]="(details.chk_HH != '') ? 'odd' : 'even'">
+          <ion-row style="width: 1500px;" *ngFor = "let details of data_itemList; let i = index" (click)="doReturn_Detail_select(details.item_barcode,details.row_hh,details.packing_no,details.carton_no)" [ngClass]="(details.chk_HH != '') ? 'odd' : 'even'">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 Chk
               </ion-row>
               <ion-row style="width:30px;" >
                 <!-- <ion-checkbox [(ngModel)]="item"></ion-checkbox> -->
-                <ion-checkbox color="danger" name="chk_item"  [checked]="details.chk_HH != ''" (click)="doReturn_Detail(details.load_summary,details.item_barcode,details.sales_order,details.delivery,details.customer,details.row_id)"></ion-checkbox>
+                <ion-checkbox color="danger" name="chk_item"  [checked]="details.chk_HH != ''" (click)="doReturn_Detail(details.load_summary,details.item_barcode,details.sales_order,details.delivery,details.customer,details.row_id,details.packing_no,details.carton_no)"></ion-checkbox>
               </ion-row>
             </ion-col>
 
@@ -291,7 +317,7 @@
               </ion-row>
             </ion-col>
             <ion-col class="border-col" col-3>
-              <ion-row class="border-row" *ngIf = "i == 0">
+              <ion-row class="border-row" *ngIf = "i == 0" >
                   ชื่อสินค้า
               </ion-row>
               <ion-row >
@@ -378,21 +404,38 @@
                 {{details.prod_date}}
               </ion-row>
             </ion-col>
+            <!-- <ion-col class="border-col" col-1>
+              <ion-row class="border-row" *ngIf = "i == 0">
+               Pack No.
+              </ion-row>
+              <ion-row>
+                {{details.packing_no}}
+              </ion-row>
+            </ion-col> -->
+            <ion-col class="border-col" col-1>
+              <ion-row class="border-row" *ngIf = "i == 0">
+               Carton
+              </ion-row>
+              <ion-row>
+                {{details.carton_no}}
+              </ion-row>
+            </ion-col>
 
           </ion-row>
         </ion-scroll>
       </ion-grid>
-      <!-- <ion-grid> -->
-        <!-- <ion-row> -->
-          <!-- <ion-col> -->
-            <!-- <button ion-button block (click)="doClearDetails()">Clear</button> -->
+      <ion-grid>
+         <ion-row>
+          <ion-col>
+            <button ion-button block (click)="doClearDetails()">Clear</button>
             <!-- <button ion-button block (click)="doClearDetails()">CONFIRM CHECK</button> -->
           <!-- </ion-col> -->
           <!-- <ion-col>
             <button ion-button block (click)="doDeleteLoadingSummaryDetail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo , oDeliveryNo , oDeliveryNo)">Delete</button>
           </ion-col> -->
-        <!-- </ion-row> -->
-      <!-- </ion-grid> -->
+            </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-list>
 
   </div>
@@ -406,7 +449,7 @@
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient)">
           Details
         </ion-segment-button>
-        <ion-segment-button value="Item" [disabled]="!isenabled" (click)="doGetItemList(oLoadingSummaryNo, oSalesOrder)">
+        <ion-segment-button value="Item" [disabled]="!isenabled" (click)="doGetItemList(oClient, oSalesOrder ,oPackingNo,oCartonNo)">
           Item List
         </ion-segment-button>
       </ion-segment>

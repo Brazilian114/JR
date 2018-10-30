@@ -234,7 +234,7 @@ doLoginApprove(username,password){
   }
   doConfirm(oLocation, oLocation_confirm, oPallet){
 
-  console.log("เช้กตัวแปร",oLocation, oLocation_confirm, oPallet);
+  console.log("เช้กตัวแปร","oLocation = ",oLocation, "oLocation_confirm",oLocation_confirm, "oPallet",oPallet);
 
     if(oPallet == undefined || oPallet == "")
     {
@@ -264,7 +264,7 @@ doLoginApprove(username,password){
          else
          {
              console.log("loop  else");
-           //var oCPallet = this.oPallet;
+           var oCPallet = this.oPallet;
            if(oLocation_confirm != undefined){
                    this.storage.get('_Wh').then((res)=>{
                      this.oWh = res;

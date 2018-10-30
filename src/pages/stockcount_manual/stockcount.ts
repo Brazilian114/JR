@@ -192,7 +192,7 @@ export class StockcountPage {
       this.doGetUOM(oClient, this.oItem);
       this.doGetGrade();
       setTimeout(()=>{
-        //this.oUOM = this.data_barcodeDetail["0"].item_packing;
+        this.oUOM = this.data_barcodeDetail["0"].item_packing;
         this.doGetProductOrther(oClient, this.oItem)
       },600);
     })

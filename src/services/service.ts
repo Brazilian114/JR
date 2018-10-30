@@ -623,6 +623,29 @@ get_location_all(oWarehouse, oLocation) {
        }
     );
 }
+
+get_location_zone(oLocation,oZone) {
+  let parameters='oZone='+oZone+'&oLocation='+oLocation;
+  return this.http.get(this.hostWebService +"/Get_Location_Zone?"+parameters)
+    .toPromise()
+    .then(response =>
+       {
+          let a;
+          xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+          a = result;
+       });
+          try {
+              // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+              return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+              // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+          }
+          catch (e) {
+            return [];
+          }
+       }
+    );
+}
+
 get_ListPalletInLocation(oWH, oLoc) {
   let parameters='oWH='+oWH+'&oLoc='+oLoc;
   return this.http.get(this.hostWebService +"/Get_ListPalletInLocation?"+parameters)
@@ -1414,6 +1437,27 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
+  get_Book_OT() {
+    return this.http.get(this.hostWebService +"/showBookOT?")
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
+
   get_Book_CN() {
     return this.http.get(this.hostWebService +"/showBookCN?")
       .toPromise()
@@ -2136,8 +2180,54 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
-  Get_Loading_Summary_Detail_Item_List(oLoadingSummaryNo) {
-    let parameters='oLoadingSummaryNo='+oLoadingSummaryNo;
+
+  Get_Loading_Summary_Detail_Item_List_pack_carton(oClient,oSalesOrder,oPackingNo,oCartonNo) {
+    let parameters='oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oPackingNo='+oPackingNo+'&oCartonNo='+oCartonNo;
+    return this.http.get(this.hostWebService +"/Get_Loading_Summary_Detail_Item_List_pack_carton?"+parameters)
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
+
+  rf_chk_pack_carton_scan(oClient,oSalesOrder,oPackingNo,oCartonNo,oTypeChk) {
+    let parameters='oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oPackingNo='+oPackingNo+'&oCartonNo='+oCartonNo+'&oTypeChk='+oTypeChk;
+    return this.http.get(this.hostWebService +"/rf_chk_pack_carton_scan?"+parameters)
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
+
+
+  Get_Loading_Summary_Detail_Item_List(oLoadingSummaryNo, oSalesOrder) {
+    let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oSalesOrder='+oSalesOrder;
     return this.http.get(this.hostWebService +"/Get_Loading_Summary_Detail_Item_List?"+parameters)
       .toPromise()
       .then(response =>
@@ -2181,6 +2271,27 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
   Get_Loading_Sales_Order_Customer_Info(oClient) {
     let parameters='oClient='+oClient;
     return this.http.get(this.hostWebService +"/Get_Loading_Sales_Order_Customer_Info?"+parameters)
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
+  Get_Loading_Sales_Order_Customer_Info_by_pack_carton(oClient) {
+    let parameters='oClient='+oClient;
+    return this.http.get(this.hostWebService +"/Get_Loading_Sales_Order_Customer_Info_by_pack_carton?"+parameters)
       .toPromise()
       .then(response =>
          {
@@ -2263,8 +2374,8 @@ Ins_Branch_Receipt_Checkin_Detail(oClient, oLoadingSummaryNo, oPackingNo, oMaker
        }
     );
 }
-Save_Loading_Summary_Header(oLoadingSummaryNo, oStatus, oDeliveryDate, oVehicle, oVehicleType, oDriver, oMaker) {
-  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oStatus='+oStatus+'&oDeliveryDate='+oDeliveryDate+'&oVehicle='+oVehicle+'&oVehicleType='+oVehicleType+'&oDriver='+oDriver+'&oMaker='+oMaker;
+Save_Loading_Summary_Header(oLoadingSummaryNo, oStatus, oDeliveryDate, oVehicle, oVehicleType, oDriver, oMaker, oName) {
+  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oStatus='+oStatus+'&oDeliveryDate='+oDeliveryDate+'&oVehicle='+oVehicle+'&oVehicleType='+oVehicleType+'&oDriver='+oDriver+'&oMaker='+oMaker+'&oAgent='+oName;
   return this.http.get(this.hostWebService +"/Save_Loading_Summary_Header?"+parameters)
     .toPromise()
     .then(response =>
@@ -2330,6 +2441,48 @@ Confirm_Loading_Summary_Detail(oLoadingSummaryNo, oMaker) {
 Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oPackingNo, oMaker , oDeliveryNo) {
   let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oPackingNo='+oPackingNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo;
   return this.http.get(this.hostWebService +"/Delete_Loading_Summary_Detail?"+parameters)
+    .toPromise()
+    .then(response =>
+       {
+          let a;
+          xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+          a = result;
+       });
+          try {
+              // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+              return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+              // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+          }
+          catch (e) {
+            return [];
+          }
+       }
+    );
+}
+Update_Loading_Summary_Detail_Check(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oItemNo, oMaker , oDeliveryNo,oLineUpd) {
+  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oItemNo='+oItemNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo+'&oLineUpd='+oLineUpd;
+  return this.http.get(this.hostWebService +"/rf_upd_loadsummary_detail_chk?"+parameters)
+    .toPromise()
+    .then(response =>
+       {
+          let a;
+          xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+          a = result;
+       });
+          try {
+              // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+              return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+              // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+          }
+          catch (e) {
+            return [];
+          }
+       }
+    );
+}
+Update_Loading_Summary_Detail_Check_pack_carton(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oItemNo, oMaker , oDeliveryNo,oLineUpd,oPackingNo,oCartonNo) {
+  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oItemNo='+oItemNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo+'&oLineUpd='+oLineUpd+'&oPackingNo='+oPackingNo+'&oCartonNo='+oCartonNo;
+  return this.http.get(this.hostWebService +"/rf_upd_loadsummary_detail_chk_pack_carton?"+parameters)
     .toPromise()
     .then(response =>
        {
@@ -2550,10 +2703,10 @@ update_receipt_detail_udf(oClient, oReciptNo, oReceiptDate, oLine, oPallet, oIte
        }
     );
 }
-update_Stock_Count(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oItemBarcode, oUOM, oSQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, oMaker) {
+update_Stock_Count(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oItemBarcode, oUOM, oSQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, oMaker,oStk_type) {
   let parameters='oSttRef='+oSttRef+'&oRecNum='+oRecNum+'&oWh='+oWh+'&OLoc='+OLoc+'&oPallet='+oPallet+'&oClient='+oClient+'&oItem='+oItem
   +'&oItemBarcode='+oItemBarcode+'&oUOM='+oUOM+'&oSQty='+oSQty+'&oCQty='+oCQty+'&oGrade='+oGrade+'&oLotNo='+oLotNo+'&oBatNo='+oBatNo+'&oExpDate='+oExpDate
-  +'&oProdDate='+oProdDate+'&oSize='+oSize+'&oColor='+oColor+'&oClass='+oClass+'&oOwner='+oOwner+'&oMaker='+oMaker;
+  +'&oProdDate='+oProdDate+'&oSize='+oSize+'&oColor='+oColor+'&oClass='+oClass+'&oOwner='+oOwner+'&oMaker='+oMaker+'&oStk_type='+oStk_type;
   return this.http.get(this.hostWebService +"/Update_Stock_Count?"+parameters)
     .toPromise()
     .then(response =>
@@ -2696,11 +2849,12 @@ update_receipt_header(oClient, oReceiptNo, oStation, oWarehouse, oZone, oType, o
        }
     );
 }
-update_receipt_header_new(oClient, oBook, oReceiptNo, oReceiptDate, oIncoming, oStation, oWarehouse, oZone, oType, oContainer, oSupplier, oClientSoNo, oRemarks, oRefNo, oStatus, oMaker, oInvoice, oInvoice_Date, oAsn_flag) {
+update_receipt_header_new(oClient, oBook, oReceiptNo, oReceiptDate, oIncoming, oStation, oWarehouse, oZone, oType, oContainer, oSupplier, oClientSoNo,oClientPoNo, oRemarks, oRefNo, oStatus, oMaker, oInvoice, oInvoice_Date, oAsn_flag) {
+  console.log(oClient, oBook, oReceiptNo, oReceiptDate, oIncoming, oStation, oWarehouse,"Zone:",oZone, "Type:",oType,"Contanier :", oContainer,"Supplier:", oSupplier,"ClientSoNo :", oClientSoNo,"Remark:", oRemarks,"RefNo :", oRefNo,"Status :", oStatus,"Marker : ", oMaker, oInvoice, oInvoice_Date,"oAsn_flag :", oAsn_flag);
     let parameters="oClient="+oClient+'&oBook='+oBook+'&oReceiptNo='+oReceiptNo+'&oReceiptDate='+oReceiptDate
     +'&oIncoming='+oIncoming+'&oStation='+oStation+'&oWarehouse='+oWarehouse+'&oZone='+oZone+'&oType='+oType
-    +'&oContainer='+oContainer+'&oSupplier='+oSupplier+'&oClientSoNo='+oClientSoNo+'&oRemarks='+oRemarks+'&oRefNo='+oRefNo
-    +'&oStatus='+oStatus+'&oMaker='+oMaker+'&oInvoice='+oInvoice+'&oInvoice_Date='+oInvoice_Date;
+    +'&oContainer='+oContainer+'&oSupplier='+oSupplier+'&oClientSoNo='+oClientSoNo+'&oClientPoNo='+oClientPoNo+'&oRemarks='+oRemarks+'&oRefNo='+oRefNo
+    +'&oStatus='+oStatus+'&oMaker='+oMaker+'&oInvoice='+oInvoice+'&oInvoice_Date='+oInvoice_Date+'&oAsn_flag='+oAsn_flag;
   return this.http.get(this.hostWebService +"/Update_Receipt_Header_NEW?"+parameters)
     .toPromise()
     .then(response =>

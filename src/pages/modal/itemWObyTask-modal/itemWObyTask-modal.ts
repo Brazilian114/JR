@@ -42,11 +42,11 @@ export class itemWObyTaskPage {
         }
   }
   doSelectItem(itemNo, description, qty, uom, location_from, order_no, pallet_from, delivery_date, customer, task_no
-    , activity, location_to, warehouse_from, warehouse_to, zone_dest, zone_from){
+    , activity, location_to, warehouse_from, warehouse_to, zone_dest, zone_from,QTY_Dec){
     let data = { 'itemNo': itemNo, 'description': description, 'qty': qty, 'uom': uom, 'location_from': location_from
     , 'order_no': order_no, 'pallet_from': pallet_from, 'delivery_date': delivery_date, 'customer_name': customer
     , 'task_no': task_no, 'activity': activity, 'location_to': location_to, 'warehouse_from': warehouse_from
-    , 'warehouse_to': warehouse_to, 'zone_dest': zone_dest, 'zone_from': zone_from };
+    , 'warehouse_to': warehouse_to, 'zone_dest': zone_dest, 'zone_from': zone_from,'QTY_Dec':QTY_Dec };
     this.viewCtrl.dismiss(data);
   }
   doGetDetailWorkOrderBySelect(oWO){

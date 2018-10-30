@@ -16,7 +16,7 @@
         <ion-col col-2>
           <ion-input [(ngModel)]="oClient"></ion-input>
         </ion-col>
-        <ion-col col-auto>
+        <ion-col col-2>
           <button ion-button block (click)="doGetItemNo(oClient)">Item</button>
         </ion-col>
         <ion-col>
@@ -36,7 +36,7 @@
   </ion-grid>
   <ion-grid>
       <ion-scroll scrollX="true" scrollY="true">
-        <ion-row style="width: 1200px;" *ngFor = "let items of data_item; let i = index">
+        <ion-row style="width: 1500px;" *ngFor = "let items of data_item; let i = index">
           <ion-col class="border-col" col-auto>
             <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
               #
@@ -53,19 +53,19 @@
               {{items.item_no}}
             </ion-row>
           </ion-col>
-          <ion-col class="border-col" style="width:150px;">
+          <ion-col class="border-col" col-3>
             <ion-row class="border-row" *ngIf = "i == 0">
                 ชื่อสินค้า
             </ion-row>
-            <ion-row style="width:150px;">
+            <ion-row >
               {{items.description}}
             </ion-row>
           </ion-col>
           <ion-col class="border-col">
-            <ion-row class="border-row" style="width:100px;" *ngIf = "i == 0">
+            <ion-row class="border-row"  *ngIf = "i == 0">
               Qty
             </ion-row>
-            <ion-row style="width:100px;">
+            <ion-row >
               {{items.qty_avail}}
             </ion-row>
           </ion-col>
@@ -86,10 +86,10 @@
             </ion-row>
           </ion-col>
           <ion-col class="border-col">
-            <ion-row class="border-row" style="width:100px;" *ngIf = "i == 0">
+            <ion-row class="border-row"  *ngIf = "i == 0">
               Location
             </ion-row>
-            <ion-row style="width:100px;">
+            <ion-row >
               {{items.location}}
             </ion-row>
           </ion-col>
@@ -186,7 +186,7 @@
     </ion-row>
 
   </ion-grid>
-    
+
   <ion-grid>
     <ion-row>
         <ion-col>

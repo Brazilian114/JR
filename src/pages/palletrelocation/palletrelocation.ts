@@ -17,7 +17,7 @@ export class PalletrelocationPage {
   @ViewChild('focusInputLocation_Confirm') myInputLocation_Confirm;
   @ViewChild(Content) content: Content;
 
-  oClient:any = "001";
+  oClient:any = "JRFB2550";
   oUsername:any;
   oPallet:any;
   oDes:any;

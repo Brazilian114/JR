@@ -40,6 +40,8 @@ export class LocationmodalPage {
     this.oGrade = navParams.get('oGrade');
     this.oPalletFrom = navParams.get('oPalletFrom');
 
+    console.log(this.oZone);
+
     if(this.oItemNo != undefined || this.oItemNo != null){
       if(this.oWarehouse != undefined || this.oWarehouse != null){
           if(this.oLOC_DESC == undefined && this.oQtyPick == undefined){
@@ -67,11 +69,18 @@ export class LocationmodalPage {
       }
 
     }else{
-      if(this.oLOC_DESC == undefined){
+      if(this.oLOC_DESC == undefined && this.oZone == undefined){
         this.oLOC_DESC = "";
         this.doGetLocationAll(this.oWarehouse, this.oLOC_DESC);
-      }else{
-        this.doGetLocationAll(this.oWarehouse, this.oLOC_DESC);
+      }
+      else{
+        if(this.oZone != undefined){
+          console.log("else if Zone location")
+          this.doGetLocation_zone(this.oZone);
+        }
+        else{
+          this.doGetLocationAll(this.oWarehouse, this.oLOC_DESC);
+        }
       }
     }
 
@@ -163,6 +172,17 @@ export class LocationmodalPage {
       this.initializeItems();
     })
   }
+
+  doGetLocation_zone(oZone){
+    this.presentLoading();
+    this.service.get_location_zone("",oZone).then((res)=>{
+      this.data_location = res;
+      console.log(this.data_location);
+      this.finishLoding();
+      this.initializeItems();
+    })
+  }
+
   doGetLocationStk(oClient, oStockRef, oWarehouse, oLocation){
     this.service.get_StockCountListLocation_LocPage(oClient, oStockRef, oWarehouse, oLocation).then((res)=>{
       this.data_location = res;

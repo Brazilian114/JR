@@ -18,7 +18,7 @@ export class ReservationOrderPage {
   data_item:any;
   user_detail:any;
   oItem_Barcode:any;
-  oClient:any = '001';
+  oClient:any = 'JRFB2550';
   oBranch:any;
   oBranchName:any;
   oLine_no:any;

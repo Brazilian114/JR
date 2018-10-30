@@ -10,14 +10,16 @@ import { CheckbarcodemodelPage } from '../modal/checkbarcodemodel/checkbarcodemo
 import { IncmodelPage } from '../modal/incmodel/incmodel';
 import { PalletmodelPage } from '../modal/palletmodel/palletmodel';
 import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
+import { SuppliermodelPage } from '../modal/suppliermodel/suppliermodel';
+
 
 import { Service } from '../../services/service';
 
 @Component({
-  selector: 'page-checkin',
-  templateUrl: 'checkin.html'
+  selector: 'page-checkinother',
+  templateUrl: 'checkinother.html'
 })
-export class CheckinPage {
+export class CheckinotherPage {
   @ViewChild('focusInputQty') InputQty;
   @ViewChild('focusInputPO') InputPO;
   @ViewChild('focusInputPallet') InputPallet;
@@ -26,6 +28,7 @@ export class CheckinPage {
   @ViewChild('focusInputInc') InputInc;
   @ViewChild('focusInputRemark') InputRemark;
   @ViewChild('focusInputSO') InputSO;
+  @ViewChild('focusInputLoc') InputLoc;
   @ViewChild(Content) content: Content;
 
   data_login:any;
@@ -80,7 +83,7 @@ export class CheckinPage {
   oCustomer:string;
   oPo:string = "";
   oSo:string;
-  oRemarks:string;
+  oRemarks:string = "";
   oRefNo:string;
   oMaker:string;
   oReply:string;
@@ -99,7 +102,7 @@ export class CheckinPage {
   loader:any;
   listWhses:any;
   listBook:any;
-  listType:any = "NORMAL";
+  listType:any = "OTHER";
   listUOM:any;
   listGrade:any;
   listZone:any;
@@ -200,7 +203,12 @@ export class CheckinPage {
       this.data_location = res;
       console.log(this.data_location);
         if(this.data_location.length <=0){
-          this.Alert("Error","ไม่พบ Location");
+          // this.Alert("Error","ไม่พบ Location");
+          this.presentToast('ไม่พบ Location', false, 'bottom');
+          this.InputLoc.setFocus();
+          console.log("No have");
+          return;
+
         }
         else{
           console.log("have");
@@ -214,6 +222,7 @@ export class CheckinPage {
     this.storage.set('_oReceipt', oReceipt);
 
     console.log("listBook",listBook);
+    console.log("listType",listType);
 
     if(listType == undefined){
         this.presentToast('โปรดระบุ Type', false, 'bottom');
@@ -276,6 +285,29 @@ export class CheckinPage {
         });
     }
   }
+
+  doGetSupplier(oClient){
+
+      let profileModal = this.modalCtrl.create(SuppliermodelPage, { oClient: oClient});
+        profileModal.present();
+        profileModal.onDidDismiss(data =>{
+
+
+            console.log("doGetReceipt",data);
+            if(data == undefined){
+
+            }else{
+            this.oSupplier = data.supplier;
+            //this.oStatus = data.status;
+}
+
+          }
+        );
+
+  }
+
+
+
   doGetReceiptScan(oClient, oReciptNo, oReceiptType, oBook){
     this.service.get_receipt_detail(oClient, oReciptNo, oReceiptType, oBook).then((res)=>{
       this.data_receipt = res;
@@ -488,7 +520,8 @@ export class CheckinPage {
         this.presentToast('โปรดระบุ Warehouse', false, 'bottom');
       }else{
 
-        this.service.update_receipt_header_new(oClient, listBook, oReceipt, oDate, oInc, listStation, listWhses, listZone, listType, oContainer, oSupplier, "",oPo, oRemarks, "", oStatus, this.oUsername, oInvoice, oInvoice_Date, oAsn_flag ).then((res)=>{
+        // this.service.update_receipt_header_new(oClient, listBook, oReceipt, oDate, oInc, listStation, listWhses, listZone, listType, oContainer, oSupplier, "",oPo, oRemarks, "", oStatus, this.oUsername, oInvoice, oInvoice_Date, oAsn_flag ).then((res)=>{
+        this.service.update_receipt_header_new(oClient, listBook, oReceipt, oDate, oInc, listStation, listWhses, "", listType, oContainer, oSupplier, "",oPo, oRemarks, "", oStatus, this.oUsername, oInvoice, oInvoice_Date, oAsn_flag ).then((res)=>{
           this.data_saveReturn = res;
           console.log(this.data_saveReturn);
           if(this.data_saveReturn.sqlstatus != "0"){
@@ -547,9 +580,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     }else if(this.isenabledClass == true && oClass == ""){
         this.presentToast('Please specify Class.', false, 'bottom');
     }
-    // else if(listZone == "" || listZone == undefined ){
-    //     this.presentToast('โปรดระบุ Zone.', false, 'bottom');
-    // }else if(oLoc == "" || oLoc == undefined ){
+
+    // else if(oLoc == "" || oLoc == undefined ){
     //     this.presentToast('โปรดระบุ Location.', false, 'bottom');
     // }
 
@@ -565,9 +597,12 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
         if(oPallet == undefined || oPallet == ""){
           this.presentToast('โปรดระบุเลขที่ Pallet', false, 'bottom');
         }
-        // else if(listZone == undefined || listZone == ""){
-        //   this.presentToast('โปรดระบุ Zone ที่ต้องการจัดเก็บ', false, 'bottom');
-        // }
+        else if(listZone == undefined || listZone == ""){
+          this.presentToast('โปรดระบุ Zone ที่ต้องการจัดเก็บ', false, 'bottom');
+        }
+        else if(oLoc == "" || oLoc == undefined ){
+              this.presentToast('โปรดระบุ Location.', false, 'bottom');
+          }
         else{
           if(listQty != 1){
             console.log('oLine:0 ' +this.oLine)
@@ -601,13 +636,16 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
                       this.oSize = "";
                       this.oColor = "";
                       this.oClass = "";
+                      this.oLoc = "";
                       //this.data_pallet_detail = null;
                       this.oPallet = "";
                       setTimeout(()=>{
-                          this.InputPallet.setFocus();
+                          // this.InputPallet.setFocus();
+                          this.InputLoc.setFocus();
                       },0);
                       setTimeout(()=>{
-                          this.InputPallet.setFocus();
+                          // this.InputPallet.setFocus();
+                          this.InputLoc.setFocus();
                       },2000);
                     })
                   }
@@ -636,18 +674,22 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
                     this.oSize = "";
                     this.oColor = "";
                     this.oClass = "";
+                    this.oLoc = "";
+                    this.oPallet = "";
                     setTimeout(()=>{
-                      this.InputBarcode.setFocus();
+                      // this.InputBarcode.setFocus();
+                      this.InputLoc.setFocus();
                     },0);
                     setTimeout(()=>{
-                      this.InputBarcode.setFocus();
+                      // this.InputBarcode.setFocus();
+                      this.InputLoc.setFocus();
                     },2000);
                   })
                 }
               })
             }
           }else{
-            console.log('type:2 ' +listQty)
+            console.log('type:2 แสกนต่อเนื่อง' +listQty)
             this.storage.remove('_oLine');
             this.oLine = "";
             console.log('oLine:1 ' +this.oLine)
@@ -680,10 +722,12 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
                       // this.oColor = "";
                       // this.oClass = "";
                       setTimeout(()=>{
-                        this.InputBarcode.setFocus();
+                        // this.InputBarcode.setFocus();
+                        this.InputLoc.setFocus();
                       },0);
                       setTimeout(()=>{
-                        this.InputBarcode.setFocus();
+                        // this.InputBarcode.setFocus();
+                        this.InputLoc.setFocus();
                       },1000);
                     })
                   }
@@ -867,8 +911,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location){
-    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location);
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no){
+    console.log("doReturnItemDetail",line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no);
     this.oBarcode = "1";
     setTimeout(()=>{
       let dateExp = String(expiry_date).substr(0,10)
@@ -886,6 +930,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       this.oColor = item_color;
       this.oClass = item_class;
       this.oLoc = location;
+      this.oPallet = pallet_no;
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
         this.data_barcodeDetail = res;
@@ -978,19 +1023,19 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     })
   }
   doGetBook(){
-    this.service.get_Book().then((res)=>{
+    this.service.get_Book_OT().then((res)=>{
       this.data_book = res;
       this.listBook = this.data_book["0"].QCBOOK["0"];
       console.log(this.data_book);
     })
   }
-  doGetSupplier(oClient){
-    this.service.get_Supplier(oClient).then((res)=>{
-      this.data_supplier = res;
-      this.oSupplier = this.data_supplier["0"];
-      console.log(this.data_supplier);
-    })
-  }
+  // doGetSupplier(oClient){
+  //   this.service.get_Supplier(oClient).then((res)=>{
+  //     this.data_supplier = res;
+  //     this.oSupplier = this.data_supplier["0"];
+  //     console.log(this.data_supplier);
+  //   })
+  // }
   doGetWarehouse(oUsername){
     this.service.get_WarehouseByUser(oUsername).then((res)=>{
       this.data_warehouse = res;
@@ -1159,9 +1204,12 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
           if(listQty == 0){
             this.oQty = 0;
           }
-          // else{
-          //   this.oQty = 1;
-          // }
+          else{
+            // this.oQty = 1;
+              this.doGetPalletListDetali(this.oClient,this.oReceipt,"");
+            console.log("TEST",this.oClient,this.oReceipt,"");
+          }
+
       },0);
       setTimeout(()=>{
       },200);

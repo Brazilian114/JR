@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Loading Summary</ion-title>
+    <ion-title>Sale Order Pack</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -12,10 +12,12 @@
 
 <ion-content>
   <div *ngFor = "let data of items">
-  <ion-card (click)="doSelectLoading(data.load_summary, data.status, data.create_date, data.vehicle_type, data.vehicle, data.driver, data.agent)">
+  <ion-card (click)="doSelectSO(data.sales_order, data.customer, data.customer_name, data.delivery)">
       <ion-card-content >
-        <ion-card-title>{{data.load_summary}}</ion-card-title>
+        <ion-card-title>{{data.sales_order}}</ion-card-title>
+        <p>{{data.customer_name}}({{data.customer}})</p>
         <p>Status: {{data.status}}</p>
+        <p>Delivery: {{data.delivery}}</p>
       </ion-card-content>
     </ion-card>
   </div>

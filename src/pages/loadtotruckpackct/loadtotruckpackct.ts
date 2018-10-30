@@ -9,19 +9,21 @@ import { LoadingsummaryPage } from '../modal/loadingsummary/loadingsummary';
 import { VehicletypePage } from '../modal/vehicletype/vehicletype';
 import { LicensePage } from '../modal/license/license';
 import { DriverPage } from '../modal/driver/driver';
-import { SaleorderPage } from '../modal/saleorder/saleorder';
+// import { SaleorderPage } from '../modal/saleorder/saleorder';
+import { SaleorderPagePack } from '../modal/saleorder-pack/saleorder-pack';
 
 @Component({
-  selector: 'page-loadtotruck',
-  templateUrl: 'loadtotruck.html'
+  selector: 'page-loadtotruck-pack',
+  templateUrl: 'loadtotruckpackct.html'
 })
-export class LoadtotruckPage {
+export class LoadtotruckPackCartonPage {
   @ViewChild('focusInputT') InputT;
   @ViewChild('focusInputVType') InputVType;
   @ViewChild('focusInputLic') InputLic;
   @ViewChild('focusInputDriver') InputDriver;
   @ViewChild('focusInputSo') InputSo;
   @ViewChild('focusInputPackNo') InputPackNo;
+  @ViewChild('focusInputCartonNo') InputCartonNo;
   @ViewChild(Content) content: Content;
 
 
@@ -29,6 +31,7 @@ export class LoadtotruckPage {
   oUsername:any;
   Check:any = "Header";
   loader:any;
+  oTypeChk:any = "PackNo";
   isenabled:boolean = false;
 
   //Header
@@ -49,12 +52,14 @@ export class LoadtotruckPage {
   oCustomer:string = "";
   oCustomer_Name:string = "";
   oPackingNo:string = "";
+  oCartonNo:string = "";
   oDeliveryNo:string = "";
   oLineUpd:string = "";
   data_del_detail:any;
   data_save_detail:any;
   data_details:any;
   data_upd_detail_chk:any;
+  data_chk_pack_carton:any;
   //ItemList
   data_itemList:any;
   oItemNo:string = "";
@@ -240,7 +245,7 @@ export class LoadtotruckPage {
 //END Header---------------------------------------------------------------------------------------------------------------------------------------------
 //Start Details---------------------------------------------------------------------------------------------------------------------------------------------
 GetLoadingSalesOrderCustomerInfo(oLoadingSummaryNo, oClient){
-let profileModal = this.modalCtrl.create(SaleorderPage, { oClient: oClient });
+let profileModal = this.modalCtrl.create(SaleorderPagePack, { oClient: oClient });
   profileModal.present();
   profileModal.onDidDismiss(data =>{
     console.log(data);
@@ -317,36 +322,40 @@ doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient){
 }
 doReturn(packing_no, customer, customer_name, sales_order, delivery){
     console.log("doReturn",packing_no, customer, customer_name, sales_order, delivery);
-  this.oPackingNo = packing_no;
+  //this.oPackingNo = packing_no;
   this.oCustomer = customer;
   this.oCustomer_Name = customer_name;
   this.oSalesOrder = sales_order;
   this.oDeliveryNo = delivery;
 }
-doReturn_Detail_select(item_barcode,row_hh){
+doReturn_Detail_select(item_barcode,row_hh,packing_no,carton_no){
     console.log("doReturn_Detail_select",item_barcode,row_hh);
 
     this.oItemChk = item_barcode;
     this.oLineChk = row_hh;
-  // this.oPackingNo = packing_no;
+
+   this.oPackingNo = packing_no;
+   this.oCartonNo = carton_no
   // this.oCustomer = customer;
   // this.oCustomer_Name = customer_name;
   // this.oSalesOrder = sales_order;
   // this.oDeliveryNo = delivery;
 }
-doReturn_Detail(load_summary,item_no,sales_order, delivery,customer,row_id){
-  console.log("doReturn_Detail" , load_summary,item_no,sales_order, delivery,customer,row_id);
-  this.oLoadingSummaryNo = load_summary;
+doReturn_Detail(load_summary,item_no,sales_order, delivery,customer,row_id,packing_no,carton_no){
+  console.log("doReturn_Detail" , load_summary,item_no,sales_order, delivery,customer,row_id,packing_no,carton_no);
+  //this.oLoadingSummaryNo = load_summary;
   this.oItemNo = item_no;
   this.oSalesOrder = sales_order;
   this.oDeliveryNo = delivery;
   this.oCustomer = customer;
   this.oLineUpd = row_id;
+  this.oPackingNo = packing_no;
+  this.oCartonNo = carton_no;
 
-  this.doUpdatedingSummaryDetail_Check_Detail(this.oLoadingSummaryNo, this.oClient, this.oItemNo, this.oCustomer, this.oSalesOrder, this.oDeliveryNo,this.oLineUpd);
+  this.doUpdatedingSummaryDetail_Check_Detail(this.oLoadingSummaryNo, this.oClient, this.oItemNo, this.oCustomer, this.oSalesOrder, this.oDeliveryNo,this.oLineUpd,this.oPackingNo,this.oCartonNo);
 
 }
-doUpdatedingSummaryDetail_Check_Detail(oLoadingSummaryNo, oClient, oItemNo, oCustomer, oSalesOrder, oDeliveryNo, oLineUpd){
+doUpdatedingSummaryDetail_Check_Detail(oLoadingSummaryNo, oClient, oItemNo, oCustomer, oSalesOrder, oDeliveryNo, oLineUpd,oPackingNo,oCartonNo){
   if(oLoadingSummaryNo == undefined || oLoadingSummaryNo == ""){
     this.presentToast('โปรดระบุ Loading Summary No', false, 'bottom');
   }else if(oClient == undefined || oClient == ""){
@@ -361,13 +370,19 @@ doUpdatedingSummaryDetail_Check_Detail(oLoadingSummaryNo, oClient, oItemNo, oCus
     this.presentToast('โปรดเลือก ✔ รหัสสินค้าทีต้องการ ', false, 'bottom');
   }else if(oLineUpd == undefined || oLineUpd == ""){
     this.presentToast('โปรดเลือก ✔ รหัสสินค้าทีต้องการ ', false, 'bottom');
+  }else if(oPackingNo == undefined || oPackingNo == ""){
+    this.presentToast('โปรดระบุ รหัส Pack No ที่ต้องงการ ', false, 'bottom');
+  }else if(oCartonNo == undefined || oCartonNo == ""){
+    this.presentToast('โปรดระบุ รหัส Carton No ที่ต้องงการ', false, 'bottom');
   }else{
-    this.service.Update_Loading_Summary_Detail_Check(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oItemNo, this.oUsername , oDeliveryNo,oLineUpd).then((res)=>{
+    this.service.Update_Loading_Summary_Detail_Check_pack_carton(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oItemNo, this.oUsername , oDeliveryNo,oLineUpd,oPackingNo,oCartonNo).then((res)=>{
       this.data_upd_detail_chk = res;
-      console.log("this.service.Update_Loading_Summary_Detail_Check",this.data_upd_detail_chk);
+      console.log("this.service.Update_Loading_Summary_Detail_Check_pack_carton",this.data_upd_detail_chk);
       //this.doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient);
-      this.doGetItemList(oLoadingSummaryNo, oSalesOrder);
+      //this.doGetItemList(oClient,oSalesOrder,this.oPackingNo,this.oCartonNo);
+        this.doGetItemList(oClient,oSalesOrder,this.oPackingNo,"");
       this.oPackingNo = "";
+      this.oCartonNo = "";
       // this.doClearDetails();
       setTimeout(()=>{
           //this.InputPackNo.setFocus();
@@ -403,14 +418,15 @@ doUpdatedingSummaryDetail_Check_Detail(oLoadingSummaryNo, oClient, oItemNo, oCus
     }
   }
   doClearDetails(){
-    this.oSalesOrder = "";
-    this.oCustomer = "";
-    this.oCustomer_Name = "";
+  //  this.oSalesOrder = "";
+    //this.oCustomer = "";
+    //this.oCustomer_Name = "";
     this.oPackingNo = "";
-    this.oDeliveryNo = "";
+    this.oCartonNo = "";
+    //this.oDeliveryNo = "";
 
     setTimeout(()=>{
-        this.InputSo.setFocus();
+        this.InputPackNo.setFocus();
     },100);
   }
   doConfirmLoadingSummaryDetail(oLoadingSummaryNo){
@@ -428,14 +444,44 @@ doUpdatedingSummaryDetail_Check_Detail(oLoadingSummaryNo, oClient, oItemNo, oCus
       })
     }
   }
-  doGetItemList(oLoadingSummaryNo,oSalesOrder){
-    this.service.Get_Loading_Summary_Detail_Item_List(oLoadingSummaryNo, oSalesOrder).then((res)=>{
+  doGetItemList(oClient,oSalesOrder,oPackingNo,oCartonNo){
+    this.service.Get_Loading_Summary_Detail_Item_List_pack_carton(oClient,oSalesOrder,oPackingNo,oCartonNo).then((res)=>{
       this.data_itemList = res;
       console.log(this.data_itemList);
       if(this.data_itemList.length <= 0){
         this.Alert('Error', 'ไม่พบข้อมูล')
       }else{
 
+      }
+    })
+  }
+  doChkScanPackCaton(oClient,oSalesOrder,oPackingNo,oCartonNo){
+    this.service.rf_chk_pack_carton_scan(oClient,oSalesOrder,oPackingNo,oCartonNo,this.oTypeChk).then((res)=>{
+      this.data_chk_pack_carton = res;
+      console.log(this.data_chk_pack_carton);
+      if(this.data_chk_pack_carton["0"].sqlstatus == "0"){
+
+         this.InputCartonNo.setFocus();
+
+
+      }else{
+        this.Alert('Error', this.data_chk_pack_carton["0"].sqlmsg);
+           this.InputPackNo.setFocus();
+      }
+    })
+  }
+  doChkScanPackCaton_2(oClient,oSalesOrder,oPackingNo,oCartonNo){
+    this.service.rf_chk_pack_carton_scan(oClient,oSalesOrder,oPackingNo,oCartonNo,"").then((res)=>{
+      this.data_chk_pack_carton = res;
+      console.log(this.data_chk_pack_carton);
+      if(this.data_chk_pack_carton["0"].sqlstatus == "0"){
+
+         this.InputCartonNo.setFocus();
+
+
+      }else{
+        this.Alert('Error', this.data_chk_pack_carton["0"].sqlmsg);
+           this.InputPackNo.setFocus();
       }
     })
   }

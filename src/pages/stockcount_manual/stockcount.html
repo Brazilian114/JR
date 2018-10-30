@@ -193,8 +193,7 @@
             <ion-item>
               <ion-label stacked style="margin: 0px 0px 0px 0;">UOM</ion-label>
               <ion-select [(ngModel)]="oUOM" interface="popover">
-                <!-- <ion-option *ngFor="let uom of listUOM" value="{{uom.item_packing}}" disabled>{{uom.item_packing}}</ion-option> -->
-                <ion-option *ngFor="let uom of listUOM" value="{{uom.item_packing}}" >{{uom.item_packing}}</ion-option>
+                <ion-option *ngFor="let uom of listUOM" value="{{uom.item_packing}}" disabled>{{uom.item_packing}}</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>

@@ -187,7 +187,8 @@
           <ion-col>
             <ion-item>
               <ion-label stacked>UOM</ion-label>
-              <ion-select [(ngModel)]="listUOM" interface="popover" disabled>
+              <!-- <ion-select [(ngModel)]="listUOM" interface="popover" disabled> -->
+                <ion-select [(ngModel)]="listUOM" interface="popover" >
                 <ion-option *ngFor = "let uom of data_uom" value="{{uom.item_packing}}">{{uom.item_packing}}</ion-option>
               </ion-select>
             </ion-item>
@@ -219,20 +220,20 @@
                 </ion-select>
               </ion-item>
             </ion-col>
-            <ion-col col-auto>
+            <ion-col col-2>
               <button ion-button block style="margin-top: 20px" (click)="doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode, listUOM, oQty, listGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass)">Add</button>
             </ion-col>
-            <ion-col col-auto>
+            <ion-col col-2>
               <button ion-button block style="margin-top: 20px" (click)="doDelete(oClient, oReceipt, oPallet)">Delete</button>
             </ion-col>
-            <ion-col col-auto>
+            <ion-col col-2>
               <button ion-button block style="margin-top: 20px" (click)="doClearDetail()">Clear</button>
             </ion-col>
         </ion-row>
       </ion-grid>
     <ion-grid>
         <ion-scroll scrollX="true" scrollY="true">
-          <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty,details.uom,details.item_barcode,details.grade,details.remark01,details.location)">
+          <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty,details.uom,details.item_barcode,details.grade,details.remark01,details.location,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class)">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #

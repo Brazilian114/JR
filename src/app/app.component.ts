@@ -34,7 +34,7 @@ export class WMSHandheld {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'DC Operation', component: OperationPage },
-      { title: 'Branch Operation', component: OperationBranchPage },
+      //{ title: 'Branch Operation', component: OperationBranchPage },
       { title: 'Logout', component: null }
     ];
 

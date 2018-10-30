@@ -19,7 +19,7 @@ export class PickbytaskTransferPage {
     @ViewChild('focusInputLocation_Confirm') myInputLocation_Confirm;
     @ViewChild('focusInputPallet_Confirm') myInputPallet_Confirm;
     @ViewChild(Content) content: Content;
-    oClient:string = "001";
+    oClient:string = "JRFB2550";
     oWo:string;
     oStatus:string;
     oItem:string;

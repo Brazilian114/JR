@@ -19,7 +19,7 @@ page-loadtotruck {
     padding-bottom: 0px;
   }
   ion-scroll {
-    white-space: nowrap;
+    //white-space: nowrap;
     height: 100px;
     // width: 100px;
   }
@@ -50,4 +50,15 @@ page-loadtotruck {
   .button-md {
       padding: 0 0.7em;
   }
+
+.odd{
+  // color: black;
+  background-color: #99ff99;
+}
+.even{
+  // color: green;
+  background-color: #ffffcc;
+}
+
+
 }

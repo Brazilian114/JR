@@ -19,7 +19,7 @@ export class PickbytaskPage {
     @ViewChild('focusInputPalletTo') myInputPalletTo;
     @ViewChild('focusInputPalletConfirm') myInputPalletConfirm;
     @ViewChild(Content) content: Content;
-    oClient:any = "001";
+    oClient:any = "JRFB2550";
     oWo:any;
     oStatus:any;
     oItem:any;
@@ -28,6 +28,7 @@ export class PickbytaskPage {
     oUOM:any;
     oQty:any;
     oQtyNew:any;
+    oQtyPackUOM:any;
     oLocation:any;
     oLocation_confirm:any;
     oPalletFrom:any;
@@ -81,7 +82,7 @@ export class PickbytaskPage {
     let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oUsername: this.oUsername });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
-        console.log(data);
+        console.log("data",data);
         if(data != undefined){
           this.oWo = data.wo_no;
           this.oSup = data.customer_name;
@@ -108,6 +109,7 @@ export class PickbytaskPage {
         this.oDate = data.delivery_date;
         this.oTaskNo = data.task_no;
         this.oActivity = data.activity;
+        this.oQtyPackUOM = data.QTY_Dec;
 
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
@@ -135,7 +137,7 @@ export class PickbytaskPage {
   doGetDetailWorkOrder(oWo, oUsername){
     this.service.get_detail_workorder(oWo).then((res)=>{
       this.data_item = res;
-      console.log(this.data_item);
+      console.log("this.data_item",this.data_item);
         if(this.data_item.length <= 0){
           let alert = this.alertCtrl.create({
             title: 'Success',
@@ -160,6 +162,7 @@ export class PickbytaskPage {
         this.oDate = this.data_item["0"].delivery_date;
         this.oPalletFrom = this.data_item["0"].pallet_from;
         this.oStatus = this.data_item["0"].status;
+        this.oQtyPackUOM = this.data_item["0"].QTY_Dec;
 
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();

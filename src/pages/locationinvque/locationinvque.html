@@ -30,16 +30,16 @@
   </ion-grid>
   <ion-scroll scrollX="true" scrollY="true">
       <ion-grid>
-        <ion-row style="width: 1200px;" *ngFor="let listPallet of data_listPallet; let i = index">
-          <ion-col class="border-col" col-2>
-            <ion-row class="border-row" *ngIf = "i == 0">
+        <ion-row style="width: 1200px;" *ngFor="let listPallet of data_listPallet; let i = index" >
+          <ion-col class="border-col" col-1>
+            <ion-row class="border-row" *ngIf = "i == 0" >
               Item Code
             </ion-row>
             <ion-row>
               {{listPallet.item_no}}
             </ion-row>
           </ion-col>
-          <ion-col class="border-col" col-4>
+          <ion-col class="border-col" col-3>
             <ion-row class="border-row" *ngIf = "i == 0">
               Description
             </ion-row>
@@ -104,14 +104,14 @@
               {{listPallet.prod_date}}
             </ion-row>
           </ion-col> -->
-          <!-- <ion-col class="border-col">
+          <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
               Expiry Date
             </ion-row>
             <ion-row>
               {{listPallet.expiry_date}}
             </ion-row>
-          </ion-col> -->
+          </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
               Grade

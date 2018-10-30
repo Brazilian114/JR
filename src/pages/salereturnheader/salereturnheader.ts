@@ -13,7 +13,7 @@ import { Service } from '../../services/service';
 export class SaleReturnHeaderPage {
   data_Branch_list:any;
   data_Create_branch:any;
-  oClient:any = "001";
+  oClient:any = "JRFB2550";
   oUsername:any;
   oBranch:any;
   oBranchName:any;

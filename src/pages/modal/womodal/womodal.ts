@@ -27,7 +27,10 @@ export class WomodalPage {
     this.frag = navParams.get('frag');
     console.log(this.frag);
     console.log(this.oClient);
+    console.log(this.oWo);
+    console.log(this.oUsername);
     if(this.frag != 1 && this.frag != 2 && this.frag != 3){
+      console.log("if");
         this.doGetWo(this.oClient);
     }else if(this.frag == 1){
       if(this.oWo == undefined){
@@ -40,15 +43,18 @@ export class WomodalPage {
       }
     }else if(this.frag == 3){
       if(this.oWo == undefined){
+        console.log("oWo undefined")
         this.oWo = "";
         this.doGetWoSum(this.oClient);
 
       }else{
+        console.log("oWo if undefined")
         this.oWo = "";
         this.doGetWo(this.oClient);
       }
     }
     else{
+      console.log("else");
       this.doGetWOPickbyOrder(this.oClient, this.oUsername);
     }
   }
@@ -111,9 +117,9 @@ export class WomodalPage {
  doGetWo(oClient){
 
    this.presentLoading();
-    this.service.get_wo(oClient, "", "").then((res)=>{
+    this.service.get_wo(oClient, "", this.oUsername).then((res)=>{
       this.data_wo = res;
-      console.log(this.data_wo);
+      console.log("this.data.wo",this.data_wo);
       this.finishLoding();
       this.initializeItems();
     })
@@ -121,7 +127,8 @@ export class WomodalPage {
 
   doGetWoSum(oClient){
     this.presentLoading();
-    this.service.get_wo_sum(oClient, "", "").then((res)=>{
+      console.log('oClient = ',oClient,'this.oUsername = ',this.oUsername);
+    this.service.get_wo_sum(oClient, "", this.oUsername).then((res)=>{
       this.data_pick_sum = res;
       console.log(this.data_pick_sum);
       this.finishLoding();

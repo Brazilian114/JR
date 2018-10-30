@@ -50,7 +50,7 @@ export class ReceiptCheckinReturnPage {
   data_grade:any;
   data_productOther:any;
 
-  oClient:any = "001";
+  oClient:any = "JRFB2550";
   oReceipt:any;
   oDocref:any;
   oCustomer_Header:any;
@@ -178,6 +178,7 @@ export class ReceiptCheckinReturnPage {
   }
   doGetReceipt(oClient, listType ,oReceipt, listBook, listWhses){
     this.storage.set('_oReceipt', oReceipt);
+    console.log(oClient, "listType : ",listType,"oReceipt :" ,oReceipt, listBook, listWhses);
 
     if(listType == undefined){
         this.presentToast('โปรดระบุ Type', false, 'bottom');
@@ -316,8 +317,10 @@ export class ReceiptCheckinReturnPage {
             this.oName = this.data_barcodeDetail["0"].description;
             this.oItem = this.data_barcodeDetail["0"].item_no;
             this.storage.set('_oItem', this.oItem);
+            console.log("this.oItem 320 => ",this.oItem);
             this.doGetUOM(oClient,this.oItem);
-            this.listUOM = this.data_barcodeDetail["0"].item_packing;
+            // this.listUOM = this.data_barcodeDetail["0"].item_packing;
+
             this.doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode ,this.listUOM, this.oQty, this.listGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass);
             this.doGetProductOrther(oClient, this.oItem);
             console.log("Testtt",oClient, this.oItem);
@@ -339,8 +342,10 @@ export class ReceiptCheckinReturnPage {
             this.oName = this.data_barcodeDetail["0"].description;
             this.oItem = this.data_barcodeDetail["0"].item_no;
             this.storage.set('_oItem', this.oItem);
-                  this.doGetUOM(oClient,this.oItem);
-            this.listUOM = this.data_barcodeDetail["0"].item_packing;
+
+            console.log("this.oItem 346 => ",this.oItem);
+            this.doGetUOM(oClient,this.oItem);
+            // his.listUOM = this.data_barcodeDetail["0"].item_packing;
             this.doGetProductOrther(oClient, this.oItem);
             console.log("Testtt",oClient, this.oItem);
               setTimeout(()=>{
@@ -421,7 +426,7 @@ export class ReceiptCheckinReturnPage {
     // this.oExpiry = "";
     // this.oMfg = "";
 
-    console.log(oBarcode);
+    console.log("oBarcode 429 = > ",oBarcode);
     if(this.isenabledLot == true && oLot == ""){
         this.presentToast('Please specify Lot No.', false, 'bottom');
     }else if(this.isenabledBatch == true && oBatch == ""){
@@ -444,7 +449,7 @@ export class ReceiptCheckinReturnPage {
     let date = String(oDate).substr(0,10)
     this.storage.get('_oItem').then((res)=>{
       let SesItem = res;
-
+      console.log("SesItem 451 = > ",SesItem);
       if(oLoc == undefined || oLoc == ""){
         this.presentToast('โปรดระบุเลขที่ Loc', false, 'bottom');
       }else if(oPallet == undefined || oPallet == ""){
@@ -458,7 +463,8 @@ export class ReceiptCheckinReturnPage {
               this.presentToast('โปรดระบุ Barcode', false, 'bottom');
             }else{
               console.log('type:' +oQty)
-              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason,oExpiry,oMfg).then((res)=>{
+              console.log('type:' +SesItem)
+              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, SesItem, oReason,oExpiry,oMfg).then((res)=>{
                 this.data_r_detail = res;
                 console.log(this.data_r_detail);
                 if(this.data_r_detail.sqlstatus != "0"){
@@ -486,7 +492,7 @@ export class ReceiptCheckinReturnPage {
             }
           }else{
             console.log('type1:' +oQty)
-            this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason,oExpiry,oMfg).then((res)=>{
+            this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, SesItem, oReason,oExpiry,oMfg).then((res)=>{
               this.data_r_detail = res;
               console.log(this.data_r_detail);
               if(this.data_r_detail.sqlstatus != "0"){
@@ -521,7 +527,7 @@ export class ReceiptCheckinReturnPage {
             if(oBarcode == "" || oBarcode == " " || oBarcode == undefined){
               this.presentToast('โปรดระบุ Barcode', false, 'bottom');
             }else{
-              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, oBarcode, oReason,oExpiry,oMfg).then((res)=>{
+              this.service.update_receipt_detail_udf(oClient, oReceipt, date, this.oLine, oPallet, SesItem, oUOM, oQty, oGrade, oLoc, this.oBatch, this.oLot, this.oUsername, SesItem, oReason,oExpiry,oMfg).then((res)=>{
                 this.data_r_detail = res;
                 console.log(this.data_r_detail);
                 if(this.data_r_detail.sqlstatus != "0"){
@@ -699,10 +705,12 @@ export class ReceiptCheckinReturnPage {
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,remark01,location){
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,remark01,location,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class){
     console.log(line_no,item_no,description,qty,uom,item_barcode,grade,remark01,location);
     this.oBarcode = "1";
     setTimeout(()=>{
+      let dateExp = String(expiry_date).substr(0,10)
+      let datePro = String(prod_date).substr(0,10)
       this.oBarcode = item_barcode;
       this.oLine = line_no;
       this.oQty = qty;
@@ -710,6 +718,13 @@ export class ReceiptCheckinReturnPage {
       this.oReason = remark01;
       this.storage.set('_oLine', this.oLine);
       this.oLoc = location;
+      this.oLot = lot_no;
+      this.oBatch = batch_no;
+      this.oExpiry = dateExp;
+      this.oMfg = datePro;
+      this.oSize = item_size;
+      this.oColor = item_color;
+      this.oClass = item_class;
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
         this.data_barcodeDetail = res;

@@ -24,7 +24,7 @@ export class PickbyorderPage {
   @ViewChild(Content) content: Content;
 
 
-  oClient:any = "001";
+  oClient:any = "JRFB2550";
   oUsername:any;
   Check:any = "Header";
   loader:any;

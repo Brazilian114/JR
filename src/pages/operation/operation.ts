@@ -18,7 +18,8 @@ import { PickbyorderPage } from '../pickbyorder/pickbyorder';
 import { ReplenishmentPage } from '../replenishment/replenishment';
 import { ReceiptCheckinReturnPage } from '../receiptcheckinreturn/receiptcheckinreturn';
 import { LoadtotruckPage } from '../loadtotruck/loadtotruck';
-
+import { CheckinotherPage } from '../checkinother/checkinother';
+import { LoadtotruckPackCartonPage } from '../loadtotruckpackct/loadtotruckpackct';
 import { Network } from '@ionic-native/network';
 
 @Component({
@@ -33,6 +34,15 @@ export class OperationPage {
   doCheckIn(){
     if(this.network.type !== 'none'){
       this.navCtrl.push(CheckinPage);
+    }else if(this.network.type === 'none'){
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }else{
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }
+  }
+  doCheckInOther(){
+    if(this.network.type !== 'none'){
+      this.navCtrl.push(CheckinotherPage);
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -159,6 +169,15 @@ export class OperationPage {
   doLoadToTruck(){
     if(this.network.type !== 'none'){
       this.navCtrl.push(LoadtotruckPage);
+    }else if(this.network.type === 'none'){
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }else{
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }
+  }
+  doLoadToTruckPack(){
+    if(this.network.type !== 'none'){
+      this.navCtrl.push(LoadtotruckPackCartonPage);
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{

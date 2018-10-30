@@ -1,14 +1,13 @@
-page-login {
-  ion-content {
-    background-image: url('../assets/imgs/login-img.jpg');
-    background-repeat: no-repeat;
-    background-size:cover;
-    margin-top: 30px;
-  }
+page-stockcount {
+  // ion-content {
+  //   background-image: url('../assets/imgs/login-BG.png');
+  //   background-repeat: no-repeat;
+  //   background-size:cover;
+  // }
   ion-input{
     background-color: #FFFFFF;
     border: 1px solid #cecece;
-    border-radius: 15px 15px 15px 15px;
+    // border-radius: 25px 25px 25px 25px;
   }
   ion-grid{
     padding-left: 0px;
@@ -18,7 +17,7 @@ page-login {
   }
   ion-scroll {
     white-space: nowrap;
-    height: 120px;
+    height: 150px;
     // width: 100px;
   }
   .border-col{
@@ -41,10 +40,13 @@ page-login {
     padding-top: 0px;
     padding-bottom: 0px;
   }
-  .label-md {
-    margin: 0px 0px 0px 0;
-  }
+  // .label-md {
+  //   margin: 0px 0px 0px 0;
+  // }
   .button-md {
       padding: 0 0.7em;
+  }
+  ion-checkbox{
+    margin-top: 30px;
   }
 }
