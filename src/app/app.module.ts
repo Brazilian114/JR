@@ -141,7 +141,7 @@ import { LoadtotruckPackCartonPage } from '../pages/loadtotruckpackct/loadtotruc
       {
         platforms : {
           android : {
-            backButtonText: 'Back',
+            backButtonText: 'ย้อนกลับ',
             backButtonIcon: 'ios-arrow-back',
             scrollPadding: false,
             modalEnter: 'modal-slide-in',

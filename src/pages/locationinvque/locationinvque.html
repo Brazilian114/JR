@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
         <ion-col col-auto>
-          <button ion-button (click)="doGetWH()">W/H</button>
+          <button ion-button (click)="doGetWH()">คลัง</button>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oWH" #focusInputWH></ion-input>
@@ -21,7 +21,7 @@
   <ion-grid>
     <ion-row>
         <ion-col col-auto>
-          <button ion-button (click)="doGetLocationAll(oWH)">Location</button>
+          <button ion-button (click)="doGetLocationAll(oWH)">โลเคชั่น</button>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oLoc" #focusInputLoc (keyup.enter)="doGetListPalletInLocation(oWH, oLoc)"></ion-input>
@@ -33,7 +33,7 @@
         <ion-row style="width: 1200px;" *ngFor="let listPallet of data_listPallet; let i = index" >
           <ion-col class="border-col" col-1>
             <ion-row class="border-row" *ngIf = "i == 0" >
-              Item Code
+              รหัส
             </ion-row>
             <ion-row>
               {{listPallet.item_no}}
@@ -41,7 +41,7 @@
           </ion-col>
           <ion-col class="border-col" col-3>
             <ion-row class="border-row" *ngIf = "i == 0">
-              Description
+              รายละเอียด
             </ion-row>
             <ion-row>
               {{listPallet.description}}
@@ -49,7 +49,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Pallet No
+              พาเลท
             </ion-row>
             <ion-row>
               {{listPallet.pallet}}
@@ -57,7 +57,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Qty
+              จำนวน
             </ion-row>
             <ion-row>
               {{listPallet.qty_avail}}
@@ -65,7 +65,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              UOM
+              หน่วย
             </ion-row>
             <ion-row>
               {{listPallet.uom}}
@@ -73,7 +73,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Batch No
+              ชุด
             </ion-row>
             <ion-row>
               {{listPallet.batch_no}}
@@ -82,7 +82,7 @@
 
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Lot No
+              ล็อต
             </ion-row>
             <ion-row>
               {{listPallet.lot_no}}
@@ -106,7 +106,7 @@
           </ion-col> -->
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Expiry Date
+              วันหมดอายุ
             </ion-row>
             <ion-row>
               {{listPallet.expiry_date}}
@@ -114,7 +114,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Grade
+              เกรด
             </ion-row>
             <ion-row>
               {{listPallet.grade}}
@@ -135,7 +135,7 @@
   <ion-grid>
     <ion-row>
         <ion-col>
-          <button ion-button block (click)="doClear()">Clear</button>
+          <button ion-button block (click)="doClear()">ล้าง</button>
         </ion-col>
     </ion-row>
   </ion-grid>

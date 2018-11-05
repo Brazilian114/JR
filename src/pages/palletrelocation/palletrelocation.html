@@ -11,13 +11,13 @@
   <ion-grid>
     <ion-row>
         <ion-col col-3>
-          <button ion-button block>Client</button>
+          <button ion-button block>บริษัท</button>
         </ion-col>
         <ion-col col-2>
           <ion-input [(ngModel)]="oClient"></ion-input>
         </ion-col>
         <ion-col col-2>
-          <button ion-button block (click)="doGetItemNo(oClient)">Item</button>
+          <button ion-button block (click)="doGetItemNo(oClient)">สินค้า</button>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oItem"></ion-input>
@@ -27,7 +27,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-2>
-        <ion-label>Des</ion-label>
+        <ion-label>รายละเอียด</ion-label>
       </ion-col>
       <ion-col>
         <ion-input style="background-color: #FFFF99" [(ngModel)]="oDes"></ion-input>
@@ -36,7 +36,7 @@
   </ion-grid>
   <ion-grid>
       <ion-scroll scrollX="true" scrollY="true">
-        <ion-row style="width: 1500px;" *ngFor = "let items of data_item; let i = index">
+        <ion-row style="width: 900px;" *ngFor = "let items of data_item; let i = index">
           <ion-col class="border-col" col-auto>
             <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
               #
@@ -45,15 +45,15 @@
               {{i+1}}
             </ion-row>
           </ion-col>
-          <ion-col class="border-col" style="width:120px;">
+          <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
               รหัสสินค้า
             </ion-row>
-            <ion-row style="width:120px;">
+            <ion-row>
               {{items.item_no}}
             </ion-row>
           </ion-col>
-          <ion-col class="border-col" col-3>
+          <ion-col class="border-col" col-2>
             <ion-row class="border-row" *ngIf = "i == 0">
                 ชื่อสินค้า
             </ion-row>
@@ -63,7 +63,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row"  *ngIf = "i == 0">
-              Qty
+              จำนวน
             </ion-row>
             <ion-row >
               {{items.qty_avail}}
@@ -79,7 +79,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Grade
+              เกรด
             </ion-row>
             <ion-row>
               {{items.grade}}
@@ -87,7 +87,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row"  *ngIf = "i == 0">
-              Location
+              โลเคชั่น
             </ion-row>
             <ion-row >
               {{items.location}}
@@ -95,7 +95,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Warehouse
+              คลัง
             </ion-row>
             <ion-row>
               {{items.warehouse}}
@@ -103,7 +103,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Batch
+              ชุด
             </ion-row>
             <ion-row>
               {{items.batch_no}}
@@ -111,7 +111,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Lot
+              ล็อต
             </ion-row>
             <ion-row>
               {{items.lot_no}}
@@ -119,7 +119,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Prod.Date
+              วันผลิต
             </ion-row>
             <ion-row>
               {{items.prod_date}}
@@ -127,7 +127,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Exp.Date
+              วันหมดอายุ
             </ion-row>
             <ion-row>
               {{items.expiry_date}}
@@ -139,7 +139,7 @@
     <ion-grid>
       <ion-row>
         <ion-col col-2>
-          <ion-label>Pallet No</ion-label>
+          <ion-label>พาเลท</ion-label>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oPallet" #focusInputScanPallet (keyup.enter)="doGetListItemInPallet_ByPallet(oClient, oPallet)" (click)="doClick()"></ion-input>
@@ -147,13 +147,13 @@
       </ion-row>
       <ion-row>
         <ion-col col-2>
-          <ion-label>WH</ion-label>
+          <ion-label>คลัง</ion-label>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oWH" style="background-color: #FFFF99"></ion-input>
         </ion-col>
         <ion-col col-2>
-          <ion-label>Loc</ion-label>
+          <ion-label>โลเคชั่น</ion-label>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oLoc" style="background-color: #FFFF99"></ion-input>
@@ -161,13 +161,13 @@
       </ion-row>
       <ion-row>
         <ion-col col-2>
-          <ion-label>Lot</ion-label>
+          <ion-label>ล็อต</ion-label>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oLot" style="background-color: #FFFF99"></ion-input>
         </ion-col>
         <ion-col col-2>
-          <ion-label>Batch</ion-label>
+          <ion-label>ชุด</ion-label>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oBatch" style="background-color: #FFFF99"></ion-input>
@@ -175,7 +175,7 @@
       </ion-row>
     <ion-row>
       <ion-col col-2>
-        <ion-label>New Loc</ion-label>
+        <ion-label>โลเคชั่นใหม่</ion-label>
       </ion-col>
       <ion-col>
         <ion-input [(ngModel)]="oNLoc" #focusInputLocation_Confirm (click)="doClick()"></ion-input>
@@ -190,10 +190,10 @@
   <ion-grid>
     <ion-row>
         <ion-col>
-          <button ion-button block (click)="doClear()">Clear</button>
+          <button ion-button block (click)="doClear()">ล้าง</button>
         </ion-col>
         <ion-col>
-          <button ion-button block (click)="doMove(oPallet, oWH, oNLoc)">Move</button>
+          <button ion-button block (click)="doMove(oPallet, oWH, oNLoc)">ย้าย</button>
         </ion-col>
     </ion-row>
   </ion-grid>

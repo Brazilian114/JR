@@ -10,13 +10,13 @@
 <ion-grid>
   <ion-row>
       <ion-col style="text-align:center" class="col" col-auto>
-        <button ion-button>Client</button>
+        <button ion-button>บริษัท</button>
       </ion-col>
       <ion-col style="text-align:center" class="col" col-2>
           <ion-input [(ngModel)]="oClient" readonly></ion-input>
       </ion-col>
       <ion-col style="text-align:center" class="col" col-auto>
-        <button ion-button (click)="doGetWo(oClient)">WO#</button>
+        <button ion-button (click)="doGetWo(oClient)">ใบสั่งงาน</button>
       </ion-col>
       <ion-col style="text-align:center" class="col">
           <ion-input [(ngModel)]="oWo" #focusInputScanWo (keyup.enter)="onKeyup(oClient)" (click)="clickInput()"></ion-input>
@@ -84,7 +84,7 @@
 </ion-row>
     <ion-row>
       <ion-col class="col" col-3>
-        <ion-label>Pallet From</ion-label>
+        <ion-label>พาเลทต้นทาง</ion-label>
       </ion-col>
       <ion-col class="col">
         <ion-input [(ngModel)]="oPalletFrom" style="background-color: #FFFF99" readonly></ion-input>
@@ -98,7 +98,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="col" col-3>
-        <ion-label>Location</ion-label>
+        <ion-label>โลเคชั่น</ion-label>
       </ion-col>
       <ion-col class="col">
         <ion-input [(ngModel)]="oLocation" style="background-color: #FFFF99" readonly></ion-input>
@@ -112,7 +112,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="col" col-3>
-        <ion-label>Pallet Confirm</ion-label>
+        <ion-label>ยืนยันพาเลท</ion-label>
       </ion-col>
       <ion-col class="col">
         <ion-input [(ngModel)]="oPalletFromConfirm" #focusInputPalletConfirm (keyup.enter)="doCheckPrePick(oWo, oPalletFrom, oPalletFromConfirm, oTaskNo, oActivity, oUOM, oQty)" (click)="doClick()"></ion-input>
@@ -120,7 +120,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="col" col-3>
-        <ion-label>Location To</ion-label>
+        <ion-label>โล.ปลายทาง</ion-label>
       </ion-col>
       <ion-col class="col">
         <ion-input [(ngModel)]="oLocation_confirm" #focusInputLocation_Confirm (keyup.enter)="doLocation(oLocation, oLocation_confirm, oQty)" (click)="doClick()"></ion-input>
@@ -134,23 +134,23 @@
     </ion-row>
     <ion-row>
       <ion-col class="col" col-3>
-        <ion-label>Pallet To</ion-label>
+        <ion-label>พาเลทปลายทาง</ion-label>
       </ion-col>
       <ion-col class="col">
         <ion-input [(ngModel)]="oPalletTo" #focusInputPalletTo (click)="doClick()"></ion-input>
       </ion-col>
-      <ion-col class="col" col-auto>
-        <button ion-button block (click)="doGetNewPallet(oClient)">N</button>
+      <ion-col class="col" col-2>
+        <button ion-button block (click)="doGetNewPallet(oClient)">ต่อไป</button>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid>
     <ion-row>
       <ion-col class="col">
-        <button ion-button block (click)="doClear()">Clear</button>
+        <button ion-button block (click)="doClear()">ล้าง</button>
       </ion-col>
       <ion-col class="col">
-        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew)">Pick</button>
+        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew)">หยิบ</button>
       </ion-col>
     </ion-row>
   </ion-grid>

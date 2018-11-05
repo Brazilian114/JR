@@ -10,13 +10,13 @@
 <ion-content>
     <ion-grid>
       <ion-row>
-        <ion-col col-5>
-            <ion-label>Pallet No</ion-label>
+        <ion-col col-3>
+            <ion-label>เลขที่พาเลท</ion-label>
         </ion-col>
         <ion-col>
             <ion-input [(ngModel)]="oPallet" #focusInputScanCode (keyup.enter)="onKeyup(oPallet)" no-lines></ion-input>
         </ion-col>
-        <ion-col col-auto>
+        <ion-col col-2>
             <button ion-button block (click)="doGetPalletforPutaway(oPallet)">?</button>
         </ion-col>
       </ion-row>
@@ -85,16 +85,16 @@
         </ion-col>
       </ion-row> -->
       <ion-row>
-        <ion-col col-5>
-            <ion-label>Location Assign</ion-label>
+        <ion-col col-3>
+            <ion-label>กำหนดโลเคชั่น</ion-label>
         </ion-col>
         <ion-col>
             <ion-input type="text" [(ngModel)]="oLocation" style="background-color: #FFFF99" readonly></ion-input>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-5>
-            <ion-label>Location Confirm</ion-label>
+        <ion-col col-3>
+            <ion-label>ยืนยันโลเคชั่น</ion-label>
         </ion-col>
         <ion-col>
             <ion-input type="text" [(ngModel)]="oLocation_confirm" #focusInputLocation_Confirm (keyup.enter)="doConfirm(oLocation, oLocation_confirm, oPallet)"></ion-input>
@@ -104,10 +104,10 @@
 <br>
       <ion-row>
           <ion-col>
-            <button ion-button block (click)="doClear()">Clear</button>
+            <button ion-button block (click)="doClear()">ล้าง</button>
           </ion-col>
           <ion-col>
-            <button ion-button block (click)="doConfirm(oLocation, oLocation_confirm, oPallet)">Putaway</button>
+            <button ion-button block (click)="doConfirm(oLocation, oLocation_confirm, oPallet)">เอาของเข้า</button>
 
           </ion-col>
           <!-- <ion-col>

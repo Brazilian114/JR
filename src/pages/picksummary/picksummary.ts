@@ -179,7 +179,7 @@ export class PicksummaryPage {
         if(this.data_item.length <= 0){
           let alert = this.alertCtrl.create({
             title: 'Success',
-            subTitle: 'All Pick tasks for Work order '+oWo+' Completed. Work Order has been successfully Closed.',
+            subTitle: 'Work order '+oWo+' นี้ได้ทำการหยิบเสร็จเรียบร้อยแล้ว.',
             buttons: [ {
                 text: 'ตกลง',
                 handler: data => {
@@ -447,7 +447,7 @@ doCheckPallet(oPalletFr, oPalletTo){
       this.data_closePick = res;
       console.log(this.data_closePick);
       if(this.data_closePick.length < 0){
-        this.presentToast(this.data_closePick["0"].sqlmsg, false, 'bottom');
+        this.Alert("Warning",this.data_closePick["0"].sqlmsg);
       }
       else if(this.data_closePick["0"].sqlstatus == "0"){
         this.doGetDetailWorkOrder(oWo,this.oClient, this.oUsername);
