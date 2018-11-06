@@ -55,10 +55,10 @@ console.log(this.oWO);
   }
 
   doSelectItemSum( item_no,  description,  qty,  uom,  location_from, pallet_from, batch_no,
-  area_to, warehouse_to, location_to, status, wave_pick_no, area_from)
+  area_to, warehouse_to, location_to, status, wave_pick_no, area_from, qty_uom1, qty_uom2)
   {
     let data = { 'item_no' : item_no, 'description' : description, 'qty' : qty, 'uom' : uom, 'location_from' : location_from, 'pallet_from' :pallet_from, 'batch_no' : batch_no ,
-  'area_to' :area_to,'warehouse_to' : warehouse_to, 'location_to' :location_to, 'status' :status, 'wave_pick_no' :wave_pick_no,'area_from' : area_from}
+  'area_to' :area_to,'warehouse_to' : warehouse_to, 'location_to' :location_to, 'status' :status, 'wave_pick_no' :wave_pick_no,'area_from' : area_from,'qty_uom1' : qty_uom1,'qty_uom2' : qty_uom2}
   this.viewCtrl.dismiss(data);
   }
 

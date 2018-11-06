@@ -137,8 +137,8 @@ export class PicksummaryPage {
       // this.oSupId = this.data_wo["0"].customer;
       console.log(this.data_wo);
       this.oWo = this.data_wo.wave_pick_no;
+      this.doGetDetailWorkOrder(this.oWo,this.oClient, this.oUsername);
     })
-     this.doGetDetailWorkOrder(this.oWo,this.oClient, this.oUsername);
   }
 
 
@@ -158,12 +158,13 @@ export class PicksummaryPage {
         this.oExp = data.expiry_date;
         this.oProd = data.prod_date;
         this.oBacth = data.batch_no;
+        this.oQty_Group=data.qty_uom1+" | "+data.qty_uom2;
 
         setTimeout(()=>{
-            this.myInputPalletConfirm.setFocus();
+            this.myInputLocation_Confirm.setFocus();
         },0);
         setTimeout(()=>{
-            this.myInputPalletConfirm.setFocus();
+            this.myInputLocation_Confirm.setFocus();
         },500);
       }else{
 
@@ -189,10 +190,11 @@ export class PicksummaryPage {
           });
           alert.present();
       }else{
+        this.oQty_Group = "";
         this.oItem = this.data_item["0"].item_no;
 
         this.oDesItem = this.data_item["0"].description;
-        this.oQty_Group=this.data_item["0"].qty_uom1+" | "+this.data_item["0"].qty_uom2+" | "+this.data_item["0"].qty_uom3+" | "+this.data_item["0"].qty_uom4;
+        this.oQty_Group=this.data_item["0"].qty_uom1+" | "+this.data_item["0"].qty_uom2;
         this.oQty = this.data_item["0"].qty;
         this.oUOM = this.data_item["0"].uom;
         this.oColor = this.data_item["0"].item_color;
@@ -342,7 +344,7 @@ console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLoca
     })
   }
 
-doCheckPallet(oPalletFr, oPalletTo){
+doCheckPallet(oPalletFr, oPalletTo, oUOM){
   if(oPalletFr != oPalletTo)
   {
       //this.Alert('Error', 'โปรดกรอก Pallet ให้ตรงกัน')
@@ -357,6 +359,7 @@ doCheckPallet(oPalletFr, oPalletTo){
       },500);
       return;
   }else
+  this.oUomNew = oUOM;
   setTimeout(()=>{
       this.myInputBarcodeConfirm.setFocus();
   },0);
@@ -370,10 +373,10 @@ doCheckPallet(oPalletFr, oPalletTo){
 
 
 
-  doLocation(oLocation, oLocation_confirm, oQty, oUom){
+  doLocation(oLocation, oLocation_confirm, oQty){
     if(oLocation != oLocation_confirm){
       //this.Alert('Error', 'โปรดกรอก Location ให้ตรงกัน');
-      this.presentToast('ปรดกรอก Location ให้ตรงกัน', false, 'bottom');
+      this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
       setTimeout(()=>{
           this.myInputLocation_Confirm.setFocus();
       },0);
@@ -383,17 +386,6 @@ doCheckPallet(oPalletFr, oPalletTo){
       },500);
       return;
     }else{
-      // //this.oQtyNew = oQty;
-      // this.oUomNew = oUom;
-      // setTimeout(()=>{
-      //     this.myInputBarcodeConfirm.setFocus();
-      // },0);
-      // setTimeout(()=>{
-      //     this.myInputBarcodeConfirm.setFocus();
-      //     this.updateScroll();
-      // },200);
-      // //this.oQtyNew = oQty;
-      this.oUomNew = oUom;
       setTimeout(()=>{
           this.myInputPalletConfirm.setFocus();
       },0);
@@ -548,6 +540,9 @@ doCheckPallet(oPalletFr, oPalletTo){
     setTimeout(()=>{
       this.keyboard.show();
     },200)
+  }
+  setFilteredLocation_confirm(data) {
+     this.oLocation_confirm = data.toUpperCase();
   }
   Alert(title, subTitle){
     let alert = this.alertCtrl.create({

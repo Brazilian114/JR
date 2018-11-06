@@ -90,13 +90,13 @@
     </ion-row>
     <ion-row>
       <ion-col class="col" col-2 >
-        <ion-label>ชุดที่</ion-label>
+        <ion-label>Batch</ion-label>
       </ion-col>
       <ion-col class="col" >
         <ion-input [(ngModel)]="oBatch" style="background-color: #FFFF99" readonly></ion-input>
       </ion-col>
       <ion-col class="col" col-auto >
-        <ion-label>ล็อตที่</ion-label>
+        <ion-label>Lotที่</ion-label>
       </ion-col>
       <ion-col class="col" >
         <ion-input [(ngModel)]="oLot" style="background-color: #FFFF99" readonly></ion-input>
@@ -139,7 +139,7 @@
         <ion-label>ยืนยันโลเคชั่น </ion-label>
       </ion-col>
       <ion-col class="col">
-        <ion-input [(ngModel)]="oLocation_confirm" #focusInputLocation_Confirm (keyup.enter)="doLocation(oLocation, oLocation_confirm, oQty, oUOM)" (click)="doClick()"></ion-input>
+        <ion-input [(ngModel)]="oLocation_confirm" #focusInputLocation_Confirm (keyup.enter)="doLocation(oLocation, oLocation_confirm, oQty)" (ionChange)="setFilteredLocation_confirm(oLocation_confirm)" (click)="doClick()"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -147,7 +147,7 @@
         <ion-label>ยืนยันพาเลท</ion-label>
       </ion-col>
       <ion-col class="col">
-        <ion-input [(ngModel)]="oPalletFromConfirm" #focusInputPalletConfirm (keyup.enter)="doCheckPallet(oPalletFrom, oPalletFromConfirm)" (click)="doClick()"></ion-input>
+        <ion-input [(ngModel)]="oPalletFromConfirm" #focusInputPalletConfirm (keyup.enter)="doCheckPallet(oPalletFrom, oPalletFromConfirm, oUOM)" (click)="doClick()"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -163,13 +163,13 @@
         <ion-label>จำนวน</ion-label>
       </ion-col>
       <ion-col class="col">
-        <ion-input [(ngModel)]="oQtyNew" disabled #focusQtyNew (click)="doClick()"></ion-input>
+        <ion-input [(ngModel)]="oQtyNew" #focusQtyNew (click)="doClick()"></ion-input>
       </ion-col>
       <ion-col class="col" col-auto>
         <ion-label>หน่วย</ion-label>
       </ion-col>
       <ion-col class="col">
-        <ion-input [(ngModel)]="oUomNew" disabled (click)="doClick()"></ion-input>
+        <ion-input [(ngModel)]="oUomNew" disabled  style="background-color: #FFFF99" (click)="doClick()"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row hidden>
