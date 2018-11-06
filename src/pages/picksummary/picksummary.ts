@@ -205,7 +205,7 @@ export class PicksummaryPage {
         this.oProd = this.data_item["0"].prod_date;
         this.oBatch = this.data_item["0"].batch_no;
         this.oLot = this.data_item["0"].lot_no;
-
+        this.oLocation.toString().trim()
         setTimeout(()=>{
             this.myInputLocation_Confirm.setFocus();
         },0);
