@@ -135,9 +135,10 @@ export class PicksummaryPage {
       console.log("this.data_wo : ",this.data_wo)
       // this.oSup = this.data_wo["0"].customer_name;
       // this.oSupId = this.data_wo["0"].customer;
-      console.log(this.data_wo);
+      // console.log(this.data_wo);
       this.oWo = this.data_wo.wave_pick_no;
-      this.doGetDetailWorkOrder(this.oWo,this.oClient, this.oUsername);
+  
+      this.doGetDetailWorkOrder(oWo, oClient, this.oUsername);
     })
   }
 
