@@ -13,7 +13,7 @@
 <ion-content>
   <div *ngFor = "let item of items">
   <ion-card (click)="doSelectItemSum(item.item_no, item.description, item.qty, item.uom, item.location_from, item.pallet_from, item.batch_no
-  , item.area_to, item.warehouse_to, item.location_to, item.status, item.wave_pick_no, item.area_from, item.qty_uom1, item.qty_uom2)">
+  , item.area_to, item.warehouse_to, item.location_to, item.status, item.wave_pick_no, item.area_from, item.qty_uom1, item.qty_uom2, item.expiry_date, item.prod_date)">
       <ion-card-content >
         <ion-card-title>Item No: {{item.item_no}}</ion-card-title>
         <p>Description: {{item.description}}</p>

@@ -137,7 +137,7 @@ export class PicksummaryPage {
       // this.oSupId = this.data_wo["0"].customer;
       // console.log(this.data_wo);
       this.oWo = this.data_wo.wave_pick_no;
-  
+
       this.doGetDetailWorkOrder(oWo, oClient, this.oUsername);
     })
   }
@@ -375,6 +375,7 @@ doCheckPallet(oPalletFr, oPalletTo, oUOM){
 
 
   doLocation(oLocation, oLocation_confirm, oQty){
+    this.oLocation_confirm = oLocation_confirm.toString().trim();
     if(oLocation != oLocation_confirm){
       //this.Alert('Error', 'โปรดกรอก Location ให้ตรงกัน');
       this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
