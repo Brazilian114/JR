@@ -131,6 +131,14 @@
               {{item.status}}
             </ion-row>
           </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              วันหมดอายุ
+            </ion-row>
+            <ion-row>
+              {{item.expiry_date}}
+            </ion-row>
+          </ion-col>
         </ion-row>
       </ion-grid>
   </ion-scroll>

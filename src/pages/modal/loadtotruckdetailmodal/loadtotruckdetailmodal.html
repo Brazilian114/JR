@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Item List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button block disabled>บริษัท</button>
+      </ion-col>
+      <ion-col col-2>
+        <ion-input [(ngModel)]="oClient" readonly></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button block disabled>ใบขาย</button>
+      </ion-col>
+      <ion-col>
+        <!-- <ion-input [(ngModel)]="oWO" readonly></ion-input> -->
+        <ion-input [(ngModel)]="oSalesOrder" readonly></ion-input>
+      </ion-col>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button block>บรรทัด</button>
+        </ion-col>
+        <ion-col col-2>
+          <ion-input [(ngModel)]="oLineChk" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button block>สินค้า</button>
+        </ion-col>
+        <ion-col>
+          <ion-input [(ngModel)]="oItemChk" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-scroll scrollX="true" scrollY="true" style="height: 400px">
+      <ion-row style="width: 1200px;" *ngFor = "let details of data_itemList; let i = index" (click)="doReturn_Detail_select(details.item_barcode,details.row_hh)" [ngClass]="(details.chk_HH != '') ? 'odd' : 'even'">
+        <ion-col class="border-col" col-auto>
+          <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+            Chk
+          </ion-row>
+          <ion-row style="width:30px;" >
+            <!-- <ion-checkbox [(ngModel)]="item"></ion-checkbox> -->
+            <ion-checkbox color="danger" name="chk_item"  [checked]="details.chk_HH != ''" (click)="doReturn_Detail(details.load_summary,details.item_barcode,details.sales_order,details.delivery,details.customer,details.row_id)"></ion-checkbox>
+          </ion-row>
+        </ion-col>
+
+        <ion-col class="border-col" col-auto>
+          <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
+            #
+          </ion-row>
+          <ion-row style="width:20px;">
+            {{i+1}}
+          </ion-row>
+        </ion-col>
+        <!-- <ion-col class="border-col" col-auto>
+          <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+            Task
+          </ion-row>
+          <ion-row style="width:30px;">
+            {{details.task_no}}
+          </ion-row>
+        </ion-col> -->
+        <!-- <ion-col class="border-col" col-auto>
+          <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
+            Act
+          </ion-row>
+          <ion-row style="width:30px;">
+            {{details.activity}}
+          </ion-row>
+        </ion-col> -->
+        <!-- <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Pallet
+          </ion-row>
+          <ion-row style="width:30px;">
+            {{details.pallet_to}}
+          </ion-row>
+        </ion-col> -->
+        <ion-col class="border-col" col-auto>
+          <ion-row class="border-row" *ngIf = "i == 0" style="width:65px;">
+            รหัสสินค้า
+          </ion-row>
+          <ion-row style="width:65px;">
+            {{details.item_barcode}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col" col-3>
+          <ion-row class="border-row" *ngIf = "i == 0">
+              ชื่อสินค้า
+          </ion-row>
+          <ion-row >
+            {{details.description}}
+          </ion-row>
+        </ion-col>
+        <!-- <ion-col class="border-col" >
+          <ion-row class="border-row" *ngIf = "i == 0">
+            จำนวนย่อย
+          </ion-row>
+          <ion-row>
+            {{details.qty}}
+          </ion-row>
+        </ion-col> -->
+        <!-- <ion-col class="border-col" >
+          <ion-row class="border-row" *ngIf = "i == 0">
+            หน่วยย่อย
+          </ion-row>
+          <ion-row>
+            {{details.uom}}
+          </ion-row>
+        </ion-col> -->
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+            จำนวนหีบ
+          </ion-row>
+          <ion-row>
+            {{details.qty_pack}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+            หน่วยหีบ
+          </ion-row>
+          <ion-row>
+            {{details.packing_uom}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+            จำนวนเศษ
+          </ion-row>
+          <ion-row>
+            {{details.qty_mod}}
+          </ion-row>
+        </ion-col>
+        <!-- <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            อัตราแปลงหน่วย
+          </ion-row>
+          <ion-row>
+            {{details.convert_Qty}}
+          </ion-row>
+        </ion-col> -->
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+           Lot
+          </ion-row>
+          <ion-row>
+            {{details.lot_no}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+           Batch
+          </ion-row>
+          <ion-row>
+            {{details.batch_no}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+           วันหมดอายุ
+          </ion-row>
+          <ion-row>
+            {{details.expiry_date}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col" col-1>
+          <ion-row class="border-row" *ngIf = "i == 0">
+           วันผลิต
+          </ion-row>
+          <ion-row>
+            {{details.prod_date}}
+          </ion-row>
+        </ion-col>
+
+      </ion-row>
+    </ion-scroll>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <button ion-button clear (click)="dismiss()">
+    Close
+  </button>
+</ion-footer>

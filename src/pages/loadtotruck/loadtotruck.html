@@ -124,7 +124,7 @@
       </ion-grid>
       <ion-grid>
         <ion-scroll scrollX="true" scrollY="true" style="height: 300px">
-          <ion-row style="width: 800px;" *ngFor = "let details of data_details; let i = index" (click)="doReturn(details.packing_no,details.customer,details.customer_name,details.sales_order,details.delivery)" [ngClass]="((details.item_count) <= (details.chk_count)) ? 'odd' : 'even'" >
+          <ion-row style="width: 800px;" *ngFor = "let details of data_details; let i = index" (click)="doReturn(details.packing_no,details.customer,details.customer_name,details.sales_order,details.delivery,oLoadingSummaryNo)" [ngClass]="((details.item_count) <= (details.chk_count)) ? 'odd' : 'even'" >
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #
@@ -406,8 +406,8 @@
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient)">
           Details
         </ion-segment-button>
-        <ion-segment-button value="Item" [disabled]="!isenabled" (click)="doGetItemList(oLoadingSummaryNo, oSalesOrder)">
-          Item List
+        <ion-segment-button value="Item" [disabled]="!isenabled" (click)="doGetSummaryItemList(oLoadingSummaryNo,oSalesOrder)">
+          Summary List
         </ion-segment-button>
       </ion-segment>
   </ion-footer>

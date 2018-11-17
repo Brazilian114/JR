@@ -2225,7 +2225,27 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
       );
   }
 
-
+  Get_Loading_Summary_Summary_Item_List(oLoadingSummaryNo) {
+    let parameters='oLoadingSummaryNo='+oLoadingSummaryNo;
+    return this.http.get(this.hostWebService +"/Get_Loading_Summary_Summary_Item_List?"+parameters)
+      .toPromise()
+      .then(response =>
+         {
+            let a;
+            xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+            a = result;
+         });
+            try {
+                // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+                return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+                // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+            }
+            catch (e) {
+              return [];
+            }
+         }
+      );
+  }
   Get_Loading_Summary_Detail_Item_List(oLoadingSummaryNo, oSalesOrder) {
     let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oSalesOrder='+oSalesOrder;
     return this.http.get(this.hostWebService +"/Get_Loading_Summary_Detail_Item_List?"+parameters)
@@ -2459,8 +2479,8 @@ Delete_Loading_Summary_Detail(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer
        }
     );
 }
-Update_Loading_Summary_Detail_Check(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oItemNo, oMaker , oDeliveryNo,oLineUpd) {
-  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oItemNo='+oItemNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo+'&oLineUpd='+oLineUpd;
+Update_Loading_Summary_Detail_Check(oLoadingSummaryNo, oClient, oSalesOrder, oCustomer, oItemNo, oMaker , oDeliveryNo,oLineUpd, oType) {
+  let parameters='oLoadingSummaryNo='+oLoadingSummaryNo+'&oClient='+oClient+'&oSalesOrder='+oSalesOrder+'&oCustomer='+oCustomer+'&oItemNo='+oItemNo+'&oMaker='+oMaker+'&oDeliveryNo='+oDeliveryNo+'&oLineUpd='+oLineUpd+'&oType='+oType;
   return this.http.get(this.hostWebService +"/rf_upd_loadsummary_detail_chk?"+parameters)
     .toPromise()
     .then(response =>

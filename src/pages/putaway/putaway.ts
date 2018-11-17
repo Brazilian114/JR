@@ -234,7 +234,7 @@ doLoginApprove(username,password){
   }
   doConfirm(oLocation, oLocation_confirm, oPallet){
 
-  console.log("เช้กตัวแปร","oLocation = ",oLocation, "oLocation_confirm",oLocation_confirm, "oPallet",oPallet);
+  console.log("เช็กตัวแปร","oLocation = ",oLocation, "oLocation_confirm",oLocation_confirm, "oPallet",oPallet);
 
     if(oPallet == undefined || oPallet == "")
     {
@@ -247,11 +247,11 @@ doLoginApprove(username,password){
     }
     else if (oLocation != oLocation_confirm)
     {
-       // this.service.Get_Chk_Confirm_Location_Putaway(this.oUsername,).then((res)=>{
-       //   this.data_return_CheckUser = res;
-       //  console.log(this.data_return_CheckUser);
-       //     console.log(this.data_return_CheckUser["0"].edit_loc_wh_trask);
-       //   });
+       this.service.Get_Chk_Confirm_Location_Putaway(this.oUsername,).then((res)=>{
+         this.data_return_CheckUser = res;
+        console.log(this.data_return_CheckUser);
+           console.log(this.data_return_CheckUser["0"].edit_loc_wh_trask);
+         });
 
          if(this.chk_Loc != 'Y')
 

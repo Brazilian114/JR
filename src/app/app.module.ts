@@ -59,6 +59,7 @@ import { LicensePage } from '../pages/modal/license/license';
 import { DriverPage } from '../pages/modal/driver/driver';
 import { SaleorderPage } from '../pages/modal/saleorder/saleorder';
 import { SaleorderPagePack } from '../pages/modal/saleorder-pack/saleorder-pack';
+import { LoadtotruckdetailmodalPage } from '../pages/modal/loadtotruckdetailmodal/loadtotruckdetailmodal';
 
 import { Service } from '../services/service';
 
@@ -132,7 +133,8 @@ import { LoadtotruckPackCartonPage } from '../pages/loadtotruckpackct/loadtotruc
     itemPickSumPage,
     CheckinotherPage,
     LoadtotruckPackCartonPage,
-    SaleorderPagePack
+    SaleorderPagePack,
+    LoadtotruckdetailmodalPage
   ],
   imports: [
     BrowserModule,
@@ -215,7 +217,8 @@ import { LoadtotruckPackCartonPage } from '../pages/loadtotruckpackct/loadtotruc
     itemPickSumPage,
     CheckinotherPage,
     LoadtotruckPackCartonPage,
-    SaleorderPagePack
+    SaleorderPagePack,
+    LoadtotruckdetailmodalPage
   ],
   providers: [
     StatusBar,
