@@ -27,7 +27,7 @@
 
   <ion-scroll scrollX="true" scrollY="true">
       <ion-grid>
-        <ion-row style="width: 1000px;" *ngFor="let item of data_item; let i = index"
+        <ion-row style="width: 1200px;" *ngFor="let item of data_item; let i = index"
         (click)="doReturnItemDetail(item.description,item.grade,item.item_code,item.item_no,item.location,item.qty_avail
         ,item.rec_num,item.uom,item.warehouse, item.pallet)">
           <ion-col class="border-col">
@@ -48,7 +48,15 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              จำนวน
+              เกรด
+            </ion-row>
+            <ion-row>
+              {{item.grade}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวนย่อย
             </ion-row>
             <ion-row>
               {{item.qty_avail}}
@@ -56,7 +64,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              หน่วย
+              หน่วยย่อย
             </ion-row>
             <ion-row>
               {{item.uom}}
@@ -64,10 +72,26 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              เกรด
+              จำนวนใหญ่
             </ion-row>
             <ion-row>
-              {{item.grade}}
+              {{item.qty_pack}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วยใหญ่
+            </ion-row>
+            <ion-row>
+              {{item.packing_uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวนเศษ
+            </ion-row>
+            <ion-row>
+              {{item.qty_pack_mod}}
             </ion-row>
           </ion-col>
           <ion-col class="border-col">

@@ -376,7 +376,8 @@ doCheckPallet(oPalletFr, oPalletTo, oUOM){
 
   doLocation(oLocation, oLocation_confirm, oQty){
     this.oLocation_confirm = oLocation_confirm.toString().trim();
-    if(oLocation != oLocation_confirm){
+    setTimeout(()=>{
+    if(oLocation.toString().trim() != this.oLocation_confirm){
       //this.Alert('Error', 'โปรดกรอก Location ให้ตรงกัน');
       this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
       setTimeout(()=>{
@@ -396,6 +397,7 @@ doCheckPallet(oPalletFr, oPalletTo, oUOM){
           this.updateScroll();
       },200);
     }
+  },1000);
   }
 
   doChkBarcode(oItem, oBarcode_confirm ){

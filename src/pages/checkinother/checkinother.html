@@ -556,7 +556,7 @@
               <ion-item>
                 <ion-label stacked>วันผลิต</ion-label>
                 <ion-datetime *ngIf="isenabledMfg == true" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oMfg" [disabled]="!isenabledMfg" style="background-color: #DFFBFA"></ion-datetime>
-                <ion-datetime *ngIf="isenabledMfg == false" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oMfg" [disabled]="!isenabledExp"></ion-datetime>
+                <ion-datetime *ngIf="isenabledMfg == false" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="oMfg" [disabled]="!isenabledMfg"></ion-datetime>
               </ion-item>
             </ion-col>
         </ion-row>

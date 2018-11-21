@@ -57,7 +57,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              จำนวน
+              จำนวนย่อย
             </ion-row>
             <ion-row>
               {{listPallet.qty_avail}}
@@ -65,10 +65,34 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              หน่วย
+              หน่วยย่อย
             </ion-row>
             <ion-row>
               {{listPallet.uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวนใหญ่
+            </ion-row>
+            <ion-row>
+              {{listPallet.qty_pack}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วยใหญ่
+            </ion-row>
+            <ion-row>
+              {{listPallet.packing_uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วยเศษ
+            </ion-row>
+            <ion-row>
+              {{listPallet.qty_pack_mod}}
             </ion-row>
           </ion-col>
           <ion-col class="border-col">

@@ -36,7 +36,7 @@
   </ion-grid>
   <ion-grid>
       <ion-scroll scrollX="true" scrollY="true">
-        <ion-row style="width: 900px;" *ngFor = "let items of data_item; let i = index">
+        <ion-row style="width: 1200px;" *ngFor = "let items of data_item; let i = index">
           <ion-col class="border-col" col-auto>
             <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
               #
@@ -62,16 +62,24 @@
             </ion-row>
           </ion-col>
           <ion-col class="border-col">
-            <ion-row class="border-row"  *ngIf = "i == 0">
-              จำนวน
+            <ion-row class="border-row" *ngIf = "i == 0">
+              เกรด
             </ion-row>
-            <ion-row >
+            <ion-row>
+              {{items.grade}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวนย่อย
+            </ion-row>
+            <ion-row>
               {{items.qty_avail}}
             </ion-row>
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              หน่วย
+              หน่วยย่อย
             </ion-row>
             <ion-row>
               {{items.uom}}
@@ -79,10 +87,26 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              เกรด
+              จำนวนใหญ่
             </ion-row>
             <ion-row>
-              {{items.grade}}
+              {{items.qty_pack}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              หน่วยใหญ่
+            </ion-row>
+            <ion-row>
+              {{items.packing_uom}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              จำนวนเศษ
+            </ion-row>
+            <ion-row>
+              {{items.qty_pack_mod}}
             </ion-row>
           </ion-col>
           <ion-col class="border-col">
