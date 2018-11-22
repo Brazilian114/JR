@@ -1,8 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'CheckinOrderPage',
+  segment: 'CheckinOrder'}
+)
 
 @Component({
   selector: 'page-checkinorder',

@@ -1,9 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, NavParams, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, NavParams, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Service } from '../../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
+
+@IonicPage(
+  {name:'SaleReturnPage',
+  segment: 'SaleReturn'}
+)
 @Component({
   selector: 'page-salereturn',
   templateUrl: 'salereturn.html'

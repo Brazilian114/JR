@@ -1,16 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Service } from '../../services/service';
 
-import { WomodalPage } from '../modal/womodal/womodal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-import { SuppliermodelPage } from '../modal/suppliermodel/suppliermodel';
-import { ReplenishmentPage } from '../replenishment/replenishment';
-import { PalletmodelPage } from '../modal/palletmodel/palletmodel';
-
+@IonicPage(
+  {name:'PickbyorderPage',
+  segment: 'Pickbyorder'}
+)
 @Component({
   selector: 'page-pickbyorder',
   templateUrl: 'pickbyorder.html'
@@ -105,7 +103,7 @@ export class PickbyorderPage {
       }, 300)
     }
   doGetWo(oClient){
-    let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oUsername: this.oUsername,  frag: 2});
+    let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oUsername: this.oUsername,  frag: 2});
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -161,7 +159,7 @@ export class PickbyorderPage {
     })
   }
   doGetLine(oClient, oOrderNo, oWorksOrder){
-    let profileModal = this.modalCtrl.create(SuppliermodelPage, { oClient: oClient, oOrderNo: oOrderNo, oWorksOrder: oWorksOrder });
+    let profileModal = this.modalCtrl.create("SuppliermodelPage", { oClient: oClient, oOrderNo: oOrderNo, oWorksOrder: oWorksOrder });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -192,7 +190,7 @@ export class PickbyorderPage {
       });
   }
   doGetPalletTo(oWorksOrder){
-    let profileModal = this.modalCtrl.create(PalletmodelPage, { oWorksOrder: oWorksOrder });
+    let profileModal = this.modalCtrl.create("PalletmodelPage", { oWorksOrder: oWorksOrder });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -263,7 +261,7 @@ export class PickbyorderPage {
     }else if(oGrade == undefined || oGrade == ""){
       this.Alert('Error', 'Select Line(L#) Please');
     }else{
-      let profileModal = this.modalCtrl.create(LocationmodalPage, { oClient: oClient, oItem: oItem, oUom: this.oUOM, oQtyPick: this.oQty, oWH: oWarehouse, oZone: oZone, oGrade: oGrade, oPalletFrom: oPalletFrom });
+      let profileModal = this.modalCtrl.create("LocationmodalPage", { oClient: oClient, oItem: oItem, oUom: this.oUOM, oQtyPick: this.oQty, oWH: oWarehouse, oZone: oZone, oGrade: oGrade, oPalletFrom: oPalletFrom });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
@@ -517,7 +515,7 @@ export class PickbyorderPage {
     },100);
   }
   doReplenishment(){
-      this.navCtrl.push(ReplenishmentPage);
+      this.navCtrl.push("ReplenishmentPage");
   }
   doGetNewPallet(oClient){
     if(oClient != ""){

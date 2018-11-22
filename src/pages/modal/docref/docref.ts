@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, IonicPage } from 'ionic-angular';
 
 import { Service } from '../../../services/service';
 
+@IonicPage(
+  {name:'DocrefPage',
+  segment: 'Docref'}
+)
 @Component({
   selector: 'page-docref',
   templateUrl: 'docref.html'
@@ -23,7 +27,7 @@ export class DocrefPage {
       this.oCustomer = "";
     }if(this.oDocref == undefined){
       this.oDocref = "";
-    
+
       //this.rf_get_sale_for_receipt_return(this.oClient, this.oCustomer,this.oDocref);
     }else{
       this.rf_get_sale_for_receipt_return(this.oClient, this.oCustomer,this.oDocref);

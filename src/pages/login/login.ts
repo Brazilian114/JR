@@ -1,15 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, LoadingController, AlertController, Content, Platform } from 'ionic-angular';
+import { NavController, ToastController, LoadingController, AlertController, Content, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Service } from '../../services/service';
 
-import { OperationPage } from '../operation/operation';
-import { SettingPage } from '../setting/setting';
-import { HomePage } from '../home/home';
-
 import { Network } from '@ionic-native/network';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+
+@IonicPage(
+  {name:'LoginPage',
+  segment: 'Login'}
+)
 
 @Component({
   selector: 'page-login',
@@ -85,7 +86,7 @@ export class LoginPage {
                           })
 
                 this.finishLoding();
-                this.navCtrl.setRoot(HomePage);
+                this.navCtrl.setRoot("HomePage");
               }
             });
           }
@@ -110,7 +111,7 @@ export class LoginPage {
     })
   }
   doSetting(){
-    this.navCtrl.push(SettingPage);
+    this.navCtrl.push("SettingPage");
   }
   presentToast(key, showCloseButton, position: string) {
     const toast = this.toastCtrl.create({

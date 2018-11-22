@@ -1,17 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { RecipesmodalPage } from '../modal/recipesmodal/recipesmodal';
-import { PomodalPage } from '../modal/pomodal/pomodal';
-import { CheckbarcodemodelPage } from '../modal/checkbarcodemodel/checkbarcodemodel';
-import { IncmodelPage } from '../modal/incmodel/incmodel';
-import { PalletmodelPage } from '../modal/palletmodel/palletmodel';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'CheckinPage',
+  segment: 'Checkin'}
+)
 
 @Component({
   selector: 'page-checkin',
@@ -175,7 +173,7 @@ export class CheckinPage {
             this.presentToast('โปรดระบุ Zone.', false, 'bottom');
     }
     else{
-      let profileModal = this.modalCtrl.create(LocationmodalPage, { oZone: listZone });
+      let profileModal = this.modalCtrl.create("LocationmodalPage", { oZone: listZone });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log("Location",data);
@@ -222,7 +220,7 @@ export class CheckinPage {
     }else if(listWhses == undefined){
         this.presentToast('โปรดระบุ Warehouse', false, 'bottom');
     }else{
-      let profileModal = this.modalCtrl.create(RecipesmodalPage, { oClient: oClient, oReciptNo: oReceipt, oReceiptType: listType, oBook: listBook});
+      let profileModal = this.modalCtrl.create("RecipesmodalPage", { oClient: oClient, oReciptNo: oReceipt, oReceiptType: listType, oBook: listBook});
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log("doGetReceipt(checkin.ts)",data);
@@ -316,7 +314,7 @@ export class CheckinPage {
     })
   }
   doGetPo(oClient,oSupplier,oInc){
-    let profileModal = this.modalCtrl.create(PomodalPage, { oClient: oClient, oSupplier: oSupplier, oInc_no: oInc });
+    let profileModal = this.modalCtrl.create("PomodalPage", { oClient: oClient, oSupplier: oSupplier, oInc_no: oInc });
 
       profileModal.present();
       profileModal.onDidDismiss(data =>{
@@ -335,7 +333,7 @@ export class CheckinPage {
       });
   }
   doGetBarcode(oClient,oSupplier,oInc){
-    let profileModal = this.modalCtrl.create(PomodalPage, { oClient: oClient, oSupplier: oSupplier, oInc_no: oInc });
+    let profileModal = this.modalCtrl.create("PomodalPage", { oClient: oClient, oSupplier: oSupplier, oInc_no: oInc });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -347,7 +345,7 @@ export class CheckinPage {
     });
   }
   doGetPallet(oClient,oReceipt){
-    let profileModal = this.modalCtrl.create(PalletmodelPage, { oClient: oClient, oReceipt: oReceipt });
+    let profileModal = this.modalCtrl.create("PalletmodelPage", { oClient: oClient, oReceipt: oReceipt });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -377,7 +375,7 @@ export class CheckinPage {
   }
   doGetINC(oClient, oSupplier, oDate){
     let date = String(oDate).substr(0,10)
-    let profileModal = this.modalCtrl.create(IncmodelPage, {oClient: oClient, oSupplier: oSupplier, oDate: date });
+    let profileModal = this.modalCtrl.create("IncmodelPage", {oClient: oClient, oSupplier: oSupplier, oDate: date });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -950,7 +948,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
 
   }
   doCheckBarCode(oClient, oReceipt, oBarcode){
-    let profileModal = this.modalCtrl.create(CheckbarcodemodelPage, { oClient: oClient, oReceipt: oReceipt, oBarcode: oBarcode });
+    let profileModal = this.modalCtrl.create("CheckbarcodemodelPage", { oClient: oClient, oReceipt: oReceipt, oBarcode: oBarcode });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
       });

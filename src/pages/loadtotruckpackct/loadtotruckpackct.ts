@@ -1,16 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Service } from '../../services/service';
 
-import { LoadingsummaryPage } from '../modal/loadingsummary/loadingsummary';
-import { VehicletypePage } from '../modal/vehicletype/vehicletype';
-import { LicensePage } from '../modal/license/license';
-import { DriverPage } from '../modal/driver/driver';
-// import { SaleorderPage } from '../modal/saleorder/saleorder';
-import { SaleorderPagePack } from '../modal/saleorder-pack/saleorder-pack';
+@IonicPage(
+  {name:'LoadtotruckPackCartonPage',
+  segment: 'LoadtotruckPackCarton'}
+)
 
 @Component({
   selector: 'page-loadtotruck-pack',
@@ -146,7 +144,7 @@ export class LoadtotruckPackCartonPage {
 
   }
   doGetLoading(){
-    let profileModal = this.modalCtrl.create(LoadingsummaryPage);
+    let profileModal = this.modalCtrl.create("LoadingsummaryPage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -188,7 +186,7 @@ export class LoadtotruckPackCartonPage {
       }
   }
   doGetLoadingTruck(){
-    let profileModal = this.modalCtrl.create(VehicletypePage);
+    let profileModal = this.modalCtrl.create("VehicletypePage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -204,7 +202,7 @@ export class LoadtotruckPackCartonPage {
       });
   }
   doGetLoadingDriver(){
-    let profileModal = this.modalCtrl.create(DriverPage);
+    let profileModal = this.modalCtrl.create("DriverPage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -217,7 +215,7 @@ export class LoadtotruckPackCartonPage {
       });
   }
   doGetLoadingTruckLicensePlate(){
-    let profileModal = this.modalCtrl.create(LicensePage);
+    let profileModal = this.modalCtrl.create("LicensePage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -245,7 +243,7 @@ export class LoadtotruckPackCartonPage {
 //END Header---------------------------------------------------------------------------------------------------------------------------------------------
 //Start Details---------------------------------------------------------------------------------------------------------------------------------------------
 GetLoadingSalesOrderCustomerInfo(oLoadingSummaryNo, oClient){
-let profileModal = this.modalCtrl.create(SaleorderPagePack, { oClient: oClient });
+let profileModal = this.modalCtrl.create("SaleorderPagePack", { oClient: oClient });
   profileModal.present();
   profileModal.onDidDismiss(data =>{
     console.log(data);

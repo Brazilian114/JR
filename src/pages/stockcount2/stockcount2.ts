@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, ModalController } from 'ionic-angular';
+import { NavController, ToastController, ModalController, IonicPage} from 'ionic-angular';
 
-import { StkmodalPage } from '../modal/stkmodal/stkmodal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-import { ItemNomodalPage } from '../modal/itemNo-modal/itemNo-modal';
-import { StockcountPage } from '../stockcount/stockcount'
-import { OperationPage } from '../operation/operation';
 import { Service } from '../../services/service';
 
+@IonicPage(
+  {name:'Stockcount2Page',
+  segment: 'Stockcount2'}
+)
 
 @Component({
   selector: 'page-stockcount2',
@@ -37,7 +36,7 @@ export class Stockcount2Page {
     if(this.oClient == undefined){
       this.presentToast('Please specify Client.', false, 'bottom');
     }else{
-    let profileModal = this.modalCtrl.create(StkmodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("StkmodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -59,7 +58,7 @@ export class Stockcount2Page {
     }else{
       if(oLocation == undefined){
         oLocation = "";
-      let profileModal = this.modalCtrl.create(LocationmodalPage, { oClient: oClient, oWH: oWarehouse, oStockRef: oStockRef, oLocation: oLocation });
+      let profileModal = this.modalCtrl.create("LocationmodalPage", { oClient: oClient, oWH: oWarehouse, oStockRef: oStockRef, oLocation: oLocation });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
@@ -102,7 +101,7 @@ export class Stockcount2Page {
     })
   }
   doGetItemNo(oClient){
-    let profileModal = this.modalCtrl.create(ItemNomodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -129,10 +128,10 @@ export class Stockcount2Page {
     this.listUOM = [];
   }
   doPage1(){
-    this.navCtrl.setRoot(StockcountPage);
+    this.navCtrl.setRoot("StockcountPage");
   }
   doMain(){
-    this.navCtrl.setRoot(OperationPage);
+    this.navCtrl.setRoot("OperationPage");
   }
   presentToast(key, showCloseButton, position: string) {
     const toast = this.toastCtrl.create({

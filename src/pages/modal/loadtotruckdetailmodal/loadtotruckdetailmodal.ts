@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, AlertController, ToastController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Service } from '../../../services/service';
 
+@IonicPage(
+  {name:'LoadtotruckdetailmodalPage',
+  segment: 'Loadtotruckdetailmodal'}
+)
 @Component({
   selector: 'page-loadtotruckdetailmodal',
   templateUrl: 'loadtotruckdetailmodal.html'

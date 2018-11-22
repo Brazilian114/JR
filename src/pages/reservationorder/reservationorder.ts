@@ -1,10 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Service } from '../../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
 
+@IonicPage(
+  {name:'ReservationOrderPage',
+  segment: 'ReservationOrder'}
+)
 @Component({
   selector: 'page-reservationorder',
   templateUrl: 'reservationorder.html'

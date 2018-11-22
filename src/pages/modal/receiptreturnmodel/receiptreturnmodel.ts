@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, ToastController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Service } from '../../../services/service';
 
+@IonicPage(
+  {name:'ReceiptreturnmodelmodelPage',
+  segment: 'Receiptreturnmodelmodel'}
+)
 @Component({
   selector: 'page-receiptreturnmodel',
   templateUrl: 'receiptreturnmodel.html'

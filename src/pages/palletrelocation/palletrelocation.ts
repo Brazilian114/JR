@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Content, AlertController, Platform } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Content, AlertController, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { ItemNomodalPage } from '../modal/itemNo-modal/itemNo-modal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-
 import { Service } from '../../services/service';
 
+@IonicPage(
+  {name:'PalletrelocationPage',
+  segment: 'Palletrelocation'}
+)
 @Component({
   selector: 'page-palletrelocation',
   templateUrl: 'palletrelocation.html'
@@ -64,7 +65,7 @@ export class PalletrelocationPage {
     }
 
   doGetItemNo(oClient){
-    let profileModal = this.modalCtrl.create(ItemNomodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -77,7 +78,7 @@ export class PalletrelocationPage {
       });
   }
   doGetLocation(oClient, oItem, oWH, oLoc, oNLoc){
-    let profileModal = this.modalCtrl.create(LocationmodalPage, { oClient: oClient, oItem: oItem, oWH: oWH , oLOC: oLoc, oLOC_DESC: oNLoc });
+    let profileModal = this.modalCtrl.create("LocationmodalPage", { oClient: oClient, oItem: oItem, oWH: oWH , oLOC: oLoc, oLOC_DESC: oNLoc });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

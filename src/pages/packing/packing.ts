@@ -1,13 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Service } from '../../services/service';
-import { PutawaydetailPage } from '../putawaydetail/putawaydetail';
-import { RecipesmodalPage } from '../modal/recipesmodal/recipesmodal';
-import { HomePage } from '../home/home';
 
+
+@IonicPage(
+  {name:'PackingPage',
+  segment: 'Packing'}
+)
 @Component({
   selector: 'page-packing',
   templateUrl: 'packing.html'
@@ -57,7 +59,7 @@ export class PackingPage {
 
       console.log(this.oUsername);
 
-      let profileModal = this.modalCtrl.create(RecipesmodalPage, { oRecipt: oRecipt, oUsername: this.oUsername });
+      let profileModal = this.modalCtrl.create("RecipesmodalPage", { oRecipt: oRecipt, oUsername: this.oUsername });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
@@ -67,7 +69,7 @@ export class PackingPage {
   }
   doPutawayDetail(oRecipt){
       console.log(this.oUsername);
-      this.navCtrl.push(PutawaydetailPage, { oRecipt: oRecipt, oUsername: this.oUsername });
+      this.navCtrl.push("PutawaydetailPage", { oRecipt: oRecipt, oUsername: this.oUsername });
 
   }
   doGetPutawayDetail(oRecipt, oUsername){
@@ -213,7 +215,7 @@ export class PackingPage {
 
   }
   doBack(){
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot("HomePage");
   }
   onKeyup(){
     console.log(this.oRecipt)

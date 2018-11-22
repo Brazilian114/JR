@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, AlertController, IonicPage } from 'ionic-angular';
 
 import { Service } from '../../../services/service';
 
+@IonicPage(
+  {name:'LocationmodalPage',
+  segment: 'Locationmodal'}
+)
 @Component({
   selector: 'page-locationmodal',
   templateUrl: 'locationmodal.html'

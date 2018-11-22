@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, AlertController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-import { SaleReturnPage } from '../salereturn/salereturn';
 
 import { Service } from '../../services/service';
 
+@IonicPage(
+  {name:'SaleReturnHeaderPage',
+  segment: 'SaleReturnHeader'}
+)
 @Component({
   selector: 'page-salereturnheader',
   templateUrl: 'salereturnheader.html'
@@ -33,7 +35,7 @@ export class SaleReturnHeaderPage {
       });
   }
   doSendToSaleReturn(doc_no, customer, status){
-    this.navCtrl.push(SaleReturnPage, { doc_no: doc_no, customer: customer, status: status });
+    this.navCtrl.push("SaleReturnPage", { doc_no: doc_no, customer: customer, status: status });
   }
   doGetBranchReturnList(oClient, oStartDate, oEndDate){
     oStartDate = oStartDate.split('T')[0];
@@ -62,7 +64,7 @@ export class SaleReturnHeaderPage {
       this.data_Create_branch = res;
       console.log(this.data_Create_branch);
 
-      this.navCtrl.push(SaleReturnPage, { doc_no: this.data_Create_branch.doc_no });
+      this.navCtrl.push("SaleReturnPage", { doc_no: this.data_Create_branch.doc_no });
 
     })
   }

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, IonicPage } from 'ionic-angular';
 
 import { Service } from '../../../services/service';
+
+@IonicPage(
+  {name:'BarcodemodelPage',
+  segment: 'Barcodemodel'}
+)
 
 @Component({
   selector: 'page-barcodemodel',

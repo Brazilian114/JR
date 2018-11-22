@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController  } from 'ionic-angular';
-
-
-import { SaleReturnHeaderPage } from '../salereturnheader/salereturnheader';
-import { CheckinOrderPage } from '../checkinorder/checkinorder';
-import { ReservationOrderPage } from '../reservationorder/reservationorder';
+import { NavController, NavParams, ToastController, IonicPage } from 'ionic-angular';
 
 import { Network } from '@ionic-native/network';
 
+@IonicPage(
+  {name:'OperationBranchPage',
+  segment: 'OperationBranch'}
+)
 @Component({
   selector: 'page-operationBranch',
   templateUrl: 'operationBranch.html'
@@ -19,7 +18,7 @@ export class OperationBranchPage {
   }
   doReservationOrder(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(SaleReturnHeaderPage);
+      this.navCtrl.push("SaleReturnHeaderPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -28,7 +27,7 @@ export class OperationBranchPage {
   }
   doCheckinOrder(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(CheckinOrderPage);
+      this.navCtrl.push("CheckinOrderPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -37,7 +36,7 @@ export class OperationBranchPage {
   }
   doOrdering(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(ReservationOrderPage);
+      this.navCtrl.push("ReservationOrderPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{

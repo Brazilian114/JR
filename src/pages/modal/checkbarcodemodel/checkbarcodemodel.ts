@@ -1,8 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, ToastController, Content, Platform } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, ToastController, Content, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Service } from '../../../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
+
+
+@IonicPage(
+  {name:'CheckbarcodemodelPage',
+  segment: 'Checkbarcodemodel'}
+)
+
 @Component({
   selector: 'page-checkbarcodemodel',
   templateUrl: 'checkbarcodemodel.html'

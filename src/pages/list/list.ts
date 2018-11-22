@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, IonicPage } from 'ionic-angular';
 
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer';
+
+@IonicPage(
+  {name:'ListPage',
+  segment: 'List'}
+)
 
 @Component({
   selector: 'page-list',

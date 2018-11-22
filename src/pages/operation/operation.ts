@@ -1,26 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, IonicPage } from 'ionic-angular';
 
-import { CheckinPage } from '../checkin/checkin';
-import { PutawayPage } from '../putaway/putaway';
-import { PickbytaskPage } from '../pickbytask/pickbytask';
-import { PicksummaryPage } from '../picksummary/picksummary';
-import { ItemrelocationPage } from '../itemrelocation/itemrelocation';
-import { StockadjustmentPage } from '../stockadjustment/stockadjustment';
-import { PalletrelocationPage } from '../palletrelocation/palletrelocation';
-import { LocationinvquePage } from '../locationinvque/locationinvque';
-import { LocationrelocationPage } from '../locationrelocation/locationrelocation';
-import { StockcountPage } from '../stockcount/stockcount';
-import { IteminvquePage } from '../iteminvque/iteminvque';
-import { PickbytaskTransferPage } from '../pickbytasktransfer/pickbytasktransfer';
-import { PackingPage } from '../packing/packing';
-import { PickbyorderPage } from '../pickbyorder/pickbyorder';
-import { ReplenishmentPage } from '../replenishment/replenishment';
-import { ReceiptCheckinReturnPage } from '../receiptcheckinreturn/receiptcheckinreturn';
-import { LoadtotruckPage } from '../loadtotruck/loadtotruck';
-import { CheckinotherPage } from '../checkinother/checkinother';
-import { LoadtotruckPackCartonPage } from '../loadtotruckpackct/loadtotruckpackct';
 import { Network } from '@ionic-native/network';
+
+@IonicPage(
+  {name:'OperationPage',
+  segment: 'Operation'}
+)
 
 @Component({
   selector: 'page-operation',
@@ -33,7 +19,7 @@ export class OperationPage {
   }
   doCheckIn(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(CheckinPage);
+      this.navCtrl.push("CheckinPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -42,7 +28,7 @@ export class OperationPage {
   }
   doCheckInOther(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(CheckinotherPage);
+      this.navCtrl.push("CheckinotherPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -51,7 +37,7 @@ export class OperationPage {
   }
   doPutaway(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(PutawayPage);
+      this.navCtrl.push("PutawayPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -60,7 +46,7 @@ export class OperationPage {
   }
   doPickbytask(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(PickbytaskPage);
+      this.navCtrl.push("PickbytaskPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -69,7 +55,7 @@ export class OperationPage {
   }
   doPicksummary(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(PicksummaryPage);
+      this.navCtrl.push("PicksummaryPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -78,7 +64,7 @@ export class OperationPage {
   }
   doItemrelocation(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(ItemrelocationPage);
+      this.navCtrl.push("ItemrelocationPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -87,7 +73,7 @@ export class OperationPage {
   }
   doStockadjustmentPage(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(StockadjustmentPage);
+      this.navCtrl.push("StockadjustmentPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -96,7 +82,7 @@ export class OperationPage {
   }
   doPalletrelocationPage(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(PalletrelocationPage);
+      this.navCtrl.push("PalletrelocationPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -105,7 +91,7 @@ export class OperationPage {
   }
   doLocationinvquePage(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(LocationinvquePage);
+      this.navCtrl.push("LocationinvquePage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -114,7 +100,7 @@ export class OperationPage {
   }
   doLocationrelocationPage(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(LocationrelocationPage);
+      this.navCtrl.push("LocationrelocationPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -123,7 +109,7 @@ export class OperationPage {
   }
   doStockcountPage(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(StockcountPage);
+      this.navCtrl.push("StockcountPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -132,7 +118,7 @@ export class OperationPage {
   }
   doIteminvquePage(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(IteminvquePage);
+      this.navCtrl.push("IteminvquePage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -141,7 +127,7 @@ export class OperationPage {
   }
   doPickbytaskTransfer(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(PickbytaskTransferPage);
+      this.navCtrl.push("PickbytaskTransferPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -150,7 +136,7 @@ export class OperationPage {
   }
   doPickbyorder(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(PickbyorderPage);
+      this.navCtrl.push("PickbyorderPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -159,7 +145,7 @@ export class OperationPage {
   }
   doReplenishment(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(ReplenishmentPage);
+      this.navCtrl.push("ReplenishmentPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -168,7 +154,7 @@ export class OperationPage {
   }
   doLoadToTruck(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(LoadtotruckPage);
+      this.navCtrl.push("LoadtotruckPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -177,7 +163,7 @@ export class OperationPage {
   }
   doLoadToTruckPack(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(LoadtotruckPackCartonPage);
+      this.navCtrl.push("LoadtotruckPackCartonPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{
@@ -186,7 +172,7 @@ export class OperationPage {
   }
   doReceiptCheckinReturn(){
     if(this.network.type !== 'none'){
-      this.navCtrl.push(ReceiptCheckinReturnPage);
+      this.navCtrl.push("ReceiptCheckinReturnPage");
     }else if(this.network.type === 'none'){
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }else{

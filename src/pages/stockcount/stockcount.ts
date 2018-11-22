@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, ModalController, AlertController, Platform, Content } from 'ionic-angular';
+import { NavController, ToastController, ModalController, AlertController, Platform, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { StkmodalPage } from '../modal/stkmodal/stkmodal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-import { ItemNomodalPage } from '../modal/itemNo-modal/itemNo-modal';
-
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'StockcountPage',
+  segment: 'Stockcount'}
+)
 
 @Component({
   selector: 'page-stockcount',
@@ -93,7 +94,7 @@ export class StockcountPage {
     if(this.oClient == undefined){
       this.presentToast('Please specify Client.', false, 'bottom');
     }else{
-    let profileModal = this.modalCtrl.create(StkmodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("StkmodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -123,7 +124,7 @@ export class StockcountPage {
     }else if(oWarehouse == undefined || oWarehouse == ""){
       this.presentToast('Please specify Warehouse.', false, 'bottom');
     }else{
-      let profileModal = this.modalCtrl.create(LocationmodalPage, { oClient: oClient, oWH: oWarehouse, oStockRef: oStockRef, oLocation: oLocation });
+      let profileModal = this.modalCtrl.create("LocationmodalPage", { oClient: oClient, oWH: oWarehouse, oStockRef: oStockRef, oLocation: oLocation });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
@@ -164,7 +165,7 @@ export class StockcountPage {
     })
   }
   doGetItemNo(oClient){
-    let profileModal = this.modalCtrl.create(ItemNomodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

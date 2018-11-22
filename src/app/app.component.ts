@@ -4,12 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
-import { HomePage } from '../pages/home/home';
-import { OperationPage } from '../pages/operation/operation';
-import { LoginPage } from '../pages/login/login';
-import { OperationBranchPage } from '../pages/operationBranch/operationBranch';
-import { ListPage } from '../pages/list/list';
-
 import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
@@ -19,7 +13,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class WMSHandheld {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = "LoginPage";
   oUsername:any;
   alert:any = null;
   pages: Array<{title: string, component: any}>;
@@ -32,8 +26,8 @@ export class WMSHandheld {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'DC Operation', component: OperationPage },
+      { title: 'Home', component: "HomePage" },
+      { title: 'DC Operation', component: "OperationPage" },
       //{ title: 'Branch Operation', component: OperationBranchPage },
       { title: 'Logout', component: null }
     ];
@@ -59,6 +53,12 @@ export class WMSHandheld {
   exitApp(){
      this.platform.exitApp();
   }
+  openDCOperationPage(){
+    this.nav.setRoot("OperationPage");
+  }
+  openHomePage(){
+    this.nav.setRoot("HomePage");
+  }
   doLogout(){
     let alert = this.alertCtrl.create({
       title: 'ออกจากระบบ',
@@ -75,10 +75,20 @@ export class WMSHandheld {
 
             this.storage.ready().then(() => {
               this.storage.remove('_user');
+              this.storage.remove('_RecNum');
+              this.storage.remove('_oReversePallet');
+              this.storage.remove('_Qty');
+              this.storage.remove('_oLine');
+              this.storage.remove('_oItem');
+              this.storage.remove('_oReceipt');
+              this.storage.remove('_Wh');
+              this.storage.remove('_PalleNO');
+              this.storage.remove('_user_Group');
+              this.storage.remove('_user_Cus_name');
             });
             this.data_logins = "";
-            this.reload();
-            // this.nav.setRoot(LoginPage)
+            // this.reload();
+            this.nav.setRoot("LoginPage")
           }
         }
       ]

@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, ModalController, Content, AlertController, Platform } from 'ionic-angular';
+import { NavController, ToastController, ModalController, Content, AlertController, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { ItemNomodalPage } from '../modal/itemNo-modal/itemNo-modal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'ItemrelocationPage',
+  segment: 'Itemrelocation'}
+)
 
 @Component({
   selector: 'page-itemrelocation',
@@ -69,7 +71,7 @@ export class ItemrelocationPage {
     }
   doGetItemNo(oClient, oItem, flag){
     console.log(oItem);
-        let profileModal = this.modalCtrl.create(ItemNomodalPage, { oClient: oClient });
+        let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
           profileModal.present();
           profileModal.onDidDismiss(data =>{
             console.log(data);
@@ -100,7 +102,7 @@ export class ItemrelocationPage {
     }
 
     else{
-      let profileModal = this.modalCtrl.create(LocationmodalPage, { oClient: oClient, oItem: oItem, oWH: oWH, oLOC_DESC: oLOC_DESC, oLOC: oLocation});
+      let profileModal = this.modalCtrl.create("LocationmodalPage", { oClient: oClient, oItem: oItem, oWH: oWH, oLOC_DESC: oLOC_DESC, oLOC: oLocation});
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);

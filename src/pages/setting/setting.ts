@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, IonicPage } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 
+@IonicPage(
+  {name:'SettingPage',
+  segment: 'Setting'}
+)
 @Component({
   selector: 'page-setting',
   templateUrl: 'setting.html'

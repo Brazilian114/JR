@@ -132,7 +132,7 @@
         <ion-input [(ngModel)]="oQtyNew" disabled (click)="doClick()"></ion-input>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <!-- <ion-row>
       <ion-col class="col" col-3>
         <ion-label>พาเลทปลายทาง</ion-label>
       </ion-col>
@@ -142,7 +142,7 @@
       <ion-col class="col" col-2>
         <button ion-button block (click)="doGetNewPallet(oClient)">ต่อไป</button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
   <ion-grid>
     <ion-row>
@@ -150,7 +150,7 @@
         <button ion-button block (click)="doClear()">ล้าง</button>
       </ion-col>
       <ion-col class="col">
-        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew)">หยิบ</button>
+        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew)">หยิบ</button>
       </ion-col>
     </ion-row>
   </ion-grid>

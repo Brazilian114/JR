@@ -1,10 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, ModalController, Content, AlertController } from 'ionic-angular';
+import { NavController, ToastController, ModalController, Content, AlertController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Service } from '../../services/service';
 
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
+@IonicPage(
+  {name:'StockListPage',
+  segment: 'StockList'}
+)
+
 @Component({
   selector: 'page-stocklist',
   templateUrl: 'stocklist.html'
@@ -91,7 +95,7 @@ export class StockListPage {
 
   }
   doGetLocationAll(oWH, oLoc, oClient, oWarehouse){
-    let profileModal = this.modalCtrl.create(LocationmodalPage, { oWH: oWH, oLOC_DESC: oLoc });
+    let profileModal = this.modalCtrl.create("LocationmodalPage", { oWH: oWH, oLOC_DESC: oLoc });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

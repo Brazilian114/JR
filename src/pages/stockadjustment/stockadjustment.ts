@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, IonicPage } from 'ionic-angular';
 
-import { ItemNomodalPage } from '../modal/itemNo-modal/itemNo-modal';
-
+@IonicPage(
+  {name:'StockadjustmentPage',
+  segment: 'Stockadjustment'}
+)
 
 @Component({
   selector: 'page-stockadjustment',
@@ -17,7 +19,7 @@ export class StockadjustmentPage {
   }
 
   doGetItemNo(oClient){
-    let profileModal = this.modalCtrl.create(ItemNomodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

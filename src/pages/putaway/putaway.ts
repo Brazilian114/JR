@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController , Content, AlertController, Platform } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController , Content, AlertController, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Service } from '../../services/service';
-import { PutawaydetailPage } from '../putawaydetail/putawaydetail';
-import { HomePage } from '../home/home';
-import { PutawaymodalPage } from '../modal/putawaymodal/putawaymodal';
+
+@IonicPage(
+  {name:'PutawayPage',
+  segment: 'Putaway'}
+)
 
 @Component({
   selector: 'page-putaway',
@@ -82,7 +84,7 @@ export class PutawayPage {
       }, 300)
     }
   doGetPalletforPutaway(oPallet){
-      let profileModal = this.modalCtrl.create(PutawaymodalPage, { oPallet: oPallet });
+      let profileModal = this.modalCtrl.create("PutawaymodalPage", { oPallet: oPallet });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
@@ -111,7 +113,7 @@ export class PutawayPage {
   }
   doPutawayDetail(oRecipt){
       console.log(this.oUsername);
-      this.navCtrl.push(PutawaydetailPage, { oRecipt: oRecipt, oUsername: this.oUsername });
+      this.navCtrl.push("PutawaydetailPage", { oRecipt: oRecipt, oUsername: this.oUsername });
 
   }
 
@@ -388,7 +390,7 @@ doLoginApprove(username,password){
   }
 
   doBack(){
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot("HomePage");
   }
   onKeyup(oPallet){
     console.log(oPallet)

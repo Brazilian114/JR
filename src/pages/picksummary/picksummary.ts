@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-import { WomodalPage } from '../modal/womodal/womodal';
-import { itemWObyTaskPage } from '../modal/itemWObyTask-modal/itemWObyTask-modal';
-import { itemPickSumPage } from '../modal/itemPickSum/itemPickSum';
 
 import { Service } from '../../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
+
+@IonicPage(
+  {name:'PicksummaryPage',
+  segment: 'Picksummary'}
+)
 @Component({
   selector: 'page-picksummary',
   templateUrl: 'picksummary.html'
@@ -94,7 +95,7 @@ export class PicksummaryPage {
       }, 300)
     }
   doGetWo(oClient){
-    let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oUsername: this.oUsername });
+    let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oUsername: this.oUsername });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -112,7 +113,7 @@ export class PicksummaryPage {
   doGetWoSum(oClient){
     let frag = 3;
     console.log('oClient:',oClient, 'oUsername:', this.oUsername,'frag:', frag);
-    let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oUsername: this.oUsername,frag: frag });
+    let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oUsername: this.oUsername,frag: frag });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -144,7 +145,7 @@ export class PicksummaryPage {
 
 
   doGetitemWObyTask(oWo,oClient){
-    let profileModal = this.modalCtrl.create(itemPickSumPage, { oWo: oWo, oClient:oClient, oUsername: this.oUsername });
+    let profileModal = this.modalCtrl.create("itemPickSumPage", { oWo: oWo, oClient:oClient, oUsername: this.oUsername });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

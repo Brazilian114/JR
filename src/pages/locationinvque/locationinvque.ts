@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ModalController, Content } from 'ionic-angular';
+import { NavController, ModalController, Content, IonicPage } from 'ionic-angular';
 
-import { WarehousemodalPage } from '../modal/warehousemodal/warehousemodal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'LocationinvquePage',
+  segment: 'Locationinvque'}
+)
 
 @Component({
   selector: 'page-locationinvque',
@@ -38,7 +41,7 @@ export class LocationinvquePage {
       }, 300)
     }
   doGetWH(){
-    let profileModal = this.modalCtrl.create(WarehousemodalPage);
+    let profileModal = this.modalCtrl.create("WarehousemodalPage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -59,7 +62,7 @@ export class LocationinvquePage {
       });
   }
   doGetLocationAll(oWH){
-    let profileModal = this.modalCtrl.create(LocationmodalPage, { oWH: oWH });
+    let profileModal = this.modalCtrl.create("LocationmodalPage", { oWH: oWH });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

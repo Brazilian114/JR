@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'HomePage',
+  segment: 'Home'}
+)
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

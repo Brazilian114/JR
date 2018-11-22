@@ -1,13 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Content, AlertController, Platform  } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Content, AlertController, Platform, IonicPage  } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-import { WomodalPage } from '../modal/womodal/womodal';
-import { itemWObyTaskPage } from '../modal/itemWObyTask-modal/itemWObyTask-modal';
-import { HomePage } from '../home/home';
 
 import { Service } from '../../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
+
+@IonicPage(
+  {name:'PickbytaskTransferPage',
+  segment: 'PickbytaskTransfer'}
+)
 @Component({
   selector: 'page-pickbytasktransfer',
   templateUrl: 'pickbytasktransfer.html'
@@ -82,7 +83,7 @@ export class PickbytaskTransferPage {
     }
   doGetWo(oClient, oWo){
     let frag = 1;
-    let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oWo:oWo , oUsername: this.oUsername, frag: frag });
+    let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oWo:oWo , oUsername: this.oUsername, frag: frag });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -101,7 +102,7 @@ export class PickbytaskTransferPage {
   }
   doGetitemWObyTask(oWo){
     let frag = 1;
-    let profileModal = this.modalCtrl.create(itemWObyTaskPage, { oWo: oWo, oUsername: this.oUsername, frag: frag });
+    let profileModal = this.modalCtrl.create("itemWObyTaskPage", { oWo: oWo, oUsername: this.oUsername, frag: frag });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -304,7 +305,7 @@ export class PickbytaskTransferPage {
     this.oColor = "";
   }
   doBack(){
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot("HomePage");
   }
   barcodeOnClick(){
     setTimeout(()=>{

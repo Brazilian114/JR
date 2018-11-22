@@ -1,10 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Content, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Content, AlertController, IonicPage } from 'ionic-angular';
 
-import { CilentmodelPage } from '../modal/cilentmodel/cilentmodel';
-import { ItemNomodalPage } from '../modal/itemNo-modal/itemNo-modal';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Service } from '../../services/service';
+
+@IonicPage(
+  {name:'IteminvquePage',
+  segment: 'Iteminvque'}
+)
 
 @Component({
   selector: 'page-iteminvque',
@@ -53,7 +56,7 @@ export class IteminvquePage {
     }
 
   doGetClient(){
-    let profileModal = this.modalCtrl.create(CilentmodelPage);
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -61,7 +64,7 @@ export class IteminvquePage {
       });
   }
   doGetItemNo(oClient){
-    let profileModal = this.modalCtrl.create(ItemNomodalPage, { oClient: oClient });
+    let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);

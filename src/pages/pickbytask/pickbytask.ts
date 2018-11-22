@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
-import { WomodalPage } from '../modal/womodal/womodal';
-import { itemWObyTaskPage } from '../modal/itemWObyTask-modal/itemWObyTask-modal';
 
 import { Service } from '../../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
+
+@IonicPage(
+  {name:'PickbytaskPage',
+  segment: 'Pickbytask'}
+)
 @Component({
   selector: 'page-pickbytask',
   templateUrl: 'pickbytask.html'
@@ -79,7 +81,7 @@ export class PickbytaskPage {
       }, 300)
     }
   doGetWo(oClient){
-    let profileModal = this.modalCtrl.create(WomodalPage, { oClient: oClient, oUsername: this.oUsername });
+    let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oUsername: this.oUsername });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log("data",data);
@@ -95,7 +97,7 @@ export class PickbytaskPage {
       });
   }
   doGetitemWObyTask(oWo){
-    let profileModal = this.modalCtrl.create(itemWObyTaskPage, { oWo: oWo, oUsername: this.oUsername });
+    let profileModal = this.modalCtrl.create("itemWObyTaskPage", { oWo: oWo, oUsername: this.oUsername });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -198,7 +200,7 @@ export class PickbytaskPage {
       console.log(this.data_movement);
     })
   }
-  doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oPalletTo, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew){
+  doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew){
     if(oLocation != oLocation_confirm)
     {
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
@@ -211,17 +213,14 @@ export class PickbytaskPage {
     {
         this.presentToast('โปรดกรอก Pallet ให้ตรงกัน', false, 'bottom');
     }
-    else if(oPalletTo == "" || oPalletTo == undefined)
-    {
-        this.presentToast('โปรดกรอก Pallet To', false, 'bottom');
-    }
     else if(oQtyNew == "" || oQtyNew == undefined || oQtyNew == 0)
     {
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
     else
     {
-      this.doClosePickTask(oWo, oTaskNo, oActivity, oQtyNew, "", this.oUsername, oUOM, oPalletTo);
+      this.oPalletTo = oPalletFromConfirm;
+      this.doClosePickTask(oWo, oTaskNo, oActivity, oQtyNew, "", this.oUsername, oUOM, this.oPalletTo);
     }
   }
   doCheckPrePick(oWo, oPallet, oPalletFromConfirm, oTaskNo, oActivity, oUom, oQty){

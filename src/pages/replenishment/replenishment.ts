@@ -1,15 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, ModalController, Content, AlertController, Platform } from 'ionic-angular';
+import { NavController, ToastController, ModalController, Content, AlertController, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
-import { PalletmodelPage } from '../modal/palletmodel/palletmodel';
-import { StockListPage } from '../stocklist/stocklist';
-import { BarcodemodelPage } from '../modal/barcodemodel/barcodemodel';
-
 import { Service } from '../../services/service';
 
+@IonicPage(
+  {name:'ReplenishmentPage',
+  segment: 'Replenishment'}
+)
 @Component({
   selector: 'page-replenishment',
   templateUrl: 'replenishment.html'
@@ -70,7 +69,7 @@ export class ReplenishmentPage {
       }, 300)
     }
   doGetLocation(oNWH, oLOC_DESC){
-      let profileModal = this.modalCtrl.create(LocationmodalPage, { oWH: oNWH, oLOC_DESC: oLOC_DESC });
+      let profileModal = this.modalCtrl.create("LocationmodalPage", { oWH: oNWH, oLOC_DESC: oLOC_DESC });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -86,7 +85,7 @@ export class ReplenishmentPage {
       this.Alert('Error', 'Please fill out the Pallet.')
     }else{
       console.log(oClient, oPallet);
-      let profileModal = this.modalCtrl.create(PalletmodelPage, { oClient: oClient, oPallet: oPallet});
+      let profileModal = this.modalCtrl.create("PalletmodelPage", { oClient: oClient, oPallet: oPallet});
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
@@ -156,7 +155,7 @@ export class ReplenishmentPage {
       this.oItem = "";
       this.oUOM = "";
 
-      let profileModal = this.modalCtrl.create(BarcodemodelPage, { oClient: oClient, oBarcode: oBarcode, oItemNo: this.oItem, oUOM: this.oUOM  });
+      let profileModal = this.modalCtrl.create("BarcodemodelPage", { oClient: oClient, oBarcode: oBarcode, oItemNo: this.oItem, oUOM: this.oUOM  });
         profileModal.present();
         profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -225,7 +224,7 @@ export class ReplenishmentPage {
     },2000);
   }
   doStockList(){
-      this.navCtrl.push(StockListPage);
+      this.navCtrl.push("StockListPage");
   }
   Alert(title, subTitle){
     let alert = this.alertCtrl.create({

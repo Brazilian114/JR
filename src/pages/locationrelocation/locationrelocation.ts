@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, ModalController, Content, AlertController, Platform } from 'ionic-angular';
+import { NavController, ToastController, ModalController, Content, AlertController, Platform, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 
 import { Service } from '../../services/service';
 
-import { WarehousemodalPage } from '../modal/warehousemodal/warehousemodal';
-import { LocationmodalPage } from '../modal/locationmodal/locationmodal';
+@IonicPage(
+  {name:'LocationrelocationPage',
+  segment: 'Locationrelocation'}
+)
 
 @Component({
   selector: 'page-locationrelocation',
@@ -55,7 +57,7 @@ export class LocationrelocationPage {
       }, 300)
     }
   doGetWH(){
-    let profileModal = this.modalCtrl.create(WarehousemodalPage);
+    let profileModal = this.modalCtrl.create("WarehousemodalPage");
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -76,7 +78,7 @@ export class LocationrelocationPage {
       });
   }
   doGetLocationAll(oWH, oLoc){
-    let profileModal = this.modalCtrl.create(LocationmodalPage, { oWH: oWH, oLOC_DESC: oLoc });
+    let profileModal = this.modalCtrl.create("LocationmodalPage", { oWH: oWH, oLOC_DESC: oLoc });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
@@ -90,7 +92,7 @@ export class LocationrelocationPage {
       });
   }
   doGetLocationAll_NotGetDetail(oWH, oLocDes){
-    let profileModal = this.modalCtrl.create(LocationmodalPage, { oWH: oWH, oLOC_DESC: oLocDes });
+    let profileModal = this.modalCtrl.create("LocationmodalPage", { oWH: oWH, oLOC_DESC: oLocDes });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
         console.log(data);
