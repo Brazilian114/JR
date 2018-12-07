@@ -410,7 +410,7 @@ doLoginApprove(username,password){
          setTimeout(()=>{
              this.myInputLocation_Confirm.setFocus();
              this.updateScroll();
-         },0);
+         },500);
        }
      })
    }else{
