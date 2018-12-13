@@ -13,7 +13,7 @@
 <ion-content>
   <div *ngFor = "let item of items">
   <ion-card (click)="doSelectItem(item.item_no, item.description, item.qty, item.uom, item.location_from, item.order_no, item.pallet_from
-  , item.delivery_date, item.customer, item.task_no, item.activity, item.location_to, item.warehouse_from, item.warehouse_to, item.zone_dest, item.zone_from , item.QTY_Dec)">
+  , item.delivery_date, item.customer, item.task_no, item.activity, item.location_to, item.warehouse_from, item.warehouse_to, item.zone_dest, item.zone_from , item.QTY_Dec, item.route)">
       <ion-card-content >
         <ion-card-title>Item No: {{item.item_no}} (Task: {{item.task_no}})</ion-card-title>
         <p>Description: {{item.description}}</p>
@@ -22,6 +22,7 @@
         <p>Location From: {{item.location_from}}</p>
         <p>Order No: {{item.order_no}}</p>
         <p>Pallet From: {{item.pallet_from}}</p>
+        <p>Route: {{item.route}}</p>
         <p>Delivery Date: {{item.delivery_date}}</p>
       </ion-card-content>
     </ion-card>

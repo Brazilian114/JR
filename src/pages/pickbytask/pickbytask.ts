@@ -44,6 +44,7 @@ export class PickbytaskPage {
     oTaskNo:any;
     oActivity:any;
     oColor:any;
+    oRoute:any;
 
     data_new_pallet:any;
     data_checkWo:any;
@@ -112,7 +113,7 @@ export class PickbytaskPage {
         this.oTaskNo = data.task_no;
         this.oActivity = data.activity;
         this.oQtyPackUOM = data.QTY_Dec;
-
+        this.oRoute = data.route;
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
         },0);
@@ -165,6 +166,7 @@ export class PickbytaskPage {
         this.oPalletFrom = this.data_item["0"].pallet_from;
         this.oStatus = this.data_item["0"].status;
         this.oQtyPackUOM = this.data_item["0"].QTY_Dec;
+        this.oRoute = this.data_item["0"].route;
 
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();

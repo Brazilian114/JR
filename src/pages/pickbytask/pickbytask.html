@@ -47,7 +47,7 @@
           <ion-input [(ngModel)]="oActivity" style="background-color: #FFFF99" readonly></ion-input>
         </ion-col>
         <ion-col col-auto class="col">
-          <button ion-button (click)="doGetitemWObyTask(oWo)">#</button>
+          <button ion-button block (click)="doGetitemWObyTask(oWo)">#</button>
         </ion-col>
       </ion-row>
   <ion-row>
@@ -74,14 +74,22 @@
           <ion-input [(ngModel)]="oUOM" style="background-color: #FFFF99" readonly></ion-input>
         </ion-col>
     </ion-row>
-<ion-row>
-  <ion-col class="col" col-2>
-    <ion-label>จำนวนหยิบ</ion-label>
-  </ion-col>
-    <ion-col class="col">
-      <ion-input [(ngModel)]="oQtyPackUOM" style="background-color: #FFFF99" readonly></ion-input>
-    </ion-col>
-</ion-row>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>จำนวนหยิบ</ion-label>
+      </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oQtyPackUOM" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="col" col-2>
+        <ion-label>เส้นทาง</ion-label>
+      </ion-col>
+        <ion-col class="col">
+          <ion-input [(ngModel)]="oRoute" style="background-color: #FFFF99" readonly></ion-input>
+        </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col class="col" col-3>
         <ion-label>พาเลทต้นทาง</ion-label>

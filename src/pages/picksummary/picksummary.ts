@@ -259,8 +259,8 @@ export class PicksummaryPage {
     }
   }
 
-  doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd){
-console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd);
+  doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd, oLot){
+console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd, oLot);
     if(oLocation != oLocation_confirm){
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
         this.myInputLocation_Confirm.setFocus();
@@ -291,8 +291,8 @@ console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLoca
     //     this.updateScroll();
     // }
     else{
-      console.log("doPickItemSum",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd);
-      this.service.close_pickSum(oWo, this.oUsername, oQtyNew, oUOM, oPalletFromConfirm, oLocation_confirm, oItem,  oBacth, oExp, oProd).then((res)=>{
+      console.log("doPickItemSum",oLocation, oPalletFrom, oPalletFromConfirm , oLocation_confirm, oWo, oUOM, oQtyNew, oItem,  oBacth, oExp, oProd, oLot);
+      this.service.close_pickSum(oWo, this.oUsername, oQtyNew, oUOM, oPalletFromConfirm, oLocation_confirm, oItem,  oBacth, oExp, oProd, oLot).then((res)=>{
         this.data_closePick = res;
         console.log(this.data_closePick);
         if(this.data_closePick.length < 0){
