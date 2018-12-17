@@ -315,6 +315,8 @@ export class PickbytaskPage {
     this.oPalletTo = "";
     this.oPalletFrom = "";
     this.oPalletFromConfirm = "";
+    this.oRoute = "";
+    this.oQtyPackUOM = "";
   }
   doClearInput(){
     this.oQtyNew = "";

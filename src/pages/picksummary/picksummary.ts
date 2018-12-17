@@ -161,7 +161,7 @@ export class PicksummaryPage {
         this.oProd = data.prod_date;
         this.oBacth = data.batch_no;
         this.oQty_Group=data.qty_uom1+" | "+data.qty_uom2;
-
+        this.oLot = data.lot_no;
         setTimeout(()=>{
             this.myInputLocation_Confirm.setFocus();
         },0);
@@ -492,6 +492,7 @@ doCheckPallet(oPalletFr, oPalletTo, oUOM){
     this.oBarcode_confirm_scan_chk = "";
     this.oBatch = "";
     this.oLot = "";
+    this.oQty_Group = "";
   }
   doClearInput(){
     this.oQtyNew = "";

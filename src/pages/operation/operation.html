@@ -8,288 +8,293 @@
 </ion-header>
 
 <ion-content>
-  <ion-card (click)="doCheckIn()">
-    <ion-card-content style="border-left: 2px solid #99CCCC;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/checkbox-pen-outline.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            รับสินค้า
-          </ion-card-title>
-          <!-- <ion-card-title>
-            รับสินค้าเข้าระบบ อ้างอิง PO,ASN
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doCheckInOther()">
-    <ion-card-content style="border-left: 2px solid #99CCCC;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/checkbox-pen-outline.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            รับสินค้าอื่นๆ
-          </ion-card-title>
-          <!-- <ion-card-title>
-            รับสินค้าเข้าระบบ อ้างอิง PO,ASN
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doCheckIn()" text-center>
+        <ion-card-content style="border-left: 2px solid #99CCCC;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/checkbox-pen-outline.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                รับสินค้า
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doCheckInOther()" text-center>
+        <ion-card-content style="border-left: 2px solid #99CCCC;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/checkbox-pen-outline.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                รับสินค้าอื่นๆ
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doReceiptCheckinReturn()" text-center>
+        <ion-card-content style="border-left: 2px solid #99CCCC;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Receipt-checkin-Return.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                รับสินค้าคืนจากลูกค้า
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doPutaway()" text-center>
+        <ion-card-content style="border-left: 2px solid #9999FF;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/icon-forklift.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                เก็บสินค้าเข้าสต๊อค
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doPickbytask()" text-center>
+        <ion-card-content style="border-left: 2px solid #6A5ACD;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-task.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                หยิบสินค้าแบบรายเดียว
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doPicksummary()" text-center>
+        <ion-card-content style="border-left: 2px solid #6A5ACD;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-task.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                หยิบสินค้าแบบรายกลุ่ม
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doPickbytaskTransfer()" text-center>
+        <ion-card-content style="border-left: 2px solid #660000;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-transfer.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                หยิบสินค้าเพื่อย้ายแบบรายเดียว
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doLoadToTruck()" text-center>
+        <ion-card-content style="border-left: 2px solid #FF4500;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/LoadtoTruck.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                โหลดสินค้าขึ้นรถ
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doLoadToTruckPack()" text-center>
+        <ion-card-content style="border-left: 2px solid #FF4500;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/LoadtoTruck.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                โหลดสินค้าขึ้นรถแบบแพ็ค/คาตอน
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doItemrelocation()" text-center>
+        <ion-card-content style="border-left: 2px solid #FFA500;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Item-Relocation.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                สินค้าย้ายโลเคชั่น
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doPalletrelocationPage()" text-center>
+        <ion-card-content style="border-left: 2px solid #FFFF00;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Pallet-Relocation.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                พาเลทสินค้าย้ายโลเคชั่น
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doStockcountPage()" text-center>
+        <ion-card-content style="border-left: 2px solid #00FFFF;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Stock-count.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                นับสต๊อค
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doIteminvquePage()" text-center>
+        <ion-card-content style="border-left: 2px solid #87CEFA;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Item-Inventory-query.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                ตรวจสอบสินค้าภายในคลัง
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card (click)="doLocationinvquePage()" text-center>
+        <ion-card-content style="border-left: 2px solid #ADFF2F;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Location-inventory-query.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                ตรวจสอบสินค้าภายในโลเคชั่น
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card (click)="doLocationrelocationPage()" text-center>
+        <ion-card-content style="border-left: 2px solid #7FFFD4;">
+          <ion-row>
+            <ion-col style="margin: auto;">
+              <ion-img width="30" height="30" src="assets/imgs/Location-relocation.png"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-card-title>
+                ย้ายสินค้าภายในโลเคชั่นทั้งหมด
+              </ion-card-title>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
 
-  <ion-card (click)="doReceiptCheckinReturn()">
-    <ion-card-content style="border-left: 2px solid #99CCCC;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Receipt-checkin-Return.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            รับสินค้าคืนจากลูกค้า
-          </ion-card-title>
-          <!-- <ion-card-title>
-            รับสินค้าเข้าระบบ จากการทำ SM
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doPutaway()">
-    <ion-card-content style="border-left: 2px solid #9999FF;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/icon-forklift.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            เก็บสินค้าเข้าสต๊อค
-          </ion-card-title>
-          <!-- <ion-card-title>
-            นำสินค้าไปจัดเก็บ
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doPickbytask()">
-    <ion-card-content style="border-left: 2px solid #6A5ACD;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-task.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            หยิบสินค้าแบบรายเดียว
-          </ion-card-title>
-          <!-- <ion-card-title>
-            หยิบสินค้าตามงาน
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doPicksummary()">
-    <ion-card-content style="border-left: 2px solid #6A5ACD;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-task.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            หยิบสินค้าแบบรายกลุ่ม
-          </ion-card-title>
-          <!-- <ion-card-title>
-            หยิบสินค้าแบบรวม
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doPickbytaskTransfer()">
-    <ion-card-content style="border-left: 2px solid #660000;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-transfer.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            หยิบสินค้าเพื่อย้ายแบบรายเดียว
-          </ion-card-title>
-          <!-- <ion-card-title>
-            หยิบสินค้าตามงาน แบบโอนย้ายโซน
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <!-- <ion-card (click)="doPickbyorder()">
-    <ion-card-content style="border-left: 2px solid #FF0000;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/icon-pick-by-order.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            Pick By Order
-          </ion-card-title>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card> -->
-  <ion-card (click)="doLoadToTruck()">
-    <ion-card-content style="border-left: 2px solid #FF4500;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/LoadtoTruck.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            โหลดสินค้าขึ้นรถ
-          </ion-card-title>
-          <!-- <ion-card-title>
-            นำสินค้าขึ้นรถ
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card (click)="doLoadToTruckPack()">
-    <ion-card-content style="border-left: 2px solid #FF4500;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/LoadtoTruck.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            โหลดสินค้าขึ้นรถแบบแพ็ค/คาตอน
-          </ion-card-title>
-
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card (click)="doItemrelocation()">
-    <ion-card-content style="border-left: 2px solid #FFA500;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Item-Relocation.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            สินค้าย้ายโลเคชั่น
-          </ion-card-title>
-          <!-- <ion-card-title>
-            ย้ายสินค้า
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doPalletrelocationPage()">
-    <ion-card-content style="border-left: 2px solid #FFFF00;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Pallet-Relocation.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            พาเลทสินค้าย้ายโลเคชั่น
-          </ion-card-title>
-          <!-- <ion-card-title>
-            ย้ายพาเลท
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doStockcountPage()">
-    <ion-card-content style="border-left: 2px solid #00FFFF;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Stock-count.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            นับสต๊อค
-          </ion-card-title>
-          <!-- <ion-card-title>
-            นับสต๊อกสินค้า
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doIteminvquePage()">
-    <ion-card-content style="border-left: 2px solid #87CEFA;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Item-Inventory-query.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            ตรวจสอบสถานะสินค้าภายในคลัง
-          </ion-card-title>
-          <!-- <ion-card-title>
-            ดูสต๊อกสินค้าตามรหัสสินค้า
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doLocationinvquePage()">
-    <ion-card-content style="border-left: 2px solid #ADFF2F;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Location-inventory-query.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            ตรวจสอบสถานะสินค้าภายในโลเคชั่น
-          </ion-card-title>
-          <!-- <ion-card-title>
-            ดูสต๊อกสินค้าตามสถานที่
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <ion-card (click)="doLocationrelocationPage()">
-    <ion-card-content style="border-left: 2px solid #7FFFD4;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Location-relocation.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            ย้ายสินค้าภายในโลเคชั่นทั้งหมด
-          </ion-card-title>
-          <!-- <ion-card-title>
-            ย้ายทั้งสถานที่
-          </ion-card-title> -->
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-  <!-- <ion-card (click)="doReplenishment()">
-    <ion-card-content style="border-left: 2px solid #0000CD;">
-      <ion-row>
-        <ion-col col-1 style="margin: auto;">
-          <ion-img width="30" height="30" src="assets/imgs/Replenishment.png"></ion-img>
-        </ion-col>
-        <ion-col class="paddingLeft">
-          <ion-card-title>
-            Replenishment
-          </ion-card-title>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card> -->
+    </ion-col>
+  </ion-row>
 </ion-content>
