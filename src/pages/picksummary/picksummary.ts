@@ -159,7 +159,7 @@ export class PicksummaryPage {
         this.oStatus = data.status;
         this.oExp = data.expiry_date;
         this.oProd = data.prod_date;
-        this.oBacth = data.batch_no;
+        this.oBatch = data.batch_no;
         this.oQty_Group=data.qty_uom1+" | "+data.qty_uom2;
         this.oLot = data.lot_no;
         setTimeout(()=>{
@@ -493,6 +493,7 @@ doCheckPallet(oPalletFr, oPalletTo, oUOM){
     this.oBatch = "";
     this.oLot = "";
     this.oQty_Group = "";
+    this.oUomNew = "";
   }
   doClearInput(){
     this.oQtyNew = "";
