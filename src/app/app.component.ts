@@ -3,7 +3,7 @@ import { Nav, Platform, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
-
+import { Service } from '../services/service';
 import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
@@ -18,9 +18,11 @@ export class WMSHandheld {
   alert:any = null;
   pages: Array<{title: string, component: any}>;
   data_logins:any;
+
+  data_receipt:any;
   backButtonPressedOnceToExit:any;
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private alertCtrl: AlertController, private toastCtrl: ToastController
-    , public storage: Storage) {
+    , public storage: Storage,private service: Service) {
     this.initializeApp();
     this.menuOpened();
 
@@ -41,14 +43,39 @@ export class WMSHandheld {
                     this.nav.pop({});
                   } else {
                     this.presentToast('คลิกอีกครั้งเพื่อออกจากโปรแกรม', false, 'middle');
+
+                    this.storage.get('_user').then((res)=>{
+                      this.oUsername = res;
+                      console.log(this.oUsername);
+                      //this.doGetGrade();
+                        this.service.Set_Loguot(this.oUsername).then((res)=>{
+                          this.data_receipt = res;
+                            console.log(this.data_receipt)  });
+
+                      if(this.Check == 'Header')
+                      {
+                        setTimeout(() => {
+                          //this.doGetBook();
+                          //this.doGetWarehouse(this.oUsername);
+                          console.log(this.oUsername);
+                        }, 300)
+                      }
+                    })
+
                     this.backButtonPressedOnceToExit = true;
                     setTimeout(() => {
 
+
+
                       this.backButtonPressedOnceToExit = false;
+
                     },2000)
                   }
            });
        });
+
+
+
   }
   exitApp(){
      this.platform.exitApp();
@@ -73,6 +100,30 @@ export class WMSHandheld {
           text: 'ตกลง',
           handler: data => {
 
+
+          //  this.service.Set_Loguot(oUsername).then((res)=>{
+            //  this.data_receipt = res;
+            //    console.log(this.data_receipt)  });
+
+                this.storage.get('_user').then((res)=>{
+                  this.oUsername = res;
+                  console.log(this.oUsername);
+                  //this.doGetGrade();
+                    this.service.Set_Loguot(this.oUsername).then((res)=>{
+                      this.data_receipt = res;
+                        console.log(this.data_receipt)  });
+
+                  if(this.Check == 'Header')
+                  {
+                    setTimeout(() => {
+                      //this.doGetBook();
+                      //this.doGetWarehouse(this.oUsername);
+                      console.log(this.oUsername);
+                    }, 300)
+                  }
+                })
+
+
             this.storage.ready().then(() => {
               this.storage.remove('_user');
               this.storage.remove('_RecNum');
@@ -87,7 +138,11 @@ export class WMSHandheld {
               this.storage.remove('_user_Cus_name');
             });
             this.data_logins = "";
+            this.data_receipt = "";
             // this.reload();
+
+
+
             this.nav.setRoot("LoginPage")
           }
         }

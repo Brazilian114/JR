@@ -74,7 +74,7 @@
   </ion-grid>
   <ion-scroll scrollX="true" scrollY="true">
       <ion-grid>
-        <ion-row style="width: 800px;" *ngFor="let item of data_item; let i = index">
+        <ion-row style="width: 1000px;" *ngFor="let item of data_item; let i = index">
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
               คลัง
@@ -161,6 +161,22 @@
             </ion-row>
             <ion-row>
               {{item.expiry_date}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              TI
+            </ion-row>
+            <ion-row>
+              {{item.TI}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              HI
+            </ion-row>
+            <ion-row>
+              {{item.HI}}
             </ion-row>
           </ion-col>
         </ion-row>

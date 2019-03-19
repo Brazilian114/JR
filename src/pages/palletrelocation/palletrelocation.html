@@ -36,7 +36,7 @@
   </ion-grid>
   <ion-grid>
       <ion-scroll scrollX="true" scrollY="true">
-        <ion-row style="width: 1200px;" *ngFor = "let items of data_item; let i = index">
+        <ion-row style="width: 1500px;" *ngFor = "let items of data_item; let i = index">
           <ion-col class="border-col" col-auto>
             <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
               #
@@ -155,6 +155,22 @@
             </ion-row>
             <ion-row>
               {{items.expiry_date}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              TI
+            </ion-row>
+            <ion-row>
+              {{items.TI}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              HI
+            </ion-row>
+            <ion-row>
+              {{items.HI}}
             </ion-row>
           </ion-col>
         </ion-row>

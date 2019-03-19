@@ -27,7 +27,7 @@
 
   <ion-scroll scrollX="true" scrollY="true">
       <ion-grid>
-        <ion-row style="width: 1200px;" *ngFor="let item of data_item; let i = index"
+        <ion-row style="width: 1800px;" *ngFor="let item of data_item; let i = index"
         (click)="doReturnItemDetail(item.description,item.grade,item.item_code,item.item_no,item.location,item.qty_avail
         ,item.rec_num,item.uom,item.warehouse, item.pallet)">
           <ion-col class="border-col">
@@ -156,6 +156,22 @@
             </ion-row>
             <ion-row>
               {{item.rec_num}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              HI
+            </ion-row>
+            <ion-row>
+              {{item.TI}}
+            </ion-row>
+          </ion-col>
+          <ion-col class="border-col">
+            <ion-row class="border-row" *ngIf = "i == 0">
+              HI
+            </ion-row>
+            <ion-row>
+              {{item.HI}}
             </ion-row>
           </ion-col>
 

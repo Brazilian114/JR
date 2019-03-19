@@ -23,7 +23,7 @@
 
       <ion-scroll scrollX="true" scrollY="true">
           <ion-grid>
-            <ion-row style="width: 700px;" *ngFor = "let items of data_detail; let i = index">
+            <ion-row style="width: 1000px;" *ngFor = "let items of data_detail; let i = index">
               <ion-col class="border-col" col-auto>
                 <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
                   #
@@ -86,6 +86,22 @@
                 </ion-row>
                 <ion-row>
                   {{items.qty_mod}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  TI
+                </ion-row>
+                <ion-row>
+                  {{items.TI}}
+                </ion-row>
+              </ion-col>
+              <ion-col class="border-col">
+                <ion-row class="border-row" *ngIf = "i == 0">
+                  HI
+                </ion-row>
+                <ion-row>
+                  {{items.HI}}
                 </ion-row>
               </ion-col>
             </ion-row>
