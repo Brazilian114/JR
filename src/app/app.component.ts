@@ -52,14 +52,6 @@ export class WMSHandheld {
                           this.data_receipt = res;
                             console.log(this.data_receipt)  });
 
-                      if(this.Check == 'Header')
-                      {
-                        setTimeout(() => {
-                          //this.doGetBook();
-                          //this.doGetWarehouse(this.oUsername);
-                          console.log(this.oUsername);
-                        }, 300)
-                      }
                     })
 
                     this.backButtonPressedOnceToExit = true;
@@ -112,15 +104,6 @@ export class WMSHandheld {
                     this.service.Set_Loguot(this.oUsername).then((res)=>{
                       this.data_receipt = res;
                         console.log(this.data_receipt)  });
-
-                  if(this.Check == 'Header')
-                  {
-                    setTimeout(() => {
-                      //this.doGetBook();
-                      //this.doGetWarehouse(this.oUsername);
-                      console.log(this.oUsername);
-                    }, 300)
-                  }
                 })
 
 
