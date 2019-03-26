@@ -23,7 +23,7 @@
 
       <ion-scroll scrollX="true" scrollY="true">
           <ion-grid>
-            <ion-row style="width: 1400px;" *ngFor = "let items of data_detail; let i = index">
+            <ion-row style="width: 900px;" *ngFor = "let items of data_detail; let i = index">
               <ion-col class="border-col" col-auto>
                 <ion-row class="border-row" style="width:20px;" *ngIf = "i == 0">
                   #
@@ -32,7 +32,7 @@
                   {{items.line_no}}
                 </ion-row>
               </ion-col>
-              <ion-col class="border-col" col-2>
+              <ion-col class="border-col">
                 <ion-row class="border-row" *ngIf = "i == 0">
                   รหัสสินค้า
                 </ion-row>
@@ -40,7 +40,7 @@
                   {{items.item_no}}
                 </ion-row>
               </ion-col>
-              <ion-col class="border-col" col-5>
+              <ion-col class="border-col">
                 <ion-row class="border-row" *ngIf = "i == 0">
                     ชื่อสินค้า
                 </ion-row>
