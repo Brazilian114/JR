@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, LoadingController, AlertController, Content, Platform, IonicPage } from 'ionic-angular';
+import { NavController, ToastController, LoadingController, AlertController, Content, Platform, IonicPage, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Service } from '../../services/service';
@@ -27,13 +27,15 @@ export class LoginPage {
   url:string;
   constructor(public navCtrl: NavController, private toastCtrl: ToastController,private loadingCtrl: LoadingController
     , private storage: Storage, private service : Service, private alertCtrl: AlertController, private network: Network
-    , private screenOrientation: ScreenOrientation, public platform: Platform, private keyboard: Keyboard) {
-
+    , private screenOrientation: ScreenOrientation, public platform: Platform, private keyboard: Keyboard, private menuCtrl: MenuController) {
       // this.doLoginJson(this.oUsername, this.oPassword);
+
   }
   ionViewDidEnter() {
       this.platform.ready().then(() => {
         this.keyboard.disableScroll(true);
+        // close and disable the side menu.  I don't want them accessing this unless they're logged in.
+        this.menuCtrl.swipeEnable(false);
       });
   }
   updateScroll() {
