@@ -63,12 +63,17 @@ export class ItemrelocationPage {
   doClick(){
     this.updateScroll();
   }
+
   updateScroll() {
       console.log('updating scroll')
       setTimeout(() => {
         this.content.scrollToBottom();
       }, 300)
     }
+    LocDestEnter(){
+      this.InputDestPit.setFocus();
+    }
+
   doGetItemNo(oClient, oItem, flag){
     console.log(oItem);
         let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });
@@ -290,6 +295,7 @@ export class ItemrelocationPage {
       console.log(oClient, oPallet);
     this.service.get_ListItemInPalletLocation_ByPallet(oClient, oPallet+"0").then((res)=>{
       this.data_item = res;
+
       console.log(this.data_item);
     })
   }
