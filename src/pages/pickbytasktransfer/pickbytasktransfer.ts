@@ -20,7 +20,7 @@ export class PickbytaskTransferPage {
     @ViewChild('focusInputLocation_Confirm') myInputLocation_Confirm;
     @ViewChild('focusInputPallet_Confirm') myInputPallet_Confirm;
     @ViewChild(Content) content: Content;
-    oClient:string = "GTP";
+    oClient:string;
     oWo:string;
     oStatus:string;
     oItem:string;
@@ -58,6 +58,7 @@ export class PickbytaskTransferPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
           this.oUsername = res;
+          this.oClient = this.oUsername
         })
   }
   doClick(){

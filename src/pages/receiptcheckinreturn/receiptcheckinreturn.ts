@@ -47,7 +47,7 @@ export class ReceiptCheckinReturnPage {
   data_grade:any;
   data_productOther:any;
 
-  oClient:any = "GTP";
+  oClient:any;
   oReceipt:any;
   oDocref:any;
   oCustomer_Header:any;
@@ -125,6 +125,7 @@ export class ReceiptCheckinReturnPage {
 
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
+        this.oClient = this.oUsername
         console.log(this.oUsername);
 
         if(this.Check == 'Header')

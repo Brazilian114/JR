@@ -26,7 +26,7 @@ export class StockcountPage {
     data_item:any;
     data_barcodeDetail:any;
 
-    oClient:string = "GTP";
+    oClient:string;
     oStk:string = "";
     oZone:string = "";
     oItem:string = "";
@@ -74,6 +74,7 @@ export class StockcountPage {
   , private alertCtrl: AlertController, public platform: Platform, private keyboard: Keyboard) {
     this.storage.get('_user').then((res)=>{
       this.oUsername = res;
+      this.oClient = this.oUsername
     })
   }
   ionViewDidEnter() {

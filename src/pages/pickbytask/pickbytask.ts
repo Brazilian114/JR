@@ -21,7 +21,7 @@ export class PickbytaskPage {
     @ViewChild('focusInputPalletTo') myInputPalletTo;
     @ViewChild('focusInputPalletConfirm') myInputPalletConfirm;
     @ViewChild(Content) content: Content;
-    oClient:any = "GTP";
+    oClient:any;
     oWo:any;
     oStatus:any;
     oItem:any;
@@ -58,6 +58,7 @@ export class PickbytaskPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
           this.oUsername = res;
+          this.oClient = this.oUsername
         })
   }
   doClick(){

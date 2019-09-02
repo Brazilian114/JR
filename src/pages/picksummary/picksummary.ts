@@ -24,7 +24,7 @@ export class PicksummaryPage {
     @ViewChild('focusQtyNew') myInputQtyNew;
 
     @ViewChild(Content) content: Content;
-    oClient:any = "GTP";
+    oClient:any;
     oWo:any;
     oStatus:any;
     oItem:any;
@@ -70,8 +70,10 @@ export class PicksummaryPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
           this.oUsername = res;
+          this.oClient = this.oUsername
           console.log(this.oUsername)
         })
+        
   }
   doClick(){
     this.updateScroll();

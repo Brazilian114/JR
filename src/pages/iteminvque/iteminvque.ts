@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, LoadingController, ToastController, ModalController, Content, AlertController, IonicPage } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Service } from '../../services/service';
 
@@ -18,7 +18,7 @@ export class IteminvquePage {
   @ViewChild('focusInputBarcode') InputBarcode;
   @ViewChild(Content) content: Content;
 
-  oClient:string = "GTP";
+  oClient:string;
   oDes:string = null;
   oItem:string = null;
   oQty:any;
@@ -26,6 +26,7 @@ export class IteminvquePage {
   oBarcode:string;
   listType:any;
   oGrade:any;
+  oUsername:any;
   data_item:any;
   data_showlist:any;
   data_grade:any;
@@ -34,9 +35,12 @@ export class IteminvquePage {
   oReceiptNO:string = "";
   oPONo:string = "";
   loader:any;
-  constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
+  constructor( private storage: Storage, public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private keyboard: Keyboard, private alertCtrl: AlertController) {
-
+      this.storage.get('_user').then((res)=>{
+        this.oUsername = res;
+        this.oClient = this.oUsername
+      })
   }
   ionViewDidEnter(){
     setTimeout(()=>{

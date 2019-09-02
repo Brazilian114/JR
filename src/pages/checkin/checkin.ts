@@ -49,7 +49,7 @@ export class CheckinPage {
   data_close:any;
   data_productOther:any;
 
-  oClient:string = "GTP";
+  oClient:string;
   oReceipt:string;
   oDocref:string;
   oSupplier:string;
@@ -120,6 +120,7 @@ export class CheckinPage {
 
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
+        this.oClient = this.oUsername
         console.log(this.oUsername);
         this.doGetGrade();
 

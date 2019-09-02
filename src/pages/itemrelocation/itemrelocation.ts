@@ -24,7 +24,7 @@ export class ItemrelocationPage {
   data_item:any;
   data_item_relocation:any;
   data_new_pallet:any;
-  oClient:any = "GTP";
+  oClient:any;
   oDes:any = null;
   oItem:any = null;
   oDestLoc: any;
@@ -46,6 +46,7 @@ export class ItemrelocationPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
+        this.oClient = this.oUsername
       })
   }
   ionViewDidEnter() {
