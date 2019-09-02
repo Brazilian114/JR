@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Receipt Check In Return</ion-title>
+    <ion-title>รับสินค้าคืน</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -366,13 +366,13 @@
 <ion-footer>
       <ion-segment [(ngModel)]="Check">
         <ion-segment-button value="Header" (click)="doClickHeader(Check, listQty)">
-          Header
+          รับสินค้าคืน
         </ion-segment-button>
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doClickHeader(Check, listQty)">
-          Details
+          รายละเอียด
         </ion-segment-button>
         <ion-segment-button value="Other" [disabled]="!isenabled">
-          Other
+          อื่น ๆ
         </ion-segment-button>
       </ion-segment>
 </ion-footer>

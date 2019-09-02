@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>WO</ion-title>
+    <ion-title>การสั่งงาน</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -17,7 +17,7 @@
         <ion-card-content >
           <ion-card-title>{{wo.wo_no}}</ion-card-title>
           <p>{{wo.customer_name}}({{wo.customer}})</p>
-          <p>เลขที่ SO {{wo.so_no}}</p>
+          <p>เลขที่การสั่งงานขาย {{wo.so_no}}</p>
           <p>วันที่ : {{wo.delivery_date}}({{wo.wo_status}})</p>
         </ion-card-content>
       </ion-card>
@@ -29,7 +29,7 @@
         <ion-card-content >
           <ion-card-title>{{wo.works_order}}</ion-card-title>
           <p>{{wo.customer_name}}({{wo.customer}})</p>
-          <p>เลขที่ Order No : {{wo.order_no}}</p>
+          <p>เลขที่การสั่งงาน : {{wo.order_no}}</p>
           <p>วันที่ : {{wo.delivery_date}}({{wo.status}})</p>
         </ion-card-content>
       </ion-card>
@@ -40,7 +40,7 @@
       <ion-card (click)="doSelectPickSum(wo.wave_pick_no)">
         <ion-card-content >
           <ion-card-title>{{wo.wave_pick_no}}</ion-card-title>
-            <p>เลขที่ Order No : {{wo.wave_pick_no}}</p>
+            <p>เลขที่การสั่งงานหยิบ : {{wo.wave_pick_no}}</p>
             <p>สถานที่ : {{wo.route_picksum}} {{wo.route_name}}</p>
             <p>วันที่จัดส่ง : {{wo.delivery_picsum | date : 'dd/MM/yyyy'}}</p>
             <p>หมายเหตุ : {{wo.remark_picksum}}</p>

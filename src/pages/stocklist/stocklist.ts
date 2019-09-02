@@ -21,7 +21,7 @@ export class StockListPage {
 
   data_barcode_master:any;
 
-  oClient:any = "JRFB2550";
+  oClient:any = "GTP";
   oUsername:any;
   oCheck_Item:any = true;
   oCheck_Location:any = false;

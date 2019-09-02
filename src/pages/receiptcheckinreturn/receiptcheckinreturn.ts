@@ -47,7 +47,7 @@ export class ReceiptCheckinReturnPage {
   data_grade:any;
   data_productOther:any;
 
-  oClient:any = "JRFB2550";
+  oClient:any = "GTP";
   oReceipt:any;
   oDocref:any;
   oCustomer_Header:any;

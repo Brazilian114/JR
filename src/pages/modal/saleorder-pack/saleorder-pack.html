@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Sale Order Pack</ion-title>
+    <ion-title>ใบสั่งขายแบบแพ๊ค</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -16,8 +16,8 @@
       <ion-card-content >
         <ion-card-title>{{data.sales_order}}</ion-card-title>
         <p>{{data.customer_name}}({{data.customer}})</p>
-        <p>Status: {{data.status}}</p>
-        <p>Delivery: {{data.delivery}}</p>
+        <p>สถานะ: {{data.status}}</p>
+        <p>เลขที่การจัดส่ง: {{data.delivery}}</p>
       </ion-card-content>
     </ion-card>
   </div>

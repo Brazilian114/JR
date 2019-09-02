@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Item Work Order</ion-title>
+    <ion-title>รายการสั่งการทำงาน</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -15,15 +15,15 @@
   <ion-card (click)="doSelectItem(item.item_no, item.description, item.qty, item.uom, item.location_from, item.order_no, item.pallet_from
   , item.delivery_date, item.customer, item.task_no, item.activity, item.location_to, item.warehouse_from, item.warehouse_to, item.zone_dest, item.zone_from , item.QTY_Dec, item.route)">
       <ion-card-content >
-        <ion-card-title>Item No: {{item.item_no}} (Task: {{item.task_no}})</ion-card-title>
-        <p>Description: {{item.description}}</p>
-        <p>Qty: {{item.qty}}</p>
-        <p>UOM: {{item.uom}}</p>
-        <p>Location From: {{item.location_from}}</p>
-        <p>Order No: {{item.order_no}}</p>
-        <p>Pallet From: {{item.pallet_from}}</p>
-        <p>Route: {{item.route}}</p>
-        <p>Delivery Date: {{item.delivery_date}}</p>
+        <ion-card-title>เลขที่สินค้า: {{item.item_no}} (Task: {{item.task_no}})</ion-card-title>
+        <p>รายละเอียด: {{item.description}}</p>
+        <p>จำนวน: {{item.qty}}</p>
+        <p>หน่วย: {{item.uom}}</p>
+        <p>จากตำแหน่ง: {{item.location_from}}</p>
+        <p>หมายเลขการสั่งซื้อ: {{item.order_no}}</p>
+        <p>จากพาเลท: {{item.pallet_from}}</p>
+        <p>เส้นทาง: {{item.route}}</p>
+        <p>วันที่ส่งมอบ: {{item.delivery_date}}</p>
       </ion-card-content>
     </ion-card>
   </div>

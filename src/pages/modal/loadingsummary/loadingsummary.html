@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Loading Summary</ion-title>
+    <ion-title>โหลดแบบกลุ่ม</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -15,7 +15,7 @@
   <ion-card (click)="doSelectLoading(data.load_summary, data.status, data.create_date, data.vehicle_type, data.vehicle, data.driver, data.agent)">
       <ion-card-content >
         <ion-card-title>{{data.load_summary}}</ion-card-title>
-        <p>Status: {{data.status}}</p>
+        <p>สถานะ: {{data.status}}</p>
       </ion-card-content>
     </ion-card>
   </div>

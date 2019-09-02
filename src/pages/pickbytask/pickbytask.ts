@@ -21,7 +21,7 @@ export class PickbytaskPage {
     @ViewChild('focusInputPalletTo') myInputPalletTo;
     @ViewChild('focusInputPalletConfirm') myInputPalletConfirm;
     @ViewChild(Content) content: Content;
-    oClient:any = "JRFB2550";
+    oClient:any = "GTP";
     oWo:any;
     oStatus:any;
     oItem:any;
@@ -127,6 +127,8 @@ export class PickbytaskPage {
   }
   onKeyup(oClient){
     console.log(this.oWo)
+    console.log(this.oClient)
+    
     let barcode=this.oWo;
     this.service.get_wo(oClient, barcode, this.oUsername).then((res)=>{
       this.data_wo = res;
@@ -137,8 +139,8 @@ export class PickbytaskPage {
      this.doGetDetailWorkOrder(barcode, this.oUsername);
   }
 
-  doGetDetailWorkOrder(oWo, oUsername){
-    this.service.get_detail_workorder(oWo).then((res)=>{
+  doGetDetailWorkOrder(oWo, oUser){
+    this.service.get_detail_workorder(oWo, oUser).then((res)=>{
       this.data_item = res;
       console.log("this.data_item",this.data_item);
         if(this.data_item.length <= 0){
@@ -154,6 +156,8 @@ export class PickbytaskPage {
           });
           alert.present();
       }else{
+        this.oSup = this.data_item["0"].customer_name;
+
         this.oItem = this.data_item["0"].item_no;
         this.oTaskNo = this.data_item["0"].task_no;
         this.oActivity = this.data_item["0"].activity;

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Sale Return</ion-title>
+    <ion-title>การขายคืน</ion-title>
     <ion-buttons end>
        <button style="background-color: #000080;width:30px; height:30px;" (click)="doGetSaleReturnDetail(oClient, oBranch, oDoc_no)">
          <ion-icon style="color: #FFFFFF;" name="ios-refresh-circle-outline"></ion-icon>
@@ -38,7 +38,7 @@
           <ion-input [(ngModel)]="oBranchName" readonly></ion-input>
         </ion-col>
         <ion-col col-auto>
-          <ion-label>Status</ion-label>
+          <ion-label>สถานะ</ion-label>
         </ion-col>
         <ion-col>
           <ion-input [(ngModel)]="oStatus" readonly></ion-input>

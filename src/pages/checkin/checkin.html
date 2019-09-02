@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>Check In</ion-title> -->
-    <ion-title>Check In</ion-title>
+    <ion-title>รับสินค้า</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -51,7 +51,7 @@
                 <!-- <ion-label stacked style="margin: 0px 0px 0px 0;">Warehouse</ion-label> -->
                 <ion-label stacked style="margin: 0px 0px 0px 0;">คลังสินค้า</ion-label>
                 <ion-select [(ngModel)]="listWhses" interface="popover" (ionChange)="doGetStation(listWhses)">
-                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Description}}</ion-option>
+                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Warehouse}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -100,7 +100,8 @@
                 <ion-label stacked style="margin: 0px 0px 0px 0;">ชนิด</ion-label>
                 <ion-select [(ngModel)]="listType" interface="popover" disabled ="{{isEnabled}}">
                   <!-- <ion-select [(ngModel)]="listType" interface="popover" > -->
-                  <ion-option value="NORMAL" [selected]="true">NORMAL</ion-option>
+                  <!-- <ion-option value="NORMAL" [selected]="true">NORMAL</ion-option> -->
+                  <ion-option value="NORMAL" [selected]="true">ปกติ</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -261,7 +262,7 @@
             <ion-col col-3>
               <!-- <button ion-button block (click)="doGetBarcode(oClient,oSupplier,oInc)">Barcode</button> -->
               <!-- <button ion-button block >Barcode</button> -->
-              <button ion-button block >บาร์โค้ด</button>
+              <button ion-button block (click)="doGetBarcodeDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass)">บาร์โค้ด</button>
             </ion-col>
             <ion-col>
               <ion-input [(ngModel)]="oBarcode" #focusInputBarcode (keyup.enter)="doGetBarcodeDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, listGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass)"></ion-input>
@@ -295,8 +296,10 @@
               <!-- <ion-label stacked>Qty</ion-label> -->
               <ion-label stacked>จำนวน</ion-label>
               <ion-select [(ngModel)]="listQty" dir="ltr" interface="popover" (ionChange)="doListqty(listQty)">
-                <ion-option value="0" [selected]="true">Key Qty</ion-option>
-                <ion-option value="1">Count Qty</ion-option>
+                <!-- <ion-option value="0" [selected]="true">Key Qty</ion-option>
+                <ion-option value="1">Count Qty</ion-option> -->
+                <ion-option value="0" [selected]="true">จำนวนที่ใส่</ion-option>
+                <ion-option value="1">จำนวนนับ</ion-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -572,16 +575,16 @@
 <ion-footer>
       <ion-segment [(ngModel)]="Check">
         <ion-segment-button value="Header" (click)="doClickHeader(Check, listQty)">
-          Header
+          <!-- Header --> รับสินค้า
         </ion-segment-button>
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doClickHeader(Check, listQty)">
-          Details
+          <!-- Details --> รายละเอียด
         </ion-segment-button>
         <ion-segment-button value="Other" [disabled]="!isenabled">
-          Other
+          <!-- Other --> อื่น ๆ
         </ion-segment-button>
         <ion-segment-button value="PalletList" [disabled]="!isenabled" (click)="doGetPalletList(oClient, oReceipt)">
-          Pallet List
+          <!-- Pallet List --> รายการพาเลท
         </ion-segment-button>
       </ion-segment>
 </ion-footer>

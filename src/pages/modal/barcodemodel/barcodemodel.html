@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Barcode Detail</ion-title>
+    <ion-title>รายละเอียดบาร์โค๊ด</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -16,10 +16,10 @@
       <ion-card-content >
         <ion-card-title>{{barcode.item_no}}</ion-card-title>
         <p>{{barcode.description}}</p>
-        <p>Location: {{barcode.location}}</p>
-        <p>Qty: {{barcode.qty_avail}}</p>
-        <p>UOM: {{barcode.item_packing}}</p>
-        <p>Grade: {{barcode.grade}}</p>
+        <p>ตำแหน่ง: {{barcode.location}}</p>
+        <p>จำนวน: {{barcode.qty_avail}}</p>
+        <p>หน่วย: {{barcode.item_packing}}</p>
+        <p>เกรด: {{barcode.grade}}</p>
       </ion-card-content>
     </ion-card>
   </div>

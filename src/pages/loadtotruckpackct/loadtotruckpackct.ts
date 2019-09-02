@@ -25,7 +25,7 @@ export class LoadtotruckPackCartonPage {
   @ViewChild(Content) content: Content;
 
 
-  oClient:any = "JRFB2550";
+  oClient:any = "GTP";
   oUsername:any;
   Check:any = "Header";
   loader:any;

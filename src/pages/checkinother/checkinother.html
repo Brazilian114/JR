@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <!-- <ion-title>Check In</ion-title> -->
-    <ion-title>Check In Other</ion-title>
+    <ion-title>รับสินค้าอื่น ๆ</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -95,7 +95,8 @@
                 <ion-label stacked style="margin: 0px 0px 0px 0;">ชนิด</ion-label>
                 <ion-select [(ngModel)]="listType" interface="popover" disabled ="{{isEnabled}}">
                   <!-- <ion-select [(ngModel)]="listType" interface="popover" > -->
-                  <ion-option value="OTHER" [selected]="true">OTHER</ion-option>
+                  <!-- <ion-option value="OTHER" [selected]="true">OTHER</ion-option> -->
+                  <ion-option value="OTHER" [selected]="true">อื่น ๆ</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -586,16 +587,16 @@
 <ion-footer>
       <ion-segment [(ngModel)]="Check">
         <ion-segment-button value="Header" (click)="doClickHeader(Check, listQty)">
-          Header
+          รับสินค้าอื่น ๆ
         </ion-segment-button>
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doClickHeader(Check, listQty)">
-          Details
+          รายละเอียด
         </ion-segment-button>
         <ion-segment-button value="Other" [disabled]="!isenabled">
-          Other
+          อื่น ๆ
         </ion-segment-button>
         <ion-segment-button value="PalletList" [disabled]="!isenabled" (click)="doGetPalletList(oClient, oReceipt)">
-          Pallet List
+          รายการพาเลท
         </ion-segment-button>
       </ion-segment>
 </ion-footer>

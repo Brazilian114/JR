@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Load To Truck</ion-title>
+    <ion-title>โหลดสินค้าขึ้นรถ</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -401,13 +401,13 @@
   <ion-footer>
       <ion-segment [(ngModel)]="Check">
         <ion-segment-button value="Header">
-          Header
+          โหลดสินค้าขึ้นรถ
         </ion-segment-button>
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doGetLoadingSummaryDetail(oLoadingSummaryNo, oClient)">
-          Details
+          รายละเอียด
         </ion-segment-button>
         <ion-segment-button value="Item" [disabled]="!isenabled" (click)="doGetSummaryItemList(oLoadingSummaryNo,oSalesOrder)">
-          Summary List
+          สรุปรายการ
         </ion-segment-button>
       </ion-segment>
   </ion-footer>

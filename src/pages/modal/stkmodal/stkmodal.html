@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>STK</ion-title>
+    <ion-title>สต๊อค</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -15,9 +15,9 @@
   <ion-card (click)="doSelectStk(stk.count_type, stk.status, stk.stocktake_ref, stk.warehouse)">
       <ion-card-content >
         <ion-card-title>{{stk.stocktake_ref}}</ion-card-title>
-        <p>Count Type: {{stk.count_type}}</p>
-        <p>Status: {{stk.status}}</p>
-        <p>Warehouse: {{stk.warehouse}}</p>
+        <p>ประเภทการนับ: {{stk.count_type}}</p>
+        <p>สถานะ: {{stk.status}}</p>
+        <p>คลังสินค้า: {{stk.warehouse}}</p>
       </ion-card-content>
     </ion-card>
   </div>

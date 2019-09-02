@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Stock Adjustment</ion-title>
+    <ion-title>การปรับสต็อก</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +17,7 @@
           <ion-input [(ngModel)]="oClient" [value]="oClient"></ion-input>
         </ion-col>
         <ion-col col-auto>
-          <button ion-button style="width: 95%" (click)="doGetItemNo(oClient)">Item</button>
+          <button ion-button style="width: 95%" (click)="doGetItemNo(oClient)">สินค้า</button>
         </ion-col>
         <ion-col>
           <ion-input placeholder="Item"  style="background-color: #FFFF99" [(ngModel)]="oItem" [value]="oItem"></ion-input>
@@ -27,7 +27,7 @@
   <ion-grid>
     <ion-row>
         <ion-col>
-          <ion-label stacked>Des</ion-label>
+          <ion-label stacked>รายละเอียด</ion-label>
           <ion-input placeholder="Des" style="background-color: #FFFF99" [(ngModel)]="oDes" [value]="oDes"></ion-input>
         </ion-col>
     </ion-row>
@@ -36,22 +36,22 @@
       <ion-grid style="margin-top: 10px;">
         <ion-row style="width: 1000px;">
           <ion-col class="border-col">
-            Location
+            ตำแหนง
           </ion-col>
           <ion-col class="border-col">
-            Qty
+            จำนวน
           </ion-col>
           <ion-col class="border-col">
-            UOM
+            หน่วย
           </ion-col>
           <ion-col class="border-col">
-            Grade
+            เกรด
           </ion-col>
           <ion-col class="border-col">
-            Item
+            สินค้า
           </ion-col>
           <ion-col class="border-col">
-            Warehouse
+            คลังสินค้า
           </ion-col>
           <ion-col class="border-col">
             Lot No
@@ -71,7 +71,7 @@
   <ion-grid>
     <ion-row>
         <ion-col >
-          <ion-label stacked>Pallet No</ion-label>
+          <ion-label stacked>เลขที่พาเลท</ion-label>
           <ion-input placeholder="Pallet No"></ion-input>
         </ion-col>
     </ion-row>
@@ -79,11 +79,11 @@
   <ion-grid>
     <ion-row>
         <ion-col>
-          <ion-label stacked>WH</ion-label>
+          <ion-label stacked>คลังสินค้า</ion-label>
           <ion-input placeholder="Pallet No" style="background-color: #FFFF99"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-label stacked>Loc</ion-label>
+          <ion-label stacked>ตำแหนง</ion-label>
           <ion-input placeholder="Loc" style="background-color: #FFFF99"></ion-input>
         </ion-col>
     </ion-row>
@@ -91,11 +91,11 @@
   <ion-grid>
     <ion-row>
         <ion-col>
-          <ion-label stacked>Grade</ion-label>
+          <ion-label stacked>เกรด</ion-label>
           <ion-input style="background-color: #FFFF99" value="01"></ion-input>
         </ion-col>
         <ion-col >
-          <ion-label stacked>UOM</ion-label>
+          <ion-label stacked>หน่วย</ion-label>
           <ion-input placeholder="UOM" style="background-color: #FFFF99"></ion-input>
         </ion-col>
     </ion-row>
@@ -103,11 +103,11 @@
   <ion-grid>
     <ion-row>
         <ion-col >
-          <ion-label stacked>Qty</ion-label>
+          <ion-label stacked>จำนวน</ion-label>
           <ion-input placeholder="Qty" style="background-color: #FFFF99"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-label stacked>New Qty</ion-label>
+          <ion-label stacked>จำนวนล่าสุด</ion-label>
           <ion-input placeholder=""></ion-input>
         </ion-col>
     </ion-row>

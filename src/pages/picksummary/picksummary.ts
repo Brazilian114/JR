@@ -24,7 +24,7 @@ export class PicksummaryPage {
     @ViewChild('focusQtyNew') myInputQtyNew;
 
     @ViewChild(Content) content: Content;
-    oClient:any = "JRFB2550";
+    oClient:any = "GTP";
     oWo:any;
     oStatus:any;
     oItem:any;

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Stock Count</ion-title>
+    <ion-title>ตรวจสอบสินค้าภายในคลัง</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -30,7 +30,7 @@
     <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label stacked>Exp Date</ion-label>
+            <ion-label stacked>วันหมดอายุ</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="listExp"></ion-datetime>
           <!-- <ion-select [(ngModel)]="listExp">
             <ion-option value="" selected>Please Select.</ion-option>
@@ -44,7 +44,7 @@
     <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label stacked>Mfg Date</ion-label>
+            <ion-label stacked>วันที่ผลิต</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="listMfg"></ion-datetime>
           <!-- <ion-select [(ngModel)]="listMfg">
             <ion-option value="" selected>Please Select.</ion-option>     -->
@@ -57,7 +57,7 @@
     <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label stacked>Rcpt Date</ion-label>
+            <ion-label stacked>วันที่รับ</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" max="2500-12-31" [(ngModel)]="listRcpt"></ion-datetime>
           <!-- <ion-select [(ngModel)]="listRcpt">
             <ion-option value="" selected>Please Select.</ion-option>
@@ -72,21 +72,21 @@
   <ion-grid>
     <ion-row>
         <ion-col>
-          <ion-label stacked>Size</ion-label>
+          <ion-label stacked>ขนาด</ion-label>
           <ion-input placeholder="Size" [(ngModel)]="oSize"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-label stacked>Color</ion-label>
+          <ion-label stacked>สี</ion-label>
           <ion-input placeholder="Color" [(ngModel)]="oColor"></ion-input>
         </ion-col>
         <ion-col>
-          <ion-label stacked>Class</ion-label>
+          <ion-label stacked>คลาส</ion-label>
           <ion-input placeholder="Class" [(ngModel)]="oClass"></ion-input>
         </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-2>
-        <ion-label>Owner</ion-label>
+        <ion-label>เจ้าของ</ion-label>
       </ion-col>
       <ion-col>
         <ion-input placeholder="Owner" [(ngModel)]="oOwner"></ion-input>

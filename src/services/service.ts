@@ -16,9 +16,9 @@ export class Service {
 
     this.storage.get('_url').then((res)=>{
       this.url = res;
-     this.hostWebService = "http://"+this.url+"/RF-Service_JRFB/RFService.asmx";
+   this.hostWebService = "http://192.168.1.236/RF-Service_GreenTimberland/RFService.asmx";
 
-      //this.hostWebService = "http://"+this.url+"/RF-Service/RFService.asmx";  //debug
+      //this.hostWebService = "http://localhost:7422/RFService.asmx";  //debug
 
     })
   }
@@ -516,8 +516,8 @@ get_TranferStockMovements(oClient, oWO, oMaker) {
        }
     );
 }
-get_Detail_Tranfer_WorkOrder(oWO) {
-  let parameters='oWO='+oWO;
+get_Detail_Tranfer_WorkOrder(oWO, oUser) {
+  let parameters='oWO='+oWO+'&User='+oUser;
   return this.http.get(this.hostWebService +"/Get_Detail_Tranfer_WorkOrder?"+parameters)
     .toPromise()
     .then(response =>
@@ -944,8 +944,8 @@ get_UserProfile(oClient) {
     );
 }
 //NEW
-get_detail_workorder(oWO) {
-  let parameters='oWO='+oWO;
+get_detail_workorder(oWO, oUser) {
+  let parameters='oWO='+oWO+'&oUser='+oUser;
   return this.http.get(this.hostWebService +"/Get_Detail_WorkOrder?"+parameters)
     .toPromise()
     .then(response =>
@@ -1290,7 +1290,7 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
   close_picktask(oWO, oTaskNo, oActNO, oQtyPick, oReasonCode, oMaker, oUOM, oPalletTo) {
     let parameters='oWO='+oWO+'&oTaskNo='+oTaskNo+'&oActNO='+oActNO+'&oQtyPick='+oQtyPick+'&oReasonCode='+oReasonCode+'&oMaker='+oMaker
     +'&oUOM='+oUOM+'&oPalletTo='+oPalletTo;
-    return this.http.get(this.hostWebService +"/ClosePickTaskEkapab?"+parameters)
+    return this.http.get(this.hostWebService +"/ClosePickTask?"+parameters)
       .toPromise()
       .then(response =>
          {
@@ -1417,8 +1417,9 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
-  get_Book() {
-    return this.http.get(this.hostWebService +"/showBookGR?")
+  get_Book(client) {
+   let parameters='client='+client;
+    return this.http.get(this.hostWebService +"/showBookGR?"+parameters)
       .toPromise()
       .then(response =>
          {
@@ -1586,6 +1587,9 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
   get_Barcode_Detail(oClient, oBarcode) {
     let parameters='oClient='+oClient+'&oBarcode='+oBarcode;
     return this.http.get(this.hostWebService +"/Get_Barcode_Detail?"+parameters)
+   //  get_Barcode_Detail(oClient, oBarcode) {
+   //    let parameters='oClient='+oClient+'&oBarcode='+oBarcode;
+   //    return this.http.get(this.hostWebService +"/Get_Barcode_Detail?"+parameters)
       .toPromise()
       .then(response =>
          {

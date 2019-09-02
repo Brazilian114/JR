@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Location</ion-title>
+    <ion-title>ตำแหน่ง</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -27,12 +27,12 @@
     <ion-card>
         <ion-card-content >
           <ion-card-title>{{stock.location}}</ion-card-title>
-          <p>Pallet :{{stock.pallet}}</p>
-          <p>Qty :{{stock.qty}}</p>
-          <p>UOM :{{stock.uom}}</p>
-          <p>Zone :{{stock.zone}}</p>
-          <p>Grade :{{stock.grade}}</p>
-          <p>Receipt Date :{{stock.receipt_date}}</p>
+          <p>พาเลท :{{stock.pallet}}</p>
+          <p>จำนวน :{{stock.qty}}</p>
+          <p>หน่วย :{{stock.uom}}</p>
+          <p>โซน :{{stock.zone}}</p>
+          <p>เกรด :{{stock.grade}}</p>
+          <p>วันที่รับ :{{stock.receipt_date}}</p>
         </ion-card-content>
       </ion-card>
     </div>

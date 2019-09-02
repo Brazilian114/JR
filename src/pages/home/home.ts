@@ -21,7 +21,7 @@ export class HomePage {
     this.storage.get('_user').then((res) => {
       this.data_logins = res;
       console.log(this.data_logins);
-      this.doGetUser(this.data_logins);
+      // this.doGetUser(this.data_logins);
     });
   }
   doGetUser(oClient){

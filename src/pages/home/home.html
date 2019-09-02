@@ -3,15 +3,19 @@
     <button ion-button menuToggle (click)="menuOpened()">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>หน้าหลัก</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <div style="margin-top: 90%">
-    <ion-label style="text-align: center;">THIS USER IS CURRENTLY LOGGED IN.</ion-label>
+    <!-- <ion-label style="text-align: center;">THIS USER IS CURRENTLY LOGGED IN.</ion-label>
     <ion-label style="text-align: center;">USERNAME : {{data_logins}}</ion-label>
     <ion-label style="text-align: center;">GROUP : {{oGroup}}</ion-label>
-    <ion-label *ngIf="oCus_name != undefined" style="text-align: center;">NAME : {{oCus_name}}</ion-label>
+    <ion-label *ngIf="oCus_name != undefined" style="text-align: center;">NAME : {{oCus_name}}</ion-label> -->
+    <ion-label style="text-align: center;">ผู้ใช้รายนี้ลงชื่อเข้าใช้ปัจจุบัน</ion-label>
+    <ion-label style="text-align: center;">ชื่อผู้ใช้งาน : {{data_logins}}</ion-label>
+    <ion-label style="text-align: center;">กลุ่ม : {{oGroup}}</ion-label>
+    <ion-label *ngIf="oCus_name != undefined" style="text-align: center;">ชื่อลูกค้า : {{oCus_name}}</ion-label>
   </div>
 </ion-content>

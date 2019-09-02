@@ -24,7 +24,7 @@ export class SaleReturnPage {
   data_closesalereturn:any;
   user_detail:any;
   oItem_Barcode:any;
-  oClient:any = "JRFB2550";
+  oClient:any = "GTP";
   oUsername:any;
   oBranch:any;
   oBranchName:any;

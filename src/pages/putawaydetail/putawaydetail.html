@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Putaway Detail</ion-title>
+    <ion-title>รายละเอียดการจัดเก็บสินค้า</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-list-header>
       <h2>
-        Detail Pallet
+        รายละเอียดพาเลท
       </h2>
     </ion-list-header>
     <ion-scroll scrollX="true" scrollY="true">
@@ -22,7 +22,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Receipt
+                เลขที่ใบรับ
               </ion-row>
               <ion-row>
                 {{detail.receipt_no}}
@@ -30,7 +30,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Item
+                สินค้า
               </ion-row>
               <ion-row>
                 {{detail.item_no}}
@@ -38,7 +38,7 @@
             </ion-col>
             <ion-col class="border-col" col-2>
               <ion-row class="border-row" *ngIf="i == 0">
-                Description
+                รายละเอียดสินค้า
               </ion-row>
               <ion-row>
                 {{detail.description}}
@@ -62,7 +62,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Location TO
+                ตำแหน่งที่ตั้ง
               </ion-row>
               <ion-row>
                 {{detail.location_to}}
@@ -70,7 +70,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                UOM
+                หน่วย
               </ion-row>
               <ion-row>
                 {{detail.uom}}
@@ -78,7 +78,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Qty
+                จำนวน
               </ion-row>
               <ion-row>
                 {{detail.qty}}
@@ -86,7 +86,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Grade
+                เกรด
               </ion-row>
               <ion-row>
                 {{detail.grade}}
@@ -94,7 +94,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Branch
+                สาขา
               </ion-row>
               <ion-row>
                 {{detail.branch}}
@@ -110,7 +110,7 @@
             </ion-col>
             <ion-col class="border-col">
               <ion-row class="border-row" *ngIf="i == 0">
-                Receipt Date
+                วันที่รับ
               </ion-row>
               <ion-row>
                 {{detail.receipt_date}}

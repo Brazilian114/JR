@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Item Pick Summary</ion-title>
+    <ion-title>หยิบสินค้าแบบรายการกลุ่ม	</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -15,16 +15,16 @@
   <ion-card (click)="doSelectItemSum(item.item_no, item.description, item.qty, item.uom, item.location_from, item.pallet_from, item.batch_no
   , item.area_to, item.warehouse_to, item.location_to, item.status, item.wave_pick_no, item.area_from, item.qty_uom1, item.qty_uom2, item.expiry_date, item.prod_date, item.lot_no)">
       <ion-card-content >
-        <ion-card-title>Item No: {{item.item_no}}</ion-card-title>
-        <p>Description: {{item.description}}</p>
-        <p>Qty: {{item.qty}}</p>
-        <p>UOM: {{item.uom}}</p>
+        <ion-card-title>เลขที่สินค้า: {{item.item_no}}</ion-card-title>
+        <p>รายละเอียด: {{item.description}}</p>
+        <p>จำนวน: {{item.qty}}</p>
+        <p>หน่วย: {{item.uom}}</p>
         <p>BACTH: {{item.batch_no}}</p>
-        <p>EXP DATE: {{item.expiry_date}}</p>
-        <p>PROD DATE: {{item.prod_date}}</p>
-        <p>Location From: {{item.location_from}}</p>
-        <p>Pallet From: {{item.pallet_from}}</p>
-        <p>Zone From : {{item.area_from}}</p>
+        <p>วันหมดอายุ: {{item.expiry_date}}</p>
+        <p>วันผลิต: {{item.prod_date}}</p>
+        <p>จากตำแหน่ง: {{item.location_from}}</p>
+        <p>จากพาเลท: {{item.pallet_from}}</p>
+        <p>จากโซน : {{item.area_from}}</p>
       </ion-card-content>
     </ion-card>
   </div>

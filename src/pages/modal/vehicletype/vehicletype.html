@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Vehicle Type</ion-title>
+    <ion-title>ประเภทยานพาหนะ</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -15,7 +15,7 @@
   <ion-card (click)="doSelectTruck(data.param_code, data.param_desc)">
       <ion-card-content >
         <ion-card-title>{{data.param_desc}}</ion-card-title>
-        <p>Code: {{data.param_code}}</p>
+        <p>รหัส: {{data.param_code}}</p>
       </ion-card-content>
     </ion-card>
   </div>

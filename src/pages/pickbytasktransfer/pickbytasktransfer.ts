@@ -20,7 +20,7 @@ export class PickbytaskTransferPage {
     @ViewChild('focusInputLocation_Confirm') myInputLocation_Confirm;
     @ViewChild('focusInputPallet_Confirm') myInputPallet_Confirm;
     @ViewChild(Content) content: Content;
-    oClient:string = "JRFB2550";
+    oClient:string = "GTP";
     oWo:string;
     oStatus:string;
     oItem:string;
@@ -86,12 +86,12 @@ export class PickbytaskTransferPage {
     let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oWo:oWo , oUsername: this.oUsername, frag: frag });
       profileModal.present();
       profileModal.onDidDismiss(data =>{
-        console.log(data);
+        console.log("ข้อมูลหลังเลือก Dialog WO",data); //"'ข้อมูลหลังเลือก Dialog WO'+"oWo ก่อนส่งเข้า service",oWo
         if(data != undefined){
           this.oWo = data.wo_no;
-
+          console.log(this.oWo); 
           if(this.oWo != ""){
-            this.doGetDetailWorkOrder(this.oWo);
+            this.doGetDetailWorkOrder(this.oWo, this.oUsername);
           }else{
             this.presentToast('ไม่พบ Work Order', false, 'bottom');
           }
@@ -137,15 +137,15 @@ export class PickbytaskTransferPage {
   onKeyup(){
     console.log(this.oWo)
     let barcode=this.oWo;
-     this.doGetDetailWorkOrder(barcode);
+     this.doGetDetailWorkOrder(barcode, this.oUsername);
   }
 
-  doGetDetailWorkOrder(oWo){
+  doGetDetailWorkOrder(oWo,oUsername){
     if(oWo == undefined){
       this.presentToast('กรุณากรอก Work Order', false, 'bottom');
     }else{
         console.log("oWo ก่อนส่งเข้า service",oWo);
-      this.service.get_Detail_Tranfer_WorkOrder(oWo).then((res)=>{
+      this.service.get_Detail_Tranfer_WorkOrder(oWo,oUsername).then((res)=>{
         this.data_item = res;
         console.log(this.data_item);
           if(this.data_item.length <= 0){
@@ -237,7 +237,7 @@ export class PickbytaskTransferPage {
       console.log(this.data_closePick);
       // this.presentToast(this.data_closePick["0"].sqlmsg, false, 'bottom');
       if(this.data_closePick["0"].sqlstatus == "0"){
-        this.doGetDetailWorkOrder(oWo);
+        this.doGetDetailWorkOrder(oWo,this.oUsername);
         this.oLocation_confirm = "";
         this.oPalletCon = "";
       }else{

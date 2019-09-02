@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Doc Ref</ion-title>
+    <ion-title>อ้างอิงเอกสาร</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -15,7 +15,7 @@
   <ion-card (click)="doSelectDocref(data.doc_no, data.branch)">
       <ion-card-content >
         <ion-card-title>{{data.doc_no}}</ion-card-title>
-        <p>Branch: {{data.branch}}</p>
+        <p>สาขา: {{data.branch}}</p>
       </ion-card-content>
     </ion-card>
   </div>

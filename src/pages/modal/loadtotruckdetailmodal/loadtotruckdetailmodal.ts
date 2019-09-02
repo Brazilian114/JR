@@ -12,7 +12,7 @@ import { Service } from '../../../services/service';
   templateUrl: 'loadtotruckdetailmodal.html'
 })
 export class LoadtotruckdetailmodalPage {
-  oClient:any = "JRFB2550";
+  oClient:any = "GTP";
   oUsername:any;
   oItemChk:any;
   oLineChk:any;

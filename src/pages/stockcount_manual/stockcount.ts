@@ -25,7 +25,7 @@ export class StockcountPage {
     data_item:any;
     data_barcodeDetail:any;
 
-    oClient:string = "JRFB2550";
+    oClient:string = "GTP";
     oStk:string = "";
     oZone:string = "";
     oItem:string = "";

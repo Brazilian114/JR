@@ -50,7 +50,7 @@ export class CheckinotherPage {
   data_close:any;
   data_productOther:any;
 
-  oClient:string = "JRFB2550";
+  oClient:string = "GTP";
   oReceipt:string;
   oDocref:string;
   oSupplier:string;

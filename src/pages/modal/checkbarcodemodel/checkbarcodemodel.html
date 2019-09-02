@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Check Barcode</ion-title>
+    <ion-title>ตรวจสอบบาร์โค๊ด</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
         (click)="doReturnItemDetail(barcode.item_barcode,barcode.description,barcode.item_qty)">
           <ion-col class="border-col" col-2>
             <ion-row class="border-row" *ngIf = "i == 0">
-              Barcode
+              บาร์โค๊ด
             </ion-row>
             <ion-row>
               {{barcode.item_barcode}}
@@ -51,7 +51,7 @@
           </ion-col>
           <ion-col class="border-col" col-2>
             <ion-row class="border-row" *ngIf = "i == 0">
-                Maker
+                ผู้สร้าง
             </ion-row>
             <ion-row>
               {{barcode.maker}}

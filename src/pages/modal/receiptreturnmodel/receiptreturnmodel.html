@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Details</ion-title>
+    <ion-title>รายละเอียด</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -18,7 +18,7 @@
           </ion-col>
           <ion-col class="border-col" col-5>
             <ion-row class="border-row" *ngIf = "i == 0">
-              Barcode
+              บาร์โค๊ด
             </ion-row>
             <ion-row>
               {{detail.item_barcode}}
@@ -26,7 +26,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Branch Qty
+              จำนวนสาขา
             </ion-row>
             <ion-row>
               {{detail.branch_qty}}
@@ -34,7 +34,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              Receipt Qty
+              จำนวนที่รับ
             </ion-row>
             <ion-row>
               {{detail.receipt_qty}}
@@ -42,7 +42,7 @@
           </ion-col>
           <ion-col class="border-col">
             <ion-row class="border-row" *ngIf = "i == 0">
-              UOM
+              หน่วย
             </ion-row>
             <ion-row>
               {{detail.uom}}

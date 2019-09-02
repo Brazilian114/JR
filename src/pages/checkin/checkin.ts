@@ -49,7 +49,7 @@ export class CheckinPage {
   data_close:any;
   data_productOther:any;
 
-  oClient:string = "JRFB2550";
+  oClient:string = "GTP";
   oReceipt:string;
   oDocref:string;
   oSupplier:string;
@@ -976,7 +976,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     })
   }
   doGetBook(){
-    this.service.get_Book().then((res)=>{
+    this.service.get_Book(this.oClient).then((res)=>{
       this.data_book = res;
       this.listBook = this.data_book["0"].QCBOOK["0"];
       console.log(this.data_book);

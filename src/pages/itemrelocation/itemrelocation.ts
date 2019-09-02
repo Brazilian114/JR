@@ -24,7 +24,7 @@ export class ItemrelocationPage {
   data_item:any;
   data_item_relocation:any;
   data_new_pallet:any;
-  oClient:any = "JRFB2550";
+  oClient:any = "GTP";
   oDes:any = null;
   oItem:any = null;
   oDestLoc: any;

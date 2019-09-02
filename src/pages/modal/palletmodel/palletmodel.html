@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Pallet List</ion-title>
+    <ion-title>รายการพาเลท</ion-title>
     <ion-searchbar
       [(ngModel)]="myInput"
       [showCancelButton]="shouldShowCancel"
@@ -29,9 +29,9 @@
         <ion-card-content >
           <ion-card-title>{{pallet.item_no}}</ion-card-title>
           <p>{{pallet.description}}</p>
-          <p>Location: {{pallet.location}}</p>
+          <p>ตำแหน่ง: {{pallet.location}}</p>
           <p>จำนวน {{pallet.qty_avail}} : {{pallet.item_packing}}</p>
-          <p>Receipt Date: {{pallet.receipt_date}}</p>
+          <p>วันที่รับ: {{pallet.receipt_date}}</p>
         </ion-card-content>
       </ion-card>
     </div>
@@ -41,10 +41,10 @@
     <ion-card (click)="doSelectPalletForWork(pallet.pallet_to, pallet.item_code, pallet.description, pallet.qty, pallet.uom)">
         <ion-card-content >
           <ion-card-title>{{pallet.pallet_to}}</ion-card-title>
-          <p>Item No: {{pallet.item_code}}</p>
+          <p>เลขที่สินค้า: {{pallet.item_code}}</p>
           <p>{{pallet.description}}</p>
-          <p>Qty: {{pallet.qty}}</p>
-          <p>UOM: {{pallet.uom}}</p>
+          <p>จำนวน: {{pallet.qty}}</p>
+          <p>หน่วย: {{pallet.uom}}</p>
         </ion-card-content>
       </ion-card>
     </div>

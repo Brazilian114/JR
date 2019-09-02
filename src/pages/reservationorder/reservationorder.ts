@@ -22,7 +22,7 @@ export class ReservationOrderPage {
   data_item:any;
   user_detail:any;
   oItem_Barcode:any;
-  oClient:any = 'JRFB2550';
+  oClient:any = 'GTP';
   oBranch:any;
   oBranchName:any;
   oLine_no:any;

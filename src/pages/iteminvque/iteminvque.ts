@@ -18,7 +18,7 @@ export class IteminvquePage {
   @ViewChild('focusInputBarcode') InputBarcode;
   @ViewChild(Content) content: Content;
 
-  oClient:string = "JRFB2550";
+  oClient:string = "GTP";
   oDes:string = null;
   oItem:string = null;
   oQty:any;
