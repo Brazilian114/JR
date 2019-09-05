@@ -56,10 +56,10 @@ export class RecipesmodalPage {
     if(oReciptNo == undefined){
       this.presentLoading();
       oReciptNo = "";
-      console.log(this.oReciptNo);
+     // console.log(this.oReciptNo);
       this.service.get_receipt_detail(oClient, oReciptNo, oReceiptType, oBook).then((res)=>{
         this.data_receipt = res;
-        console.log("doGetReceipt",this.data_receipt);
+        console.log("doGetReceiptttt",this.data_receipt);
         this.initializeItems();
       })
     }else{

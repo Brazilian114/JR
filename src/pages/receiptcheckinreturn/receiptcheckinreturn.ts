@@ -825,7 +825,7 @@ export class ReceiptCheckinReturnPage {
     })
   }
   doGetBook(){
-    this.service.get_Book_CN().then((res)=>{
+    this.service.get_Book_CN(this.oClient).then((res)=>{
       this.data_book = res;
       this.listBook = this.data_book["0"].QCBOOK["0"];
       console.log(this.data_book);

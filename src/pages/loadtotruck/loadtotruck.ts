@@ -24,7 +24,7 @@ export class LoadtotruckPage {
   @ViewChild(Content) content: Content;
 
 
-  oClient:any = "GTP";
+  oClient:any;
   oUsername:any;
   Check:any = "Header";
   loader:any;
@@ -65,7 +65,7 @@ export class LoadtotruckPage {
     , private alertCtrl: AlertController) {
     this.storage.get('_user').then((res)=>{
       this.oUsername = res;
-
+      this.oClient = this.oUsername;
       if(this.Check == 'Header')
       {
 

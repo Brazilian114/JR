@@ -121,7 +121,7 @@ export class WomodalPage {
  doGetWo(oClient){
 
    this.presentLoading();
-    this.service.get_wo(oClient, "", this.oUsername).then((res)=>{
+    this.service.get_wo(oClient, "", oClient).then((res)=>{
       this.data_wo = res;
       console.log("this.data.wo",this.data_wo);
       this.finishLoding();

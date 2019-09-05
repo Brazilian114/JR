@@ -16,6 +16,7 @@ export class Service {
 
     this.storage.get('_url').then((res)=>{
       this.url = res;
+  
    this.hostWebService = "http://192.168.1.236/RF-Service_GreenTimberland/RFService.asmx";
 
       //this.hostWebService = "http://localhost:7422/RFService.asmx";  //debug
@@ -1438,8 +1439,9 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
          }
       );
   }
-  get_Book_OT() {
-    return this.http.get(this.hostWebService +"/showBookOT?")
+  get_Book_OT(client) {
+   let parameters='client='+client;
+    return this.http.get(this.hostWebService +"/showBookOT?"+parameters)
       .toPromise()
       .then(response =>
          {
@@ -1459,8 +1461,9 @@ get_Detail_Tranfer_WorkOrderBySelect(oWO, oTask, oAct) {
       );
   }
 
-  get_Book_CN() {
-    return this.http.get(this.hostWebService +"/showBookCN?")
+  get_Book_CN(client) {
+   let parameters='client='+client;
+    return this.http.get(this.hostWebService +"/showBookCN?"+parameters)
       .toPromise()
       .then(response =>
          {
@@ -3088,7 +3091,7 @@ delete_Receipt_Check_Barcode(oClient, oReceiptNo, oBarcode, oMaker) {
        }
     );
 }
-Set_Loguot(oMaker) {
+Set_Logout(oMaker) {
   let parameters="oMaker="+oMaker;
   return this.http.get(this.hostWebService +"/Set_Loguot?"+parameters)
     .toPromise()

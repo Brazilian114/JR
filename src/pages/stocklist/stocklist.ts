@@ -21,7 +21,7 @@ export class StockListPage {
 
   data_barcode_master:any;
 
-  oClient:any = "GTP";
+  oClient:any;
   oUsername:any;
   oCheck_Item:any = true;
   oCheck_Location:any = false;
@@ -39,6 +39,7 @@ export class StockListPage {
     , private storage: Storage, private alertCtrl: AlertController) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
+        this.oClient = this.oUsername;
       })
   }
   ionViewDidEnter(){

@@ -48,7 +48,7 @@ export class WMSHandheld {
                       this.oUsername = res;
                       console.log(this.oUsername);
                       //this.doGetGrade();
-                        this.service.Set_Loguot(this.oUsername).then((res)=>{
+                        this.service.Set_Logout(this.oUsername).then((res)=>{
                           this.data_receipt = res;
                             console.log(this.data_receipt)  });
 
@@ -101,7 +101,7 @@ export class WMSHandheld {
                   this.oUsername = res;
                   console.log(this.oUsername);
                   //this.doGetGrade();
-                    this.service.Set_Loguot(this.oUsername).then((res)=>{
+                    this.service.Set_Logout(this.oUsername).then((res)=>{
                       this.data_receipt = res;
                         console.log(this.data_receipt)  });
                 })

@@ -124,11 +124,11 @@ export class CheckinotherPage {
         this.oClient = this.oUsername
         console.log(this.oUsername);
         this.doGetGrade();
-
+      //  this.doGetBook(this.oClient);
         if(this.Check == 'Header')
         {
           setTimeout(() => {
-            this.doGetBook();
+            this.doGetBook(this.oUsername);
             this.doGetWarehouse(this.oUsername);
           }, 300)
         }
@@ -308,7 +308,7 @@ export class CheckinotherPage {
   doGetReceiptScan(oClient, oReciptNo, oReceiptType, oBook){
     this.service.get_receipt_detail(oClient, oReciptNo, oReceiptType, oBook).then((res)=>{
       this.data_receipt = res;
-        console.log(this.data_receipt);
+        console.log("receipt",this.data_receipt);
       if(this.data_receipt.length == 1){
         let date = String(this.data_receipt["0"].date).substr(0,10)
         let invoicedate = String(this.data_receipt["0"].invoice_date).substr(0,10)
@@ -1019,8 +1019,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       console.log(this.data_zone);
     })
   }
-  doGetBook(){
-    this.service.get_Book_OT().then((res)=>{
+  doGetBook(oClient){
+    this.service.get_Book_OT(oClient).then((res)=>{
       this.data_book = res;
       this.listBook = this.data_book["0"].QCBOOK["0"];
       console.log(this.data_book);
@@ -1041,6 +1041,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       this.doGetStation(this.listWhses);
     })
   }
+
   doGetStation(oWarehouse){
     this.service.get_Station(oWarehouse).then((res)=>{
       this.data_station = res;
@@ -1171,7 +1172,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     }
     this.doClearDetail();
     setTimeout(() => {
-      this.doGetBook();
+      this.doGetBook(this.oUsername);
       this.doGetWarehouse(this.oUsername);
     }, 500)
   }

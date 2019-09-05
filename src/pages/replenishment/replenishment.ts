@@ -25,7 +25,7 @@ export class ReplenishmentPage {
   data_barcode_dest:any;
   data_close:any;
 
-  oClient:any = "GTP";
+  oClient:any;
   oDes:any = null;
   oItem:any = null;
   oRecNum:any;
@@ -45,6 +45,7 @@ export class ReplenishmentPage {
     , private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
+        this.oClient = this.oUsername;
       })
   }
   doClick(){

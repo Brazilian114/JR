@@ -46,7 +46,7 @@
                 <!-- <ion-label stacked style="margin: 0px 0px 0px 0;">Warehouse</ion-label> -->
                 <ion-label stacked style="margin: 0px 0px 0px 0;">คลังสินค้า</ion-label>
                 <ion-select [(ngModel)]="listWhses" interface="popover" (ionChange)="doGetStation(listWhses)">
-                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Description}}</ion-option>
+                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Warehouse}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>

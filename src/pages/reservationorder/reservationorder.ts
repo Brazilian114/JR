@@ -22,7 +22,7 @@ export class ReservationOrderPage {
   data_item:any;
   user_detail:any;
   oItem_Barcode:any;
-  oClient:any = 'GTP';
+  oClient:any;
   oBranch:any;
   oBranchName:any;
   oLine_no:any;
@@ -41,7 +41,7 @@ export class ReservationOrderPage {
 
       this.storage.get('_user').then((res) => {
         this.oUsername = res;
-
+        this.oClient = this.oUsername;
         this.doGetBranch(this.oUsername);
       });
       this.oDate = this.oDate.split('T')[0];

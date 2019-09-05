@@ -15,7 +15,7 @@ import { Service } from '../../services/service';
 export class SaleReturnHeaderPage {
   data_Branch_list:any;
   data_Create_branch:any;
-  oClient:any = "GTP";
+  oClient:any;
   oUsername:any;
   oBranch:any;
   oBranchName:any;
@@ -31,6 +31,7 @@ export class SaleReturnHeaderPage {
 
       this.storage.get('_user').then((res) => {
         this.oUsername = res;
+        this.oClient = this.oUsername;
         this.doGetBranch(this.oUsername);
       });
   }

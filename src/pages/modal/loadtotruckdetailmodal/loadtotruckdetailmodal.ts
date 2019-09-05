@@ -12,7 +12,7 @@ import { Service } from '../../../services/service';
   templateUrl: 'loadtotruckdetailmodal.html'
 })
 export class LoadtotruckdetailmodalPage {
-  oClient:any = "GTP";
+  oClient:any;
   oUsername:any;
   oItemChk:any;
   oLineChk:any;
@@ -35,7 +35,7 @@ export class LoadtotruckdetailmodalPage {
 
        this.storage.get('_user').then((res)=>{
          this.oUsername = res;
-
+         this.oClient = this.oUsername;
        })
 
        this.doGetItemList(this.oLoadingSummaryNo,this.oSalesOrder);

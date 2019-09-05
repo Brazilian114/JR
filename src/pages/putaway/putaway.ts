@@ -39,7 +39,7 @@ export class PutawayPage {
   oWh:any;
   oUsername:any;
   oPalleNO:any;
-  oPallet:any;
+  oPallet:any ;
   data_logins:any;
   username:string = '';
   password:string = '';

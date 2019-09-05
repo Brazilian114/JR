@@ -40,7 +40,7 @@ export class StkmodalPage {
   }
   doGetStk(oClient){
       this.presentLoading();
-      this.service.get_StockCountRefGet(oClient, "").then((res)=>{
+      this.service.get_StockCountRefGet(oClient,"").then((res)=>{
         this.data_stk = res;
         console.log(this.data_stk);
         this.finishLoding();

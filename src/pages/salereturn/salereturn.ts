@@ -24,7 +24,7 @@ export class SaleReturnPage {
   data_closesalereturn:any;
   user_detail:any;
   oItem_Barcode:any;
-  oClient:any = "GTP";
+  oClient:any;
   oUsername:any;
   oBranch:any;
   oBranchName:any;
@@ -46,6 +46,7 @@ export class SaleReturnPage {
 
       this.storage.get('_user').then((res) => {
         this.oUsername = res;
+        this.oClient = this.oUsername;
         this.doGetBranch(this.oUsername);
       });
       this.oDoc_no = navParams.get('doc_no');

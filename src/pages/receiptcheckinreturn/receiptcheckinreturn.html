@@ -46,7 +46,7 @@
               <ion-item>
                 <ion-label stacked style="margin: 0px 0px 0px 0;">คลังสินค้า</ion-label>
                 <ion-select [(ngModel)]="listWhses" interface="popover" (ionChange)="doGetStation(listWhses)">
-                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Description}}</ion-option>
+                  <ion-option  *ngFor = "let warehouse of data_warehouse" value="{{warehouse.Warehouse}}">{{warehouse.Warehouse}}</ion-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -242,7 +242,7 @@
                 {{details.line_no}}
               </ion-row>
             </ion-col>
-            <ion-col class="border-col" col-2>
+            <ion-col class="border-col" col-3>
               <ion-row class="border-row" *ngIf = "i == 0">
                 รหัสสินค้า
               </ion-row>
