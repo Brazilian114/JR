@@ -249,10 +249,10 @@
         <ion-row>
             <ion-col col-3>
               <!-- <button ion-button block (click)="doGetPallet(oClient,oReceipt)">Pallet</button> -->
-              <button ion-button block (click)="doGetPallet(oClient,oReceipt)">พาเลท</button>
+              <button ion-button block>พาเลท</button>
             </ion-col>
             <ion-col>
-              <ion-input [(ngModel)]="oPallet" #focusInputPallet (keyup.enter)="doGetPalletListDetali(oClient,oReceipt,oPallet)"></ion-input>
+              <ion-input [(ngModel)]="oPallet" readonly #focusInputPallet (keyup.enter)="doGetPalletListDetali(oClient,oReceipt,oPallet)"></ion-input>
             </ion-col>
             <ion-col col-2>
               <button ion-button block (click)="doGetNewPallet(oClient)">ต่อไป</button>
@@ -334,7 +334,7 @@
     <ion-grid>
         <ion-scroll scrollX="true" scrollY="true">
           <ion-row style="width: 700px;" *ngFor = "let details of data_pallet_detail; let i = index" (click)="doReturnItemDetail(details.line_no,details.item_no,details.description,details.qty
-          ,details.uom,details.item_barcode,details.grade,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class,details.location)">
+          ,details.uom,details.item_barcode,details.grade,details.batch_no,details.lot_no,details.expiry_date,details.prod_date,details.item_size,details.item_color,details.item_class,details.location,details.pallet_no)">
             <ion-col class="border-col" col-auto>
               <ion-row class="border-row" style="width:30px;" *ngIf = "i == 0">
                 #

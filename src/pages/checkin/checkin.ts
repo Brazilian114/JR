@@ -58,7 +58,7 @@ export class CheckinPage {
   oPallet:string = null;
   oItem:string = null;
   oCode:string = null;
-  oQty:number;
+  oQty:any;
   oDesItem:string;
   oUsername:string;
   oInc:string;
@@ -114,15 +114,16 @@ export class CheckinPage {
   isenabledSize:boolean = false;
   isenabledColor:boolean = false;
   isenabledClass:boolean = false;
-
+  items: any;
   constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private storage: Storage, public platform: Platform, private alertCtrl: AlertController, private keyboard: Keyboard) {
 
+      //this.listGrade = 
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
         this.oClient = this.oUsername
         console.log(this.oUsername);
-        this.doGetGrade();
+        //this.doGetGrade();
 
         if(this.Check == 'Header')
         {
@@ -132,6 +133,11 @@ export class CheckinPage {
           }, 300)
         }
       })
+  }
+  initializeItems() {
+    this.items = this.data_barcodeDetail; 
+    console.log("grade",this.items);
+      
   }
   ionViewDidEnter() {
       this.platform.ready().then(() => {
@@ -190,6 +196,7 @@ export class CheckinPage {
 
   doGetLoc(oLoc){
 
+    
     if(this.listZone == "" || this.listZone == undefined ){
         this.presentToast('โปรดระบุ Zone.', false, 'bottom');
     }
@@ -411,8 +418,10 @@ export class CheckinPage {
             this.oName = "";
             this.oName = this.data_barcodeDetail["0"].description;
             this.oItem = this.data_barcodeDetail["0"].item_no;
+            
             this.storage.set('_oItem', this.oItem);
             this.doGetUOM(oClient,this.oItem);
+            this.doGetGrade();
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
             //this.listUOM = this.data_uom["0"].item_packing;
             console.log(this.listUOM);
@@ -427,6 +436,7 @@ export class CheckinPage {
       console.log("Else");
       this.service.get_Barcode_Detail(oClient, oBarcode).then((res)=>{
         this.data_barcodeDetail = res;
+        this.initializeItems();
         console.log("this.data_barcodeDetail",this.data_barcodeDetail);
         if(this.data_barcodeDetail.length <= 0){
             this.oName = "";
@@ -439,6 +449,7 @@ export class CheckinPage {
             this.oItem = this.data_barcodeDetail["0"].item_no;
             this.storage.set('_oItem', this.oItem);
              this.doGetUOM(oClient,this.oItem);
+             this.doGetGrade();
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
             //this.listUOM = this.data_uom["0"].item_packing;
               setTimeout(()=>{
@@ -545,7 +556,9 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
         this.presentToast('Please specify Color.', false, 'bottom');
     }else if(this.isenabledClass == true && oClass == ""){
         this.presentToast('Please specify Class.', false, 'bottom');
-    }
+    }else if(this.isenabledClass == true && oQty == undefined){
+      this.presentToast('Please specify Qty.', false, 'bottom');
+  }
     // else if(listZone == "" || listZone == undefined ){
     //     this.presentToast('โปรดระบุ Zone.', false, 'bottom');
     // }else if(oLoc == "" || oLoc == undefined ){
@@ -563,6 +576,9 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
 
         if(oPallet == undefined || oPallet == ""){
           this.presentToast('โปรดระบุเลขที่ Pallet', false, 'bottom');
+        }
+        else if(oQty == undefined || oQty == ""){
+          this.presentToast('Please specify Qty.', false, 'bottom');      
         }
         // else if(listZone == undefined || listZone == ""){
         //   this.presentToast('โปรดระบุ Zone ที่ต้องการจัดเก็บ', false, 'bottom');
@@ -587,7 +603,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
 
                     this.service.get_Pallet_List_Detail(oClient,oReceipt,oPallet).then((res)=>{
                       this.data_pallet_detail = res;
-                      console.log(this.data_pallet_detail);
+                      console.log("pallet",this.data_pallet_detail);
                       this.oBarcode = "";
                       this.oName = "";
                       this.oQty = 0;
@@ -866,8 +882,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location){
-    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location);
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no){
+    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no);
     this.oBarcode = "1";
     setTimeout(()=>{
       let dateExp = String(expiry_date).substr(0,10)
@@ -885,6 +901,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       this.oColor = item_color;
       this.oClass = item_class;
       this.oLoc = location;
+      this.oPallet = pallet_no;
+      
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
         this.data_barcodeDetail = res;
@@ -931,11 +949,22 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     })
   }
   doGetGrade(){
+    
     this.service.get_Grade().then((res)=>{
-      this.data_grade = res;
-      console.log(this.data_grade);
-      this.listGrade = this.data_grade["0"].param_code;
+    this.data_grade = res;
+      if(this.items == undefined){
+        this.listGrade = this.data_grade["3"].param_code;
+      }else{
+        this.listGrade = this.items["0"].default_grade;
+        }
+
+     // console.log(this.data_grade);
+     // console.log("grade22",this.items["0"].default_grade);
+      
+      //this.listGrade = this.data_barcodeDetail["0"].default_grade;
+    //this.listGrade = this.data_grade["0"].param_code;
     })
+    this.initializeItems();
   }
   doAddItem(oQty, oPallet, oItem, UOM, Grade, oStatus, oReceipt){
     if(oPallet == undefined || oPallet == ""){
@@ -1083,16 +1112,19 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     this.oLoc = "";
     this.oBarcode = "";
     this.listUOM = "";
+    this.listGrade= "";
   //  this.data_uom = "";
 
 
     this.data_pallet_detail = null;
-    console.log(this.listQty);
-    if(this.listQty == 0){
+    //console.log(this.listQty);
+   /* if(this.listQty == 0){
       this.oQty = 0;
     }else{
       this.oQty = 1;
-    }
+    }*/
+
+    this.oQty = "";
     this.oLot = "";
     this.oBatch = "";
     this.oExpiry = "";
@@ -1101,7 +1133,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     this.oName = "";
     this.storage.remove('_oLine');
     //this.storage.remove('_oItem');
-    this.doGetGrade();
+   // this.doGetGrade();
 
   }
   doClearHeader(){
@@ -1181,6 +1213,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
           handler: data => {
                 this.presentLoading();
                 this.doDeleteLineNo(oClient, oReceipt, oPallet);
+                this.doClearDetail();
                 this.finishLoding();
           }
         }

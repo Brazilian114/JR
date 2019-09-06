@@ -103,7 +103,7 @@ export class LoadtotruckPackCartonPage {
         console.log("show",oLoadingSummaryNo, oStatus, oDeliveryDate, oVehicle, oVehicleType, oDriver, this.oUsername, oName)
         this.service.Save_Loading_Summary_Header(oLoadingSummaryNo, oStatus, oDeliveryDate, oVehicle, oVehicleType, oDriver, this.oUsername, oName).then((res)=>{
           this.data_save_header = res;
-          console.log(this.data_save_header);
+          console.log("saveload",this.data_save_header);
           if(this.data_save_header["0"].sqlstatus == "0"){
             this.oLoadingSummaryNo = this.data_save_header["0"].loading_summary_no;
             this.Alert('Success', this.data_save_header["0"].sqlmsg);

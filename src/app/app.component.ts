@@ -56,16 +56,11 @@ export class WMSHandheld {
 
                     this.backButtonPressedOnceToExit = true;
                     setTimeout(() => {
-
-
-
                       this.backButtonPressedOnceToExit = false;
-
                     },2000)
                   }
            });
        });
-
 
 
   }
