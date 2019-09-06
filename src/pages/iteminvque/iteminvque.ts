@@ -121,8 +121,8 @@ export class IteminvquePage {
       }else{
         this.oItem = this.data_getBarcode["0"].item_no;
         this.oDes = this.data_getBarcode["0"].description;
-
-
+        //this.oQty = this.data_getBarcode["0"].item_qty
+        
         this.doGetUOM(oClient, this.oItem);
         this.doGetGrade_Item(oClient, this.oItem);
 
@@ -134,21 +134,31 @@ export class IteminvquePage {
     this.service.get_ItemListUOM(oClient, oItem).then((res)=>{
       this.data_uom = res;
       console.log(this.data_uom);
+      if(this.data_uom.length <= 0){
+      this.oUOM == "-"
+      }
+       else{
       this.oUOM = this.data_uom["0"].uom;
+      }
     })
   }
   doGetGrade_Item(oClient, oItem){
     this.service.get_ItemListGrade(oClient, oItem).then((res)=>{
       this.data_grade = res;
       console.log(this.data_grade);
+      if(this.data_grade.length <= 0){
+      this.oGrade == "-"
+      }
+      else{
       this.oGrade = this.data_grade["0"].grade;
+      }
     })
   }
   GetDetail(oClient,oItem, oGrade, oUOM){
     console.log(oClient,oItem, oGrade, oUOM);
     this.service.Get_ItemLocationsGrade(oClient,oItem, oGrade, oUOM).then((res)=>{
       this.data_item = res;
-      console.log(this.data_item);
+      console.log("data "+this.data_item);
 
       console.log(this.data_item.length);
       var total = 0;

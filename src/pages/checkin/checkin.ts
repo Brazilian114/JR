@@ -100,7 +100,7 @@ export class CheckinPage {
   listType:any = "NORMAL";
   listUOM:any;
   listGrade:any;
-  listZone:any;
+  listZone:string = "";
   listStation:any;
   listQty:any;
   isenabled:boolean = false;
@@ -541,7 +541,7 @@ export class CheckinPage {
     }
   }
   doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc ){
-console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, "listQty:",listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc );
+console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, "listQty:",listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, "listZone:"+listZone,oLoc );
     if(this.isenabledLot == true && oLot == ""){
         this.presentToast('Please specify Lot No.', false, 'bottom');
     }else if(this.isenabledBatch == true && oBatch == ""){
@@ -592,8 +592,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
                 this.presentToast('โปรดระบุ Barcode', false, 'bottom');
               }else{
                 console.log('type:' +listQty)
-                console.log(oClient, oReceipt, date, oInc, oPo, 'line: '+this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,this.oLoc);
-                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername ,this.oAsn_flag, listZone ,this.oLoc).then((res)=>{
+                console.log(oClient, oReceipt, date, oInc, oPo, 'line: '+this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc);
+                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername ,this.oAsn_flag,listZone ,this.oLoc).then((res)=>{
                   this.data_r_detail = res;
                   console.log(this.data_r_detail);
                   if(this.data_r_detail.sqlstatus != "0"){
@@ -630,7 +630,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
               }
             }else{
               console.log('type1:' +listQty)
-              this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc).then((res)=>{
+              this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,this.listZone,this.oLoc).then((res)=>{
                 this.data_r_detail = res;
                 console.log(this.data_r_detail);
                 if(this.data_r_detail.sqlstatus != "0"){
@@ -672,7 +672,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
               if(oBarcode == "" || oBarcode == " " || oBarcode == undefined){
                 this.presentToast('โปรดระบุ Barcode', false, 'bottom');
               }else{
-                console.log(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, this.oLot, this.oBatch, this.oExpiry, this.oMfg, oSize, oColor, oClass, this.oUsername);
+                console.log(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, this.oLot, this.oBatch, this.oExpiry, this.oMfg, oSize, oColor, oClass,"listZone"+listZone, this.oUsername);
                 this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc).then((res)=>{
                   this.data_r_detail = res;
                   console.log(this.data_r_detail);
@@ -882,8 +882,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no){
-    console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no);
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no,zone){
+         console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no,zone);
     this.oBarcode = "1";
     setTimeout(()=>{
       let dateExp = String(expiry_date).substr(0,10)
@@ -902,6 +902,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       this.oClass = item_class;
       this.oLoc = location;
       this.oPallet = pallet_no;
+      this.listZone = zone;
       
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
@@ -925,6 +926,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
 
               this.doGetProductOrther(this.oClient, this.oItem);
             })
+              this.doGetGrade();
+
               setTimeout(()=>{
                   this.InputQty.setFocus();
               },0);
@@ -1114,7 +1117,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     this.listUOM = "";
     this.listGrade= "";
   //  this.data_uom = "";
-
+    this.listZone = "";
 
     this.data_pallet_detail = null;
     //console.log(this.listQty);

@@ -268,10 +268,10 @@ export class PickbytaskPage {
       this.oQtyNew = oQty;
 
       setTimeout(()=>{
-          this.myInputPalletTo.setFocus();
+          this.myInputLocation_Confirm.setFocus();
       },0);
       setTimeout(()=>{
-          this.myInputPalletTo.setFocus();
+          this.myInputLocation_Confirm.setFocus();
           this.updateScroll();
       },200);
     }

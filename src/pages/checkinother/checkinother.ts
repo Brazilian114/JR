@@ -59,7 +59,7 @@ export class CheckinotherPage {
   oPallet:string = null;
   oItem:string = null;
   oCode:string = null;
-  oQty:number;
+  oQty:any;
   oDesItem:string;
   oUsername:string;
   oInc:string;
@@ -123,7 +123,7 @@ export class CheckinotherPage {
         this.oUsername = res;
         this.oClient = this.oUsername
         console.log(this.oUsername);
-        this.doGetGrade();
+        //this.doGetGrade();
       //  this.doGetBook(this.oClient);
         if(this.Check == 'Header')
         {
@@ -576,7 +576,9 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
         this.presentToast('Please specify Color.', false, 'bottom');
     }else if(this.isenabledClass == true && oClass == ""){
         this.presentToast('Please specify Class.', false, 'bottom');
-    }
+    }else if(this.isenabledClass == true && oQty == undefined){
+      this.presentToast('Please specify Qty.', false, 'bottom');
+  }
 
     // else if(oLoc == "" || oLoc == undefined ){
     //     this.presentToast('โปรดระบุ Location.', false, 'bottom');
@@ -908,8 +910,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       console.log(this.data_pallet_list);
     })
   }
-  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no){
-    console.log("doReturnItemDetail",line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no);
+  doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no,zone){
+    console.log("doReturnItemDetail",line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no,zone);
     this.oBarcode = "1";
     setTimeout(()=>{
       let dateExp = String(expiry_date).substr(0,10)
@@ -928,6 +930,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
       this.oClass = item_class;
       this.oLoc = location;
       this.oPallet = pallet_no;
+      this.listZone = zone;
 
       this.service.get_Barcode_Detail(this.oClient, this.oBarcode).then((res)=>{
         this.data_barcodeDetail = res;
@@ -950,6 +953,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
 
               this.doGetProductOrther(this.oClient, this.oItem);
             })
+            this.doGetGrade();
               setTimeout(()=>{
                   this.InputQty.setFocus();
               },0);
@@ -1128,15 +1132,17 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     this.oBarcode = "";
     this.listUOM = "";
   //  this.data_uom = "";
+    this.listGrade = "";
+    this.oQty = "";
 
 
     this.data_pallet_detail = null;
     console.log(this.listQty);
-    if(this.listQty == 0){
+   /* if(this.listQty == 0){
       this.oQty = 0;
     }else{
       this.oQty = 1;
-    }
+    }*/
     this.oLot = "";
     this.oBatch = "";
     this.oExpiry = "";

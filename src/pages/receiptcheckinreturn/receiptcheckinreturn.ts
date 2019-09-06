@@ -134,7 +134,7 @@ export class ReceiptCheckinReturnPage {
             this.doGetBook();
             this.doGetWarehouse(this.oUsername);
             this.doGetReasonReturnCode();
-            this.doGetGrade();
+           // this.doGetGrade();
           }, 300)
         }
       })
@@ -745,6 +745,7 @@ export class ReceiptCheckinReturnPage {
 
                 this.doGetProductOrther(this.oClient, this.oItem);
             })
+            this.doGetGrade();
               setTimeout(()=>{
                   this.InputQty.setFocus();
               },0);
