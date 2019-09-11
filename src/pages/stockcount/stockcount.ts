@@ -449,9 +449,10 @@ export class StockcountPage {
           }else if(this.isenabledClass == true && oClass == ""){
               this.presentToast('Please specify Class .', false, 'bottom');
           }else{
+                       
             console.log('2');
-            console.log(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oUOM, oSQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, this.oUsername,this.oStk_type);
-                this.service.update_Stock_Count(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oBarcode, oUOM, oSQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, this.oUsername,this.oStk_type).then((res)=>{
+            console.log(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oUOM, oCQty, oSQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, this.oUsername,this.oStk_type);
+                this.service.update_Stock_Count(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oBarcode, oUOM, oCQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, this.oUsername,this.oStk_type).then((res)=>{
                   this.data_save = res;
                   console.log(this.data_save);
                   if(this.data_save.sqlstatus == "0"){
@@ -460,7 +461,8 @@ export class StockcountPage {
                   }else{
                     this.Alert('Error', this.data_save.sqlmsg);
                   }
-          })
+          }) 
+        
           }
         }
   }

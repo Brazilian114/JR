@@ -258,7 +258,7 @@
               <button ion-button block (click)="doGetPallet(oClient,oReceipt)">พาเลท</button>
             </ion-col>
             <ion-col>
-              <ion-input [(ngModel)]="oPallet" #focusInputPallet (keyup.enter)="doGetPalletListDetali(oClient,oReceipt,oPallet)"></ion-input>
+              <ion-input [(ngModel)]="oPallet" readonly #focusInputPallet (keyup.enter)="doGetPalletListDetali(oClient,oReceipt,oPallet)"></ion-input>
             </ion-col>
             <ion-col col-auto>
               <button ion-button block (click)="doGetNewPallet(oClient)">ต่อไป</button>
@@ -450,7 +450,7 @@
               <button ion-button block disabled>พาเลท</button>
             </ion-col>
             <ion-col>
-              <ion-input [(ngModel)]="oPalletRe" readonly></ion-input>
+              <ion-input  [(ngModel)]="oPalletRe" readonly></ion-input>
             </ion-col>
             <ion-col col-auto>
               <button ion-button block (click)="doClearPalletList()">ล้าง</button>

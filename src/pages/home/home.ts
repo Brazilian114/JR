@@ -20,8 +20,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, public storage: Storage, private service : Service) {
     this.storage.get('_user').then((res) => {
       this.data_logins = res;
-      console.log(this.data_logins);
-      // this.doGetUser(this.data_logins);
+      console.log("user",this.data_logins);
+      this.doGetUser(this.data_logins);
     });
   }
   doGetUser(oClient){
@@ -30,8 +30,16 @@ export class HomePage {
       console.log(this.data_user);
       this.oGroup = this.data_user["0"].user_group;
       this.oCus_name = this.data_user["0"].customer_name;
+      
+      this.storage.ready().then(() => {
+             this.storage.set('_user_Group', this.oGroup)
+      })
+      this.storage.ready().then(() => {
+             this.storage.set('_user_Cus_name', this.oCus_name)
+      })
     })
   }
+
   menuOpened() {
     this.storage.get('_user').then((res) => {
       this.data_logins = res;

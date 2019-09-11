@@ -1134,8 +1134,8 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
   //  this.data_uom = "";
     this.listGrade = "";
     this.oQty = "";
-
-
+    this.listZone = "";
+    
     this.data_pallet_detail = null;
     console.log(this.listQty);
    /* if(this.listQty == 0){
@@ -1151,7 +1151,7 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     this.oName = "";
     this.storage.remove('_oLine');
     //this.storage.remove('_oItem');
-    this.doGetGrade();
+    //this.doGetGrade();
 
   }
   doClearHeader(){

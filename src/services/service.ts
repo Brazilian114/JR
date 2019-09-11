@@ -3091,6 +3091,8 @@ delete_Receipt_Check_Barcode(oClient, oReceiptNo, oBarcode, oMaker) {
        }
     );
 }
+
+/*
 Set_Logout(oMaker) {
   let parameters="oMaker="+oMaker;
   return this.http.get(this.hostWebService +"/Set_Loguot?"+parameters)
@@ -3109,7 +3111,8 @@ Set_Logout(oMaker) {
           }
        }
     );
-}
+}*/
+
 delete_reservation_order_detail(oClient, oBranch, oLine_no, oItem_no, oUom, oQty, oRemark, oSource, oMarker) {
   let parameters="oClient="+oClient+'&oBranch='+oBranch+'&oLine_no='+oLine_no+'&oItem_no='+oItem_no+'&oUom='+oUom+'&oQty='+oQty+'&oRemark='+oRemark+'&oSource='+oSource+'&oMarker='+oMarker;
   return this.http.get(this.hostWebService +"/DeleteReservationOrderDetail?"+parameters)

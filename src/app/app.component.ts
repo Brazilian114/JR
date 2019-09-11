@@ -43,7 +43,7 @@ export class WMSHandheld {
                     this.nav.pop({});
                   } else {
                     this.presentToast('คลิกอีกครั้งเพื่อออกจากโปรแกรม', false, 'middle');
-
+/*
                     this.storage.get('_user').then((res)=>{
                       this.oUsername = res;
                       console.log(this.oUsername);
@@ -52,7 +52,7 @@ export class WMSHandheld {
                           this.data_receipt = res;
                             console.log(this.data_receipt)  });
 
-                    })
+                    })*/
 
                     this.backButtonPressedOnceToExit = true;
                     setTimeout(() => {
@@ -73,6 +73,7 @@ export class WMSHandheld {
   openHomePage(){
     this.nav.setRoot("HomePage");
   }
+  /*
   doLogout(){
     let alert = this.alertCtrl.create({
       title: 'ออกจากระบบ',
@@ -127,7 +128,44 @@ export class WMSHandheld {
       ]
     });
     alert.present();
+  }*/
+  doLogout(){
+    let alert = this.alertCtrl.create({
+      title: 'ออกจากระบบ',
+      subTitle: "คุณต้องการออกจากระบบหรือไม่",
+      buttons: [ {
+          text: 'ยกเลิก',
+          handler: data => {
+
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: data => {
+
+            this.storage.ready().then(() => {
+              this.storage.remove('_user');
+              this.storage.remove('_RecNum');
+              this.storage.remove('_oReversePallet');
+              this.storage.remove('_Qty');
+              this.storage.remove('_oLine');
+              this.storage.remove('_oItem');
+              this.storage.remove('_oReceipt');
+              this.storage.remove('_Wh');
+              this.storage.remove('_PalleNO');
+              this.storage.remove('_user_Group');
+              this.storage.remove('_user_Cus_name');
+            });
+            this.data_logins = "";
+            // this.reload();
+            this.nav.setRoot("LoginPage")
+          }
+        }
+      ]
+    });
+    alert.present();
   }
+
   reload(){
     window.location.reload();
   }
