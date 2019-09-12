@@ -150,7 +150,7 @@
             <ion-input [(ngModel)]="oPallet" (click)="doClick()" [disabled]="!isenabled_return"></ion-input>
           </ion-col>
           <ion-col col-2>
-            <button ion-button (click)="doGetNewPallet(oClient)">ต่อไป</button>
+            <button ion-button (click)="doGetNewPallet(oClient)" [disabled]="disabled">ต่อไป</button>
           </ion-col>
         </ion-row>
         <ion-row>

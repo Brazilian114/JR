@@ -58,8 +58,8 @@ export class StockcountPage {
     oClass:string = "";
     oOwner:string = "";
     oCountNo:string = "";
-
     Check:any="Att1"
+    disabled:boolean = false;
     isenabled:boolean = false;
     isenabledLot:boolean = false;
     isenabledBatch:boolean = false;
@@ -247,6 +247,9 @@ export class StockcountPage {
     }
     if(rec_num == undefined){
       rec_num = "";
+      this.disabled = true;
+    }else{
+      this.disabled = false;
     }
     this.oRecNum = rec_num;
     this.oPallet = pallet;
@@ -257,6 +260,7 @@ export class StockcountPage {
     this.oSQty = system_qty;
     this.oLotNo = lot;
     this.oBatchNo = batch;
+    
     if(expiry == ""){
       this.listExp = expiry;
     }else{

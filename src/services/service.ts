@@ -3152,5 +3152,24 @@ delete_sale_return_detail(oClient, oDoc_no, oBranch, oLine_no, oItem_no, oUom, o
        }
     );
 }
-
+GetProductUom(oClient, oItemNo) {
+   let parameters='oClient='+oClient+'&oItemNo='+oItemNo;
+   return this.http.get(this.hostWebService +"/Get_Product_Uom?"+parameters)
+     .toPromise()
+     .then(response =>
+       {
+           let a;
+           xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+           a = result;
+       });
+           try {
+               //return a.DataTable["diffgr:diffgram"].NewDataSet.Table; //explicitArray false
+               return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table //explicitArray true
+           }
+           catch (e) {
+             return [];
+           }
+       }
+     );
+ }
 }

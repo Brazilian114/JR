@@ -110,7 +110,7 @@ export class ReceiptCheckinReturnPage {
   isenabled:boolean = false;
   enabled:boolean = false;
   Check : string = 'Header';
-
+  items:any;
   isenabledLot:boolean = false;
   isenabledBatch:boolean = false;
   isenabledExp:boolean = false;
@@ -143,6 +143,11 @@ export class ReceiptCheckinReturnPage {
       this.platform.ready().then(() => {
         this.keyboard.disableScroll(true);
       });
+  }
+  initializeItems() {
+    this.items = this.data_barcodeDetail; 
+    console.log("grade",this.items);
+      
   }
   doClick(){
     this.updateScroll();
@@ -317,6 +322,7 @@ export class ReceiptCheckinReturnPage {
             this.storage.set('_oItem', this.oItem);
             console.log("this.oItem 320 => ",this.oItem);
             this.doGetUOM(oClient,this.oItem);
+            this.doGetGrade();
             // this.listUOM = this.data_barcodeDetail["0"].item_packing;
 
             this.doAddDetail(oClient, oReceipt, oDate, oPallet, oBarcode ,this.listUOM, this.oQty, this.listGrade, oLoc, listQty, oReason, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass);
@@ -343,6 +349,7 @@ export class ReceiptCheckinReturnPage {
 
             console.log("this.oItem 346 => ",this.oItem);
             this.doGetUOM(oClient,this.oItem);
+            this.doGetGrade();
             // his.listUOM = this.data_barcodeDetail["0"].item_packing;
             this.doGetProductOrther(oClient, this.oItem);
             console.log("Testtt",oClient, this.oItem);
@@ -773,6 +780,7 @@ export class ReceiptCheckinReturnPage {
   doGetUOM(oClient, oItemNO){
     this.service.get_UOM(oClient, oItemNO).then((res)=>{
       this.data_uom = res;
+      this.listUOM = this.data_uom["0"].item_packing;
       console.log(this.data_uom);
     })
   }
@@ -780,7 +788,11 @@ export class ReceiptCheckinReturnPage {
     this.service.get_Grade().then((res)=>{
       this.data_grade = res;
       console.log(this.data_grade);
-      this.listGrade = this.data_grade["0"].param_code;
+      if(this.items == undefined){
+        this.listGrade = this.data_grade["3"].param_code;
+      }else{
+        this.listGrade = this.items["0"].default_grade;
+        }
     })
   }
   doAddItem(oQty, oPallet, oItem, UOM, Grade, oStatus, oReceipt){
@@ -949,6 +961,7 @@ export class ReceiptCheckinReturnPage {
     this.oMfg = "";
     this.oLine = "";
     this.oName = "";
+    this.listGrade="";
 
 
     setTimeout(() => {

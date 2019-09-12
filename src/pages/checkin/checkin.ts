@@ -48,7 +48,8 @@ export class CheckinPage {
   data_location:any;
   data_close:any;
   data_productOther:any;
-
+  qty1:any
+  qty2:any
   oClient:string;
   oReceipt:string;
   oDocref:string;
@@ -93,7 +94,7 @@ export class CheckinPage {
   oColor:string = "";
 
   oAsn_flag:string = "";
-
+  luom_equivalent:any;
   loader:any;
   listWhses:any;
   listBook:any;
@@ -115,6 +116,10 @@ export class CheckinPage {
   isenabledColor:boolean = false;
   isenabledClass:boolean = false;
   items: any;
+  data_item:any;
+  data_productuom:any;
+  data_productstock:any;
+
   constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private storage: Storage, public platform: Platform, private alertCtrl: AlertController, private keyboard: Keyboard) {
 
@@ -590,10 +595,19 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
               this.oLine = "";
               if(oBarcode == "" || oBarcode == " " || oBarcode == undefined){
                 this.presentToast('โปรดระบุ Barcode', false, 'bottom');
-              }else{
+                }else if(this.oQty > parseInt(this.luom_equivalent)){
+                /* this.qty1 = parseInt(oQty) - parseInt(this.luom_equivalent)
+                 this.qty2 = parseInt(oQty) - parseInt(this.qty1)
+                 console.log(this.qty2);
+                 console.log(this.qty1);*/
+                // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
+                this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" "+this.listUOM +"ต่อ 1 Pallet");
+               }
+              else{
+          
                 console.log('type:' +listQty)
-                console.log(oClient, oReceipt, date, oInc, oPo, 'line: '+this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc);
-                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername ,this.oAsn_flag,listZone ,this.oLoc).then((res)=>{
+                console.log(oClient, oReceipt, date, oInc, oPo, 'line: '+this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,oLoc);
+                this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername ,this.oAsn_flag,listZone ,oLoc).then((res)=>{
                   this.data_r_detail = res;
                   console.log(this.data_r_detail);
                   if(this.data_r_detail.sqlstatus != "0"){
@@ -628,7 +642,15 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                   }
                 })
               }
-            }else{
+              
+            }else if(this.oQty > parseInt(this.luom_equivalent)){
+              /* this.qty1 = parseInt(oQty) - parseInt(this.luom_equivalent)
+               this.qty2 = parseInt(oQty) - parseInt(this.qty1)
+               console.log(this.qty2);
+               console.log(this.qty1);*/
+              // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
+              this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" "+this.listUOM +"ต่อ 1 Pallet");
+             }else{
               console.log('type1:' +listQty)
               this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,this.listZone,this.oLoc).then((res)=>{
                 this.data_r_detail = res;
@@ -671,7 +693,14 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
               console.log('oLine:2 ' +this.oLine)
               if(oBarcode == "" || oBarcode == " " || oBarcode == undefined){
                 this.presentToast('โปรดระบุ Barcode', false, 'bottom');
-              }else{
+              }else if(oQty > parseInt(this.luom_equivalent)){
+                /* this.qty1 = parseInt(oQty) - parseInt(this.luom_equivalent)
+                 this.qty2 = parseInt(oQty) - parseInt(this.qty1)
+                 console.log(this.qty2);
+                 console.log(this.qty1);*/
+                // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
+                this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" "+this.listUOM +"ต่อ 1 Pallet");
+               }else{
                 console.log(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, this.oLot, this.oBatch, this.oExpiry, this.oMfg, oSize, oColor, oClass,"listZone"+listZone, this.oUsername);
                 this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc).then((res)=>{
                   this.data_r_detail = res;
@@ -882,6 +911,20 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
       console.log(this.data_pallet_list);
     })
   }
+  doGetProductUom(){
+    this.service.GetProductUom(this.oClient, this.data_item.item_no).then((res)=>{
+      this.data_productuom = res;
+      console.log(this.data_productuom);  
+      // if(this.data_productstock.length <= 0){
+        // this.oItem_Qty = "0.00";
+        // this.oItem_Uom = "PCS";
+      // }else{
+        //this.oItem_Qty = this.data_productuom["0"].item_qty;
+        //this.oItem_Uom = this.data_productuom["0"].item_uom;
+        
+      // } 
+    })
+  }
   doReturnItemDetail(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no,zone){
          console.log(line_no,item_no,description,qty,uom,item_barcode,grade,batch_no,lot_no,expiry_date,prod_date,item_size,item_color,item_class,location,pallet_no,zone);
     this.oBarcode = "1";
@@ -921,7 +964,10 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
 
             this.service.get_UOM(this.oClient, this.oItem).then((res)=>{
               this.data_uom = res;
+              this.listUOM = this.data_uom["1"].item_packing;
+              this.luom_equivalent = this.data_uom["0"].luom_equivalent
               console.log(this.data_uom);
+              console.log("uom",this.luom_equivalent);
               this.listUOM = uom;
 
               this.doGetProductOrther(this.oClient, this.oItem);
@@ -947,8 +993,10 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
   doGetUOM(oClient, oItemNO){
     this.service.get_UOM(oClient, oItemNO).then((res)=>{
       this.data_uom = res;
-      this.listUOM = this.data_uom["0"].item_packing;
+      this.listUOM = this.data_uom["1"].item_packing;
+      this.luom_equivalent = this.data_uom["0"].luom_equivalent
       console.log("this.data_uom",this.data_uom);
+      console.log("uom",this.luom_equivalent);
     })
   }
   doGetGrade(){

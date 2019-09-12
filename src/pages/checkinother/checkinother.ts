@@ -69,7 +69,7 @@ export class CheckinotherPage {
   oPalletRe:string;
   oInvoice:string = "";
   oInvoice_Date:any = new Date().toISOString();
-
+  items:any;
   data_station:any;
   oZone:string;
   oCarrier:string;
@@ -138,6 +138,11 @@ export class CheckinotherPage {
       this.platform.ready().then(() => {
         this.keyboard.disableScroll(true);
       });
+  }
+  initializeItems() {
+    this.items = this.data_barcodeDetail; 
+    console.log("grade",this.items);
+      
   }
   doClick(){
     this.updateScroll();
@@ -443,6 +448,7 @@ export class CheckinotherPage {
             this.oItem = this.data_barcodeDetail["0"].item_no;
             this.storage.set('_oItem', this.oItem);
             this.doGetUOM(oClient,this.oItem);
+            this.doGetGrade();
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
             //this.listUOM = this.data_uom["0"].item_packing;
             console.log(this.listUOM);
@@ -469,6 +475,7 @@ export class CheckinotherPage {
             this.oItem = this.data_barcodeDetail["0"].item_no;
             this.storage.set('_oItem', this.oItem);
              this.doGetUOM(oClient,this.oItem);
+             this.doGetGrade();
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
             //this.listUOM = this.data_uom["0"].item_packing;
               setTimeout(()=>{
@@ -981,7 +988,11 @@ console.log(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, 
     this.service.get_Grade().then((res)=>{
       this.data_grade = res;
       console.log(this.data_grade);
-      this.listGrade = this.data_grade["0"].param_code;
+      if(this.items == undefined){
+        this.listGrade = this.data_grade["3"].param_code;
+      }else{
+        this.listGrade = this.items["0"].default_grade;
+        }
     })
   }
   doAddItem(oQty, oPallet, oItem, UOM, Grade, oStatus, oReceipt){
