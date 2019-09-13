@@ -184,6 +184,7 @@ export class StockcountPage {
       });
   }
   doGetBarcodeDetail(oClient, oBarcode){
+    this.disabled = false;
     this.service.get_Barcode_Detail(oClient, oBarcode).then((res)=>{
       this.data_barcodeDetail = res;
       console.log(this.data_barcodeDetail);
@@ -247,9 +248,9 @@ export class StockcountPage {
     }
     if(rec_num == undefined){
       rec_num = "";
-      this.disabled = true;
-    }else{
       this.disabled = false;
+    }else{
+      this.disabled = true;
     }
     this.oRecNum = rec_num;
     this.oPallet = pallet;

@@ -243,7 +243,7 @@
               <button ion-button block (click)="doGetLocation(listZone)">โลเคชั่น</button>
             </ion-col>
             <ion-col>
-              <ion-input [(ngModel)]="oLoc" #focusInputLoc (keyup.enter)="doGetLoc(oLoc)"></ion-input>
+              <ion-input [(ngModel)]="oLoc" readonly #focusInputLoc (keyup.enter)="doGetLoc(oLoc)"></ion-input>
             </ion-col>
         </ion-row>
         <ion-row>

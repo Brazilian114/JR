@@ -601,7 +601,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                  console.log(this.qty2);
                  console.log(this.qty1);*/
                 // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
-                this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" "+this.listUOM +"ต่อ 1 Pallet");
+                this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" ต่อ 1 Pallet");
                }
               else{
           
@@ -649,7 +649,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                console.log(this.qty2);
                console.log(this.qty1);*/
               // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
-              this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" "+this.listUOM +"ต่อ 1 Pallet");
+              this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" ต่อ 1 Pallet");
              }else{
               console.log('type1:' +listQty)
               this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,this.listZone,this.oLoc).then((res)=>{
@@ -699,7 +699,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                  console.log(this.qty2);
                  console.log(this.qty1);*/
                 // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
-                this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" "+this.listUOM +"ต่อ 1 Pallet");
+                this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" ต่อ 1 Pallet");
                }else{
                 console.log(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, this.oLot, this.oBatch, this.oExpiry, this.oMfg, oSize, oColor, oClass,"listZone"+listZone, this.oUsername);
                 this.service.update_receipt_detail_new(oClient, oReceipt, date, oInc, oPo, this.oLine, oPallet, SesItem, oBarcode, oUOM, oQty, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, this.oUsername,this.oAsn_flag,listZone,this.oLoc).then((res)=>{
