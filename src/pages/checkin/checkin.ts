@@ -938,10 +938,9 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
           this.service.get_pallet_for_putaway(oPallet+"0").then((res)=>{
             this.data_detail = res; 
             console.log("location",this.data_detail);
-            this.oLoc = this.data_detail["0"].location_to["0"]
-            console.log(this.oLoc);
-            
-            
+            //this.oLoc = this.data_detail["0"].location_to["0"]
+          //console.log(this.oLoc);
+         
       });
 }
   doGetProductUom(){
@@ -1019,6 +1018,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
     setTimeout(()=>{
     },200);
   }
+  
   doReturnPallet(oClient, oReceipt, pallet_no){
     let ReversePallet = pallet_no;
     this.oPalletRe = pallet_no;

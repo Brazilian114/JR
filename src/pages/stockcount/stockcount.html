@@ -147,7 +147,7 @@
             <ion-label>พาเลท</ion-label>
           </ion-col>
           <ion-col>
-            <ion-input [(ngModel)]="oPallet" (click)="doClick()" [disabled]="!isenabled_return"></ion-input>
+            <ion-input [(ngModel)]="oPallet" (click)="doClick()" readonly [disabled]="!isenabled_return"></ion-input>
           </ion-col>
           <ion-col col-2>
             <button ion-button (click)="doGetNewPallet(oClient)" [disabled]="disabled">ต่อไป</button>
@@ -163,7 +163,8 @@
         </ion-row>
         <ion-row>
           <ion-col col-2>
-            <button ion-button block (click)="doGetItemNo(oClient)">สินค้า</button>
+            <!--<button ion-button block (click)="doGetItemNo(oClient)">สินค้า</button>-->
+            <button ion-button block>สินค้า</button>
           </ion-col>
           <ion-col col-4>
             <ion-input [(ngModel)]="oItem" (click)="doClick()" [disabled]="!isenabled_return"></ion-input>
