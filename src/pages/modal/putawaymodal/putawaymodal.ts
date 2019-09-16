@@ -20,7 +20,7 @@ export class PutawaymodalPage {
      private loadingCtrl: LoadingController) {
 
     this.oPalletNo = navParams.get('oPallet');
-    console.log(this.oPalletNo);
+    console.log("pallet",this.oPalletNo);
     this.doGetPalletforPutaway(this.oPalletNo);
   }
   initializeItems() {

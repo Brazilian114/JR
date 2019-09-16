@@ -34,7 +34,7 @@ export class PalletmodelPage {
        this.oPallet = navParams.get('oPallet');
        this.oWorksOrder = navParams.get('oWorksOrder');
        console.log(this.oClient);
-       console.log(this.oReceipt);
+       console.log("reciept",this.oReceipt);
        console.log(this.oPallet);
        console.log(this.oWorksOrder);
        if(this.oPallet != undefined){
@@ -46,13 +46,14 @@ export class PalletmodelPage {
        }
   }
   initializeItems() {
-    if(this.data_pallet_for_workorder != undefined){
+   /* if(this.data_pallet_for_workorder != undefined){
       this.items = this.data_pallet_for_workorder;
     }else if(this.data_pallet_for_rep != undefined){
       this.items = this.data_pallet_for_rep;
     }else{
       this.items = this.data_pallet;
-    }
+    }*/
+    this.items = this.data_pallet;
   }
   onInput(ev: any){
          this.initializeItems();

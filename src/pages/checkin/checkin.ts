@@ -119,7 +119,8 @@ export class CheckinPage {
   data_item:any;
   data_productuom:any;
   data_productstock:any;
-
+  data_detail:any
+  data_pallet:any;
   constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private storage: Storage, public platform: Platform, private alertCtrl: AlertController, private keyboard: Keyboard) {
 
@@ -386,6 +387,15 @@ export class CheckinPage {
         },200);
     })
   }
+  doGetPalletList2(oClient, oReceipt){
+    this.presentLoading();
+    this.service.get_Pallet_List(oClient, oReceipt).then((res)=>{
+      this.data_pallet = res;
+      console.log("pallet",this.data_pallet);
+      this.finishLoding();
+      this.initializeItems();
+    })
+  }
   doGetINC(oClient, oSupplier, oDate){
     let date = String(oDate).substr(0,10)
     let profileModal = this.modalCtrl.create("IncmodelPage", {oClient: oClient, oSupplier: oSupplier, oDate: date });
@@ -427,6 +437,8 @@ export class CheckinPage {
             this.storage.set('_oItem', this.oItem);
             this.doGetUOM(oClient,this.oItem);
             this.doGetGrade();
+            //this.doGetPalletforPutaway(oPallet)
+            this.doGetPalletList2(oClient, oReceipt)
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
             //this.listUOM = this.data_uom["0"].item_packing;
             console.log(this.listUOM);
@@ -455,6 +467,8 @@ export class CheckinPage {
             this.storage.set('_oItem', this.oItem);
              this.doGetUOM(oClient,this.oItem);
              this.doGetGrade();
+             //this.doGetPalletforPutaway(oPallet)
+             this.doGetPalletList2(oClient, oReceipt)
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
             //this.listUOM = this.data_uom["0"].item_packing;
               setTimeout(()=>{
@@ -563,7 +577,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
         this.presentToast('Please specify Class.', false, 'bottom');
     }else if(this.isenabledClass == true && oQty == undefined){
       this.presentToast('Please specify Qty.', false, 'bottom');
-  }
+    }   
     // else if(listZone == "" || listZone == undefined ){
     //     this.presentToast('โปรดระบุ Zone.', false, 'bottom');
     // }else if(oLoc == "" || oLoc == undefined ){
@@ -602,6 +616,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                  console.log(this.qty1);*/
                 // this.presentToast('จำนวนรับเกินจำนวนต่อ 1 Pallet', false, 'bottom');
                 this.Alert('Error', "ไม่สามารถเพิ่มได้ จำนวนรับไม่ควรเกิน " + this.luom_equivalent +" ต่อ 1 Pallet");
+               
                }
               else{
           
@@ -838,21 +853,26 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
       buttons: [ {
           text: 'ยกเลิก',
           handler: data => {
-
+             this.storage.get('_oReversePallet').then((res)=>{
+              let PalletReverse = res;
+             });
           }
         },
         {
           text: 'ตกลง',
           handler: data => {
-
+            
             this.presentLoading();
             this.storage.get('_oReversePallet').then((res)=>{
               let PalletReverse = res;
+              console.log(PalletReverse);
+              
               if(PalletReverse == undefined || PalletReverse == ""){
                 this.presentToast('โปรดเลือก Pallet', false, 'bottom');
                 }else{
                   this.service.Reverse_Receipt_Pallet(oClient, oReceipt, PalletReverse, this.oUsername).then((res)=>{
                     this.data_reverse = res;
+                    //this.doGetPalletforPutaway(PalletReverse);
                     console.log(this.data_reverse);
                     if(this.data_reverse["0"].sqlstatus != 96){
                       let alert = this.alertCtrl.create({
@@ -874,11 +894,13 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                             text: 'ตกลง',
                             handler: data => {
                               this.doGetPalletList(oClient, oReceipt);
+                              
                             }
                           }]
                       });
                       alert.present();
                       this.doGetPalletList(oClient, oReceipt);
+                      //this.doGetPalletforPutaway(PalletReverse);
                     }
                   })
                 }
@@ -908,9 +930,20 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
   doGetPalletList(oClient, oReceipt){
     this.service.get_Receipt_List_Detail_Closed(oClient, oReceipt).then((res)=>{
       this.data_pallet_list = res;
-      console.log(this.data_pallet_list);
+      console.log("list",this.data_pallet_list);
     })
+
   }
+  doGetPalletforPutaway(oPallet){
+          this.service.get_pallet_for_putaway(oPallet+"0").then((res)=>{
+            this.data_detail = res; 
+            console.log("location",this.data_detail);
+            this.oLoc = this.data_detail["0"].location_to["0"]
+            console.log(this.oLoc);
+            
+            
+      });
+}
   doGetProductUom(){
     this.service.GetProductUom(this.oClient, this.data_item.item_no).then((res)=>{
       this.data_productuom = res;
@@ -968,6 +1001,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
               this.luom_equivalent = this.data_uom["0"].luom_equivalent
               console.log(this.data_uom);
               console.log("uom",this.luom_equivalent);
+              this.doGetPalletList2(this.oClient, this.oPallet)
               this.listUOM = uom;
 
               this.doGetProductOrther(this.oClient, this.oItem);
@@ -989,6 +1023,8 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
     let ReversePallet = pallet_no;
     this.oPalletRe = pallet_no;
     this.storage.set('_oReversePallet', ReversePallet);
+    this.doGetPalletforPutaway(pallet_no);
+    
   }
   doGetUOM(oClient, oItemNO){
     this.service.get_UOM(oClient, oItemNO).then((res)=>{

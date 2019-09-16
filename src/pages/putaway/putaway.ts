@@ -52,7 +52,7 @@ export class PutawayPage {
 
       this.storage.get('_chk_Loc').then((res)=>{
         this.chk_Loc = res;
-        console.log(this.chk_Loc);
+        console.log("pallet",this.chk_Loc);
       })
       // this.keyboard.onKeyboardHide();
 
