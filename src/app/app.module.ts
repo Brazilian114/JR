@@ -7,7 +7,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { WMSHandheld } from './app.component';
 
 import { Service } from '../services/service';
-
+import { DatePipe } from '@angular/common'
 import { StatusBar } from '@ionic-native/status-bar';
 import { Keyboard } from '@ionic-native/keyboard';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -59,7 +59,8 @@ import { DocumentViewer } from '@ionic-native/document-viewer';
     Keyboard,
     Network,
     ScreenOrientation,
-    DocumentViewer
+    DocumentViewer,
+    DatePipe
   ]
 })
 export class AppModule {}

@@ -92,6 +92,7 @@ export class ItemrelocationPage {
             }
           });
   }
+  
   doGetLocation(oClient, oItem, oWH, oLOC_DESC, oLocation){
     if(oClient == undefined || oClient == ""){
       this.presentToast('Please specify Client.', false, 'bottom');

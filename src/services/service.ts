@@ -17,7 +17,7 @@ export class Service {
     this.storage.get('_url').then((res)=>{
       this.url = res;
   
-   this.hostWebService = "http://192.168.1.236/RF-Service_GreenTimberland/RFService.asmx";
+   this.hostWebService = "http://"+this.url+"/RF-Service_GreenTimberland/RFService.asmx";
 
       //this.hostWebService = "http://localhost:7422/RFService.asmx";  //debug
 
@@ -2899,6 +2899,7 @@ update_receipt_header_new(oClient, oBook, oReceiptNo, oReceiptDate, oIncoming, o
        }
     );
 }
+
 update_receipt_detail_new(oClient, oReceiptNo, oReceiptDate, oIncoming, oPONO, oLine, oPallet, oItem, oBarcode, oUOM, oQTY, oGrade, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oMaker,oAsn_flag,listZone,oLoc) {
     let parameters="oClient="+oClient+'&oReceiptNo='+oReceiptNo+'&oReceiptDate='+oReceiptDate+'&oIncoming='+oIncoming
     +'&oPONO='+oPONO+'&oLine='+oLine+'&oPallet='+oPallet+'&oItem='+oItem+'&oBarcode='+oBarcode
@@ -3155,6 +3156,26 @@ delete_sale_return_detail(oClient, oDoc_no, oBranch, oLine_no, oItem_no, oUom, o
 GetProductUom(oClient, oItemNo) {
    let parameters='oClient='+oClient+'&oItemNo='+oItemNo;
    return this.http.get(this.hostWebService +"/Get_Product_Uom?"+parameters)
+     .toPromise()
+     .then(response =>
+       {
+           let a;
+           xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+           a = result;
+       });
+           try {
+               //return a.DataTable["diffgr:diffgram"].NewDataSet.Table; //explicitArray false
+               return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table //explicitArray true
+           }
+           catch (e) {
+             return [];
+           }
+       }
+     );
+ }
+ Get_Pallet_History(oClient, oPallet) {
+   let parameters='oClient='+oClient+'&oPallet='+oPallet;
+   return this.http.get(this.hostWebService +"/Get_History_Pallet_No?"+parameters)
      .toPromise()
      .then(response =>
        {

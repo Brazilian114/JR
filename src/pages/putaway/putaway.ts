@@ -95,7 +95,7 @@ export class PutawayPage {
               console.log("แสดง Loc.",this.data_detail.location_to);
                 console.log("แสดง chk_Loc.",this.chk_Loc);
               this.oLocation = this.data_detail["0"].location_to["0"];
-              console.log(this.data_detail);
+              console.log("pallet",this.data_detail);
 
               this.storage.set('_Wh', this.data_detail["0"].warehouse_to["0"]);
 

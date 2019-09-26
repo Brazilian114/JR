@@ -179,6 +179,15 @@ export class OperationPage {
       this.presentToast('Please Check your network and try again', false, 'bottom');
     }
   }
+  doCheckPallet(){
+    if(this.network.type !== 'none'){
+      this.navCtrl.push("CheckpalletPage");
+    }else if(this.network.type === 'none'){
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }else{
+      this.presentToast('Please Check your network and try again', false, 'bottom');
+    }
+  }
   presentToast(key, showCloseButton, position: string) {
     const toast = this.toastCtrl.create({
       message: key,

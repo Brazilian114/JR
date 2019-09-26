@@ -440,7 +440,7 @@ export class CheckinPage {
             //this.doGetPalletforPutaway(oPallet)
             this.doGetPalletList2(oClient, oReceipt)
             //this.listUOM = this.data_barcodeDetail["0"].item_packing;
-            //this.listUOM = this.data_uom["0"].item_packing;
+            this.listUOM = this.data_uom["1"].item_packing;
             console.log(this.listUOM);
             console.log(oPo);
             this.doGetProductOrther(oClient, this.oItem);
