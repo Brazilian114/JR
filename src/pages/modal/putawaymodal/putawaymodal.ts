@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, IonicPage } from 'ionic-angular';
 
 import { Service } from '../../../services/service';
-
+import { Storage } from '@ionic/storage';
 @IonicPage(
   {name:'PutawaymodalPage',
   segment: 'Putawaymodal'}
@@ -16,15 +16,19 @@ export class PutawaymodalPage {
   oPalletNo:any;
   loader:any;
   items: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private service: Service,
+  oUsername:any;
+  oClient:any;
+  constructor(public storage:Storage,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private service: Service,
      private loadingCtrl: LoadingController) {
-
+     
+    this.oClient = navParams.get('oUsername');
     this.oPalletNo = navParams.get('oPallet');
     console.log("pallet",this.oPalletNo);
     this.doGetPalletforPutaway(this.oPalletNo);
   }
   initializeItems() {
     this.items = this.data_pallet_putaway;
+    
   }
   onInput(ev: any){
          this.initializeItems();
@@ -41,9 +45,11 @@ export class PutawaymodalPage {
     this.viewCtrl.dismiss(data);
   }
   doGetPalletforPutaway(oPalletNo){
+    console.log(this.oClient);
+    
     if(oPalletNo == undefined){
       oPalletNo = "";
-      this.service.get_pallet_for_putaway(oPalletNo).then((res)=>{
+      this.service.get_pallet_for_putaway(this.oClient,oPalletNo).then((res)=>{
         this.data_pallet_putaway = res;
         console.log("doGetPalletforPutaway if 1",this.data_pallet_putaway);
         this.initializeItems();
@@ -53,13 +59,13 @@ export class PutawaymodalPage {
       //   this.data_pallet_putaway = res;
       //   console.log(this.data_pallet_putaway);
       oPalletNo = "";
-      this.service.get_pallet_for_putaway(oPalletNo).then((res)=>{
+      this.service.get_pallet_for_putaway(this.oClient,oPalletNo).then((res)=>{
         this.data_pallet_putaway = res;
         console.log("doGetPalletforPutaway if 2",this.data_pallet_putaway);
       // })
         if(this.data_pallet_putaway["0"].Column1 == "E"){
           oPalletNo = "";
-          this.service.get_pallet_for_putaway(oPalletNo).then((res)=>{
+          this.service.get_pallet_for_putaway(this.oClient,oPalletNo).then((res)=>{
             this.data_pallet_putaway = res;
             console.log(this.data_pallet_putaway);
             this.initializeItems();
@@ -69,6 +75,7 @@ export class PutawaymodalPage {
         }
       })
     }
+    
 
   }
   presentLoading(){

@@ -139,6 +139,8 @@ export class CheckinPage {
           }, 300)
         }
       })
+     
+      
   }
   initializeItems() {
     this.items = this.data_barcodeDetail; 
@@ -935,7 +937,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
 
   }
   doGetPalletforPutaway(oPallet){
-          this.service.get_pallet_for_putaway(oPallet+"0").then((res)=>{
+          this.service.get_pallet_for_putaway(this.oClient,oPallet+"0").then((res)=>{
             this.data_detail = res; 
             console.log("location",this.data_detail);
             //this.oLoc = this.data_detail["0"].location_to["0"]

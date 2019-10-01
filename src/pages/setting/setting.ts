@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { NavController, IonicPage ,ViewController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 
@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class SettingPage {
   oURL:string;
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public viewCtrl : ViewController,public navCtrl: NavController, public storage: Storage) {
     this.storage.get('_url').then((res)=>{
       console.log(res);
       this.oURL = res;
@@ -34,6 +34,6 @@ export class SettingPage {
     this.reload();
   }
   reload(){
-    this.navCtrl.pop();
+    this.viewCtrl.dismiss();
   }
 }

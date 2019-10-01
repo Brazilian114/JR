@@ -84,13 +84,13 @@ export class PutawayPage {
       }, 300)
     }
   doGetPalletforPutaway(oPallet){
-      let profileModal = this.modalCtrl.create("PutawaymodalPage", { oPallet: oPallet });
+      let profileModal = this.modalCtrl.create("PutawaymodalPage", { oPallet: oPallet ,oUsername : this.oUsername});
         profileModal.present();
         profileModal.onDidDismiss(data =>{
           console.log(data);
           if(data != undefined){
             this.oPallet = data.oPalletNo;
-            this.service.get_pallet_for_putaway(this.oPallet+"0").then((res)=>{
+            this.service.get_pallet_for_putaway(this.oUsername,this.oPallet+"0").then((res)=>{
               this.data_detail = res;
               console.log("แสดง Loc.",this.data_detail.location_to);
                 console.log("แสดง chk_Loc.",this.chk_Loc);
@@ -396,7 +396,7 @@ doLoginApprove(username,password){
     console.log(oPallet)
     let barcode=oPallet+"0";
        if(barcode != null || barcode != ""){
-     this.service.get_pallet_for_putaway(barcode).then((res)=>{
+     this.service.get_pallet_for_putaway(this.oUsername,barcode).then((res)=>{
        this.data_detail = res;
        console.log(this.data_detail);
        if(this.data_detail["0"].Column1 == "E"){

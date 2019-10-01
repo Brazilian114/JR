@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, LoadingController, AlertController, Content, Platform, IonicPage, MenuController } from 'ionic-angular';
+import { ModalController,NavController, ToastController, LoadingController, AlertController, Content, Platform, IonicPage, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Service } from '../../services/service';
 
 import { Network } from '@ionic-native/network';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { SettingPage } from '../setting/setting';
 
 @IonicPage(
   {name:'LoginPage',
@@ -25,7 +26,7 @@ export class LoginPage {
   oPassword:string = '7LINE';
   oChkLoc:string = '';
   url:string;
-  constructor(public navCtrl: NavController, private toastCtrl: ToastController,private loadingCtrl: LoadingController
+  constructor(public modalCtrl : ModalController,public navCtrl: NavController, private toastCtrl: ToastController,private loadingCtrl: LoadingController
     , private storage: Storage, private service : Service, private alertCtrl: AlertController, private network: Network
     , private screenOrientation: ScreenOrientation, public platform: Platform, private keyboard: Keyboard, private menuCtrl: MenuController) {
       // this.doLoginJson(this.oUsername, this.oPassword);
@@ -113,7 +114,12 @@ export class LoginPage {
     })
   }
   doSetting(){
-    this.navCtrl.push("SettingPage");
+    //this.navCtrl.push("SettingPage");
+    let settingModal = this.modalCtrl.create("SettingPage")
+    settingModal.present();
+    settingModal.onDidDismiss( modal => {
+      window.location.reload();
+    })
   }
   presentToast(key, showCloseButton, position: string) {
     const toast = this.toastCtrl.create({
