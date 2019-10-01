@@ -418,9 +418,7 @@ get_pallet_for_putaway(oClient,oPallet) {
   return this.http.get(this.hostWebService +"/Get_Pallet_For_Putaway?"+parameters)
     .toPromise()
     .then(response =>
-       {
-          console.log("log",oClient);
-          
+       {       
           let a;
           xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
           a = result;
