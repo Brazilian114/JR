@@ -223,7 +223,7 @@
             <ion-item>
               <!-- <ion-label stacked style="margin: 0px 0px 0px 0;">Zone</ion-label> -->
                 <ion-label stacked style="margin: 0px 0px 0px 0;">โซน</ion-label>
-                <ion-select [(ngModel)]="listZone" interface="popover">
+                <ion-select [(ngModel)]="listZone" interface="popover"  (ionChange)="onChange()">
                 <ion-option *ngFor = "let zone of data_zone" value="{{zone.Zone}}">{{zone.Description}}</ion-option>
               </ion-select>
             </ion-item>

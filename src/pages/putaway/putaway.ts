@@ -194,9 +194,6 @@ doLoginApprove(username,password){
   }
 
 }
-
-
-
   doReturnItemDetail(item_no,description,qty,location_to,rec_num,warehouse_to,pallet_no){
     console.log(item_no, description, qty, location_to, rec_num);
     this.oLocation = location_to;

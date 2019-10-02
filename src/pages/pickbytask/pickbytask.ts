@@ -281,11 +281,12 @@ export class PickbytaskPage {
       this.data_closePick = res;
       console.log(this.data_closePick);
       if(this.data_closePick.length < 0){
-        this.presentToast(this.data_closePick["0"].sqlmsg, false, 'bottom');
+        this.presentToast('completed', false, 'bottom');
       }
       else if(this.data_closePick["0"].sqlstatus == "0"){
         this.doGetDetailWorkOrder(oWo, this.oUsername);
         this.doClearInput();
+        this.presentToast(this.data_closePick["0"].sqlmsg, false, 'bottom');
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
         },0);

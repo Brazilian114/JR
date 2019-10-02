@@ -108,6 +108,7 @@ export class CheckinPage {
   enabled:boolean = false;
   Check : string = 'Header';
   isenabledLot:boolean = false;
+  changeZone:boolean = false;
   isenabledBatch:boolean = false;
   isenabledExp:boolean = false;
   isenabledMfg:boolean = false;
@@ -140,7 +141,6 @@ export class CheckinPage {
         }
       })
      
-      
   }
   initializeItems() {
     this.items = this.data_barcodeDetail; 
@@ -152,6 +152,8 @@ export class CheckinPage {
         this.keyboard.disableScroll(true);
       });
   }
+  
+
   doClick(){
     this.updateScroll();
   }
@@ -209,7 +211,7 @@ export class CheckinPage {
         this.presentToast('โปรดระบุ Zone.', false, 'bottom');
     }
     else{
-
+      
       this.service.get_location_zone(oLoc, this.listZone).then((res)=>{
       this.data_location = res;
       console.log(this.data_location);
@@ -561,6 +563,11 @@ export class CheckinPage {
       }
     }
   }
+  onChange() {
+    this.oLoc = "";
+    this.changeZone = true;  
+ }
+ 
   doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc ){
 console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, "listQty:",listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, "listZone:"+listZone,oLoc );
     if(this.isenabledLot == true && oLot == ""){
@@ -579,7 +586,11 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
         this.presentToast('Please specify Class.', false, 'bottom');
     }else if(this.isenabledClass == true && oQty == undefined){
       this.presentToast('Please specify Qty.', false, 'bottom');
-    }   
+    }else if(this.changeZone == true && this.oLoc == ""){     
+      this.presentToast('Please specify Location.', false, 'bottom');
+     }   
+
+ 
     // else if(listZone == "" || listZone == undefined ){
     //     this.presentToast('โปรดระบุ Zone.', false, 'bottom');
     // }else if(oLoc == "" || oLoc == undefined ){
