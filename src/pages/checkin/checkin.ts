@@ -25,7 +25,7 @@ export class CheckinPage {
   @ViewChild('focusInputRemark') InputRemark;
   @ViewChild('focusInputSO') InputSO;
   @ViewChild(Content) content: Content;
-
+  data_pallet_putaway:any;
   data_login:any;
   data_client:any;
   data_pallet_list:any;
@@ -226,6 +226,12 @@ export class CheckinPage {
       })
     }
   }
+  doGetPalletForPutaway(oReceipt){
+    this.service.get_pallet_for_putaway(this.oClient,"",oReceipt).then((res)=>{
+      this.data_pallet_putaway = res;
+      console.log("doGetPalletforPutaway if 1",this.data_pallet_putaway);
+  })
+}
   doGetReceipt(oClient, listType ,oReceipt, listBook, listWhses){
     this.storage.set('_oReceipt', oReceipt);
 
@@ -254,6 +260,7 @@ export class CheckinPage {
             }
             this.doGetPalletData(oClient, this.oReceipt)
             this.doGetPalletList(oClient, this.oReceipt)
+            this.doGetPalletForPutaway(this.oReceipt);
             let date = String(data.date).substr(0,10)
             let invoicedate = String(data.invoice_date).substr(0,10)
             console.log("doGetReceipt",data);
@@ -840,7 +847,9 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
   doClose(oClient, oReceiptNo){
     //his.doGetPalletList(oClient, oReceiptNo)
     //this.doGetPalletData(oClient, oReceiptNo)
-    console.log("data2",this.data_pallet_list.length);
+    console.log("doGetPalletforPutaway",this.data_pallet_putaway.length);
+    console.log("doGetPalletforPutaway",this.data_pallet_putaway);
+    //console.log("data2",this.data_pallet_list.length);
     console.log("data",this.data_pallet.length);
     if(oClient == undefined || oClient == ""){
       this.presentToast('โปรดระบุ Client', false, 'bottom');
@@ -859,7 +868,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
           {
             text: 'ตกลง',
             handler: data => {
-              if(this.data_pallet_list.length > 0 || this.data_pallet.length > 0){
+              if(this.data_pallet_putaway.length.length > 0 || this.data_pallet.length > 0){
                 this.presentToast('โปรด Putaway รายการพาเลทให้ครบ', false, 'bottom');
               }else{
               this.service.Closed_Receipt_Master(oClient, oReceiptNo, this.oUsername).then((res)=>{
@@ -972,7 +981,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
 
   }
   doGetPalletforPutaway(oPallet){
-          this.service.get_pallet_for_putaway(this.oClient,oPallet+"0").then((res)=>{
+          this.service.get_pallet_for_putaway(this.oClient,oPallet+"0","").then((res)=>{
             this.data_detail = res; 
             console.log("location",this.data_detail);
             //this.oLoc = this.data_detail["0"].location_to["0"]

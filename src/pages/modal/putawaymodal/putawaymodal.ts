@@ -49,7 +49,7 @@ export class PutawaymodalPage {
     
     if(oPalletNo == undefined){
       oPalletNo = "";
-      this.service.get_pallet_for_putaway(this.oClient,oPalletNo).then((res)=>{
+      this.service.get_pallet_for_putaway(this.oClient,oPalletNo,"").then((res)=>{
         this.data_pallet_putaway = res;
         console.log("doGetPalletforPutaway if 1",this.data_pallet_putaway);
         this.initializeItems();
@@ -59,13 +59,13 @@ export class PutawaymodalPage {
       //   this.data_pallet_putaway = res;
       //   console.log(this.data_pallet_putaway);
       oPalletNo = "";
-      this.service.get_pallet_for_putaway(this.oClient,oPalletNo).then((res)=>{
+      this.service.get_pallet_for_putaway(this.oClient,oPalletNo,"").then((res)=>{
         this.data_pallet_putaway = res;
         console.log("doGetPalletforPutaway if 2",this.data_pallet_putaway);
       // })
         if(this.data_pallet_putaway["0"].Column1 == "E"){
           oPalletNo = "";
-          this.service.get_pallet_for_putaway(this.oClient,oPalletNo).then((res)=>{
+          this.service.get_pallet_for_putaway(this.oClient,oPalletNo,"").then((res)=>{
             this.data_pallet_putaway = res;
             console.log(this.data_pallet_putaway);
             this.initializeItems();
