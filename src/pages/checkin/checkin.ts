@@ -252,6 +252,8 @@ export class CheckinPage {
             }else{
               this.oReceipt = data.receipt_no;
             }
+            this.doGetPalletData(oClient, this.oReceipt)
+            this.doGetPalletList(oClient, this.oReceipt)
             let date = String(data.date).substr(0,10)
             let invoicedate = String(data.invoice_date).substr(0,10)
             console.log("doGetReceipt",data);
@@ -316,7 +318,7 @@ export class CheckinPage {
           this.oInvoice = this.data_receipt["0"].invoice_no;
           this.oInvoice_Date = invoicedate;
         }
-
+       
         this.oPo = this.data_receipt["0"].client_po_no;
         this.oAsn_flag = this.data_receipt["0"].asn_flag;
         if(this.data_receipt.length == 1){
@@ -361,6 +363,15 @@ export class CheckinPage {
 
         }
     });
+  }
+  doGetPalletData(oClient, oReceipt){
+    this.presentLoading();
+    this.service.get_Pallet_List(oClient, oReceipt).then((res)=>{
+      this.data_pallet = res;
+      console.log("data",this.data_pallet.length);
+      this.finishLoding();
+      this.initializeItems();
+    })
   }
   doGetPallet(oClient,oReceipt){
     let profileModal = this.modalCtrl.create("PalletmodelPage", { oClient: oClient, oReceipt: oReceipt });
@@ -564,8 +575,10 @@ export class CheckinPage {
     }
   }
   onChange() {
-    this.oLoc = "";
-    this.changeZone = true;  
+    
+    this.oLoc = ""; 
+    this.changeZone = true;
+    return;  
  }
  
   doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc ){
@@ -586,9 +599,10 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
         this.presentToast('Please specify Class.', false, 'bottom');
     }else if(this.isenabledClass == true && oQty == undefined){
       this.presentToast('Please specify Qty.', false, 'bottom');
-    }else if(this.changeZone == true && this.oLoc == ""){     
+    }
+    /*else if(this.changeZone == true && this.oLoc == ""){     
       this.presentToast('Please specify Location.', false, 'bottom');
-     }   
+     }   */
 
  
     // else if(listZone == "" || listZone == undefined ){
@@ -598,6 +612,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
     // }
 
     else{
+
       let date = String(oDate).substr(0,10)
       this.storage.get('_oItem').then((res)=>{
         let SesItem = res;
@@ -823,6 +838,10 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
     }
   }
   doClose(oClient, oReceiptNo){
+    //his.doGetPalletList(oClient, oReceiptNo)
+    //this.doGetPalletData(oClient, oReceiptNo)
+    console.log("data2",this.data_pallet_list.length);
+    console.log("data",this.data_pallet.length);
     if(oClient == undefined || oClient == ""){
       this.presentToast('โปรดระบุ Client', false, 'bottom');
     }else if(oReceiptNo == undefined || oReceiptNo == ""){
@@ -840,6 +859,9 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
           {
             text: 'ตกลง',
             handler: data => {
+              if(this.data_pallet_list.length > 0 || this.data_pallet.length > 0){
+                this.presentToast('โปรด Putaway รายการพาเลทให้ครบ', false, 'bottom');
+              }else{
               this.service.Closed_Receipt_Master(oClient, oReceiptNo, this.oUsername).then((res)=>{
                 this.data_close = res;
                 console.log(this.data_close);
@@ -852,6 +874,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                   this.doClearPalletList();
                 }
               })
+            }
             }
           }
         ]
@@ -944,6 +967,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
     this.service.get_Receipt_List_Detail_Closed(oClient, oReceipt).then((res)=>{
       this.data_pallet_list = res;
       console.log("list",this.data_pallet_list);
+      console.log("data2",this.data_pallet_list.length);
     })
 
   }
@@ -1002,6 +1026,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
             this.listUOM = "";
             this.presentToast(this.data_barcodeDetail.sqlmsg, false, 'bottom');
         }else{
+            this.oLoc = location;
             this.oName = "";
             this.oName = this.data_barcodeDetail["0"].description;
             this.oItem = this.data_barcodeDetail["0"].item_no;
@@ -1281,7 +1306,9 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
       console.log("disable")
     }
   }
-  doClickHeader(Check, listQty){
+  doClickHeader(Check, listQty,oClient,oReceipt){
+    this.doGetPalletList(oClient, oReceipt)
+    this.doGetPalletData(oClient, oReceipt)
     console.log(Check);
     if(Check == "Header"){
     }else if(Check == "Details"){

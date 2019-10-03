@@ -574,7 +574,7 @@
 </ion-content>
 <ion-footer>
       <ion-segment [(ngModel)]="Check">
-        <ion-segment-button value="Header" (click)="doClickHeader(Check, listQty)">
+        <ion-segment-button value="Header" (click)="doClickHeader(Check, listQty,oClient,oReceipt)">
           <!-- Header --> รับสินค้า
         </ion-segment-button>
         <ion-segment-button value="Details" [disabled]="!isenabled" (click)="doClickHeader(Check, listQty)">
