@@ -433,19 +433,19 @@ export class ReceiptCheckinReturnPage {
 
     console.log("oBarcode 429 = > ",oBarcode);
     if(this.isenabledLot == true && oLot == ""){
-        this.presentToast('Please specify Lot No.', false, 'bottom');
+        this.presentToast('โปรดระบุ Lot No.', false, 'bottom');
     }else if(this.isenabledBatch == true && oBatch == ""){
-        this.presentToast('Please specify Batch No.', false, 'bottom');
+        this.presentToast('โปรดระบุ Batch No.', false, 'bottom');
     }else if(this.isenabledExp == true && oExpiry == ""){
-        this.presentToast('Please specify Exp Date.', false, 'bottom');
+        this.presentToast('โปรดระบุ Exp Date.', false, 'bottom');
     }else if(this.isenabledMfg == true && oMfg == ""){
-        this.presentToast('Please specify Production Date.', false, 'bottom');
+        this.presentToast('โปรดระบุ Production Date.', false, 'bottom');
     }else if(this.isenabledSize == true && oSize == ""){
-        this.presentToast('Please specify Size.', false, 'bottom');
+        this.presentToast('โปรดระบุ Size.', false, 'bottom');
     }else if(this.isenabledColor == true && oColor == ""){
-        this.presentToast('Please specify Color.', false, 'bottom');
+        this.presentToast('โปรดระบุ Color.', false, 'bottom');
     }else if(this.isenabledClass == true && oClass == ""){
-        this.presentToast('Please specify Class.', false, 'bottom');
+        this.presentToast('โปรดระบุ Class.', false, 'bottom');
     }else if(oQty == undefined || oQty == ""){
       this.presentToast('โปรดระบุจำนวน Qty ที่ต้องการ', false, 'bottom');
     }else{

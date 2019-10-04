@@ -34,7 +34,7 @@ export class Stockcount2Page {
 
   doGetStk(oClient){
     if(this.oClient == undefined){
-      this.presentToast('Please specify Client.', false, 'bottom');
+      this.presentToast('โปรดระบุ Client.', false, 'bottom');
     }else{
     let profileModal = this.modalCtrl.create("StkmodalPage", { oClient: oClient });
       profileModal.present();
@@ -50,11 +50,11 @@ export class Stockcount2Page {
   }
   doGetLocation(oClient, oWarehouse, oStockRef, oLocation){
     if(oClient == undefined || oClient == ""){
-      this.presentToast('Please specify Client.', false, 'bottom');
+      this.presentToast('โปรดระบุ Client.', false, 'bottom');
     }else if(oStockRef == undefined || oStockRef == ""){
-      this.presentToast('Please specify StockRef.', false, 'bottom');
+      this.presentToast('โปรดระบุ StockRef.', false, 'bottom');
     }else if(oWarehouse == undefined || oWarehouse == ""){
-      this.presentToast('Please specify Warehouse.', false, 'bottom');
+      this.presentToast('โปรดระบุ Warehouse.', false, 'bottom');
     }else{
       if(oLocation == undefined){
         oLocation = "";

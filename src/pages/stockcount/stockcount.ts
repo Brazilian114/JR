@@ -93,7 +93,7 @@ export class StockcountPage {
   }
   doGetStk(oClient){
     if(this.oClient == undefined){
-      this.presentToast('Please specify Client.', false, 'bottom');
+      this.presentToast('โปรดระบุ Client.', false, 'bottom');
     }else{
     let profileModal = this.modalCtrl.create("StkmodalPage", { oClient: oClient });
       profileModal.present();
@@ -119,11 +119,11 @@ export class StockcountPage {
   }
   doGetLocation(oClient, oWarehouse, oStockRef, oLocation){
     if(oClient == undefined || oClient == ""){
-      this.presentToast('Please specify Client.', false, 'bottom');
+      this.presentToast('โปรดระบุ Client.', false, 'bottom');
     }else if(oStockRef == undefined || oStockRef == ""){
-      this.presentToast('Please specify StockRef.', false, 'bottom');
+      this.presentToast('โปรดระบุ StockRef.', false, 'bottom');
     }else if(oWarehouse == undefined || oWarehouse == ""){
-      this.presentToast('Please specify Warehouse.', false, 'bottom');
+      this.presentToast('โปรดระบุ Warehouse.', false, 'bottom');
     }else{
       let profileModal = this.modalCtrl.create("LocationmodalPage", { oClient: oClient, oWH: oWarehouse, oStockRef: oStockRef, oLocation: oLocation });
         profileModal.present();
@@ -390,38 +390,38 @@ export class StockcountPage {
   doSaveStockCount(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oBarcode, oUOM, oSQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner){
 
         if(oSttRef == undefined || oSttRef == ""){
-          this.presentToast('Please specify Stk Ref.', false, 'bottom');
+          this.presentToast('โปรดระบุ Stk Ref.', false, 'bottom');
         }else if(oWh == undefined || oWh == "" ){
-          this.presentToast('Please specify Warehouse.', false, 'bottom');
+          this.presentToast('โปรดระบุ Warehouse.', false, 'bottom');
         }else if(OLoc == undefined || OLoc == "" ){
-          this.presentToast('Please specify Location.', false, 'bottom');
+          this.presentToast('โปรดระบุ Location.', false, 'bottom');
         }else if(oPallet == undefined || oPallet == "" ){
-          this.presentToast('Please specify Pallet.', false, 'bottom');
+          this.presentToast('โปรดระบุ Pallet.', false, 'bottom');
         }else if(oItem == undefined || oItem == "" ){
-          this.presentToast('Please specify Item.', false, 'bottom');
+          this.presentToast('โปรดระบุ Item.', false, 'bottom');
         }else if(oUOM == undefined || oUOM == "" ){
-          this.presentToast('Please specify UOM.', false, 'bottom');
+          this.presentToast('โปรดระบุ UOM.', false, 'bottom');
         }else if(oCQty == undefined || oCQty == null ){
-          this.presentToast('Please specify Qty.', false, 'bottom');
+          this.presentToast('โปรดระบุ Qty.', false, 'bottom');
         }else if(oGrade == undefined || oGrade == "" ){
-          this.presentToast('Please specify Grade.', false, 'bottom');
+          this.presentToast('โปรดระบุ Grade.', false, 'bottom');
         }else if(oRecNum == "" && oSQty == "0.000" || oRecNum == undefined && oSQty == undefined){
           oRecNum = "";
           oSQty = "";
           if(this.isenabledLot == true && oLotNo == ""){
-              this.presentToast('Please specify Lot No.', false, 'bottom');
+              this.presentToast('โปรดระบุ Lot No.', false, 'bottom');
           }else if(this.isenabledBatch == true && oBatNo == ""){
-              this.presentToast('Please specify Batch No.', false, 'bottom');
+              this.presentToast('โปรดระบุ Batch No.', false, 'bottom');
           }else if(this.isenabledExp == true && oExpDate == ""){
-              this.presentToast('Please specify Exp Date.', false, 'bottom');
+              this.presentToast('โปรดระบุ Exp Date.', false, 'bottom');
           }else if(this.isenabledMfg == true && oProdDate == ""){
-              this.presentToast('Please specify Production Date.', false, 'bottom');
+              this.presentToast('โปรดระบุ Production Date.', false, 'bottom');
           }else if(this.isenabledSize == true && oSize == ""){
-              this.presentToast('Please specify Size.', false, 'bottom');
+              this.presentToast('โปรดระบุ Size.', false, 'bottom');
           }else if(this.isenabledColor == true && oColor == ""){
-              this.presentToast('Please specify Color.', false, 'bottom');
+              this.presentToast('โปรดระบุ Color.', false, 'bottom');
           }else if(this.isenabledClass == true && oClass == ""){
-              this.presentToast('Please specify Class .', false, 'bottom');
+              this.presentToast('โปรดระบุ Class .', false, 'bottom');
           }else{
             console.log('1');
               console.log(oSttRef, oRecNum, oWh, OLoc, oPallet, oClient, oItem, oUOM, oSQty, oCQty, oGrade, oLotNo, oBatNo, oExpDate, oProdDate, oSize, oColor, oClass, oOwner, this.oUsername,this.oStk_type);
@@ -440,19 +440,19 @@ export class StockcountPage {
         }else{
 
           if(this.isenabledLot == true && oLotNo == ""){
-              this.presentToast('Please specify Lot No.', false, 'bottom');
+              this.presentToast('โปรดระบุ Lot No.', false, 'bottom');
           }else if(this.isenabledBatch == true && oBatNo == ""){
-              this.presentToast('Please specify Batch No.', false, 'bottom');
+              this.presentToast('โปรดระบุ Batch No.', false, 'bottom');
           }else if(this.isenabledExp == true && oExpDate == ""){
-              this.presentToast('Please specify Exp Date.', false, 'bottom');
+              this.presentToast('โปรดระบุ Exp Date.', false, 'bottom');
           }else if(this.isenabledMfg == true && oProdDate == ""){
-              this.presentToast('Please specify Production Date.', false, 'bottom');
+              this.presentToast('โปรดระบุ Production Date.', false, 'bottom');
           }else if(this.isenabledSize == true && oSize == ""){
-              this.presentToast('Please specify Size.', false, 'bottom');
+              this.presentToast('โปรดระบุ Size.', false, 'bottom');
           }else if(this.isenabledColor == true && oColor == ""){
-              this.presentToast('Please specify Color.', false, 'bottom');
+              this.presentToast('โปรดระบุ Color.', false, 'bottom');
           }else if(this.isenabledClass == true && oClass == ""){
-              this.presentToast('Please specify Class .', false, 'bottom');
+              this.presentToast('โปรดระบุ Class .', false, 'bottom');
           }else{
                        
             console.log('2');

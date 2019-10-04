@@ -591,24 +591,24 @@ export class CheckinPage {
   doAddDetail(oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, listZone,oLoc ){
 console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oUOM, oQty, oGrade, "listQty:",listQty, oLot, oBatch, oExpiry, oMfg, oSize, oColor, oClass, oAsn_flag, "listZone:"+listZone,oLoc );
     if(this.isenabledLot == true && oLot == ""){
-        this.presentToast('Please specify Lot No.', false, 'bottom');
+         this.presentToast('โปรดระบุ Lot', false, 'bottom');
     }else if(this.isenabledBatch == true && oBatch == ""){
-        this.presentToast('Please specify Batch No.', false, 'bottom');
+        this.presentToast('โปรดระบุ Batch No.', false, 'bottom');
     }else if(this.isenabledExp == true && oExpiry == ""){
-        this.presentToast('Please specify Exp Date.', false, 'bottom');
+        this.presentToast('โปรดระบุ Exp Date.', false, 'bottom');
     }else if(this.isenabledMfg == true && oMfg == ""){
-        this.presentToast('Please specify Production Date.', false, 'bottom');
+        this.presentToast('โปรดระบุ Production Date.', false, 'bottom');
     }else if(this.isenabledSize == true && oSize == ""){
-        this.presentToast('Please specify Size.', false, 'bottom');
+        this.presentToast('โปรดระบุ Size.', false, 'bottom');
     }else if(this.isenabledColor == true && oColor == ""){
-        this.presentToast('Please specify Color.', false, 'bottom');
+        this.presentToast('โปรดระบุ Color.', false, 'bottom');
     }else if(this.isenabledClass == true && oClass == ""){
-        this.presentToast('Please specify Class.', false, 'bottom');
+        this.presentToast('โปรดระบุ Class.', false, 'bottom');
     }else if(this.isenabledClass == true && oQty == undefined){
-      this.presentToast('Please specify Qty.', false, 'bottom');
+      this.presentToast('โปรดระบุ Qty.', false, 'bottom');
     }
     /*else if(this.changeZone == true && this.oLoc == ""){     
-      this.presentToast('Please specify Location.', false, 'bottom');
+      this.presentToast('โปรดระบุ Location.', false, 'bottom');
      }   */
 
  
@@ -632,7 +632,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
           this.presentToast('โปรดระบุเลขที่ Pallet', false, 'bottom');
         }
         else if(oQty == undefined || oQty == ""){
-          this.presentToast('Please specify Qty.', false, 'bottom');      
+          this.presentToast('โปรดระบุ Qty.', false, 'bottom');      
         }
         // else if(listZone == undefined || listZone == ""){
         //   this.presentToast('โปรดระบุ Zone ที่ต้องการจัดเก็บ', false, 'bottom');
@@ -847,15 +847,18 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
   doClose(oClient, oReceiptNo){
     //his.doGetPalletList(oClient, oReceiptNo)
     //this.doGetPalletData(oClient, oReceiptNo)
-    console.log("doGetPalletforPutaway",this.data_pallet_putaway.length);
-    console.log("doGetPalletforPutaway",this.data_pallet_putaway);
+    //console.log("doGetPalletforPutaway",this.data_pallet_putaway.length);
+    //console.log("doGetPalletforPutaway",this.data_pallet_putaway);
     //console.log("data2",this.data_pallet_list.length);
-    console.log("data",this.data_pallet.length);
+    //console.log("data",this.data_pallet.length);
+    
     if(oClient == undefined || oClient == ""){
       this.presentToast('โปรดระบุ Client', false, 'bottom');
     }else if(oReceiptNo == undefined || oReceiptNo == ""){
       this.presentToast('โปรดระบุ Receipt', false, 'bottom');
     }else{
+         console.log("doGetPalletforPutaway",this.data_pallet_putaway.length);
+         console.log("data",this.data_pallet.length);
       let alert = this.alertCtrl.create({
         title: 'Close',
         subTitle: "คุณยืนยันที่จะปิดเอกสารหรือไม่ ถ้าปิดเอกสารแล้วจะไม่สามารถ รับสินค้าเพิ่มในเอกสารนี้ได้อีก",
@@ -868,9 +871,13 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
           {
             text: 'ตกลง',
             handler: data => {
+              
+              
               if(this.data_pallet_putaway.length.length > 0 || this.data_pallet.length > 0){
                 this.presentToast('โปรด Putaway รายการพาเลทให้ครบ', false, 'bottom');
               }else{
+                this.presentToast('ปิดเอกสารเรียบรอย', false, 'bottom');
+                /*
               this.service.Closed_Receipt_Master(oClient, oReceiptNo, this.oUsername).then((res)=>{
                 this.data_close = res;
                 console.log(this.data_close);
@@ -883,7 +890,9 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                   this.doClearPalletList();
                 }
               })
+              */
             }
+            
             }
           }
         ]

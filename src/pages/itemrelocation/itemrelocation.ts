@@ -95,17 +95,17 @@ export class ItemrelocationPage {
   
   doGetLocation(oClient, oItem, oWH, oLOC_DESC, oLocation){
     if(oClient == undefined || oClient == ""){
-      this.presentToast('Please specify Client.', false, 'bottom');
+      this.presentToast('โปรดระบุ Client.', false, 'bottom');
     }
     else if(oItem == undefined || oItem == ""){
-      this.presentToast('Please specify Item.', false, 'bottom');
+      this.presentToast('โปรดระบุ Item.', false, 'bottom');
     }
     else if(oWH == undefined || oWH == ""){
-      this.presentToast('Please specify Warehouse.', false, 'bottom');
+      this.presentToast('โปรดระบุ Warehouse.', false, 'bottom');
     }
 
     else if(oLocation == undefined || oLocation == ""){
-      this.presentToast('Please specify Loc.', false, 'bottom');
+      this.presentToast('โปรดระบุ Location', false, 'bottom');
     }
 
     else{
@@ -216,16 +216,16 @@ export class ItemrelocationPage {
   }
   doMove(oSrcPallet,  oDestWhse,  oDestLoc,  oDestPallet,  oClient,  oItem,  oSrcRec,  oQty,  oUOM){
     if(oDestLoc == undefined || oDestLoc == ""){
-      this.presentToast('Please specify Dest Location.', false, 'bottom');
+      this.presentToast('โปรดระบุ Dest Location.', false, 'bottom');
     }
     else if(oDestPallet == undefined || oDestPallet == ""){
-      this.presentToast('Please specify Dest Pallet.', false, 'bottom');
+      this.presentToast('โปรดระบุ Dest Pallet.', false, 'bottom');
     }
     else if(oClient == undefined || oClient == ""){
-      this.presentToast('Please specify Dest Client.', false, 'bottom');
+      this.presentToast('โปรดระบุ Dest Client.', false, 'bottom');
     }
     else if(oItem == undefined || oItem == ""){
-      this.presentToast('Please specify Dest Item.', false, 'bottom');
+      this.presentToast('โปรดระบุ Dest Item.', false, 'bottom');
     }
     else{
         console.log(oQty);

@@ -124,9 +124,9 @@ export class LocationrelocationPage {
   }
   doClickMove(oWH, oLoc, oDestLoc){
       if(oWH == undefined || oWH == ""){
-        this.presentToast('Please specify Warehouse.', false, 'bottom');
+        this.presentToast('โปรดระบุ Warehouse.', false, 'bottom');
       }else if (oLoc == undefined || oWH == ""){
-        this.presentToast('Please specify Location.', false, 'bottom');
+        this.presentToast('โปรดระบุ Location.', false, 'bottom');
       }else{
         this.doGetListPalletInLocation(oWH, oLoc);
         if (this.data_listPallet == undefined || this.data_listPallet == null){
