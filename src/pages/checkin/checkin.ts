@@ -876,8 +876,8 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
               if(this.data_pallet_putaway.length.length > 0 || this.data_pallet.length > 0){
                 this.presentToast('โปรด Putaway รายการพาเลทให้ครบ', false, 'bottom');
               }else{
-                this.presentToast('ปิดเอกสารเรียบรอย', false, 'bottom');
-                /*
+                //this.presentToast('ปิดเอกสารเรียบรอย', false, 'bottom');
+                
               this.service.Closed_Receipt_Master(oClient, oReceiptNo, this.oUsername).then((res)=>{
                 this.data_close = res;
                 console.log(this.data_close);
@@ -890,7 +890,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                   this.doClearPalletList();
                 }
               })
-              */
+              
             }
             
             }
