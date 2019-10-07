@@ -781,6 +781,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                       },1000);
                     })
                   }
+                  this.doGetPalletForPutaway(oReceipt)
                 })
               }
             }
@@ -851,14 +852,16 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
     //console.log("doGetPalletforPutaway",this.data_pallet_putaway);
     //console.log("data2",this.data_pallet_list.length);
     //console.log("data",this.data_pallet.length);
-    
+    //this.doGetPalletForPutaway(oReceiptNo);
+    this.service.get_pallet_for_putaway(this.oClient,"",oReceiptNo).then((res)=>{
+      this.data_pallet_putaway = res;
     if(oClient == undefined || oClient == ""){
       this.presentToast('โปรดระบุ Client', false, 'bottom');
     }else if(oReceiptNo == undefined || oReceiptNo == ""){
       this.presentToast('โปรดระบุ Receipt', false, 'bottom');
     }else{
-         console.log("doGetPalletforPutaway",this.data_pallet_putaway.length);
-         console.log("data",this.data_pallet.length);
+         console.log("PalletforPutaway",this.data_pallet_putaway.length);
+         console.log("PalletWaitForPut",this.data_pallet.length);
       let alert = this.alertCtrl.create({
         title: 'Close',
         subTitle: "คุณยืนยันที่จะปิดเอกสารหรือไม่ ถ้าปิดเอกสารแล้วจะไม่สามารถ รับสินค้าเพิ่มในเอกสารนี้ได้อีก",
@@ -870,14 +873,12 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
           },
           {
             text: 'ตกลง',
-            handler: data => {
-              
-              
-              if(this.data_pallet_putaway.length.length > 0 || this.data_pallet.length > 0){
+            handler: data => {             
+              if(this.data_pallet_putaway.length > 0 || this.data_pallet.length > 0){
                 this.presentToast('โปรด Putaway รายการพาเลทให้ครบ', false, 'bottom');
               }else{
-                //this.presentToast('ปิดเอกสารเรียบรอย', false, 'bottom');
-                
+                this.presentToast('ปิดเอกสารเรียบรอย', false, 'bottom');
+                /*
               this.service.Closed_Receipt_Master(oClient, oReceiptNo, this.oUsername).then((res)=>{
                 this.data_close = res;
                 console.log(this.data_close);
@@ -890,7 +891,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
                   this.doClearPalletList();
                 }
               })
-              
+              */
             }
             
             }
@@ -899,6 +900,7 @@ console.log("Detail "+oClient, oReceipt, oDate, oInc, oPo, oPallet, oBarcode, oU
       });
       alert.present();
     }
+  })
   }
   doReverse(oClient, oReceipt){
     let alert = this.alertCtrl.create({
