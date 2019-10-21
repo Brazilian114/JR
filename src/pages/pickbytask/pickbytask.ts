@@ -207,7 +207,7 @@ export class PickbytaskPage {
       console.log(this.data_movement);
     })
   }
-  doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew){
+  doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew, oQty){
     if(oLocation != oLocation_confirm)
     {
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
@@ -224,6 +224,14 @@ export class PickbytaskPage {
     {
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
+    else if(oQtyNew  > oQty)
+    {
+        this.presentToast('จำนวนไม่ควรเกิน '+ oQty, false, 'bottom');
+    }/*
+    else if(typeof oQtyNew  != "number")
+    {
+        this.presentToast('กรุณากรอกตัวเลข '+ oQty, false, 'bottom');
+    }*/
     else
     {
       this.oPalletTo = oPalletFromConfirm;

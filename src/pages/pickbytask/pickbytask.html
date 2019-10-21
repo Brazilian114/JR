@@ -138,7 +138,7 @@
         <ion-label>จำนวน</ion-label>
       </ion-col>
       <ion-col class="col">
-        <ion-input [(ngModel)]="oQtyNew" (click)="doClick()"></ion-input>
+        <ion-input [(ngModel)]="oQtyNew" (click)="doClick()" type="number"></ion-input>
       </ion-col>
     </ion-row>
     <!-- <ion-row>
@@ -159,7 +159,7 @@
         <button ion-button block (click)="doClear()">ล้าง</button>
       </ion-col>
       <ion-col class="col">
-        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew)">หยิบ</button>
+        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew, oQty)">หยิบ</button>
       </ion-col>
     </ion-row>
   </ion-grid>
