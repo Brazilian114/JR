@@ -208,6 +208,9 @@ export class PickbytaskPage {
     })
   }
   doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew, oQty){
+    
+    console.log(oQtyNew," ",oQty["0"]);
+    
     if(oLocation != oLocation_confirm)
     {
         this.presentToast('โปรดกรอก Location ให้ตรงกัน', false, 'bottom');
@@ -224,10 +227,10 @@ export class PickbytaskPage {
     {
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
-    else if(oQtyNew  > oQty)
+    /*else if(oQtyNew  > oQty)
     {
         this.presentToast('จำนวนไม่ควรเกิน '+ oQty, false, 'bottom');
-    }/*
+    }
     else if(typeof oQtyNew  != "number")
     {
         this.presentToast('กรุณากรอกตัวเลข '+ oQty, false, 'bottom');
@@ -235,7 +238,7 @@ export class PickbytaskPage {
     else
     {
       this.oPalletTo = oPalletFromConfirm;
-      this.doClosePickTask(oWo, oTaskNo, oActivity, oQtyNew, "", this.oUsername, oUOM, this.oPalletTo);
+      this.doClosePickTask(oWo, oTaskNo, oActivity, oQtyNew, "", this.oUsername, oUOM, this.oPalletTo,oQty);
     }
   }
   doCheckPrePick(oWo, oPallet, oPalletFromConfirm, oTaskNo, oActivity, oUom, oQty){
@@ -262,7 +265,7 @@ export class PickbytaskPage {
           }
 
         }else{
-          this.Alert('Error', this.data_checkTask["0"].sqlmsg);
+         
       }
     }else{
         this.presentToast('ไม่พบข้อมูล', false, 'bottom');
@@ -284,7 +287,7 @@ export class PickbytaskPage {
       },200);
     }
   }
-  doClosePickTask(oWo, oTaskNo, oActNO, oQtyPick, oReasonCode, oMaker, oUOM, oPalletTo){
+  doClosePickTask(oWo, oTaskNo, oActNO, oQtyPick, oReasonCode, oMaker, oUOM, oPalletTo,oQty){
     this.service.close_picktask(oWo, oTaskNo, oActNO, oQtyPick, oReasonCode, this.oUsername, oUOM, oPalletTo).then((res)=>{
       this.data_closePick = res;
       console.log(this.data_closePick);
@@ -303,7 +306,13 @@ export class PickbytaskPage {
             this.updateScroll();
         },500);
       }else{
-        this.doClear();
+        //this.doClear(); 
+        if(this.data_checkTask["0"].sqlstatus["0"] = "-32"){
+            this.presentToast('จำนวนไม่ควรเกิน '+ oQty, false, 'bottom');
+          }else{
+            this.presentToast(this.data_checkTask["0"].sqlmsg["0"], false, 'bottom');
+          }
+       
       }
     })
   }

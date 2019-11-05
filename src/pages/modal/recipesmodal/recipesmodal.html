@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-
+  
   <div *ngFor = "let item of items">
   <ion-card (click)="doSelectReceipt(item.receipt_no, item.receipt_ref_no, item.supplier, item.status, item.receipt_date, item.warehouse, item.zone, item.receipt_station, item.incoming_no, item.container, item.customer, item.remark01, item.invoice_no, item.invoice_date, item.asn_flag, item.client_po_no)">
       <ion-card-content >
