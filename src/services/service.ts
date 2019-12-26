@@ -17,8 +17,8 @@ export class Service {
     this.storage.get('_url').then((res)=>{
       this.url = res;
   
-   this.hostWebService = "http://"+this.url+"/RF-Service_GreenTimberland/RFService.asmx";
-
+   //this.hostWebService = "http://"+this.url+"/RF-Service_GreenTimberland/RFService.asmx";
+   this.hostWebService = "http://203.154.174.129/RF-Service_GreenTimberland/RFService.asmx";
       //this.hostWebService = "http://localhost:7422/RFService.asmx";  //debug
 
     })
