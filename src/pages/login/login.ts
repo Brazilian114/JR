@@ -22,8 +22,8 @@ export class LoginPage {
 
   loader:any;
   data_logins:any;
-  oUsername:string = '7LINE';
-  oPassword:string = '7LINE';
+  oUsername:string = '';
+  oPassword:string = '';
   oChkLoc:string = '';
   url:string;
   constructor(public modalCtrl : ModalController,public navCtrl: NavController, private toastCtrl: ToastController,private loadingCtrl: LoadingController

@@ -47,7 +47,7 @@
         <ion-col class="col" col-2>
           <ion-input [(ngModel)]="oActivity" style="background-color: #FFFF99" readonly></ion-input>
         </ion-col>
-        <ion-col col-auto class="col">
+        <ion-col col-2>
           <button ion-button block (click)="doGetitemWObyTask(oWo)">#</button>
         </ion-col>
       </ion-row>
@@ -159,7 +159,7 @@
         <button ion-button block (click)="doClear()">ล้าง</button>
       </ion-col>
       <ion-col class="col">
-        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew, oQty)">หยิบ</button>
+        <button ion-button block (click)="doPickItem(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oTaskNo, oActivity, oUOM, oQtyNew, oQty)">ยืนยันหยิบ</button>
       </ion-col>
     </ion-row>
   </ion-grid>

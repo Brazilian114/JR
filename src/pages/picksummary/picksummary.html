@@ -37,7 +37,7 @@
 
 
         <ion-col col-2>
-          <button ion-button (click)="doGetitemWObyTask(oWo,oClient)">#</button>
+          <button ion-button block (click)="doGetitemWObyTask(oWo,oClient)">#</button>
         </ion-col>
       </ion-row>
   <ion-row>
@@ -193,7 +193,7 @@
         <button ion-button block (click)="doClear()">ล้าง</button>
       </ion-col>
       <ion-col class="col">
-        <button ion-button block (click)="doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oUOM, oQtyNew, oItem, oBatch, oExp, oProd, oLot)">หยิบ</button>
+        <button ion-button block (click)="doPickItemSum(oLocation, oPalletFrom, oPalletFromConfirm, oLocation_confirm, oWo, oUOM, oQtyNew, oItem, oBatch, oExp, oProd, oLot)">ยืนยันหยิบ</button>
       </ion-col>
     </ion-row>
   </ion-grid>
