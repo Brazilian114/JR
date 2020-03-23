@@ -27,11 +27,15 @@ export class LocationrelocationPage {
   oLocDes:any;
   oUsername:any;
   data_return_Putaway:any;
+  oClient:any;
   constructor(public navCtrl: NavController, private service: Service, private toastCtrl: ToastController, public platform: Platform
     ,private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController) {
     this.storage.get('_user').then((res)=>{
       this.oUsername = res;
       console.log(this.oUsername);
+    })
+    this.storage.get('oClient').then((res)=>{
+      this.oClient = res;
     })
   }
   doClick(){

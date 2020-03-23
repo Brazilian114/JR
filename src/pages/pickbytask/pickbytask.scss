@@ -16,12 +16,20 @@ page-pickbytask {
     padding-bottom: 0px;
   }
   ion-scroll {
-    white-space: nowrap;
-    height: 400px;
+    white-space: normal;
+    height: 200px;
     // width: 100px;
   }
   .border-col{
     border: 1px solid #cecece;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .border-row{
+    border-bottom: 1px solid #cecece;
+    background-color: #FAFAD2;
   }
   .col{
     padding-top: 2px;

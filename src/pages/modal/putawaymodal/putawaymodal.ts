@@ -21,7 +21,8 @@ export class PutawaymodalPage {
   constructor(public storage:Storage,public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private service: Service,
      private loadingCtrl: LoadingController) {
      
-    this.oClient = navParams.get('oUsername');
+    this.oClient = navParams.get('oClient');
+    this.oUsername = navParams.get('_user');
     this.oPalletNo = navParams.get('oPallet');
     console.log("pallet",this.oPalletNo);
     this.doGetPalletforPutaway(this.oPalletNo);
@@ -58,7 +59,7 @@ export class PutawaymodalPage {
       // this.service.get_pallet_for_putaway(oPalletNo+"0").then((res)=>{
       //   this.data_pallet_putaway = res;
       //   console.log(this.data_pallet_putaway);
-      oPalletNo = "";
+      
       this.service.get_pallet_for_putaway(this.oClient,oPalletNo,"").then((res)=>{
         this.data_pallet_putaway = res;
         console.log("doGetPalletforPutaway if 2",this.data_pallet_putaway);

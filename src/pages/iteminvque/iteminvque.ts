@@ -39,8 +39,10 @@ export class IteminvquePage {
     , private modalCtrl: ModalController, private keyboard: Keyboard, private alertCtrl: AlertController) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
-        this.oClient = this.oUsername
       })
+      // this.storage.get('oClient').then((res)=>{
+      //   this.oClient = res;
+      // })
   }
   ionViewDidEnter(){
     setTimeout(()=>{

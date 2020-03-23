@@ -10,7 +10,7 @@
 <ion-grid>
   <ion-row>
       <ion-col class="col" col-2>
-        <button ion-button block>บริษัท</button>
+        <button ion-button block (click)="doGetClient()">บริษัท</button>
       </ion-col>
       <ion-col style="text-align:center" class="col">
           <ion-input [(ngModel)]="oClient" readonly></ion-input>

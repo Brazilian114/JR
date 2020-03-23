@@ -20,7 +20,7 @@ export class CheckinOrderPage {
   @ViewChild(Content) content: Content;
 
   oUsername:string = "";
-  oClient:string = "JRFB2550";
+  oClient:string = "";
   oStatus:string = "DATA ENTRY";
   oPackNo:string = "";
   oBarcode:string = "";
@@ -45,7 +45,9 @@ export class CheckinOrderPage {
         this.oUsername = res;
         this.doGetBranchReceiptCheckinBranchByUser(this.oUsername);
       });
-
+      this.storage.get('oClient').then((res)=>{
+        this.oClient = res;
+      })
   }
   ionViewDidEnter(){
     setTimeout(()=>{

@@ -22,6 +22,7 @@ export class LoginPage {
 
   loader:any;
   data_logins:any;
+  data_client:any;
   oUsername:string = '';
   oPassword:string = '';
   oChkLoc:string = '';
@@ -81,7 +82,11 @@ export class LoginPage {
               }else{
                 this.storage.ready().then(() => {
                        this.storage.set('_user', oUsername)
-
+                       this.service.get_client(oUsername).then((res)=>{
+                        this.data_client = res;
+                        console.log("client",this.data_client);
+                        this.storage.set('oClient', this.data_client["0"].client)
+                       })
                      })
                      this.storage.ready().then(() => {
                             this.storage.set('_chk_Loc', this.data_logins.edit_loc_wh_trask)

@@ -46,8 +46,10 @@ export class ItemrelocationPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
-        this.oClient = this.oUsername
       })
+      // this.storage.get('oClient').then((res)=>{
+      //   this.oClient = res;
+      // })
   }
   ionViewDidEnter() {
       this.platform.ready().then(() => {
@@ -74,7 +76,14 @@ export class ItemrelocationPage {
     LocDestEnter(){
       this.InputDestPit.setFocus();
     }
-
+    doGetClient(){
+      let profileModal = this.modalCtrl.create("CilentmodelPage");
+        profileModal.present();
+        profileModal.onDidDismiss(data =>{
+          console.log(data);
+          this.oClient = data.client_no;
+        });
+    }
   doGetItemNo(oClient, oItem, flag){
     console.log(oItem);
         let profileModal = this.modalCtrl.create("ItemNomodalPage", { oClient: oClient });

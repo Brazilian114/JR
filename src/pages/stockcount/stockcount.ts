@@ -74,7 +74,6 @@ export class StockcountPage {
   , private alertCtrl: AlertController, public platform: Platform, private keyboard: Keyboard) {
     this.storage.get('_user').then((res)=>{
       this.oUsername = res;
-      this.oClient = this.oUsername
     })
   }
   ionViewDidEnter() {
@@ -199,6 +198,14 @@ export class StockcountPage {
         this.doGetProductOrther(oClient, this.oItem)
       },600);
     })
+  }
+  doGetClient(){
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
+      profileModal.present();
+      profileModal.onDidDismiss(data =>{
+        console.log(data);
+        this.oClient = data.client_no;
+      });
   }
   doGetItem(oClient, oItem){
     this.service.get_showitemlist(oClient,"","",oItem).then((res)=>{

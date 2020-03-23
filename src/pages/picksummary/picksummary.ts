@@ -70,7 +70,6 @@ export class PicksummaryPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
           this.oUsername = res;
-          this.oClient = this.oUsername
           console.log(this.oUsername)
         })
         
@@ -95,6 +94,14 @@ export class PicksummaryPage {
       setTimeout(() => {
         this.content.scrollToBottom();
       }, 300)
+    }
+    doGetClient(){
+      let profileModal = this.modalCtrl.create("CilentmodelPage");
+        profileModal.present();
+        profileModal.onDidDismiss(data =>{
+          console.log(data);
+          this.oClient = data.client_no;
+        });
     }
   doGetWo(oClient){
     let profileModal = this.modalCtrl.create("WomodalPage", { oClient: oClient, oUsername: this.oUsername });

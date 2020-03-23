@@ -128,19 +128,21 @@ export class CheckinPage {
       //this.listGrade = 
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
-        this.oClient = this.oUsername
+      
         console.log(this.oUsername);
         //this.doGetGrade();
 
         if(this.Check == 'Header')
         {
           setTimeout(() => {
-            this.doGetBook();
+           
             this.doGetWarehouse(this.oUsername);
           }, 300)
         }
       })
-     
+      // this.storage.get('oClient').then((res)=>{
+      //   this.oClient = res;
+      // })
   }
   initializeItems() {
     this.items = this.data_barcodeDetail; 
@@ -183,6 +185,15 @@ export class CheckinPage {
       setTimeout(() => {
           this.updateScroll();
       }, 200)
+  }
+  doGetClient(){
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
+      profileModal.present();
+      profileModal.onDidDismiss(data =>{
+        console.log(data);
+        this.oClient = data.client_no;
+        this.doGetBook();
+      });
   }
   doGetLocation(listZone){
 

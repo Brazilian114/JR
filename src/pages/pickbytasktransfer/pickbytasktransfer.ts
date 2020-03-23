@@ -58,8 +58,12 @@ export class PickbytaskTransferPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
           this.oUsername = res;
-          this.oClient = this.oUsername
+          //this.oClient = this.oUsername
         })
+        // this.storage.get('oClient').then((res)=>{
+          
+        //   this.oClient = res
+        // })
   }
   doClick(){
     this.updateScroll();
@@ -101,6 +105,15 @@ export class PickbytaskTransferPage {
         }
       });
   }
+  doGetClient(){
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
+      profileModal.present();
+      profileModal.onDidDismiss(data =>{
+        console.log(data);
+        this.oClient = data.client_no;
+      });
+  }
+
   doGetitemWObyTask(oWo){
     let frag = 1;
     let profileModal = this.modalCtrl.create("itemWObyTaskPage", { oWo: oWo, oUsername: this.oUsername, frag: frag });

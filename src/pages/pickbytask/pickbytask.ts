@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController, Content, IonicPage } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ModalController, Platform, AlertController,NavParams, Content, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Service } from '../../services/service';
@@ -45,7 +45,7 @@ export class PickbytaskPage {
     oActivity:any;
     oColor:any;
     oRoute:any;
-
+    data_item_stock:any;
     data_new_pallet:any;
     data_checkWo:any;
     data_Wo_byItem:any;
@@ -54,12 +54,12 @@ export class PickbytaskPage {
     data_closePick:any;
     data_wo:any;
     oUsername:any;
-  constructor(public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
+  constructor( public navParams: NavParams,public navCtrl: NavController, private service: Service, private loadingCtrl: LoadingController, private toastCtrl: ToastController
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
         this.storage.get('_user').then((res)=>{
-          this.oUsername = res;
-          this.oClient = this.oUsername
+          this.oUsername = res;  
         })
+  
   }
   doClick(){
     this.updateScroll();
@@ -92,6 +92,7 @@ export class PickbytaskPage {
           this.oSup = data.customer_name;
           this.oSupId = data.customer;
           this.doGetDetailWorkOrder(this.oWo, this.oUsername);
+        
         }else{
 
         }
@@ -139,6 +140,14 @@ export class PickbytaskPage {
     })
      this.doGetDetailWorkOrder(barcode, this.oUsername);
   }
+  doGetClient(){
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
+      profileModal.present();
+      profileModal.onDidDismiss(data =>{
+        console.log(data);
+        this.oClient = data.client_no;
+      });
+  }
 
   doGetDetailWorkOrder(oWo, oUser){
     this.service.get_detail_workorder(oWo, oUser).then((res)=>{
@@ -172,7 +181,7 @@ export class PickbytaskPage {
         this.oStatus = this.data_item["0"].status;
         this.oQtyPackUOM = this.data_item["0"].QTY_Dec;
         this.oRoute = this.data_item["0"].route;
-
+        this.GetDetailStock(this.oClient, this.oItem,"",this.oUOM)
         setTimeout(()=>{
             this.myInputPalletConfirm.setFocus();
         },0);
@@ -199,6 +208,23 @@ export class PickbytaskPage {
             this.oQtyNew = this.data_Wo_byItem["0"].qty;
             this.doGetWoStockMovement(oClient, oWo, this.oUsername);
       }
+    })
+  }
+  GetDetailStock(oClient,oItem, oGrade, oUOM){
+    console.log(oClient,oItem, oGrade, oUOM);
+    this.service.Get_ItemLocationsGrade_order_lot(oClient,oItem, oGrade, oUOM).then((res)=>{
+      this.data_item_stock = res;
+      console.log(this.data_item_stock);
+
+      // console.log(this.data_item_stock.length);
+      // var total = 0;
+      // for(let i=0; i < this.data_item_stock.length ; i++){
+      //   var qty = +this.data_item_stock[i].qty;
+      //   total = total + qty;
+      //
+      //   console.log(total);
+      // }
+      // this.oQty = total;
     })
   }
   doGetWoStockMovement(oClient, oWO, oMaker){
@@ -340,6 +366,7 @@ export class PickbytaskPage {
     this.oPalletFromConfirm = "";
     this.oRoute = "";
     this.oQtyPackUOM = "";
+    this.data_item_stock = [];
   }
   doClearInput(){
     this.oQtyNew = "";

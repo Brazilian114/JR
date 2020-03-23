@@ -11,7 +11,7 @@
   <ion-grid>
     <ion-row>
         <ion-col col-auto>
-          <button ion-button >บริษัท</button>
+          <button ion-button (click)="doGetClient()">บริษัท</button>
         </ion-col>
         <ion-col col-2>
           <ion-input [(ngModel)]="oClient"></ion-input>

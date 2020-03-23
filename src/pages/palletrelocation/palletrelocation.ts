@@ -38,9 +38,21 @@ export class PalletrelocationPage {
     , private modalCtrl: ModalController, private storage: Storage, private keyboard: Keyboard, private alertCtrl: AlertController, public platform: Platform) {
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
-        this.oClient = this.oUsername
         console.log(this.oUsername);
       })
+      /*this.storage.get('oClient').then((res)=>{
+        this.oUsername = res;
+        console.log(this.oUsername);
+      })*/
+    
+  }
+  doGetClient(){
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
+      profileModal.present();
+      profileModal.onDidDismiss(data =>{
+        console.log(data);
+        this.oClient = data.client_no;
+      });
   }
   doClick(){
     this.updateScroll();

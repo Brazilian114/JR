@@ -10,7 +10,7 @@
 <ion-grid>
   <ion-row>
       <ion-col style="text-align:center" class="col" col-auto>
-        <button ion-button>บริษัท</button>
+        <button ion-button (click)="doGetClient()">บริษัท</button>
       </ion-col>
       <ion-col style="text-align:center" class="col" col-2>
           <ion-input [(ngModel)]="oClient" readonly></ion-input>
@@ -163,4 +163,82 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-scroll scrollX="true" scrollY="true">
+    <ion-grid>
+      <ion-row style="width: 700px;" *ngFor="let item_stock of data_item_stock; let i = index">
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Warehouse
+          </ion-row>
+          <ion-row>
+            {{item_stock.warehouse}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Location
+          </ion-row>
+          <ion-row>
+            {{item_stock.location}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Qty
+          </ion-row>
+          <ion-row>
+            {{item_stock.qty}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            UOM
+          </ion-row>
+          <ion-row>
+            {{item_stock.uom}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Lot
+          </ion-row>
+          <ion-row>
+            {{item_stock.lot_no}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Prod Date
+          </ion-row>
+          <ion-row>
+            {{item_stock.prod_date}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Grade
+          </ion-row>
+          <ion-row>
+            {{item_stock.grade}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Pallet
+          </ion-row>
+          <ion-row>
+            {{item_stock.pallet}}
+          </ion-row>
+        </ion-col>
+        <ion-col class="border-col">
+          <ion-row class="border-row" *ngIf = "i == 0">
+            Status
+          </ion-row>
+          <ion-row>
+            {{item_stock.status}}
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-scroll>
 </ion-content>

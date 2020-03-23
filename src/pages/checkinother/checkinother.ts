@@ -121,7 +121,7 @@ export class CheckinotherPage {
 
       this.storage.get('_user').then((res)=>{
         this.oUsername = res;
-        this.oClient = this.oUsername
+        
         console.log(this.oUsername);
         //this.doGetGrade();
       //  this.doGetBook(this.oClient);
@@ -132,6 +132,9 @@ export class CheckinotherPage {
             this.doGetWarehouse(this.oUsername);
           }, 300)
         }
+      })
+      this.storage.get('oClient').then((res)=>{
+        this.oClient = res;
       })
   }
   ionViewDidEnter() {

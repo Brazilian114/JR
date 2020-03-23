@@ -35,8 +35,8 @@ export class LoadtotruckdetailmodalPage {
 
        this.storage.get('_user').then((res)=>{
          this.oUsername = res;
-         this.oClient = this.oUsername;
        })
+       this.oClient = navParams.get('oClient');
 
        this.doGetItemList(this.oLoadingSummaryNo,this.oSalesOrder);
   }

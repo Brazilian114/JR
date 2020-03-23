@@ -36,11 +36,13 @@ export class CheckpalletPage {
   oProd_Date:any;
   oExpiry_Date:any;
 
-  constructor(public toastCtrl:ToastController,public datepipe: DatePipe,public service: Service,private storage: Storage,public navCtrl: NavController, public navParams: NavParams) {
+  constructor( private modalCtrl: ModalController,public toastCtrl:ToastController,public datepipe: DatePipe,public service: Service,private storage: Storage,public navCtrl: NavController, public navParams: NavParams) {
     this.storage.get('_user').then((res)=>{
       this.oUsername = res;
-      this.oClient = this.oUsername
     })
+    // this.storage.get('oClient').then((res)=>{
+    //   this.oClient = res;
+    // })
    
   }
   GetPalletHistory(oClient,oPallet){
@@ -70,7 +72,14 @@ export class CheckpalletPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckpalletPage');
   }
-
+  doGetClient(){
+    let profileModal = this.modalCtrl.create("CilentmodelPage");
+      profileModal.present();
+      profileModal.onDidDismiss(data =>{
+        console.log(data);
+        this.oClient = data.client_no;
+      });
+  }
   doClear(){
     this.oPallet = "";
     this.oOrder_no = "";

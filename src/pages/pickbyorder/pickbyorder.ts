@@ -81,11 +81,14 @@ export class PickbyorderPage {
     , private alertCtrl: AlertController) {
     this.storage.get('_user').then((res)=>{
       this.oUsername = res;
-      this.oClient = this.oUsername;
       if(this.Check == 'Header')
       {
 
       }
+    })
+    this.storage.get('oClient').then((res)=>{
+      this.oUsername = res;
+      console.log(this.oUsername);
     })
   }
   ionViewDidEnter() {

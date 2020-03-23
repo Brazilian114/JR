@@ -17,8 +17,8 @@ export class Service {
     this.storage.get('_url').then((res)=>{
       this.url = res;
   
-   //this.hostWebService = "http://"+this.url+"/RF-Service_GreenTimberland/RFService.asmx";
-   this.hostWebService = "http://203.154.174.129/RF-Service_GreenTimberland/RFService.asmx";
+   this.hostWebService = "http://"+this.url+"/RF-Service_GreenTimberland/RFService.asmx";
+  // this.hostWebService = "http://203.154.174.129/RF-Service_GreenTimberland/RFService.asmx";
       //this.hostWebService = "http://localhost:7422/RFService.asmx";  //debug
 
     })
@@ -241,6 +241,27 @@ get_item_code_ref_PO(client, item_no, po_ref) {
        }
     );
 }
+Get_ItemLocationsGrade_order_lot(oClient, oItem, oGrade, oUom) {
+   let parameters='oClient='+oClient+'&oItem='+oItem+'&oGrade='+oGrade+'&oUom='+oUom;
+   return this.http.get(this.hostWebService +"/Get_ItemLocationsGrade_Order_Lot?"+parameters)
+     .toPromise()
+     .then(response =>
+        {
+           let a;
+           xml2js.parseString(response.text(),{explicitArray:true},function (err,result) {
+           a = result;
+        });
+           try {
+               // return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table["0"];
+               return a.DataTable["diffgr:diffgram"]["0"].NewDataSet["0"].Table
+               // return a.DataTable["diffgr:diffgram"].NewDataSet.Table;
+           }
+           catch (e) {
+             return [];
+           }
+        }
+     );
+ }
 get_UOM(oClient, oItemNo) {
   let parameters='oClient='+oClient+'&oItemNo='+oItemNo;
   return this.http.get(this.hostWebService +"/Get_UOM?"+parameters)
