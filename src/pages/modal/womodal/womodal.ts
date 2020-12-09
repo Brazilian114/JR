@@ -134,7 +134,7 @@ export class WomodalPage {
       console.log('oClient = ',oClient,'this.oUsername = ',this.oUsername);
     this.service.get_wo_sum(oClient, "", this.oUsername).then((res)=>{
       this.data_pick_sum = res;
-      console.log(this.data_pick_sum);
+      console.log("brazilian",this.data_pick_sum);
       this.finishLoding();
       this.initializeItems();
     })

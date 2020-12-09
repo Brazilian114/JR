@@ -253,14 +253,14 @@ export class PickbytaskPage {
     {
         this.presentToast('โปรดกรอก Qty', false, 'bottom');
     }
-    /*else if(oQtyNew  > oQty)
+    else if(oQtyNew  > oQty)
     {
         this.presentToast('จำนวนไม่ควรเกิน '+ oQty, false, 'bottom');
     }
-    else if(typeof oQtyNew  != "number")
-    {
-        this.presentToast('กรุณากรอกตัวเลข '+ oQty, false, 'bottom');
-    }*/
+    // else if(typeof oQtyNew  != "number")
+    // {
+    //     this.presentToast('กรุณากรอกตัวเลข '+ oQty, false, 'bottom');
+    // }
     else
     {
       this.oPalletTo = oPalletFromConfirm;

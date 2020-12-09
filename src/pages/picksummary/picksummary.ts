@@ -288,8 +288,8 @@ console.log("doPickItemSum_1",oLocation, oPalletFrom, oPalletFromConfirm , oLoca
         this.myInputQtyNew.setFocus();
         this.updateScroll();
     }
-    else if(oQtyNew != this.oQty){
-        this.presentToast('จำนวนที่ระบุ ไม่เท่ากับที่ระบบ Assign!!', false, 'bottom');
+    else if(oQtyNew > this.oQty){
+        this.presentToast('จำนวนไม่ควรเกิน '+this.oQty, false, 'bottom');
         this.myInputQtyNew.setFocus();
         this.updateScroll();
     }
